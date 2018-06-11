@@ -115,11 +115,7 @@ namespace WindowsFormsApplication1
                 switch (dgvTabla.Columns[0].Name)//la tabla cambia,esto es para controlar q tabla esta visible al momento del click en la celda
                 {
                     case "id_empleado":
-                        string dni = dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString();//obtengo el dni de la fila seleccionada
-                        int dniselect = Convert.ToInt32(dni);
-                        string control = "Datos Empleado";//para saber q UserControl usar en el otro form
-
-                        frmDato = new frmDatos(this, dniselect, control);
+                        frmDato = new frmDatos(this, Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()), "Datos Empleado");
                         frmDato.Show();/*
                         frmDetalleCliente = new frmDetalles("empleado", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()));
                         frmDetalleCliente.Show();*/
@@ -188,8 +184,8 @@ namespace WindowsFormsApplication1
 
         private void btnNewEmpleado_Click(object sender, EventArgs e)
         {
-            FormNuevoEmpleado frm = new FormNuevoEmpleado();
-            frm.Show();
+            frmNuevo frmNuevo = new frmNuevo();
+            frmNuevo.Show();
         }
 
         private void queryFiltrado()

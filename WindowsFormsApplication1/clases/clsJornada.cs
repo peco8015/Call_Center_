@@ -26,8 +26,7 @@ namespace WindowsFormsApplication1.clases
         private TimeSpan cierre_sesion { get; set; }
 
         public clsJornada()
-        {
-        }
+        {        }
 
         public int Id_empleado { get => id_empleado; set => id_empleado = value; }
         public DateTime Fecha { get => fecha; set => fecha = value; }

@@ -22,12 +22,14 @@ namespace WindowsFormsApplication1
         clsContacto contacto = new clsContacto();
         clsCampaña campaña = new clsCampaña();
         clsJornada jornada;
-        clsLllamada llamada;
+        clsLlamada llamada;
+        clsLLamadaDeNuevo llamadaProgramada;
         DateTime fechaHoy = DateTime.Now;
         TimeSpan t_atendiendo, inicio_sesion;
         string est;
         /* Medidores de tiempo */
-        Stopwatch stopWatch = new Stopwatch();
+        Stopwatch sw_llamada = new Stopwatch();
+        Stopwatch sw_enEspera = new Stopwatch();
         Stopwatch sw_llenandoFormularios = new Stopwatch();
         Stopwatch sw_inactivo = new Stopwatch();
         Stopwatch sw_almuerzo = new Stopwatch();
@@ -59,6 +61,7 @@ namespace WindowsFormsApplication1
         private void frmEmpleado_Load(object sender, EventArgs e)
         {
             ucPantallaAusente1.Visible = false;
+            cbEspera.Visible = false;
             pnlRespuesta.Visible = false;
             pnlProgramada.Visible = false;
             btnCortar.Enabled = false;
@@ -77,6 +80,7 @@ namespace WindowsFormsApplication1
 
             //Datos de la campaña
             cargarCampaña();
+            sw_inactivo.Start();
         }
 
         #region Guardo jornada: tiempos (timespand .ToString), fecha e id_empleado
@@ -87,7 +91,7 @@ namespace WindowsFormsApplication1
 
         private void frmEmpleado_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!(stopWatch.IsRunning || pnlRespuesta.Visible))
+            if (!(sw_llamada.IsRunning || pnlRespuesta.Visible))
                 cerrarFormEmpleado();
             else
                 e.Cancel = true;
@@ -98,15 +102,14 @@ namespace WindowsFormsApplication1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (stopWatch.IsRunning)
+            if (sw_llamada.IsRunning)
             {
-                TimeSpan ts = stopWatch.Elapsed;
+                TimeSpan ts = sw_llamada.Elapsed;
                 lblDurLlamada.Text = String.Format("{0:00}:{1:00}:{2:00}:{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
             }
         }
 
-        /* Muestra opciones de estado y activa/desactiva medidores de tiempo. Guarda datos en BD
-         */
+        /* Muestra opciones de estado y activa/desactiva medidores de tiempo. Guarda datos en BD */
         private void btnEstado_Click(object sender, EventArgs e)
         {
             frmEstado estado = new frmEstado();
@@ -134,6 +137,7 @@ namespace WindowsFormsApplication1
                         break;
                 }
                 ucPantallaAusente1.Size = new Size(ActiveForm.Width, ActiveForm.Height);
+                ucPantallaAusente1.Estado = "Estado: " + est.ToUpper(); //Agregar el tick?
                 //ActiveForm.Controls.SetChildIndex(ucPantallaAusente1, 0);
                 ucPantallaAusente1.Visible = true;
                 guardarJornada();
@@ -153,38 +157,38 @@ namespace WindowsFormsApplication1
             btnRegistrar.Enabled = true;
         }
 
-        /* Inicia StopWatch, habilita btnCortar (llamada), deshabilita btnEstado y btnSalir (programa).
-         */
+        /* Inicia StopWatch, habilita btnCortar (llamada), deshabilita btnEstado y btnSalir (programa). */
         private void btnLlamar_Click(object sender, EventArgs e)
         {
             sw_inactivo.Stop();
-            stopWatch.Start();
+            sw_llamada.Start();
             btnLlamar.Enabled = false;
             btnEstado.Enabled = false;
+            btnRendimiento.Enabled = false;
             btnSalir.Enabled = false;
             btnCortar.Enabled = true;
+            cbEspera.Visible = true;
         }
 
-        /* Corta llamada en curso.
-         * Resetea stopWatch y muestra panel para guardar resultado de llamada.*/
+        /* Corta llamada en curso. Resetea stopWatch y muestra panel para guardar resultado de llamada.*/
         private void btnCortar_Click(object sender, EventArgs e)
         {
-            stopWatch.Stop();
-            t_atendiendo = t_atendiendo.Add(stopWatch.Elapsed);
-            stopWatch.Reset();
+            sw_llamada.Stop();
+            sw_enEspera.Stop(); // No debería estar corriendo
+            t_atendiendo = t_atendiendo.Add(sw_llamada.Elapsed);
             sw_llenandoFormularios.Start();
             btnCortar.Enabled = false;
             pnlRespuesta.Visible = true;
+            cbEspera.Visible = false;
             pnlVolverLlam.Enabled = false;
-            if(pnlProgramada.Visible)
+            if (pnlProgramada.Visible)
                 pnlProgramada.Visible = false;
         }
 
-        
+
         /* Crea llamada (realizada) y nuevaLlamada (controla si hay llamadas programadas antes de pedir nuevo contacto)
-         * - Volver (a llamar): 
+         * - Volver (a llamar)/No vendido/No atendio: guarda en BD llamada.
          * - Vendido: guarda en BD llamada + venta.
-         * - No vendido/No atendio:
             Carga nuevo contacto / llamada programada. */
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
@@ -192,14 +196,17 @@ namespace WindowsFormsApplication1
             sw_llenandoFormularios.Stop();
             sw_inactivo.Start();
 
-
-            llamada = new clsLllamada();
+            if (llamadaProgramada.IdNuevallamada != -1)
+                conectar.eliminarLlamadaDeNuevo(llamadaProgramada.IdNuevallamada);
+            
+            llamada = new clsLlamada();
             llamada.Id_campaña = campaña.IdCampaña;
             llamada.Id_empleado = user.Id_empleado;
             llamada.Id_contacto = contacto.Id;
             llamada.Id_llamada = conectar.obtener_id_llamada();
-            llamada.Duracion = lblDurLlamada.Text;
-            llamada.fecha = fechaHoy;
+            llamada.Duracion_total = sw_llamada.Elapsed;
+            llamada.T_espera = sw_enEspera.Elapsed;
+            llamada.Fecha = fechaHoy;
             llamada.Observaciones = rtbVObs.Text;
             if (rbVendido.Checked == true) llamada.Resultado = "Vendido";
             if (rbNoVendido.Checked == true) llamada.Resultado = "No Vendido";
@@ -235,25 +242,35 @@ namespace WindowsFormsApplication1
             setearPnlLlamada(); // Limpia controles y oculta paneles
             ucDatosUsuario1.D1 = ++jornada.CantLlamadas;
             guardarJornada();
+            sw_enEspera.Reset(); // Reseteo el stopwatch para el tiempo de espera de la llamada
+            sw_llamada.Reset();
 
             if (!conectar.check_campaña(user.Id_empleado, user.Id_campaña))
                 cargarCampaña();
             else
             {
-                clsLLamadaDeNuevo llamadaProgramada = conectar.hayLLamadaEnEstaHora(fechaHoy,user.Id_campaña); //controlo antes de pedir nuevo contacto  para llamar si hay algunn
+                llamadaProgramada = conectar.hayLLamadaEnEstaHora(fechaHoy,user.Id_campaña); //controlo antes de pedir nuevo contacto  para llamar si hay algunn
                 if (llamadaProgramada.IdNuevallamada != -1)  // Hay llamada programada
-                {
                     cargarLlamProgramada(llamadaProgramada);
-
-                    conectar.eliminarLlamadaDeNuevo(llamadaProgramada.IdNuevallamada);
-                }
                 else
                     cargarContacto(++control_id_cliente);
             }
         }
 
 
+        private void cbEspera_Click(object sender, EventArgs e)
+        {
+            if ((sender as CheckBox).Checked)
+                sw_enEspera.Start();
+            else
+                sw_enEspera.Stop();
+        }
 
+        private void btnRendimiento_Click(object sender, EventArgs e)
+        {
+            frmJornada frmJ = new frmJornada(user.Id_empleado, sw_inactivo);
+            frmJ.Show();
+        }
 
         #region FUNCIONES
         /* Carga llamada programada y llama funciones */
@@ -263,11 +280,8 @@ namespace WindowsFormsApplication1
             dtpHorarioProg.Value = new DateTime(llamadaProgramada.Fecha.Year, llamadaProgramada.Fecha.Month, llamadaProgramada.Fecha.Day, llamadaProgramada.Hora, llamadaProgramada.Minutos, 00);
             rtbObsProg.Text = llamadaProgramada.Observaciones;
             pnlProgramada.Visible = true;
-
-            conectar.eliminarLlamadaDeNuevo(llamadaProgramada.IdNuevallamada);
         }
-
-
+        
         /* Busca la campaña asignada y llena datos */
         public void cargarCampaña()
         {
@@ -282,7 +296,7 @@ namespace WindowsFormsApplication1
 
 
             //Datos del cliente a llamar
-            clsLLamadaDeNuevo llamadaProgramada = conectar.hayLLamadaEnEstaHora(fechaHoy, user.Id_campaña); //controlo antes de pedir nuevo contacto  para llamar si hay algunn
+            llamadaProgramada = conectar.hayLLamadaEnEstaHora(fechaHoy, user.Id_campaña); //controlo antes de pedir nuevo contacto  para llamar si hay algunn
             if (llamadaProgramada.IdNuevallamada != -1)
                 cargarLlamProgramada(llamadaProgramada);
             else
@@ -316,8 +330,10 @@ namespace WindowsFormsApplication1
             rtbVObs.Text = string.Empty;
             btnLlamar.Enabled = true;
             btnEstado.Enabled = true;
+            btnRendimiento.Enabled = true;
             btnSalir.Enabled = true;
             pnlRespuesta.Visible = false;
+            cbEspera.Visible = false;
             foreach(RadioButton rbAux in pnlRespuesta.Controls.OfType<RadioButton>())
             {
                 if (rbAux.Checked)
@@ -346,8 +362,7 @@ namespace WindowsFormsApplication1
                 conectar.actualizar_jornada(jornada);
             }
         }
-
-
+        
         public void Volver()
         {
             switch (est)
@@ -437,12 +452,19 @@ namespace WindowsFormsApplication1
             sw_sinCampaña.Stop();
             sw_sinContactos.Stop();
         }
-
+        
         public void cerrarFormEmpleado()
         {
             pararStopWatchs();
             jornada.Cierre_sesion = DateTime.Now.TimeOfDay;
             guardarJornada();
+            if(Application.OpenForms.Count > 2)
+            {
+                foreach (Form f in Application.OpenForms.Cast<Form>().Where(x => x.Name != padre.Name && x.Name != this.Name))
+                {
+                    f.Close();
+                }
+            }
             padre.Show();
             this.Hide();
         }

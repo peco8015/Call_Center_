@@ -43,8 +43,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblNombreCamp = new System.Windows.Forms.Label();
             this.pnlContacto = new System.Windows.Forms.Panel();
-            this.ucPantallaAusente1 = new WindowsFormsApplication1.ucPantallaAusente();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbEspera = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lblDurLlamada = new System.Windows.Forms.Label();
             this.btnCortar = new System.Windows.Forms.Button();
@@ -86,6 +86,8 @@
             this.ucDatosUsuario1 = new WindowsFormsApplication1.ucDatosUsuario();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.gbOpciones = new System.Windows.Forms.GroupBox();
+            this.btnRendimiento = new System.Windows.Forms.Button();
+            this.ucPantallaAusente1 = new WindowsFormsApplication1.ucPantallaAusente();
             this.pnlCampaña.SuspendLayout();
             this.pnlContacto.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -99,12 +101,12 @@
             // 
             this.btnEstado.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEstado.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEstado.Location = new System.Drawing.Point(24, 25);
+            this.btnEstado.Location = new System.Drawing.Point(119, 25);
             this.btnEstado.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnEstado.Name = "btnEstado";
-            this.btnEstado.Size = new System.Drawing.Size(172, 57);
+            this.btnEstado.Size = new System.Drawing.Size(79, 66);
             this.btnEstado.TabIndex = 1;
-            this.btnEstado.Text = "ESTADO";
+            this.btnEstado.Text = "Cambiar Estado";
             this.btnEstado.UseVisualStyleBackColor = true;
             this.btnEstado.Click += new System.EventHandler(this.btnEstado_Click);
             // 
@@ -246,7 +248,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlContacto.BackColor = System.Drawing.Color.LightBlue;
-            this.pnlContacto.Controls.Add(this.ucPantallaAusente1);
             this.pnlContacto.Controls.Add(this.panel1);
             this.pnlContacto.Controls.Add(this.pnlProgramada);
             this.pnlContacto.Controls.Add(this.pnlRespuesta);
@@ -272,19 +273,10 @@
             this.pnlContacto.Size = new System.Drawing.Size(989, 416);
             this.pnlContacto.TabIndex = 3;
             // 
-            // ucPantallaAusente1
-            // 
-            this.ucPantallaAusente1.BackColor = System.Drawing.SystemColors.ControlText;
-            this.ucPantallaAusente1.Estado = null;
-            this.ucPantallaAusente1.Location = new System.Drawing.Point(-241, -255);
-            this.ucPantallaAusente1.Name = "ucPantallaAusente1";
-            this.ucPantallaAusente1.Opacity = 80;
-            this.ucPantallaAusente1.Size = new System.Drawing.Size(1254, 689);
-            this.ucPantallaAusente1.TabIndex = 34;
-            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.cbEspera);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.lblDurLlamada);
             this.panel1.Controls.Add(this.btnCortar);
@@ -293,6 +285,23 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(443, 177);
             this.panel1.TabIndex = 33;
+            // 
+            // cbEspera
+            // 
+            this.cbEspera.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cbEspera.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.cbEspera.FlatAppearance.CheckedBackColor = System.Drawing.Color.DarkGray;
+            this.cbEspera.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbEspera.Font = new System.Drawing.Font("Microsoft YaHei Light", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbEspera.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbEspera.Location = new System.Drawing.Point(169, 92);
+            this.cbEspera.Name = "cbEspera";
+            this.cbEspera.Size = new System.Drawing.Size(104, 53);
+            this.cbEspera.TabIndex = 33;
+            this.cbEspera.Text = "En Espera";
+            this.cbEspera.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbEspera.UseVisualStyleBackColor = false;
+            this.cbEspera.Click += new System.EventHandler(this.cbEspera_Click);
             // 
             // label3
             // 
@@ -318,6 +327,7 @@
             // 
             this.btnCortar.AutoSize = true;
             this.btnCortar.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.llamar_cortar;
+            this.btnCortar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCortar.Location = new System.Drawing.Point(329, 81);
             this.btnCortar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCortar.Name = "btnCortar";
@@ -329,13 +339,15 @@
             // btnLlamar
             // 
             this.btnLlamar.AutoSize = true;
+            this.btnLlamar.BackColor = System.Drawing.Color.LimeGreen;
             this.btnLlamar.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.llamar_llamar;
+            this.btnLlamar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLlamar.Location = new System.Drawing.Point(31, 81);
             this.btnLlamar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnLlamar.Name = "btnLlamar";
             this.btnLlamar.Size = new System.Drawing.Size(82, 74);
             this.btnLlamar.TabIndex = 28;
-            this.btnLlamar.UseVisualStyleBackColor = true;
+            this.btnLlamar.UseVisualStyleBackColor = false;
             this.btnLlamar.Click += new System.EventHandler(this.btnLlamar_Click);
             // 
             // pnlProgramada
@@ -719,12 +731,12 @@
             this.btnSalir.FlatAppearance.BorderSize = 0;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.Location = new System.Drawing.Point(24, 90);
+            this.btnSalir.Location = new System.Drawing.Point(24, 99);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(172, 63);
+            this.btnSalir.Size = new System.Drawing.Size(174, 55);
             this.btnSalir.TabIndex = 4;
-            this.btnSalir.Text = "SALIR";
+            this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btSalir_Click);
             // 
@@ -751,6 +763,7 @@
             // 
             // gbOpciones
             // 
+            this.gbOpciones.Controls.Add(this.btnRendimiento);
             this.gbOpciones.Controls.Add(this.btnEstado);
             this.gbOpciones.Controls.Add(this.btnSalir);
             this.gbOpciones.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -762,12 +775,36 @@
             this.gbOpciones.TabStop = false;
             this.gbOpciones.Text = "Opciones";
             // 
+            // btnRendimiento
+            // 
+            this.btnRendimiento.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRendimiento.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnRendimiento.Location = new System.Drawing.Point(24, 25);
+            this.btnRendimiento.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnRendimiento.Name = "btnRendimiento";
+            this.btnRendimiento.Size = new System.Drawing.Size(79, 66);
+            this.btnRendimiento.TabIndex = 5;
+            this.btnRendimiento.Text = "Detalle Jornada";
+            this.btnRendimiento.UseVisualStyleBackColor = true;
+            this.btnRendimiento.Click += new System.EventHandler(this.btnRendimiento_Click);
+            // 
+            // ucPantallaAusente1
+            // 
+            this.ucPantallaAusente1.BackColor = System.Drawing.SystemColors.ControlText;
+            this.ucPantallaAusente1.Estado = null;
+            this.ucPantallaAusente1.Location = new System.Drawing.Point(0, 1);
+            this.ucPantallaAusente1.Name = "ucPantallaAusente1";
+            this.ucPantallaAusente1.Opacity = 80;
+            this.ucPantallaAusente1.Size = new System.Drawing.Size(1254, 689);
+            this.ucPantallaAusente1.TabIndex = 40;
+            // 
             // frmEmple
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlText;
             this.ClientSize = new System.Drawing.Size(1254, 691);
+            this.Controls.Add(this.ucPantallaAusente1);
             this.Controls.Add(this.gbOpciones);
             this.Controls.Add(this.ucDatosUsuario1);
             this.Controls.Add(this.pnlContacto);
@@ -852,7 +889,9 @@
         private System.Windows.Forms.RichTextBox rtbObsProg;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox gbOpciones;
-        private ucPantallaAusente ucPantallaAusente1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox cbEspera;
+        private System.Windows.Forms.Button btnRendimiento;
+        private ucPantallaAusente ucPantallaAusente1;
     }
 }

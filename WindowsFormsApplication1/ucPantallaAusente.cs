@@ -19,7 +19,7 @@ namespace WindowsFormsApplication1
         private int m_opacity = 80;
         private string estado;
 
-        public string Estado { get => estado; set => estado = value; }
+        public string Estado { get => estado; set { estado = value; lblTexto.Text = "Para continuar con las tareas, clickee el botón 'Regresar'.\n" + estado; } }
 
         private int alpha;
         public ucPantallaAusente()

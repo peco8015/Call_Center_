@@ -40,12 +40,12 @@ namespace WindowsFormsApplication1
             empleado = conectar.datos_empleado(dni);
            campaña= conectar.datos_campaña_empleado(empleado.Id_campaña);
 
-            lbId.Text = empleado.Id_empleado.ToString();
+            lbId.Text = "Id: " + empleado.Id_empleado.ToString();
             tbApellido.Text = empleado.Apellido;
             tbNombre.Text = empleado.Nombre;
             tbDni.Text = empleado.Dni.ToString();
-            tbInicio.Text = empleado.FechaInicio.ToString("dd/M/yyyy");
-            tbNacimiento.Text = empleado.Fecha_naciemiento.ToString("dd/M/yyyy");
+            tbInicio.Text = empleado.FechaInicio.ToString();
+            tbNacimiento.Text = empleado.FechaNaciemiento.ToString();
             tbDomicilio.Text = empleado.Domicilio;
             tbTel.Text = empleado.Telefono;
             tbMail.Text = empleado.Mail;
@@ -130,26 +130,7 @@ namespace WindowsFormsApplication1
 
         private void Bt_UpdateEmpleado_Click(object sender, EventArgs e)
         {
-            
-            empleado.Apellido = tbApellido.Text;
-            empleado.Nombre = tbNombre.Text;
-            empleado.Dni= Convert.ToInt32(tbDni.Text);
-            empleado.FechaInicio= Convert.ToDateTime(tbInicio.Text);
-            empleado.Fecha_naciemiento= Convert.ToDateTime(tbNacimiento.Text);
-            empleado.Domicilio = tbDomicilio.Text;
-            empleado.Telefono = tbTel.Text;
-            empleado.Mail = tbMail.Text;
-            campaña.Nombre = lbcampañaAsig.Text;
 
-            if (conectar.updateEmpleado(empleado)==true)
-            {
-                MessageBox.Show("Empleado actualizado");
-
-            }
-            else
-            {
-                MessageBox.Show("No se pudo actualizar");
-            }
         }
 
         private void lbDetail_Click(object sender, EventArgs e)
@@ -816,29 +797,12 @@ namespace WindowsFormsApplication1
             foreach (DataRow fila in dTable.Rows)
             {
 
-                listBox1.Items.Add(Convert.ToString(fila[1])+"-"+Convert.ToString(fila[0]));
+                listBox1.Items.Add(Convert.ToString(fila[0]));
 
 
             }
 
             panelCampañas.Visible = false;
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            lbcampañaAsig.Text = listBox1.SelectedItem.ToString();
-            string a = listBox1.SelectedItem.ToString();
-            string [] a2= a.Split('-');
-
-            empleado.Id_campaña = Convert.ToInt32(a2[0]);
-            campaña.IdCampaña = Convert.ToInt32(a2[0]);
-            campaña.Nombre = a2[1].ToString();
-           
         }
 
 

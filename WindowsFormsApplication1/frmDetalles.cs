@@ -136,7 +136,7 @@ namespace WindowsFormsApplication1
                     tb05.Text = empleado.Mail;
                     tb06.Text = empleado.Domicilio;
                     tb07.Text = empleado.Id_campaña.ToString(); // NOOOO tiene que ir el nombre de la campaña
-                    dtp01.Value = Convert.ToDateTime(empleado.Fecha_naciemiento);
+                    dtp01.Value = Convert.ToDateTime(empleado.FechaNaciemiento);
                     dtp02.Value = Convert.ToDateTime(empleado.FechaInicio);
                     break;
 

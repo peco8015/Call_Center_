@@ -55,13 +55,13 @@
     <Compile Include="clases\clsEstadisticas.cs" />
     <Compile Include="clases\clsJornada.cs" />
     <Compile Include="clases\clsLLamadaDeNuevo.cs" />
-    <Compile Include="clases\clsLllamada.cs" />
+    <Compile Include="clases\clsLlamada.cs" />
     <Compile Include="clases\clsVenta.cs" />
-    <Compile Include="FormNuevoEmpleado.cs">
+    <Compile Include="frmNuevo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormNuevoEmpleado.Designer.cs">
-      <DependentUpon>FormNuevoEmpleado.cs</DependentUpon>
+    <Compile Include="frmNuevo.Designer.cs">
+      <DependentUpon>frmNuevo.cs</DependentUpon>
     </Compile>
     <Compile Include="frmAusente.cs">
       <SubType>Form</SubType>
@@ -93,17 +93,17 @@
     <Compile Include="frmEstado.Designer.cs">
       <DependentUpon>frmEstado.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmJefe.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmJefe.Designer.cs">
-      <DependentUpon>frmJefe.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmJefee.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmJefee.Designer.cs">
       <DependentUpon>frmJefee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmJornada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmJornada.Designer.cs">
+      <DependentUpon>frmJornada.cs</DependentUpon>
     </Compile>
     <Compile Include="Logeo.cs">
       <SubType>Form</SubType>
@@ -137,8 +137,8 @@
     <Compile Include="ucPantallaAusente1.Designer.cs">
       <DependentUpon>ucPantallaAusente1.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FormNuevoEmpleado.resx">
-      <DependentUpon>FormNuevoEmpleado.cs</DependentUpon>
+    <EmbeddedResource Include="frmNuevo.resx">
+      <DependentUpon>frmNuevo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAusente.resx">
       <DependentUpon>frmAusente.cs</DependentUpon>
@@ -155,11 +155,11 @@
     <EmbeddedResource Include="frmEstado.resx">
       <DependentUpon>frmEstado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmJefe.resx">
-      <DependentUpon>frmJefe.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmJefee.resx">
       <DependentUpon>frmJefee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmJornada.resx">
+      <DependentUpon>frmJornada.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Logeo.resx">
       <DependentUpon>Logeo.cs</DependentUpon>

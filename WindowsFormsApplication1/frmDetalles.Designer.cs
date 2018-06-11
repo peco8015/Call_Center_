@@ -28,24 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint7 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 5D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint8 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 5D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label1 = new System.Windows.Forms.Label();
             this.gbInformacion = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.dtp02 = new System.Windows.Forms.DateTimePicker();
             this.tb07 = new System.Windows.Forms.TextBox();
@@ -63,9 +64,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.gbContacto = new System.Windows.Forms.GroupBox();
             this.pnlEstadisticas = new System.Windows.Forms.Panel();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tcFechas = new System.Windows.Forms.TabControl();
@@ -75,7 +76,6 @@
             this.cTiempos = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tpSemana = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
-            this.gbContacto = new System.Windows.Forms.GroupBox();
             this.gbInformacion.SuspendLayout();
             this.pnlEstadisticas.SuspendLayout();
             this.tcFechas.SuspendLayout();
@@ -127,6 +127,16 @@
             this.gbInformacion.TabIndex = 2;
             this.gbInformacion.TabStop = false;
             this.gbInformacion.Text = "Información";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(20, 122);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 20);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "DNI";
             // 
             // btnEliminar
             // 
@@ -285,16 +295,6 @@
             this.label9.TabIndex = 3;
             this.label9.Text = "Nacimiento";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(20, 122);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 20);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "DNI";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -315,10 +315,20 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Nombre";
             // 
+            // gbContacto
+            // 
+            this.gbContacto.BackColor = System.Drawing.Color.Transparent;
+            this.gbContacto.Font = new System.Drawing.Font("Microsoft YaHei Light", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbContacto.Location = new System.Drawing.Point(6, 145);
+            this.gbContacto.Name = "gbContacto";
+            this.gbContacto.Size = new System.Drawing.Size(344, 139);
+            this.gbContacto.TabIndex = 20;
+            this.gbContacto.TabStop = false;
+            this.gbContacto.Text = "Contacto";
+            // 
             // pnlEstadisticas
             // 
             this.pnlEstadisticas.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pnlEstadisticas.Controls.Add(this.comboBox1);
             this.pnlEstadisticas.Controls.Add(this.tcFechas);
             this.pnlEstadisticas.Controls.Add(this.label2);
             this.pnlEstadisticas.Font = new System.Drawing.Font("Microsoft YaHei Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -335,7 +345,7 @@
             "Hoy",
             "Semana",
             "Mes"});
-            this.comboBox1.Location = new System.Drawing.Point(556, 13);
+            this.comboBox1.Location = new System.Drawing.Point(508, 10);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(196, 25);
             this.comboBox1.TabIndex = 2;
@@ -357,6 +367,7 @@
             // 
             // tpHoy
             // 
+            this.tpHoy.Controls.Add(this.comboBox1);
             this.tpHoy.Controls.Add(this.cVentasCampaña);
             this.tpHoy.Controls.Add(this.cPorcentajeVentas);
             this.tpHoy.Controls.Add(this.cTiempos);
@@ -370,89 +381,89 @@
             // 
             // cVentasCampaña
             // 
-            chartArea4.Name = "ChartArea1";
-            this.cVentasCampaña.ChartAreas.Add(chartArea4);
+            chartArea1.Name = "ChartArea1";
+            this.cVentasCampaña.ChartAreas.Add(chartArea1);
             this.cVentasCampaña.Location = new System.Drawing.Point(13, 9);
             this.cVentasCampaña.Name = "cVentasCampaña";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            series5.Legend = "Legend1";
-            series5.Name = "Campañas";
-            series5.Points.Add(dataPoint5);
-            series5.Points.Add(dataPoint6);
-            this.cVentasCampaña.Series.Add(series5);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            series1.Legend = "Legend1";
+            series1.Name = "Campañas";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            this.cVentasCampaña.Series.Add(series1);
             this.cVentasCampaña.Size = new System.Drawing.Size(391, 201);
             this.cVentasCampaña.TabIndex = 2;
             this.cVentasCampaña.Text = "Ventas por Campaña";
-            title4.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            title4.Name = "Title1";
-            title4.Text = "Ventas por Campaña";
-            this.cVentasCampaña.Titles.Add(title4);
+            title1.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            title1.Name = "Title1";
+            title1.Text = "Ventas por Campaña";
+            this.cVentasCampaña.Titles.Add(title1);
             // 
             // cPorcentajeVentas
             // 
-            chartArea5.Name = "ChartArea1";
-            this.cPorcentajeVentas.ChartAreas.Add(chartArea5);
-            legend3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend3.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            legend3.IsTextAutoFit = false;
-            legend3.Name = "Legend1";
-            legend3.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            this.cPorcentajeVentas.Legends.Add(legend3);
+            chartArea2.Name = "ChartArea1";
+            this.cPorcentajeVentas.ChartAreas.Add(chartArea2);
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend1.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            legend1.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            this.cPorcentajeVentas.Legends.Add(legend1);
             this.cPorcentajeVentas.Location = new System.Drawing.Point(410, 216);
             this.cPorcentajeVentas.Name = "cPorcentajeVentas";
             this.cPorcentajeVentas.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
-            series6.BorderColor = System.Drawing.Color.Black;
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series6.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            series6.Legend = "Legend1";
-            series6.Name = "Ventas";
-            this.cPorcentajeVentas.Series.Add(series6);
+            series2.BorderColor = System.Drawing.Color.Black;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            series2.Legend = "Legend1";
+            series2.Name = "Ventas";
+            this.cPorcentajeVentas.Series.Add(series2);
             this.cPorcentajeVentas.Size = new System.Drawing.Size(307, 236);
             this.cPorcentajeVentas.TabIndex = 1;
             this.cPorcentajeVentas.Text = "Porcentaje de Ventas";
-            title5.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            title5.Name = "Title01";
-            title5.Text = "% Ventas";
-            this.cPorcentajeVentas.Titles.Add(title5);
+            title2.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            title2.Name = "Title01";
+            title2.Text = "% Ventas";
+            this.cPorcentajeVentas.Titles.Add(title2);
             // 
             // cTiempos
             // 
             this.cTiempos.BorderlineColor = System.Drawing.Color.Black;
             this.cTiempos.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea6.Name = "ChartArea1";
-            this.cTiempos.ChartAreas.Add(chartArea6);
-            legend4.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend4.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            legend4.IsTextAutoFit = false;
-            legend4.Name = "Legend1";
-            legend4.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            this.cTiempos.Legends.Add(legend4);
+            chartArea3.Name = "ChartArea1";
+            this.cTiempos.ChartAreas.Add(chartArea3);
+            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend2.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            legend2.IsTextAutoFit = false;
+            legend2.Name = "Legend1";
+            legend2.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            this.cTiempos.Legends.Add(legend2);
             this.cTiempos.Location = new System.Drawing.Point(13, 216);
             this.cTiempos.Name = "cTiempos";
             this.cTiempos.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
-            series7.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            series7.Legend = "Legend1";
-            series7.Name = "Productivo";
-            series7.Points.Add(dataPoint7);
-            series7.Points.Add(dataPoint8);
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
-            series8.Legend = "Legend1";
-            series8.Name = "Improductivo";
-            this.cTiempos.Series.Add(series7);
-            this.cTiempos.Series.Add(series8);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
+            series3.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            series3.Legend = "Legend1";
+            series3.Name = "Productivo";
+            series3.Points.Add(dataPoint3);
+            series3.Points.Add(dataPoint4);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
+            series4.Legend = "Legend1";
+            series4.Name = "Improductivo";
+            this.cTiempos.Series.Add(series3);
+            this.cTiempos.Series.Add(series4);
             this.cTiempos.Size = new System.Drawing.Size(391, 236);
             this.cTiempos.TabIndex = 0;
             this.cTiempos.Text = "Detalle de Tiempos";
-            title6.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            title6.Name = "Title01";
-            title6.Text = "Detalle de Tiempos";
-            this.cTiempos.Titles.Add(title6);
+            title3.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            title3.Name = "Title01";
+            title3.Text = "Detalle de Tiempos";
+            this.cTiempos.Titles.Add(title3);
             // 
             // tpSemana
             // 
@@ -473,17 +484,6 @@
             this.label2.Size = new System.Drawing.Size(176, 21);
             this.label2.TabIndex = 0;
             this.label2.Text = "Estadísticas y números";
-            // 
-            // gbContacto
-            // 
-            this.gbContacto.BackColor = System.Drawing.Color.Transparent;
-            this.gbContacto.Font = new System.Drawing.Font("Microsoft YaHei Light", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbContacto.Location = new System.Drawing.Point(6, 145);
-            this.gbContacto.Name = "gbContacto";
-            this.gbContacto.Size = new System.Drawing.Size(344, 139);
-            this.gbContacto.TabIndex = 20;
-            this.gbContacto.TabStop = false;
-            this.gbContacto.Text = "Contacto";
             // 
             // frmDetalles
             // 

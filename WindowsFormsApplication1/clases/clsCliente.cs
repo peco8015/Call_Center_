@@ -14,7 +14,7 @@ namespace WindowsFormsApplication1.clases
         string contacto;
         string domicilio;
         string mail;
-        int telefono;
+        int telefono; // STRING O INT?!
 
         public clsCliente()
         { }
@@ -26,7 +26,5 @@ namespace WindowsFormsApplication1.clases
         public string Contacto { get => contacto; set => contacto = value; }
         public string Domicilio { get => domicilio; set => domicilio = value; }
         public string Mail { get => mail; set => mail = value; }
-    
-
     }
 }
