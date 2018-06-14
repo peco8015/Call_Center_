@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.pnlInformacion = new System.Windows.Forms.Panel();
+            this.rbJefe = new System.Windows.Forms.RadioButton();
+            this.rbEmpleado = new System.Windows.Forms.RadioButton();
+            this.label9 = new System.Windows.Forms.Label();
             this.tb07 = new System.Windows.Forms.TextBox();
             this.dtp02 = new System.Windows.Forms.DateTimePicker();
             this.dtp01 = new System.Windows.Forms.DateTimePicker();
@@ -61,8 +64,13 @@
             // 
             // pnlInformacion
             // 
+            this.pnlInformacion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlInformacion.BackColor = System.Drawing.Color.LightBlue;
             this.pnlInformacion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlInformacion.Controls.Add(this.rbJefe);
+            this.pnlInformacion.Controls.Add(this.rbEmpleado);
+            this.pnlInformacion.Controls.Add(this.label9);
             this.pnlInformacion.Controls.Add(this.tb07);
             this.pnlInformacion.Controls.Add(this.dtp02);
             this.pnlInformacion.Controls.Add(this.dtp01);
@@ -82,8 +90,42 @@
             this.pnlInformacion.Controls.Add(this.label3);
             this.pnlInformacion.Location = new System.Drawing.Point(38, 47);
             this.pnlInformacion.Name = "pnlInformacion";
-            this.pnlInformacion.Size = new System.Drawing.Size(386, 360);
+            this.pnlInformacion.Size = new System.Drawing.Size(386, 377);
             this.pnlInformacion.TabIndex = 7;
+            // 
+            // rbJefe
+            // 
+            this.rbJefe.AutoSize = true;
+            this.rbJefe.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbJefe.Location = new System.Drawing.Point(274, 325);
+            this.rbJefe.Name = "rbJefe";
+            this.rbJefe.Size = new System.Drawing.Size(38, 24);
+            this.rbJefe.TabIndex = 20;
+            this.rbJefe.Text = "Si";
+            this.rbJefe.UseVisualStyleBackColor = true;
+            // 
+            // rbEmpleado
+            // 
+            this.rbEmpleado.AutoSize = true;
+            this.rbEmpleado.Checked = true;
+            this.rbEmpleado.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbEmpleado.Location = new System.Drawing.Point(183, 325);
+            this.rbEmpleado.Name = "rbEmpleado";
+            this.rbEmpleado.Size = new System.Drawing.Size(47, 24);
+            this.rbEmpleado.TabIndex = 19;
+            this.rbEmpleado.TabStop = true;
+            this.rbEmpleado.Text = "No";
+            this.rbEmpleado.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(22, 327);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(140, 20);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Director de campaña";
             // 
             // tb07
             // 
@@ -244,12 +286,14 @@
             // 
             // pnlRelacion
             // 
+            this.pnlRelacion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlRelacion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlRelacion.Controls.Add(this.lblLista);
             this.pnlRelacion.Controls.Add(this.lbLista);
             this.pnlRelacion.Location = new System.Drawing.Point(489, 47);
             this.pnlRelacion.Name = "pnlRelacion";
-            this.pnlRelacion.Size = new System.Drawing.Size(312, 360);
+            this.pnlRelacion.Size = new System.Drawing.Size(312, 364);
             this.pnlRelacion.TabIndex = 23;
             // 
             // lblLista
@@ -272,17 +316,18 @@
             this.lbLista.ItemHeight = 19;
             this.lbLista.Location = new System.Drawing.Point(28, 48);
             this.lbLista.Name = "lbLista";
-            this.lbLista.Size = new System.Drawing.Size(256, 289);
-            this.lbLista.TabIndex = 15;
+            this.lbLista.Size = new System.Drawing.Size(256, 270);
+            this.lbLista.TabIndex = 21;
             this.lbLista.SelectedIndexChanged += new System.EventHandler(this.lbLista_SelectedIndexChanged);
             // 
             // btnAdd
             // 
+            this.btnAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(313, 413);
+            this.btnAdd.Location = new System.Drawing.Point(313, 430);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(87, 47);
-            this.btnAdd.TabIndex = 16;
+            this.btnAdd.TabIndex = 22;
             this.btnAdd.Text = "Guardar";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -296,7 +341,7 @@
             this.pnlRegistro.Controls.Add(this.btnAdd);
             this.pnlRegistro.Location = new System.Drawing.Point(19, 59);
             this.pnlRegistro.Name = "pnlRegistro";
-            this.pnlRegistro.Size = new System.Drawing.Size(830, 475);
+            this.pnlRegistro.Size = new System.Drawing.Size(830, 493);
             this.pnlRegistro.TabIndex = 8;
             // 
             // label11
@@ -345,7 +390,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlText;
-            this.ClientSize = new System.Drawing.Size(869, 546);
+            this.ClientSize = new System.Drawing.Size(869, 573);
             this.Controls.Add(this.cbTipoRegistro);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.pnlRegistro);
@@ -393,5 +438,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tb07;
+        private System.Windows.Forms.RadioButton rbJefe;
+        private System.Windows.Forms.RadioButton rbEmpleado;
+        private System.Windows.Forms.Label label9;
     }
 }

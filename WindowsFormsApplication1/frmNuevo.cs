@@ -25,6 +25,7 @@ namespace WindowsFormsApplication1
         private void frmNuevo_Load(object sender, EventArgs e)
         {
             pnlRegistro.Enabled = false;
+            rbEmpleado.Checked = true;
         }
 
         private void cbTipoRegistro_SelectedIndexChanged(object sender, EventArgs e)
@@ -49,12 +50,15 @@ namespace WindowsFormsApplication1
                     label6.Visible = true;
                     label7.Visible = true;
                     label8.Visible = true;
+                    label9.Visible = true;
                     tb04.Visible = true;
                     tb05.Visible = true;
                     tb06.Visible = true;
                     tb07.Visible = true;
                     dtp01.Visible = true;
                     dtp02.Visible = false;
+                    rbEmpleado.Visible = true;
+                    rbJefe.Visible = true;
 
                     pnlRelacion.Enabled = true;
                     lblLista.Text = "Asignar campaña al empleado";
@@ -83,9 +87,12 @@ namespace WindowsFormsApplication1
                     tb03.Size = new Size(191, 25);
                     label7.Visible = false;
                     label8.Visible = false;
+                    label9.Visible = false;
                     tb07.Visible = false;
                     dtp01.Visible = false;
                     dtp02.Visible = false;
+                    rbEmpleado.Visible = false;
+                    rbJefe.Visible = false;
                     break;
 
                 case "Campaña":
@@ -101,12 +108,15 @@ namespace WindowsFormsApplication1
                     label6.Visible = false;
                     label7.Visible = true;
                     label8.Visible = true;
+                    label9.Visible = false;
                     tb04.Visible = false;
                     tb05.Visible = false;
                     tb06.Visible = false;
                     tb07.Visible = false;
                     dtp01.Visible = true;
                     dtp02.Visible = true;
+                    rbEmpleado.Visible = false;
+                    rbJefe.Visible = false;
 
                     pnlRelacion.Enabled = true;
                     lblLista.Text = "Seleccione el cliente propietario";
@@ -145,7 +155,7 @@ namespace WindowsFormsApplication1
                         emp.Domicilio = tb06.Text;
                         emp.FechaNaciemiento = dtp01.Value;
                         emp.FechaInicio = DateTime.Now;
-                        emp.Jefe = 0;
+                        emp.Jefe = (rbJefe.Checked)? 0 : 1;
                         emp.Password = tb07.Text;
 
                         //CAMPAÑA
@@ -220,5 +230,6 @@ namespace WindowsFormsApplication1
         {
             MessageBox.Show(msj, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+        
     }
 }

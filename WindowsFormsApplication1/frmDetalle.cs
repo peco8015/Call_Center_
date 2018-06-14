@@ -9,7 +9,7 @@ using WindowsFormsApplication1.clases;
 
 namespace WindowsFormsApplication1
 {
-    public partial class frmDetalles : Form
+    public partial class frmDetalle : Form
     {
         clsConexion conectar = new clsConexion();
         clsEmpleado empleado;
@@ -20,7 +20,7 @@ namespace WindowsFormsApplication1
         string clase;
         int identificador;
 
-        public frmDetalles(string t, int id)
+        public frmDetalle(string t, int id)
         {
             InitializeComponent();
             clase = t;

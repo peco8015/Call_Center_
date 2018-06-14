@@ -110,7 +110,7 @@ namespace WindowsFormsApplication1
         {
             try
             {
-                frmDetalles frmDetalleCliente;
+                frmDetalle frmDetalleCliente;
                 frmDatos frmDato;
                 switch (dgvTabla.Columns[0].Name)//la tabla cambia,esto es para controlar q tabla esta visible al momento del click en la celda
                 {
@@ -122,12 +122,12 @@ namespace WindowsFormsApplication1
                         break;
 
                     case "id_cliente":
-                        frmDetalleCliente = new frmDetalles("cliente", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_cliente"].Value.ToString()));
+                        frmDetalleCliente = new frmDetalle("cliente", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_cliente"].Value.ToString()));
                         frmDetalleCliente.Show();
                         break;
 
                     case "id_campaña":
-                        frmDetalleCliente = new frmDetalles("campaña", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_campaña"].Value.ToString()));
+                        frmDetalleCliente = new frmDetalle("campaña", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_campaña"].Value.ToString()));
                         frmDetalleCliente.Show();
                         break;
                 }
