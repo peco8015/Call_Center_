@@ -130,7 +130,25 @@ namespace WindowsFormsApplication1
 
         private void Bt_UpdateEmpleado_Click(object sender, EventArgs e)
         {
+            empleado.Apellido = tbApellido.Text;
+            empleado.Nombre = tbNombre.Text;
+            empleado.Dni = Convert.ToInt32(tbDni.Text);
+            empleado.FechaInicio = Convert.ToDateTime(tbInicio.Text);
+            empleado.FechaNaciemiento= Convert.ToDateTime(tbNacimiento.Text);
+            empleado.Domicilio = tbDomicilio.Text;
+            empleado.Telefono = tbTel.Text;
+            empleado.Mail = tbMail.Text;
+            campaña.Nombre = lbcampañaAsig.Text;
 
+            if (conectar.updateEmpleado(empleado) == true)
+            {
+                MessageBox.Show("Empleado actualizado");
+
+            }
+            else
+            {
+                MessageBox.Show("No se pudo actualizar");
+            }
         }
 
         private void lbDetail_Click(object sender, EventArgs e)
@@ -311,11 +329,21 @@ namespace WindowsFormsApplication1
 
                     int SemanaProd = conectar.tiempoSemanaProductivo(empleado.Id_empleado);
                     int SemanaImprod = conectar.tiempoSemanaImproductivo(empleado.Id_empleado);
+                    float hours1s = 0;
+                    float hours2s = 0;
+
 
                     int tot2 = SemanaProd + SemanaImprod;
-                    float hours1s = (SemanaProd * 100) / tot2;
-                    float hours2s = (SemanaImprod * 100) / tot2;
+                    if (tot2 > 0)
+                    {
+                         hours1s = (SemanaProd * 100) / tot2;
+                          hours1s = (SemanaProd * 100) / tot2;
+                         hours2s = (SemanaImprod * 100) / tot2; 
+                    }
+                    else
+                    {
 
+                    }
 
                     chProdSemana.Series["Tiempos"].Points.AddXY(hours1s.ToString() + " %", SemanaProd);
                     chProdSemana.Series["Tiempos"].Points.AddXY(hours2s.ToString() + " %", SemanaImprod);
@@ -377,10 +405,16 @@ namespace WindowsFormsApplication1
 
                     int MesProd = conectar.tiempoMesProductivo(empleado.Id_empleado);
                     int MesImprod = conectar.tiempoMesImproductivo(empleado.Id_empleado);
+                    float hours1m = 0;
+                    float hours2m = 0;
 
                     int tot3 = MesProd + MesImprod;
-                    float hours1m = (MesProd * 100) / tot3;
-                    float hours2m = (MesImprod * 100) / tot3;
+                    if (tot3>0)
+                    {
+                         hours1m = (MesProd * 100) / tot3;
+                         hours2m = (MesImprod * 100) / tot3;
+                    }
+                  
 
 
                     chProdMes.Series["Tiempos"].Points.AddXY(hours1m.ToString() + " %", MesProd);
@@ -538,11 +572,18 @@ namespace WindowsFormsApplication1
 
             int total = resVenta[0] + resVenta[1] + resVenta[2] + resVenta[3];
             //0-llamar de nuevo ;1 no atendido -;2- no vendido ;3- vendido
-            int porVendido = (resVenta[3] * 100) / total;
-            int porNoAtendio = (resVenta[1] * 100) / total;
-            int porLlamarDeNuevo = (resVenta[0] * 100) / total;
-            int porNoVendido = (resVenta[2] * 100) / total;
+            int porVendido =0;
+            int porNoAtendio = 0;
+            int porLlamarDeNuevo = 0;
+            int porNoVendido = 0;
 
+            if (total > 0)
+            {
+                 porVendido = (resVenta[3] * 100) / total;
+                 porNoAtendio = (resVenta[1] * 100) / total;
+                 porLlamarDeNuevo = (resVenta[0] * 100) / total;
+                 porNoVendido = (resVenta[2] * 100) / total;
+            }
 
 
 
@@ -602,11 +643,18 @@ namespace WindowsFormsApplication1
 
             int total = resVenta[0] + resVenta[1] + resVenta[2] + resVenta[3];
             //0-llamar de nuevo ;1 no atendido -;2- no vendido ;3- vendido
-            int porVendido = (resVenta[3] * 100) / total;
-            int porNoAtendio = (resVenta[1] * 100) / total;
-            int porLlamarDeNuevo = (resVenta[0] * 100) / total;
-            int porNoVendido = (resVenta[2] * 100) / total;
+            int porVendido = 0;
+            int porNoAtendio = 0;
+            int porLlamarDeNuevo =0;
+            int porNoVendido = 0;
 
+            if (total > 0)
+            {
+                 porVendido = (resVenta[3] * 100) / total;
+                 porNoAtendio = (resVenta[1] * 100) / total;
+                 porLlamarDeNuevo = (resVenta[0] * 100) / total;
+                 porNoVendido = (resVenta[2] * 100) / total;
+            }
 
 
 
@@ -667,11 +715,19 @@ namespace WindowsFormsApplication1
 
             int total = resVenta[0] + resVenta[1] + resVenta[2] + resVenta[3];
             //0-llamar de nuevo ;1 no atendido -;2- no vendido ;3- vendido
-            int porVendido = (resVenta[3] * 100) / total;
-            int porNoAtendio = (resVenta[1] * 100) / total;
-            int porLlamarDeNuevo = (resVenta[0] * 100) / total;
-            int porNoVendido = (resVenta[2] * 100) / total;
 
+            int porVendido = 0;
+            int porNoAtendio = 0;
+            int porLlamarDeNuevo = 0;
+            int porNoVendido = 0;
+
+            if (total > 0)
+            {
+                 porVendido = (resVenta[3] * 100) / total;
+                 porNoAtendio = (resVenta[1] * 100) / total;
+                 porLlamarDeNuevo = (resVenta[0] * 100) / total;
+                 porNoVendido = (resVenta[2] * 100) / total;
+            }
 
 
             //0-llamar de nuevo ;1 no atendido -;2- no vendido ;3- vendido
