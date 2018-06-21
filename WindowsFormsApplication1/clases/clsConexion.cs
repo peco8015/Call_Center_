@@ -2636,7 +2636,27 @@ namespace WindowsFormsApplication1.clases
             }
         }
 
-     
+        public bool actualizar_campaña_empleados(int idCamp, List<int> l_empleados)
+        {
+            try
+            {
+                con.Open();
+                //string ids_empleados = "(" + string.Join(",", l_empleados) + ")";
+                SqlCommand cmd = new SqlCommand("UPDATE empleado SET id_campaña = @id_campaña WHERE id_empleado IN (@empleados)", con);
+                cmd.Parameters.AddWithValue("id_campaña", idCamp);
+                cmd.Parameters.AddWithValue("empleados", string.Join(",", l_empleados));
+                return (cmd.ExecuteNonQuery() == l_empleados.Count) ? true : false;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
         public DataTable obtenerCampañas()
         {
@@ -2759,14 +2779,15 @@ namespace WindowsFormsApplication1.clases
                 string f_fin = campaña.Fecha_fin.ToString("yyyy/MM/dd").Replace('-', '/');
                 con.Open();
                 SqlCommand cmd = new SqlCommand("INSERT INTO campaña(nombre, descripcion, precio, f_inicio, f_fin, id_cliente)" +
-                    " VALUES(@nombre, @descripcion, @precio, @f_inicio, @f_fin, @id_cliente)", con); // id_especificacion?
+                    " VALUES(@nombre, @descripcion, @precio, @f_inicio, @f_fin, @id_cliente);SELECT SCOPE_IDENTITY();", con); // id_especificacion?
                 cmd.Parameters.AddWithValue("nombre", campaña.Nombre);
                 cmd.Parameters.AddWithValue("descripcion", campaña.Descripion);
                 cmd.Parameters.AddWithValue("precio", campaña.Precio);
                 cmd.Parameters.AddWithValue("f_inicio", f_inicio);
                 cmd.Parameters.AddWithValue("f_fin", f_fin);
                 cmd.Parameters.AddWithValue("id_cliente", campaña.IdCliente);
-                return (cmd.ExecuteNonQuery() == 1) ? true : false;
+                campaña.IdCampaña = Convert.ToInt32(cmd.ExecuteScalar());
+                return true;
             }
             catch (Exception e)
             {

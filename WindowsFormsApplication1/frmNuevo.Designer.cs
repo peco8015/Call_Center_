@@ -57,6 +57,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.cbTipoRegistro = new System.Windows.Forms.ComboBox();
+            this.btnAddEmpleados = new System.Windows.Forms.Button();
             this.pnlInformacion.SuspendLayout();
             this.pnlRelacion.SuspendLayout();
             this.pnlRegistro.SuspendLayout();
@@ -293,7 +294,7 @@
             this.pnlRelacion.Controls.Add(this.lbLista);
             this.pnlRelacion.Location = new System.Drawing.Point(489, 47);
             this.pnlRelacion.Name = "pnlRelacion";
-            this.pnlRelacion.Size = new System.Drawing.Size(312, 364);
+            this.pnlRelacion.Size = new System.Drawing.Size(312, 377);
             this.pnlRelacion.TabIndex = 23;
             // 
             // lblLista
@@ -316,7 +317,7 @@
             this.lbLista.ItemHeight = 19;
             this.lbLista.Location = new System.Drawing.Point(28, 48);
             this.lbLista.Name = "lbLista";
-            this.lbLista.Size = new System.Drawing.Size(256, 270);
+            this.lbLista.Size = new System.Drawing.Size(256, 308);
             this.lbLista.TabIndex = 21;
             this.lbLista.SelectedIndexChanged += new System.EventHandler(this.lbLista_SelectedIndexChanged);
             // 
@@ -324,7 +325,7 @@
             // 
             this.btnAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(313, 430);
+            this.btnAdd.Location = new System.Drawing.Point(313, 433);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(87, 47);
             this.btnAdd.TabIndex = 22;
@@ -335,6 +336,7 @@
             // pnlRegistro
             // 
             this.pnlRegistro.BackColor = System.Drawing.Color.Teal;
+            this.pnlRegistro.Controls.Add(this.btnAddEmpleados);
             this.pnlRegistro.Controls.Add(this.label11);
             this.pnlRegistro.Controls.Add(this.pnlRelacion);
             this.pnlRegistro.Controls.Add(this.pnlInformacion);
@@ -384,6 +386,18 @@
             this.cbTipoRegistro.Size = new System.Drawing.Size(197, 29);
             this.cbTipoRegistro.TabIndex = 1;
             this.cbTipoRegistro.SelectedIndexChanged += new System.EventHandler(this.cbTipoRegistro_SelectedIndexChanged);
+            // 
+            // btnAddEmpleados
+            // 
+            this.btnAddEmpleados.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAddEmpleados.Font = new System.Drawing.Font("Microsoft YaHei Light", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddEmpleados.Location = new System.Drawing.Point(566, 433);
+            this.btnAddEmpleados.Name = "btnAddEmpleados";
+            this.btnAddEmpleados.Size = new System.Drawing.Size(159, 47);
+            this.btnAddEmpleados.TabIndex = 25;
+            this.btnAddEmpleados.Text = "Asignar CAMPAÑA";
+            this.btnAddEmpleados.UseVisualStyleBackColor = true;
+            this.btnAddEmpleados.Click += new System.EventHandler(this.btnAddEmpleados_Click);
             // 
             // frmNuevo
             // 
@@ -441,5 +455,6 @@
         private System.Windows.Forms.RadioButton rbJefe;
         private System.Windows.Forms.RadioButton rbEmpleado;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnAddEmpleados;
     }
 }

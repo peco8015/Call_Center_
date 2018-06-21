@@ -15,6 +15,7 @@ namespace WindowsFormsApplication1
     {
         clsEmpleado user = new clsEmpleado();
         clsConexion conectar = new clsConexion();
+        clsCampaña camp;
         DataTable dTable;
 
         public frmNuevo()
@@ -26,6 +27,7 @@ namespace WindowsFormsApplication1
         {
             pnlRegistro.Enabled = false;
             rbEmpleado.Checked = true;
+            btnAddEmpleados.Visible = false;
         }
 
         private void cbTipoRegistro_SelectedIndexChanged(object sender, EventArgs e)
@@ -136,13 +138,15 @@ namespace WindowsFormsApplication1
 
         private void lbLista_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnAdd.Enabled = true;
+            if((sender as ListBox).SelectedItem != null)
+                btnAdd.Enabled = true;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(tb01.Text) && !string.IsNullOrWhiteSpace(tb02.Text) && !string.IsNullOrWhiteSpace(tb03.Text))
             {
+                bool se_grabo = false; 
                 switch (cbTipoRegistro.SelectedItem)
                 {
                     case "Empleado":
@@ -157,13 +161,8 @@ namespace WindowsFormsApplication1
                         emp.FechaInicio = DateTime.Now;
                         emp.Jefe = (rbJefe.Checked)? 0 : 1;
                         emp.Password = tb07.Text;
-
-                        //CAMPAÑA
-                        emp.Id_campaña = (lbLista.SelectedItem as clsCampaña).IdCampaña;
-                        if (conectar.insertar_empleado(emp))
-                            limpiarControles();
-                        else
-                            noInserto();
+                        emp.Id_campaña = (lbLista.SelectedItem as clsCampaña).IdCampaña;    //CAMPAÑA
+                        se_grabo = conectar.insertar_empleado(emp);
                         break;
 
                     case "Cliente":
@@ -174,33 +173,48 @@ namespace WindowsFormsApplication1
                         cli.Contacto = tb04.Text;
                         cli.Mail = tb05.Text;
                         cli.Telefono = Convert.ToInt32(tb06.Text);
-                        // guardo en db
+                        se_grabo = conectar.insertar_cliente(cli);
                         break;
 
                     case "Campaña":
-                        clsCampaña camp = new clsCampaña();
+                        camp = new clsCampaña();
                         camp.Nombre = tb01.Text;
                         camp.Precio = Convert.ToInt32(tb02.Text);
                         camp.Descripion = tb03.Text;
                         camp.Fecha_inicio = dtp01.Value;
                         camp.Fecha_fin = dtp02.Value;
                         // especificaciones
-
-                        // CLIENTE
-                        camp.IdCliente = (lbLista.SelectedItem as clsCliente).Id;
-                        conectar.insertar_campaña(camp);
+                        camp.IdCliente = (lbLista.SelectedItem as clsCliente).Id;   // CLIENTE
+                        se_grabo = conectar.insertar_campaña(camp);
                         break;
                 }
+                if (se_grabo)
+                    limpiarControles();
+                else
+                    noInserto();
             }
             else
                 msjError("Falta completar campos");
+        }
+
+        private void btnAddEmpleados_Click(object sender, EventArgs e)
+        {
+            List<int> empleados = new List<int>();
+            foreach (clsEmpleado aux in lbLista.SelectedItems)
+            {
+                empleados.Add(aux.Id_empleado);
+            }
+            if (conectar.actualizar_campaña_empleados(camp.IdCampaña, empleados))
+                this.Close();
+            else
+                noInserto();
         }
 
 
         public void limpiarControles()
         {
             MessageBox.Show("Se guardó correctamente el registro.", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            if (cbTipoRegistro.SelectedItem.GetType().ToString() == "clsCampaña")
+            if (cbTipoRegistro.SelectedItem.ToString() == "Campaña")
             {
                 if(DialogResult.Yes == MessageBox.Show("¿Desea asignar empleados a esta campaña?", "Completar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
                 {
@@ -216,9 +230,18 @@ namespace WindowsFormsApplication1
                         lbLista.Items.Add(aux);
                     }
                     lbLista.DisplayMember = "nombre";
+
+                    btnAdd.Visible = false;
+                    tb01.Enabled = false;
+                    tb02.Enabled = false;
+                    tb03.Enabled = false;
+                    dtp01.Enabled = false;
+                    dtp02.Enabled = false;
+                    btnAddEmpleados.Visible = true;
                 }
             }
-            this.Close();
+            else
+                this.Close();
         }
 
         public void noInserto()
@@ -230,6 +253,5 @@ namespace WindowsFormsApplication1
         {
             MessageBox.Show(msj, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        
     }
 }

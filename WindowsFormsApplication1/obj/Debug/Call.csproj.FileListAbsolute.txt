@@ -115,7 +115,6 @@ C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.
 C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmNuevo.resources
 C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmAusente.resources
 C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmDatos.resources
-C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmDetalles.resources
 C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmEmple.resources
 C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmEstado.resources
 C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmJefee.resources
@@ -130,3 +129,4 @@ C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.
 C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csproj.CoreCompileInputs.cache
 C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmDetalle.resources
