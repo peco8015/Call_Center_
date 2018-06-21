@@ -304,5 +304,22 @@ namespace WindowsFormsApplication1
         }
         #endregion
 
+        private void label13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlEstadisticas_Paint(object sender, PaintEventArgs e)
+        {
+            DataTable rendimientos = new DataTable();
+            rendimientos = conectar.rendimientoCampaña(campaña.IdCampaña);
+
+            dgvTabla.DataSource = rendimientos;
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+          
+        }
     }
 }
