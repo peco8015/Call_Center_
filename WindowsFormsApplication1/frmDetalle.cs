@@ -348,10 +348,64 @@ namespace WindowsFormsApplication1
         
         private void llenarDtRendimiento()
         {
+            float[] canVentas= conectar.promedioVentasCamapaña(campaña.IdCampaña);
+
+            float[] canLlamadas = conectar.promedioLlamadasCamapaña(campaña.IdCampaña);
+
+            lbPromVentas.Text =Convert.ToString( canVentas[0]);
+            lbPromDurLlamVent.Text= Convert.ToString(canVentas[1]);
+            lbPromLlamadas.Text = Convert.ToString(canLlamadas[0]);
+            lbPromDurLlam.Text = Convert.ToString(canLlamadas[1]);
+
             DataTable rendimientos = new DataTable();
             rendimientos = conectar.rendimientoCampaña(campaña.IdCampaña);
 
             dgvTabla.DataSource = rendimientos;
+            foreach (DataGridViewRow row in dgvTabla.Rows)
+            {
+                /*if ((Convert.ToInt32(row.Cells["Ventas"].Value))> canVentas[0]) {
+                    row.Cells["Ventas"].Style.BackColor = Color.Green;
+                }
+                else
+                {
+                    row.Cells["Ventas"].Style.BackColor = Color.Red;
+                }*/
+
+
+
+
+                if ((Convert.ToInt32(row.Cells["Promedio Duracion llamadas Vendidas (min)"].Value)) > canVentas[1])
+                {
+                    row.Cells["Promedio Duracion llamadas Vendidas (min)"].Style.BackColor = Color.Green;
+                }
+                else
+                {
+                    row.Cells["Promedio Duracion llamadas Vendidas (min)"].Style.BackColor = Color.Red;
+                }
+
+
+                /*if ((Convert.ToInt32(row.Cells["Llamadas"].Value)) > canLlamadas[0])
+                {
+                    row.Cells["Llamadas"].Style.BackColor = Color.Green;
+                }
+                else
+                {
+                    row.Cells["Llamadas"].Style.BackColor = Color.Red;
+                }*/
+
+
+
+
+                if ((Convert.ToInt32(row.Cells["Promedio Duracion llamadas(min)"].Value)) > canLlamadas[1])
+                {
+                    row.Cells["Promedio Duracion llamadas(min)"].Style.BackColor = Color.Green;
+                }
+                else
+                {
+                    row.Cells["Promedio Duracion llamadas(min)"].Style.BackColor = Color.Red;
+                }
+            }
+
         }
         
         private void checkCampos()

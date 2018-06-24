@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1.clases
         //@"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
         SqlConnection con;
-        string conx = @"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
+        string conx = @"Data Source=CLAUDIO\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
 
         public clsConexion()
@@ -2538,7 +2538,7 @@ namespace WindowsFormsApplication1.clases
                 usuario.Nombre = Convert.ToString(dt.Rows[0]["nombre"]);
                 usuario.Apellido = Convert.ToString(dt.Rows[0]["apellido"]);
                 usuario.Dni = Convert.ToInt32(dt.Rows[0]["dni"]);
-                usuario.FechaInicio = (DateTime)dt.Rows[0]["f_inicio"];
+                usuario.FechaInicio = (DateTime)dt.Rows[0]["f_comienza"];
                 usuario.Jefe = Convert.ToInt32(dt.Rows[0]["jefe"]);
                 usuario.Password = Convert.ToString(dt.Rows[0]["password"]);
                 usuario.FechaNaciemiento = (DateTime)(dt.Rows[0]["f_nacimiento"]);
@@ -2805,7 +2805,7 @@ namespace WindowsFormsApplication1.clases
                 clsCampaña campaña = new clsCampaña();
                 campaña.IdCampaña = Convert.ToInt32(dt.Rows[0]["Id_campaña"]);
                 campaña.Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
-                campaña.Descripion = Convert.ToString(dt.Rows[0]["Descripcion"]);
+                campaña.Descripcion = Convert.ToString(dt.Rows[0]["Descripcion"]);
                 campaña.Precio = Convert.ToInt32(dt.Rows[0]["Precio"]);
                 campaña.Fecha_inicio = Convert.ToDateTime(dt.Rows[0]["F_inicio"]);
                 campaña.Fecha_fin = (dt.Rows[0]["F_fin"] != null)? Convert.ToDateTime(dt.Rows[0]["F_fin"]) : DateTime.MinValue;
@@ -2837,7 +2837,7 @@ namespace WindowsFormsApplication1.clases
                 clsCampaña campaña = new clsCampaña();
                 campaña.IdCampaña = Convert.ToInt32(dt.Rows[0]["Id_campaña"]);
                 campaña.Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
-                campaña.Descripion = Convert.ToString(dt.Rows[0]["Descripcion"]);
+                campaña.Descripcion = Convert.ToString(dt.Rows[0]["Descripcion"]);
                 campaña.Precio = Convert.ToInt32(dt.Rows[0]["Precio"]);
                 campaña.NombreCliente = Convert.ToString(dt.Rows[0]["Nombre2"]);
                 return campaña;
@@ -2863,7 +2863,7 @@ namespace WindowsFormsApplication1.clases
                 SqlCommand cmd = new SqlCommand("INSERT INTO campaña(nombre, descripcion, precio, f_inicio, f_fin, id_cliente)" +
                     " VALUES(@nombre, @descripcion, @precio, @f_inicio, @f_fin, @id_cliente);SELECT SCOPE_IDENTITY();", con); // id_especificacion?
                 cmd.Parameters.AddWithValue("nombre", campaña.Nombre);
-                cmd.Parameters.AddWithValue("descripcion", campaña.Descripion);
+                cmd.Parameters.AddWithValue("descripcion", campaña.Descripcion);
                 cmd.Parameters.AddWithValue("precio", campaña.Precio);
                 cmd.Parameters.AddWithValue("f_inicio", f_inicio);
                 cmd.Parameters.AddWithValue("f_fin", f_fin);
@@ -3002,6 +3002,128 @@ namespace WindowsFormsApplication1.clases
             }
         }
 
+        public float[] promedioLlamadasCamapaña(int idcamp)
+        {
+            try
+            {
+                float[] cant = new float[2];
+                con.Open();
+                SqlCommand cmd = new SqlCommand("select  llamada.duracion from llamada join empleado on(llamada.id_empleado = empleado.id_empleado) where llamada.id_campaña=@idcamp ", con);
+                
+                cmd.Parameters.AddWithValue("@idcamp", idcamp);
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+
+                cant[0] = dt.Rows.Count;
+                cant[1] = 0;
+                foreach (DataRow dtRow in dt.Rows)
+                {
+                    object cell = dtRow.ItemArray[0];
+                    TimeSpan time = TimeSpan.Parse((cell).ToString());
+
+                    cant[1] = cant[1] + Convert.ToInt32(time.TotalMinutes);
+
+                }
+                cant[1] = cant[1] / cant[0];
+
+
+                return cant;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+       
+
+        public float[] VentasCampaña(int idemp, int idcamp)
+        {
+            try
+            {
+                float[] cant = new float[2];
+                con.Open();
+                SqlCommand cmd = new SqlCommand("select  llamada.duracion from llamada join empleado on(llamada.id_empleado = empleado.id_empleado) where llamada.id_campaña=@idcamp and empleado.id_empleado=@idemp and llamada.resultado='Vendido'", con);
+                cmd.Parameters.AddWithValue("@idemp", idemp);
+                cmd.Parameters.AddWithValue("@idcamp", idcamp);
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+
+                cant[0] = dt.Rows.Count;
+                cant[1] = 0;
+                foreach (DataRow dtRow in dt.Rows)
+                {
+                    object cell = dtRow.ItemArray[0];
+                    TimeSpan time = TimeSpan.Parse((cell).ToString());
+
+                    cant[1] = cant[1] + Convert.ToInt32(time.TotalMinutes);
+
+                }
+                cant[1] = cant[1] / cant[0];
+
+
+                return cant;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }        
+
+        public float[] promedioVentasCamapaña( int idcamp)
+        {
+            try
+            {
+                float[] cant = new float[2];
+                con.Open();
+                SqlCommand cmd = new SqlCommand("select  llamada.duracion from llamada join empleado on(llamada.id_empleado = empleado.id_empleado) where llamada.id_campaña=@idcamp  and llamada.resultado='Vendido'", con);
+            
+                cmd.Parameters.AddWithValue("@idcamp", idcamp);
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+
+                cant[0] = dt.Rows.Count;
+                cant[1] = 0;
+                foreach (DataRow dtRow in dt.Rows)
+                {
+                    object cell = dtRow.ItemArray[0];
+                    TimeSpan time = TimeSpan.Parse((cell).ToString());
+
+                    cant[1] = cant[1] + Convert.ToInt32(time.TotalMinutes);
+
+                }
+                cant[1] = cant[1] / cant[0];
+
+
+                return cant;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public DataTable rendimientoCampaña(int id)
         {
             DataTable rendimientos= new DataTable();
@@ -3011,18 +3133,19 @@ namespace WindowsFormsApplication1.clases
 
             rendimientos.Columns.Add("Id", typeof(int));
             rendimientos.Columns.Add("Empleado", typeof(String));
-            rendimientos.Columns.Add("Cantidad Ventas", typeof(float));
-            rendimientos.Columns.Add("Promedio Duracion llamadas Vendidas", typeof(float));
-            rendimientos.Columns.Add("Cantidad Llamadas", typeof(int));
-            rendimientos.Columns.Add("Promedio Duracion llamadas", typeof(float));
+            rendimientos.Columns.Add("Ventas", typeof(float));
+            rendimientos.Columns.Add("Promedio Duracion llamadas Vendidas (min)", typeof(float));
+            rendimientos.Columns.Add("Llamadas", typeof(int));
+            rendimientos.Columns.Add("Promedio Duracion llamadas(min)", typeof(float));
             
 
             foreach (DataRow dtRow in miembros.Rows)
              {
                 int  idempleado =  Convert.ToInt32(dtRow.ItemArray[0]);
                 float[] cantLlamadas = LlamadasCampaña(idempleado, id);
+                float[] canVentas = VentasCampaña(idempleado, id);
 
-                rendimientos.Rows.Add(dtRow.ItemArray[0], dtRow.ItemArray[1], 0, 0, cantLlamadas[0], cantLlamadas[1]);
+                rendimientos.Rows.Add(dtRow.ItemArray[0], dtRow.ItemArray[1], canVentas[0], canVentas[1], cantLlamadas[0], cantLlamadas[1]);
 
 
              }
@@ -3107,7 +3230,7 @@ namespace WindowsFormsApplication1.clases
                 cliente.Contacto = Convert.ToString(dt.Rows[0]["Contacto"]);
                 cliente.Mail = Convert.ToString(dt.Rows[0]["Mail"]);
                 cliente.Telefono = Convert.ToInt32(dt.Rows[0]["Telefono"]);
-                cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilio_legal"]);
+                cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilioLegal"]);
                 return cliente;
             }
             catch (Exception e)

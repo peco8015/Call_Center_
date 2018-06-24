@@ -83,6 +83,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pnlInformacion = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
+            this.lbPromVentas = new System.Windows.Forms.Label();
+            this.lbPromDurLlamVent = new System.Windows.Forms.Label();
+            this.lbPromLlamadas = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.lbPromDurLlam = new System.Windows.Forms.Label();
             this.pnlEstadisticas.SuspendLayout();
             this.tcDatos.SuspendLayout();
             this.tpRendimiento.SuspendLayout();
@@ -119,7 +124,7 @@
             // 
             this.btnEliminar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnEliminar.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(225, 600);
+            this.btnEliminar.Location = new System.Drawing.Point(225, 596);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(87, 47);
             this.btnEliminar.TabIndex = 19;
@@ -207,7 +212,7 @@
             // 
             this.btnEditar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnEditar.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.Location = new System.Drawing.Point(36, 600);
+            this.btnEditar.Location = new System.Drawing.Point(36, 596);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(87, 47);
             this.btnEditar.TabIndex = 9;
@@ -318,7 +323,7 @@
             this.pnlEstadisticas.Font = new System.Drawing.Font("Microsoft YaHei Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlEstadisticas.Location = new System.Drawing.Point(397, 62);
             this.pnlEstadisticas.Name = "pnlEstadisticas";
-            this.pnlEstadisticas.Size = new System.Drawing.Size(874, 663);
+            this.pnlEstadisticas.Size = new System.Drawing.Size(874, 659);
             this.pnlEstadisticas.TabIndex = 3;
             // 
             // tcDatos
@@ -332,12 +337,17 @@
             this.tcDatos.Location = new System.Drawing.Point(23, 41);
             this.tcDatos.Name = "tcDatos";
             this.tcDatos.SelectedIndex = 0;
-            this.tcDatos.Size = new System.Drawing.Size(830, 612);
+            this.tcDatos.Size = new System.Drawing.Size(830, 608);
             this.tcDatos.TabIndex = 1;
             this.tcDatos.SelectedIndexChanged += new System.EventHandler(this.tcDatos_SelectedIndexChanged);
             // 
             // tpRendimiento
             // 
+            this.tpRendimiento.Controls.Add(this.lbPromDurLlam);
+            this.tpRendimiento.Controls.Add(this.label16);
+            this.tpRendimiento.Controls.Add(this.lbPromLlamadas);
+            this.tpRendimiento.Controls.Add(this.lbPromDurLlamVent);
+            this.tpRendimiento.Controls.Add(this.lbPromVentas);
             this.tpRendimiento.Controls.Add(this.dgvTabla);
             this.tpRendimiento.Controls.Add(this.label14);
             this.tpRendimiento.Controls.Add(this.label13);
@@ -345,7 +355,7 @@
             this.tpRendimiento.Location = new System.Drawing.Point(4, 28);
             this.tpRendimiento.Name = "tpRendimiento";
             this.tpRendimiento.Padding = new System.Windows.Forms.Padding(3);
-            this.tpRendimiento.Size = new System.Drawing.Size(822, 543);
+            this.tpRendimiento.Size = new System.Drawing.Size(822, 576);
             this.tpRendimiento.TabIndex = 2;
             this.tpRendimiento.Text = "Rendimientos Empleados";
             this.tpRendimiento.UseVisualStyleBackColor = true;
@@ -359,28 +369,28 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTabla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTabla.Location = new System.Drawing.Point(13, 144);
+            this.dgvTabla.Location = new System.Drawing.Point(13, 125);
             this.dgvTabla.Name = "dgvTabla";
             this.dgvTabla.ReadOnly = true;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvTabla.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTabla.Size = new System.Drawing.Size(795, 380);
+            this.dgvTabla.Size = new System.Drawing.Size(795, 395);
             this.dgvTabla.TabIndex = 6;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(31, 63);
+            this.label14.Location = new System.Drawing.Point(9, 63);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(209, 20);
+            this.label14.Size = new System.Drawing.Size(255, 20);
             this.label14.TabIndex = 2;
-            this.label14.Text = "Promedio Duracion de llamadas";
+            this.label14.Text = "Promedio Duracion de llamadas Ventas";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(31, 102);
+            this.label13.Location = new System.Drawing.Point(453, 21);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(148, 20);
             this.label13.TabIndex = 1;
@@ -389,7 +399,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(31, 24);
+            this.label12.Location = new System.Drawing.Point(9, 25);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(137, 20);
             this.label12.TabIndex = 0;
@@ -558,7 +568,7 @@
             this.pnlInformacion.Font = new System.Drawing.Font("Microsoft YaHei Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlInformacion.Location = new System.Drawing.Point(24, 62);
             this.pnlInformacion.Name = "pnlInformacion";
-            this.pnlInformacion.Size = new System.Drawing.Size(356, 663);
+            this.pnlInformacion.Size = new System.Drawing.Size(356, 659);
             this.pnlInformacion.TabIndex = 4;
             // 
             // label20
@@ -571,12 +581,61 @@
             this.label20.TabIndex = 0;
             this.label20.Text = "Información";
             // 
+            // lbPromVentas
+            // 
+            this.lbPromVentas.AutoSize = true;
+            this.lbPromVentas.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lbPromVentas.Location = new System.Drawing.Point(270, 25);
+            this.lbPromVentas.Name = "lbPromVentas";
+            this.lbPromVentas.Size = new System.Drawing.Size(137, 20);
+            this.lbPromVentas.TabIndex = 7;
+            this.lbPromVentas.Text = "Promedio de Ventas";
+            // 
+            // lbPromDurLlamVent
+            // 
+            this.lbPromDurLlamVent.AutoSize = true;
+            this.lbPromDurLlamVent.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lbPromDurLlamVent.Location = new System.Drawing.Point(270, 63);
+            this.lbPromDurLlamVent.Name = "lbPromDurLlamVent";
+            this.lbPromDurLlamVent.Size = new System.Drawing.Size(137, 20);
+            this.lbPromDurLlamVent.TabIndex = 8;
+            this.lbPromDurLlamVent.Text = "Promedio de Ventas";
+            // 
+            // lbPromLlamadas
+            // 
+            this.lbPromLlamadas.AutoSize = true;
+            this.lbPromLlamadas.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lbPromLlamadas.Location = new System.Drawing.Point(671, 24);
+            this.lbPromLlamadas.Name = "lbPromLlamadas";
+            this.lbPromLlamadas.Size = new System.Drawing.Size(137, 20);
+            this.lbPromLlamadas.TabIndex = 9;
+            this.lbPromLlamadas.Text = "Promedio de Ventas";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(453, 63);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(213, 20);
+            this.label16.TabIndex = 10;
+            this.label16.Text = "Promedio Duracion de llamadas ";
+            // 
+            // lbPromDurLlam
+            // 
+            this.lbPromDurLlam.AutoSize = true;
+            this.lbPromDurLlam.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lbPromDurLlam.Location = new System.Drawing.Point(671, 63);
+            this.lbPromDurLlam.Name = "lbPromDurLlam";
+            this.lbPromDurLlam.Size = new System.Drawing.Size(137, 20);
+            this.lbPromDurLlam.TabIndex = 11;
+            this.lbPromDurLlam.Text = "Promedio de Ventas";
+            // 
             // frmDetalle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlText;
-            this.ClientSize = new System.Drawing.Size(1291, 745);
+            this.ClientSize = new System.Drawing.Size(1291, 741);
             this.Controls.Add(this.pnlInformacion);
             this.Controls.Add(this.pnlEstadisticas);
             this.Controls.Add(this.label1);
@@ -641,5 +700,10 @@
         private System.Windows.Forms.GroupBox gbContacto;
         private System.Windows.Forms.Panel pnlInformacion;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label lbPromDurLlam;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lbPromLlamadas;
+        private System.Windows.Forms.Label lbPromDurLlamVent;
+        private System.Windows.Forms.Label lbPromVentas;
     }
 }
