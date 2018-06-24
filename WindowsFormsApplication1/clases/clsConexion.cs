@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1.clases
         //@"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
         SqlConnection con;
-        string conx = @"Data Source=CLAUDIO\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
+        string conx = @"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
 
         public clsConexion()
@@ -2508,7 +2508,7 @@ namespace WindowsFormsApplication1.clases
                 string f1 = emp.FechaInicio.ToString("dd/M/yyyy");
                 string f2 = emp.FechaNaciemiento.ToString("dd/M/yyyy");
 
-                SqlCommand cmd = new SqlCommand("UPDATE empleado SET nombre= '" + emp.Nombre + "',apellido = '" + emp.Apellido + "',dni= " + emp.Dni + ",f_comienza = '" + f1 + "',jefe = " + emp.Jefe + ",password= " + emp.Password + ",f_nacimiento = '" + f2 + "',id_campaña = " + emp.Id_campaña + ",domicilio = '" + emp.Domicilio + "' ,telefono = " + emp.Telefono + ",mail = '" + emp.Mail + "' WHERE id_empleado=" + emp.Id_empleado, con);
+                SqlCommand cmd = new SqlCommand("UPDATE empleado SET nombre= '" + emp.Nombre + "',apellido = '" + emp.Apellido + "',dni= " + emp.Dni + ", = '" + f1 + "',jefe = " + emp.Jefe + ",password= " + emp.Password + ",f_nacimiento = '" + f2 + "',id_campaña = " + emp.Id_campaña + ",domicilio = '" + emp.Domicilio + "' ,telefono = " + emp.Telefono + ",mail = '" + emp.Mail + "' WHERE id_empleado=" + emp.Id_empleado, con);
                 cmd.ExecuteNonQuery();
 
                 return true;
@@ -2538,7 +2538,7 @@ namespace WindowsFormsApplication1.clases
                 usuario.Nombre = Convert.ToString(dt.Rows[0]["nombre"]);
                 usuario.Apellido = Convert.ToString(dt.Rows[0]["apellido"]);
                 usuario.Dni = Convert.ToInt32(dt.Rows[0]["dni"]);
-                usuario.FechaInicio = (DateTime)dt.Rows[0]["f_comienza"];
+                usuario.FechaInicio = (DateTime)dt.Rows[0]["f_inicio"];
                 usuario.Jefe = Convert.ToInt32(dt.Rows[0]["jefe"]);
                 usuario.Password = Convert.ToString(dt.Rows[0]["password"]);
                 usuario.FechaNaciemiento = (DateTime)(dt.Rows[0]["f_nacimiento"]);
@@ -2564,8 +2564,31 @@ namespace WindowsFormsApplication1.clases
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id_empleado, empleado.nombre +' '+ apellido as Empleado, dni as DNI, campaña.nombre as 'Campaña actual', f_comienza as 'Fecha de ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento " +
+                SqlCommand cmd = new SqlCommand("SELECT id_empleado, empleado.nombre +' '+ apellido as Empleado, dni as DNI, campaña.nombre as 'Campaña actual', f_inicio as 'Fecha de ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento " +
                     "FROM empleado JOIN campaña ON (empleado.id_campaña = campaña.id_campaña) WHERE jefe = 0", con);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                return dt;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public DataTable listarJefes()
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT id_empleado, empleado.nombre +' '+ apellido as Empleado, dni as DNI, campaña.nombre as 'Campaña actual', f_inicio as 'Fecha de ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento " +
+                    "FROM empleado JOIN campaña ON (empleado.id_campaña = campaña.id_campaña) WHERE jefe = 1", con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
@@ -2586,15 +2609,15 @@ namespace WindowsFormsApplication1.clases
         {
             try
             {
-                string f_comienza = empleado.FechaInicio.ToString("yyyy/MM/dd").Replace('-', '/');
+                string f_inicio = empleado.FechaInicio.ToString("yyyy/MM/dd").Replace('-', '/');
                 string f_nacimiento = empleado.FechaNaciemiento.ToString("yyyy/MM/dd").Replace('-', '/');
                 con.Open();
-                SqlCommand cmd = new SqlCommand("INSERT INTO empleado(nombre, apellido, dni, f_comienza, jefe, password, f_nacimiento, id_campaña, domicilio, telefono, mail)" +
-                    " VALUES(@nombre, @apellido, @dni, @f_comienza, @jefe, @password, @f_nacimiento, @id_campaña, @domicilio, @telefono, @mail)", con);
+                SqlCommand cmd = new SqlCommand("INSERT INTO empleado(nombre, apellido, dni, f_inicio, jefe, password, f_nacimiento, id_campaña, domicilio, telefono, mail)" +
+                    " VALUES(@nombre, @apellido, @dni, @f_inicio, @jefe, @password, @f_nacimiento, @id_campaña, @domicilio, @telefono, @mail)", con);
                 cmd.Parameters.AddWithValue("nombre", empleado.Nombre);
                 cmd.Parameters.AddWithValue("apellido", empleado.Apellido);
                 cmd.Parameters.AddWithValue("dni", empleado.Dni);
-                cmd.Parameters.AddWithValue("f_comienza", f_comienza);
+                cmd.Parameters.AddWithValue("f_inicio", f_inicio);
                 cmd.Parameters.AddWithValue("jefe", empleado.Jefe);
                 cmd.Parameters.AddWithValue("password", empleado.Password);
                 cmd.Parameters.AddWithValue("f_nacimiento", f_nacimiento);
@@ -2603,6 +2626,41 @@ namespace WindowsFormsApplication1.clases
                 cmd.Parameters.AddWithValue("telefono", empleado.Telefono);
                 cmd.Parameters.AddWithValue("mail", empleado.Mail);
                 return (cmd.ExecuteNonQuery() == 1) ? true : false;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool actualizar_empleado(clsEmpleado empleado)
+        {
+            try
+            {
+                string f_nac = empleado.FechaNaciemiento.ToString("yyyy/MM/dd").Replace('-', '/');
+                string f_ini = empleado.FechaInicio.ToString("yyyy/MM/dd").Replace('-', '/');
+                con.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE SET nombre = @nombre, apellido = @apellido, dni = @dni, telefono = @telefono, mail = @mail, @domicilio = @domicilio, f_nacimiento = @f_nacimiento, f_inicio = @f_inicio, id_campaña = @id_campaña" +
+                    " WHERE id_empleado = @id_empleado", con);
+                cmd.Parameters.AddWithValue("id_empleado", empleado.Id_empleado);
+                cmd.Parameters.AddWithValue("nombre", empleado.Nombre);
+                cmd.Parameters.AddWithValue("apellido", empleado.Apellido);
+                cmd.Parameters.AddWithValue("dni", empleado.Dni);
+                cmd.Parameters.AddWithValue("telefono", empleado.Telefono);
+                cmd.Parameters.AddWithValue("mail", empleado.Mail);
+                cmd.Parameters.AddWithValue("domicilio", empleado.Domicilio);
+                cmd.Parameters.AddWithValue("f_nacimiento", f_nac);
+                cmd.Parameters.AddWithValue("f_inicio", f_ini);
+                cmd.Parameters.AddWithValue("id_campaña", empleado.Id_campaña);
+                if (cmd.ExecuteNonQuery() == 1)
+                    return true;
+                else
+                    return false;
             }
             catch (Exception e)
             {
@@ -2824,6 +2882,40 @@ namespace WindowsFormsApplication1.clases
             }
         }
 
+        public bool actualizar_campaña(clsCampaña campaña)
+        {
+            try
+            {
+                string f_ini = campaña.Fecha_inicio.ToString("yyyy/MM/dd").Replace('-', '/');
+                string f_fin = campaña.Fecha_fin.ToString("yyyy/MM/dd").Replace('-', '/');
+                con.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE SET nombre = @nombre, descripcion = @descripcion, precio = @precio, f_inicio = @f_inicio, f_fin = @f_fin, id_cliente = @id_cliente, id_especificacion = @id_especificacion, lider = @lider" +
+                    " WHERE id_campaña = @id_campaña", con);
+                cmd.Parameters.AddWithValue("id_campaña", campaña.IdCampaña);
+                cmd.Parameters.AddWithValue("nombre", campaña.Nombre);
+                cmd.Parameters.AddWithValue("descripcion", campaña.Descripcion);
+                cmd.Parameters.AddWithValue("precio", campaña.Precio);
+                cmd.Parameters.AddWithValue("f_ini", f_ini);
+                cmd.Parameters.AddWithValue("f_fin", f_fin);
+                cmd.Parameters.AddWithValue("id_cliente", campaña.IdCliente);
+                //cmd.Parameters.AddWithValue("id_especificacion", campaña.);
+                //cmd.Parameters.AddWithValue("lider", campaña.);
+                if (cmd.ExecuteNonQuery() == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public DataTable listarCampañas()
         {
             try
@@ -2950,7 +3042,7 @@ namespace WindowsFormsApplication1.clases
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id_cliente, nombre as Cliente, cuil as CUIL, domicilioLegal as 'Domicilio Legal', contacto as 'Nombre de contacto', telefono as 'Telefono de contacto', mail as 'Mail de contacto' " +
+                SqlCommand cmd = new SqlCommand("SELECT id_cliente, nombre as Cliente, cuil as CUIL, domicilio_legal as 'Domicilio Legal', contacto as 'Nombre de contacto', telefono as 'Telefono de contacto', mail as 'Mail de contacto' " +
                     "FROM cliente", con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -2961,6 +3053,36 @@ namespace WindowsFormsApplication1.clases
             {
                 msjError(e.Message);
                 return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool actualizar_cliente(clsCliente cliente)
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE SET nombre = @nombre, cuil = @cuil, domicilio_legal = @domicilio_legal, contacto = @contacto, mail = @mail, telefono = @telefono" +
+                    " WHERE id_cliente = @id_cliente", con);
+                cmd.Parameters.AddWithValue("id_cliente", cliente.Id );
+                cmd.Parameters.AddWithValue("nombre", cliente.Nombre );
+                cmd.Parameters.AddWithValue("cuil", cliente.Cuil );
+                cmd.Parameters.AddWithValue("domicilio_legal", cliente.Domicilio );
+                cmd.Parameters.AddWithValue("contacto", cliente.Contacto );
+                cmd.Parameters.AddWithValue("mail", cliente.Mail );
+                cmd.Parameters.AddWithValue("telefono", cliente.Telefono );
+                if (cmd.ExecuteNonQuery() == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return false;
             }
             finally
             {
@@ -2985,7 +3107,7 @@ namespace WindowsFormsApplication1.clases
                 cliente.Contacto = Convert.ToString(dt.Rows[0]["Contacto"]);
                 cliente.Mail = Convert.ToString(dt.Rows[0]["Mail"]);
                 cliente.Telefono = Convert.ToInt32(dt.Rows[0]["Telefono"]);
-                cliente.Domicilio = Convert.ToString(dt.Rows[0]["DomicilioLegal"]);
+                cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilio_legal"]);
                 return cliente;
             }
             catch (Exception e)
@@ -3004,7 +3126,7 @@ namespace WindowsFormsApplication1.clases
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("INSERT INTO cliente(nombre,cuil,domicilioLegal,contacto,telefono,mail)" +
+                SqlCommand cmd = new SqlCommand("INSERT INTO cliente(nombre,cuil,domicilio_legal,contacto,telefono,mail)" +
                     " VALUES(@nombre, @cuil, @domicilio, @contacto, @telefono, @mail)", con);
                 cmd.Parameters.AddWithValue("nombre",cliente.Nombre);
                 cmd.Parameters.AddWithValue("cuil",cliente.Cuil);
@@ -3252,7 +3374,7 @@ namespace WindowsFormsApplication1.clases
                 sda.Fill(dt);
                 if (dt.Rows.Count > 0)
                 {
-                    MessageBox.Show("La jornada para la fecha actual fue guardada. Los nuevos datos erán agregados a los valores existentes.", "Atención: Jornada existente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("La jornada para la fecha actual fue guardada. Los nuevos datos erán agregados a los valores existentes.", "Atención: Jornada existente", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     jornada = new clsJornada();
                     jornada.Id_empleado = Convert.ToInt32(dt.Rows[0]["id_empleado"]);
                     jornada.Fecha = Convert.ToDateTime(dt.Rows[0]["fecha"]);

@@ -28,25 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea13 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint17 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint18 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
-            System.Windows.Forms.DataVisualization.Charting.Title title13 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea14 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title14 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea15 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint19 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 5D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint20 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
-            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title15 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 5D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label1 = new System.Windows.Forms.Label();
-            this.gbInformacion = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.dtp02 = new System.Windows.Forms.DateTimePicker();
@@ -69,28 +68,30 @@
             this.label3 = new System.Windows.Forms.Label();
             this.gbContacto = new System.Windows.Forms.GroupBox();
             this.pnlEstadisticas = new System.Windows.Forms.Panel();
-            this.tcFechas = new System.Windows.Forms.TabControl();
-            this.tpHoy = new System.Windows.Forms.TabPage();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.tcDatos = new System.Windows.Forms.TabControl();
+            this.tpRendimiento = new System.Windows.Forms.TabPage();
+            this.dgvTabla = new System.Windows.Forms.DataGridView();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tpFechas = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.cbFiltroFecha = new System.Windows.Forms.ComboBox();
             this.cVentasCampaña = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cPorcentajeVentas = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cTiempos = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.tpSemana = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.dgvTabla = new System.Windows.Forms.DataGridView();
-            this.gbInformacion.SuspendLayout();
+            this.pnlInformacion = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
             this.pnlEstadisticas.SuspendLayout();
-            this.tcFechas.SuspendLayout();
-            this.tpHoy.SuspendLayout();
+            this.tcDatos.SuspendLayout();
+            this.tpRendimiento.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).BeginInit();
+            this.tpFechas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cVentasCampaña)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cPorcentajeVentas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cTiempos)).BeginInit();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).BeginInit();
+            this.pnlInformacion.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -104,43 +105,11 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "# [ID] - [Nombre]";
             // 
-            // gbInformacion
-            // 
-            this.gbInformacion.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.gbInformacion.Controls.Add(this.label5);
-            this.gbInformacion.Controls.Add(this.btnEliminar);
-            this.gbInformacion.Controls.Add(this.dtp02);
-            this.gbInformacion.Controls.Add(this.tb07);
-            this.gbInformacion.Controls.Add(this.tb06);
-            this.gbInformacion.Controls.Add(this.tb05);
-            this.gbInformacion.Controls.Add(this.tb04);
-            this.gbInformacion.Controls.Add(this.tb03);
-            this.gbInformacion.Controls.Add(this.tb02);
-            this.gbInformacion.Controls.Add(this.tb01);
-            this.gbInformacion.Controls.Add(this.dtp01);
-            this.gbInformacion.Controls.Add(this.btnEditar);
-            this.gbInformacion.Controls.Add(this.label11);
-            this.gbInformacion.Controls.Add(this.label10);
-            this.gbInformacion.Controls.Add(this.label8);
-            this.gbInformacion.Controls.Add(this.label7);
-            this.gbInformacion.Controls.Add(this.label6);
-            this.gbInformacion.Controls.Add(this.label9);
-            this.gbInformacion.Controls.Add(this.label4);
-            this.gbInformacion.Controls.Add(this.label3);
-            this.gbInformacion.Controls.Add(this.gbContacto);
-            this.gbInformacion.Font = new System.Drawing.Font("Microsoft YaHei Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbInformacion.Location = new System.Drawing.Point(21, 62);
-            this.gbInformacion.Name = "gbInformacion";
-            this.gbInformacion.Size = new System.Drawing.Size(356, 545);
-            this.gbInformacion.TabIndex = 2;
-            this.gbInformacion.TabStop = false;
-            this.gbInformacion.Text = "Información";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(20, 122);
+            this.label5.Location = new System.Drawing.Point(20, 143);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 20);
             this.label5.TabIndex = 2;
@@ -148,20 +117,22 @@
             // 
             // btnEliminar
             // 
+            this.btnEliminar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnEliminar.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(225, 477);
+            this.btnEliminar.Location = new System.Drawing.Point(225, 600);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(87, 47);
             this.btnEliminar.TabIndex = 19;
+            this.btnEliminar.Tag = "Eliminar";
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            this.btnEliminar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // dtp02
             // 
             this.dtp02.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtp02.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtp02.Location = new System.Drawing.Point(149, 332);
+            this.dtp02.Location = new System.Drawing.Point(149, 402);
             this.dtp02.Name = "dtp02";
             this.dtp02.Size = new System.Drawing.Size(196, 27);
             this.dtp02.TabIndex = 18;
@@ -169,7 +140,7 @@
             // tb07
             // 
             this.tb07.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb07.Location = new System.Drawing.Point(149, 374);
+            this.tb07.Location = new System.Drawing.Point(149, 454);
             this.tb07.Multiline = true;
             this.tb07.Name = "tb07";
             this.tb07.Size = new System.Drawing.Size(196, 91);
@@ -178,7 +149,7 @@
             // tb06
             // 
             this.tb06.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb06.Location = new System.Drawing.Point(123, 248);
+            this.tb06.Location = new System.Drawing.Point(123, 298);
             this.tb06.Name = "tb06";
             this.tb06.Size = new System.Drawing.Size(219, 27);
             this.tb06.TabIndex = 16;
@@ -186,7 +157,7 @@
             // tb05
             // 
             this.tb05.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb05.Location = new System.Drawing.Point(123, 205);
+            this.tb05.Location = new System.Drawing.Point(123, 246);
             this.tb05.Name = "tb05";
             this.tb05.Size = new System.Drawing.Size(219, 27);
             this.tb05.TabIndex = 15;
@@ -194,7 +165,7 @@
             // tb04
             // 
             this.tb04.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb04.Location = new System.Drawing.Point(123, 162);
+            this.tb04.Location = new System.Drawing.Point(123, 194);
             this.tb04.Name = "tb04";
             this.tb04.Size = new System.Drawing.Size(219, 27);
             this.tb04.TabIndex = 14;
@@ -202,7 +173,7 @@
             // tb03
             // 
             this.tb03.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb03.Location = new System.Drawing.Point(123, 119);
+            this.tb03.Location = new System.Drawing.Point(123, 142);
             this.tb03.Name = "tb03";
             this.tb03.Size = new System.Drawing.Size(219, 27);
             this.tb03.TabIndex = 13;
@@ -210,7 +181,7 @@
             // tb02
             // 
             this.tb02.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb02.Location = new System.Drawing.Point(123, 76);
+            this.tb02.Location = new System.Drawing.Point(123, 90);
             this.tb02.Name = "tb02";
             this.tb02.Size = new System.Drawing.Size(219, 27);
             this.tb02.TabIndex = 12;
@@ -218,7 +189,7 @@
             // tb01
             // 
             this.tb01.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb01.Location = new System.Drawing.Point(123, 33);
+            this.tb01.Location = new System.Drawing.Point(123, 38);
             this.tb01.Name = "tb01";
             this.tb01.Size = new System.Drawing.Size(219, 27);
             this.tb01.TabIndex = 11;
@@ -227,18 +198,20 @@
             // 
             this.dtp01.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtp01.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtp01.Location = new System.Drawing.Point(149, 290);
+            this.dtp01.Location = new System.Drawing.Point(149, 350);
             this.dtp01.Name = "dtp01";
             this.dtp01.Size = new System.Drawing.Size(193, 27);
             this.dtp01.TabIndex = 10;
             // 
             // btnEditar
             // 
+            this.btnEditar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnEditar.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.Location = new System.Drawing.Point(36, 477);
+            this.btnEditar.Location = new System.Drawing.Point(36, 600);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(87, 47);
             this.btnEditar.TabIndex = 9;
+            this.btnEditar.Tag = "Editar";
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
@@ -247,7 +220,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(20, 374);
+            this.label11.Location = new System.Drawing.Point(20, 449);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(118, 20);
             this.label11.TabIndex = 8;
@@ -257,7 +230,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(20, 335);
+            this.label10.Location = new System.Drawing.Point(20, 398);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(123, 20);
             this.label10.TabIndex = 7;
@@ -267,7 +240,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(20, 251);
+            this.label8.Location = new System.Drawing.Point(20, 296);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(70, 20);
             this.label8.TabIndex = 6;
@@ -277,7 +250,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(20, 208);
+            this.label7.Location = new System.Drawing.Point(20, 245);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(36, 20);
             this.label7.TabIndex = 5;
@@ -287,7 +260,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(20, 165);
+            this.label6.Location = new System.Drawing.Point(20, 194);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(67, 20);
             this.label6.TabIndex = 4;
@@ -297,7 +270,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(20, 293);
+            this.label9.Location = new System.Drawing.Point(20, 347);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(85, 20);
             this.label9.TabIndex = 3;
@@ -307,7 +280,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(20, 79);
+            this.label4.Location = new System.Drawing.Point(20, 92);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 20);
             this.label4.TabIndex = 1;
@@ -317,7 +290,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(20, 36);
+            this.label3.Location = new System.Drawing.Point(20, 41);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 20);
             this.label3.TabIndex = 0;
@@ -327,216 +300,55 @@
             // 
             this.gbContacto.BackColor = System.Drawing.Color.Transparent;
             this.gbContacto.Font = new System.Drawing.Font("Microsoft YaHei Light", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbContacto.Location = new System.Drawing.Point(6, 145);
+            this.gbContacto.Location = new System.Drawing.Point(6, 166);
             this.gbContacto.Name = "gbContacto";
-            this.gbContacto.Size = new System.Drawing.Size(344, 139);
-            this.gbContacto.TabIndex = 20;
+            this.gbContacto.Size = new System.Drawing.Size(344, 171);
+            this.gbContacto.TabIndex = 21;
             this.gbContacto.TabStop = false;
             this.gbContacto.Text = "Contacto";
             // 
             // pnlEstadisticas
             // 
+            this.pnlEstadisticas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlEstadisticas.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pnlEstadisticas.Controls.Add(this.tcFechas);
+            this.pnlEstadisticas.Controls.Add(this.tcDatos);
             this.pnlEstadisticas.Controls.Add(this.label2);
             this.pnlEstadisticas.Font = new System.Drawing.Font("Microsoft YaHei Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlEstadisticas.Location = new System.Drawing.Point(397, 62);
             this.pnlEstadisticas.Name = "pnlEstadisticas";
-            this.pnlEstadisticas.Size = new System.Drawing.Size(777, 545);
+            this.pnlEstadisticas.Size = new System.Drawing.Size(874, 663);
             this.pnlEstadisticas.TabIndex = 3;
-            this.pnlEstadisticas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlEstadisticas_Paint);
             // 
-            // tcFechas
+            // tcDatos
             // 
-            this.tcFechas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tcDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tcFechas.Controls.Add(this.tabPage1);
-            this.tcFechas.Controls.Add(this.tpHoy);
-            this.tcFechas.Controls.Add(this.tpSemana);
-            this.tcFechas.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tcFechas.Location = new System.Drawing.Point(23, 41);
-            this.tcFechas.Name = "tcFechas";
-            this.tcFechas.SelectedIndex = 0;
-            this.tcFechas.Size = new System.Drawing.Size(733, 494);
-            this.tcFechas.TabIndex = 1;
-            this.tcFechas.SelectedIndexChanged += new System.EventHandler(this.tcFechas_SelectedIndexChanged);
+            this.tcDatos.Controls.Add(this.tpRendimiento);
+            this.tcDatos.Controls.Add(this.tpFechas);
+            this.tcDatos.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tcDatos.Location = new System.Drawing.Point(23, 41);
+            this.tcDatos.Name = "tcDatos";
+            this.tcDatos.SelectedIndex = 0;
+            this.tcDatos.Size = new System.Drawing.Size(830, 612);
+            this.tcDatos.TabIndex = 1;
+            this.tcDatos.SelectedIndexChanged += new System.EventHandler(this.tcDatos_SelectedIndexChanged);
             // 
-            // tpHoy
+            // tpRendimiento
             // 
-            this.tpHoy.Controls.Add(this.comboBox1);
-            this.tpHoy.Controls.Add(this.cVentasCampaña);
-            this.tpHoy.Controls.Add(this.cPorcentajeVentas);
-            this.tpHoy.Controls.Add(this.cTiempos);
-            this.tpHoy.Location = new System.Drawing.Point(4, 28);
-            this.tpHoy.Name = "tpHoy";
-            this.tpHoy.Padding = new System.Windows.Forms.Padding(3);
-            this.tpHoy.Size = new System.Drawing.Size(725, 462);
-            this.tpHoy.TabIndex = 0;
-            this.tpHoy.Text = "Hoy";
-            this.tpHoy.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Hoy",
-            "Semana",
-            "Mes"});
-            this.comboBox1.Location = new System.Drawing.Point(508, 10);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(196, 25);
-            this.comboBox1.TabIndex = 2;
-            // 
-            // cVentasCampaña
-            // 
-            chartArea13.Name = "ChartArea1";
-            this.cVentasCampaña.ChartAreas.Add(chartArea13);
-            this.cVentasCampaña.Location = new System.Drawing.Point(13, 9);
-            this.cVentasCampaña.Name = "cVentasCampaña";
-            series17.ChartArea = "ChartArea1";
-            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series17.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            series17.Legend = "Legend1";
-            series17.Name = "Campañas";
-            series17.Points.Add(dataPoint17);
-            series17.Points.Add(dataPoint18);
-            this.cVentasCampaña.Series.Add(series17);
-            this.cVentasCampaña.Size = new System.Drawing.Size(391, 201);
-            this.cVentasCampaña.TabIndex = 2;
-            this.cVentasCampaña.Text = "Ventas por Campaña";
-            title13.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            title13.Name = "Title1";
-            title13.Text = "Ventas por Campaña";
-            this.cVentasCampaña.Titles.Add(title13);
-            // 
-            // cPorcentajeVentas
-            // 
-            chartArea14.Name = "ChartArea1";
-            this.cPorcentajeVentas.ChartAreas.Add(chartArea14);
-            legend9.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend9.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            legend9.IsTextAutoFit = false;
-            legend9.Name = "Legend1";
-            legend9.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            this.cPorcentajeVentas.Legends.Add(legend9);
-            this.cPorcentajeVentas.Location = new System.Drawing.Point(410, 216);
-            this.cPorcentajeVentas.Name = "cPorcentajeVentas";
-            this.cPorcentajeVentas.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
-            series18.BorderColor = System.Drawing.Color.Black;
-            series18.ChartArea = "ChartArea1";
-            series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series18.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            series18.Legend = "Legend1";
-            series18.Name = "Ventas";
-            this.cPorcentajeVentas.Series.Add(series18);
-            this.cPorcentajeVentas.Size = new System.Drawing.Size(307, 236);
-            this.cPorcentajeVentas.TabIndex = 1;
-            this.cPorcentajeVentas.Text = "Porcentaje de Ventas";
-            title14.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            title14.Name = "Title01";
-            title14.Text = "% Ventas";
-            this.cPorcentajeVentas.Titles.Add(title14);
-            // 
-            // cTiempos
-            // 
-            this.cTiempos.BorderlineColor = System.Drawing.Color.Black;
-            this.cTiempos.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea15.Name = "ChartArea1";
-            this.cTiempos.ChartAreas.Add(chartArea15);
-            legend10.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend10.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            legend10.IsTextAutoFit = false;
-            legend10.Name = "Legend1";
-            legend10.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            this.cTiempos.Legends.Add(legend10);
-            this.cTiempos.Location = new System.Drawing.Point(13, 216);
-            this.cTiempos.Name = "cTiempos";
-            this.cTiempos.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series19.ChartArea = "ChartArea1";
-            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
-            series19.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            series19.Legend = "Legend1";
-            series19.Name = "Productivo";
-            series19.Points.Add(dataPoint19);
-            series19.Points.Add(dataPoint20);
-            series20.ChartArea = "ChartArea1";
-            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
-            series20.Legend = "Legend1";
-            series20.Name = "Improductivo";
-            this.cTiempos.Series.Add(series19);
-            this.cTiempos.Series.Add(series20);
-            this.cTiempos.Size = new System.Drawing.Size(391, 236);
-            this.cTiempos.TabIndex = 0;
-            this.cTiempos.Text = "Detalle de Tiempos";
-            title15.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            title15.Name = "Title01";
-            title15.Text = "Detalle de Tiempos";
-            this.cTiempos.Titles.Add(title15);
-            // 
-            // tpSemana
-            // 
-            this.tpSemana.Location = new System.Drawing.Point(4, 28);
-            this.tpSemana.Name = "tpSemana";
-            this.tpSemana.Padding = new System.Windows.Forms.Padding(3);
-            this.tpSemana.Size = new System.Drawing.Size(725, 462);
-            this.tpSemana.TabIndex = 1;
-            this.tpSemana.Text = "Semana";
-            this.tpSemana.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(19, 11);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(176, 21);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Estadísticas y números";
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.dgvTabla);
-            this.tabPage1.Controls.Add(this.label14);
-            this.tabPage1.Controls.Add(this.label13);
-            this.tabPage1.Controls.Add(this.label12);
-            this.tabPage1.Location = new System.Drawing.Point(4, 28);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(725, 462);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "Rendimientos Empleados";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(31, 14);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(137, 20);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Promedio de Ventas";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(31, 93);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(148, 20);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "Promedio de llamadas";
-            this.label13.Click += new System.EventHandler(this.label13_Click);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(31, 50);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(209, 20);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "Promedio Duracion de llamadas";
+            this.tpRendimiento.Controls.Add(this.dgvTabla);
+            this.tpRendimiento.Controls.Add(this.label14);
+            this.tpRendimiento.Controls.Add(this.label13);
+            this.tpRendimiento.Controls.Add(this.label12);
+            this.tpRendimiento.Location = new System.Drawing.Point(4, 28);
+            this.tpRendimiento.Name = "tpRendimiento";
+            this.tpRendimiento.Padding = new System.Windows.Forms.Padding(3);
+            this.tpRendimiento.Size = new System.Drawing.Size(822, 543);
+            this.tpRendimiento.TabIndex = 2;
+            this.tpRendimiento.Text = "Rendimientos Empleados";
+            this.tpRendimiento.UseVisualStyleBackColor = true;
             // 
             // dgvTabla
             // 
@@ -547,40 +359,244 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTabla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTabla.Location = new System.Drawing.Point(21, 159);
+            this.dgvTabla.Location = new System.Drawing.Point(13, 144);
             this.dgvTabla.Name = "dgvTabla";
             this.dgvTabla.ReadOnly = true;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvTabla.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvTabla.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTabla.Size = new System.Drawing.Size(698, 296);
+            this.dgvTabla.Size = new System.Drawing.Size(795, 380);
             this.dgvTabla.TabIndex = 6;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(31, 63);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(209, 20);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "Promedio Duracion de llamadas";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(31, 102);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(148, 20);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Promedio de llamadas";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(31, 24);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(137, 20);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Promedio de Ventas";
+            // 
+            // tpFechas
+            // 
+            this.tpFechas.Controls.Add(this.label15);
+            this.tpFechas.Controls.Add(this.cbFiltroFecha);
+            this.tpFechas.Controls.Add(this.cVentasCampaña);
+            this.tpFechas.Controls.Add(this.cPorcentajeVentas);
+            this.tpFechas.Controls.Add(this.cTiempos);
+            this.tpFechas.Location = new System.Drawing.Point(4, 28);
+            this.tpFechas.Name = "tpFechas";
+            this.tpFechas.Padding = new System.Windows.Forms.Padding(3);
+            this.tpFechas.Size = new System.Drawing.Size(822, 580);
+            this.tpFechas.TabIndex = 0;
+            this.tpFechas.Text = "Fechas";
+            this.tpFechas.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(8, 14);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(148, 20);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "Seleccione fecha filtro";
+            // 
+            // cbFiltroFecha
+            // 
+            this.cbFiltroFecha.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFiltroFecha.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbFiltroFecha.FormattingEnabled = true;
+            this.cbFiltroFecha.Location = new System.Drawing.Point(162, 12);
+            this.cbFiltroFecha.Name = "cbFiltroFecha";
+            this.cbFiltroFecha.Size = new System.Drawing.Size(155, 25);
+            this.cbFiltroFecha.TabIndex = 2;
+            this.cbFiltroFecha.SelectedIndexChanged += new System.EventHandler(this.cbFiltroFecha_SelectedIndexChanged);
+            // 
+            // cVentasCampaña
+            // 
+            this.cVentasCampaña.BorderlineColor = System.Drawing.Color.Black;
+            this.cVentasCampaña.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea1.Name = "ChartArea1";
+            this.cVentasCampaña.ChartAreas.Add(chartArea1);
+            this.cVentasCampaña.Location = new System.Drawing.Point(341, 12);
+            this.cVentasCampaña.Name = "cVentasCampaña";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            series1.Legend = "Legend1";
+            series1.Name = "Campañas";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            this.cVentasCampaña.Series.Add(series1);
+            this.cVentasCampaña.Size = new System.Drawing.Size(456, 264);
+            this.cVentasCampaña.TabIndex = 2;
+            this.cVentasCampaña.Text = "Ventas por Campaña";
+            title1.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            title1.Name = "Title1";
+            title1.Text = "Ventas por Campaña";
+            this.cVentasCampaña.Titles.Add(title1);
+            // 
+            // cPorcentajeVentas
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.cPorcentajeVentas.ChartAreas.Add(chartArea2);
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend1.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            legend1.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            this.cPorcentajeVentas.Legends.Add(legend1);
+            this.cPorcentajeVentas.Location = new System.Drawing.Point(12, 301);
+            this.cPorcentajeVentas.Name = "cPorcentajeVentas";
+            this.cPorcentajeVentas.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
+            series2.BorderColor = System.Drawing.Color.Black;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            series2.Legend = "Legend1";
+            series2.Name = "Ventas";
+            this.cPorcentajeVentas.Series.Add(series2);
+            this.cPorcentajeVentas.Size = new System.Drawing.Size(322, 264);
+            this.cPorcentajeVentas.TabIndex = 1;
+            this.cPorcentajeVentas.Text = "Porcentaje de Ventas";
+            title2.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            title2.Name = "Title01";
+            title2.Text = "% Ventas";
+            this.cPorcentajeVentas.Titles.Add(title2);
+            // 
+            // cTiempos
+            // 
+            this.cTiempos.BorderlineColor = System.Drawing.Color.Black;
+            this.cTiempos.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea3.Name = "ChartArea1";
+            this.cTiempos.ChartAreas.Add(chartArea3);
+            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend2.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            legend2.IsTextAutoFit = false;
+            legend2.Name = "Legend1";
+            legend2.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            this.cTiempos.Legends.Add(legend2);
+            this.cTiempos.Location = new System.Drawing.Point(341, 301);
+            this.cTiempos.Name = "cTiempos";
+            this.cTiempos.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
+            series3.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            series3.Legend = "Legend1";
+            series3.Name = "Productivo";
+            series3.Points.Add(dataPoint3);
+            series3.Points.Add(dataPoint4);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
+            series4.Legend = "Legend1";
+            series4.Name = "Improductivo";
+            this.cTiempos.Series.Add(series3);
+            this.cTiempos.Series.Add(series4);
+            this.cTiempos.Size = new System.Drawing.Size(456, 264);
+            this.cTiempos.TabIndex = 0;
+            this.cTiempos.Text = "Detalle de Tiempos";
+            title3.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            title3.Name = "Title01";
+            title3.Text = "Detalle de Tiempos";
+            this.cTiempos.Titles.Add(title3);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei Light", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(19, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(176, 21);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Estadísticas y números";
+            // 
+            // pnlInformacion
+            // 
+            this.pnlInformacion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlInformacion.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pnlInformacion.Controls.Add(this.label5);
+            this.pnlInformacion.Controls.Add(this.label20);
+            this.pnlInformacion.Controls.Add(this.btnEliminar);
+            this.pnlInformacion.Controls.Add(this.label3);
+            this.pnlInformacion.Controls.Add(this.dtp02);
+            this.pnlInformacion.Controls.Add(this.tb07);
+            this.pnlInformacion.Controls.Add(this.label4);
+            this.pnlInformacion.Controls.Add(this.tb06);
+            this.pnlInformacion.Controls.Add(this.label9);
+            this.pnlInformacion.Controls.Add(this.tb05);
+            this.pnlInformacion.Controls.Add(this.label6);
+            this.pnlInformacion.Controls.Add(this.tb04);
+            this.pnlInformacion.Controls.Add(this.label7);
+            this.pnlInformacion.Controls.Add(this.tb03);
+            this.pnlInformacion.Controls.Add(this.label8);
+            this.pnlInformacion.Controls.Add(this.tb02);
+            this.pnlInformacion.Controls.Add(this.label10);
+            this.pnlInformacion.Controls.Add(this.tb01);
+            this.pnlInformacion.Controls.Add(this.label11);
+            this.pnlInformacion.Controls.Add(this.dtp01);
+            this.pnlInformacion.Controls.Add(this.btnEditar);
+            this.pnlInformacion.Controls.Add(this.gbContacto);
+            this.pnlInformacion.Font = new System.Drawing.Font("Microsoft YaHei Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pnlInformacion.Location = new System.Drawing.Point(24, 62);
+            this.pnlInformacion.Name = "pnlInformacion";
+            this.pnlInformacion.Size = new System.Drawing.Size(356, 663);
+            this.pnlInformacion.TabIndex = 4;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft YaHei Light", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(19, 11);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(98, 21);
+            this.label20.TabIndex = 0;
+            this.label20.Text = "Información";
             // 
             // frmDetalle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlText;
-            this.ClientSize = new System.Drawing.Size(1194, 627);
+            this.ClientSize = new System.Drawing.Size(1291, 745);
+            this.Controls.Add(this.pnlInformacion);
             this.Controls.Add(this.pnlEstadisticas);
-            this.Controls.Add(this.gbInformacion);
             this.Controls.Add(this.label1);
             this.Name = "frmDetalle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Detalles [tipo]";
             this.Load += new System.EventHandler(this.frmDetalles_Load);
-            this.gbInformacion.ResumeLayout(false);
-            this.gbInformacion.PerformLayout();
             this.pnlEstadisticas.ResumeLayout(false);
             this.pnlEstadisticas.PerformLayout();
-            this.tcFechas.ResumeLayout(false);
-            this.tpHoy.ResumeLayout(false);
+            this.tcDatos.ResumeLayout(false);
+            this.tpRendimiento.ResumeLayout(false);
+            this.tpRendimiento.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).EndInit();
+            this.tpFechas.ResumeLayout(false);
+            this.tpFechas.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cVentasCampaña)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cPorcentajeVentas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cTiempos)).EndInit();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).EndInit();
+            this.pnlInformacion.ResumeLayout(false);
+            this.pnlInformacion.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -588,11 +604,9 @@
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox gbInformacion;
         private System.Windows.Forms.Panel pnlEstadisticas;
-        private System.Windows.Forms.TabControl tcFechas;
-        private System.Windows.Forms.TabPage tpHoy;
-        private System.Windows.Forms.TabPage tpSemana;
+        private System.Windows.Forms.TabControl tcDatos;
+        private System.Windows.Forms.TabPage tpFechas;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataVisualization.Charting.Chart cTiempos;
         private System.Windows.Forms.Label label9;
@@ -617,12 +631,15 @@
         private System.Windows.Forms.TextBox tb01;
         private System.Windows.Forms.DateTimePicker dtp01;
         private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.GroupBox gbContacto;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.ComboBox cbFiltroFecha;
+        private System.Windows.Forms.TabPage tpRendimiento;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.DataGridView dgvTabla;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.GroupBox gbContacto;
+        private System.Windows.Forms.Panel pnlInformacion;
+        private System.Windows.Forms.Label label20;
     }
 }

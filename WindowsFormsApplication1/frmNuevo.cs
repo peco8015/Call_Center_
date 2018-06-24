@@ -139,59 +139,76 @@ namespace WindowsFormsApplication1
         private void lbLista_SelectedIndexChanged(object sender, EventArgs e)
         {
             if((sender as ListBox).SelectedItem != null)
+            {
                 btnAdd.Enabled = true;
+                if (lbLider.SelectedItem !=null)
+                {
+                    btnAddEmpleados.Enabled = true;
+                }
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(tb01.Text) && !string.IsNullOrWhiteSpace(tb02.Text) && !string.IsNullOrWhiteSpace(tb03.Text))
             {
-                bool se_grabo = false; 
                 switch (cbTipoRegistro.SelectedItem)
                 {
                     case "Empleado":
                         clsEmpleado emp = new clsEmpleado();
-                        emp.Nombre = tb01.Text;
-                        emp.Apellido = tb02.Text;
-                        emp.Dni = Convert.ToInt32(tb03.Text);
-                        emp.Telefono = tb04.Text;
-                        emp.Mail = tb05.Text;
-                        emp.Domicilio = tb06.Text;
-                        emp.FechaNaciemiento = dtp01.Value;
-                        emp.FechaInicio = DateTime.Now;
-                        emp.Jefe = (rbJefe.Checked)? 0 : 1;
-                        emp.Password = tb07.Text;
-                        emp.Id_campaña = (lbLista.SelectedItem as clsCampaña).IdCampaña;    //CAMPAÑA
-                        se_grabo = conectar.insertar_empleado(emp);
+                        if ( Int32.TryParse(tb03.Text, out int aux_dni) && !string.IsNullOrWhiteSpace(tb04.Text) && !string.IsNullOrWhiteSpace(tb05.Text)
+                            && !string.IsNullOrWhiteSpace(tb06.Text) && !string.IsNullOrWhiteSpace(tb07.Text) && dtp01.Value < DateTime.Now )
+                        {
+                            emp.Nombre = tb01.Text;
+                            emp.Apellido = tb02.Text;
+                            emp.Dni = aux_dni;
+                            emp.Telefono = tb04.Text; // guardar como int? checkear eso?
+                            emp.Mail = tb05.Text;
+                            emp.Domicilio = tb06.Text;
+                            emp.FechaNaciemiento = dtp01.Value;
+                            emp.FechaInicio = DateTime.Now;
+                            emp.Jefe = (rbJefe.Checked) ? 0 : 1;
+                            emp.Password = tb07.Text;
+                            emp.Id_campaña = (lbLista.SelectedItem as clsCampaña).IdCampaña;    //CAMPAÑA
+                            SeGuardo(conectar.insertar_empleado(emp));
+                        }
+                        else
+                            msjError("Falta completar campos");
                         break;
 
                     case "Cliente":
-                        clsCliente cli = new clsCliente();
-                        cli.Nombre = tb01.Text;
-                        cli.Cuil = Convert.ToInt32(tb02.Text);
-                        cli.Domicilio = tb03.Text;
-                        cli.Contacto = tb04.Text;
-                        cli.Mail = tb05.Text;
-                        cli.Telefono = Convert.ToInt32(tb06.Text);
-                        se_grabo = conectar.insertar_cliente(cli);
+                        if ( !string.IsNullOrWhiteSpace(tb04.Text) && !string.IsNullOrWhiteSpace(tb05.Text) && Int32.TryParse(tb06.Text, out int aux_tel) )
+                        {
+                            clsCliente cli = new clsCliente();
+                            cli.Nombre = tb01.Text;
+                            cli.Cuil = Convert.ToInt32(tb02.Text);
+                            cli.Domicilio = tb03.Text;
+                            cli.Contacto = tb04.Text;
+                            cli.Mail = tb05.Text;
+                            cli.Telefono = aux_tel;
+                            SeGuardo(conectar.insertar_cliente(cli));
+                        }
+                        else
+                            msjError("Falta completar campos");
                         break;
 
                     case "Campaña":
-                        camp = new clsCampaña();
-                        camp.Nombre = tb01.Text;
-                        camp.Precio = Convert.ToInt32(tb02.Text);
-                        camp.Descripion = tb03.Text;
-                        camp.Fecha_inicio = dtp01.Value;
-                        camp.Fecha_fin = dtp02.Value;
-                        // especificaciones
-                        camp.IdCliente = (lbLista.SelectedItem as clsCliente).Id;   // CLIENTE
-                        se_grabo = conectar.insertar_campaña(camp);
+                        if ( Int32.TryParse(tb02.Text, out int aux_precio) && dtp01.Value < dtp02.Value )
+                        {
+                            camp = new clsCampaña();
+                            camp.Nombre = tb01.Text;
+                            camp.Precio = aux_precio;
+                            camp.Descripcion = tb03.Text;
+                            camp.Fecha_inicio = dtp01.Value;
+                            camp.Fecha_fin = dtp02.Value;
+                            // especificaciones
+                            camp.IdCliente = (lbLista.SelectedItem as clsCliente).Id;   // CLIENTE
+                            SeGuardo(conectar.insertar_campaña(camp));
+                        }
+                        else
+                            msjError("Falta completar campos");
                         break;
                 }
-                if (se_grabo)
-                    limpiarControles();
-                else
-                    noInserto();
             }
             else
                 msjError("Falta completar campos");
@@ -199,6 +216,7 @@ namespace WindowsFormsApplication1
 
         private void btnAddEmpleados_Click(object sender, EventArgs e)
         {
+            // ACTUALIZAR JEFE CAMPAÑA.
             List<int> empleados = new List<int>();
             foreach (clsEmpleado aux in lbLista.SelectedItems)
             {
@@ -230,14 +248,21 @@ namespace WindowsFormsApplication1
                         lbLista.Items.Add(aux);
                     }
                     lbLista.DisplayMember = "nombre";
+                    dTable = conectar.listarJefes();
+                    foreach (DataRow fila in dTable.Rows)
+                    {
+                        clsEmpleado aux = new clsEmpleado();
+                        aux.Id_empleado = Convert.ToInt32(fila["id_empleado"]);
+                        aux.Nombre = Convert.ToString(fila["Empleado"]);
+                        lbLista.Items.Add(aux);
+                    }
+                    lbLista.DisplayMember = "nombre";
 
+                    pnlInformacion.Visible = false;
+                    pnlLider.Visible = true;
                     btnAdd.Visible = false;
-                    tb01.Enabled = false;
-                    tb02.Enabled = false;
-                    tb03.Enabled = false;
-                    dtp01.Enabled = false;
-                    dtp02.Enabled = false;
                     btnAddEmpleados.Visible = true;
+                    btnAddEmpleados.Enabled = false;
                 }
             }
             else
@@ -252,6 +277,14 @@ namespace WindowsFormsApplication1
         public void msjError(string msj)
         {
             MessageBox.Show(msj, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public void SeGuardo(bool se_guardo)
+        {
+            if (se_guardo)
+                limpiarControles();
+            else
+                noInserto();
         }
     }
 }

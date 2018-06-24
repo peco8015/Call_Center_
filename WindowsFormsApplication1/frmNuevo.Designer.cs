@@ -58,9 +58,13 @@
             this.label10 = new System.Windows.Forms.Label();
             this.cbTipoRegistro = new System.Windows.Forms.ComboBox();
             this.btnAddEmpleados = new System.Windows.Forms.Button();
+            this.pnlLider = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lbLider = new System.Windows.Forms.ListBox();
             this.pnlInformacion.SuspendLayout();
             this.pnlRelacion.SuspendLayout();
             this.pnlRegistro.SuspendLayout();
+            this.pnlLider.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlInformacion
@@ -336,6 +340,7 @@
             // pnlRegistro
             // 
             this.pnlRegistro.BackColor = System.Drawing.Color.Teal;
+            this.pnlRegistro.Controls.Add(this.pnlLider);
             this.pnlRegistro.Controls.Add(this.btnAddEmpleados);
             this.pnlRegistro.Controls.Add(this.label11);
             this.pnlRegistro.Controls.Add(this.pnlRelacion);
@@ -391,13 +396,50 @@
             // 
             this.btnAddEmpleados.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAddEmpleados.Font = new System.Drawing.Font("Microsoft YaHei Light", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddEmpleados.Location = new System.Drawing.Point(566, 433);
+            this.btnAddEmpleados.Location = new System.Drawing.Point(518, 433);
             this.btnAddEmpleados.Name = "btnAddEmpleados";
             this.btnAddEmpleados.Size = new System.Drawing.Size(159, 47);
             this.btnAddEmpleados.TabIndex = 25;
             this.btnAddEmpleados.Text = "Asignar CAMPAÑA";
             this.btnAddEmpleados.UseVisualStyleBackColor = true;
             this.btnAddEmpleados.Click += new System.EventHandler(this.btnAddEmpleados_Click);
+            // 
+            // pnlLider
+            // 
+            this.pnlLider.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlLider.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlLider.Controls.Add(this.label12);
+            this.pnlLider.Controls.Add(this.lbLider);
+            this.pnlLider.Location = new System.Drawing.Point(116, 47);
+            this.pnlLider.Name = "pnlLider";
+            this.pnlLider.Size = new System.Drawing.Size(312, 377);
+            this.pnlLider.TabIndex = 24;
+            this.pnlLider.Visible = false;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(24, 16);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(187, 20);
+            this.label12.TabIndex = 20;
+            this.label12.Text = "Asignar líder/jefe a campaña";
+            // 
+            // lbLider
+            // 
+            this.lbLider.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbLider.Font = new System.Drawing.Font("Microsoft YaHei Light", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLider.FormattingEnabled = true;
+            this.lbLider.ItemHeight = 19;
+            this.lbLider.Location = new System.Drawing.Point(28, 48);
+            this.lbLider.Name = "lbLider";
+            this.lbLider.Size = new System.Drawing.Size(256, 308);
+            this.lbLider.TabIndex = 21;
+            this.lbLider.SelectedIndexChanged += new System.EventHandler(this.lbLista_SelectedIndexChanged);
             // 
             // frmNuevo
             // 
@@ -419,6 +461,8 @@
             this.pnlRelacion.PerformLayout();
             this.pnlRegistro.ResumeLayout(false);
             this.pnlRegistro.PerformLayout();
+            this.pnlLider.ResumeLayout(false);
+            this.pnlLider.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -456,5 +500,8 @@
         private System.Windows.Forms.RadioButton rbEmpleado;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnAddEmpleados;
+        private System.Windows.Forms.Panel pnlLider;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ListBox lbLider;
     }
 }

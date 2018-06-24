@@ -33,10 +33,12 @@ namespace WindowsFormsApplication1
             {
                 case "empleado":
                     empleado = conectar.datos_empleado(identificador); // DNI para empleado
+                    tcDatos.TabPages.RemoveByKey("tpRendimiento");
                     break;
 
                 case "cliente":
                     cliente = conectar.datos_cliente(identificador);
+                    tcDatos.TabPages.RemoveByKey("tpRendimiento");
                     break;
 
                 case "campaña":
@@ -46,12 +48,75 @@ namespace WindowsFormsApplication1
             }
             setearForm();
         }
-        
-        private void tcFechas_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void btnEditar_Click(object sender, EventArgs e)
         {
-            TabControl tc = (sender as TabControl);
+            string sender_tag = (sender as Button).Tag.ToString();
+            switch (sender_tag)
+            {
+                case "Eliminar":
+                    //aca elimina
+                    this.Close();
+                    break;
+
+                case "Editar":
+                    foreach (Control c in pnlInformacion.Controls)
+                    {
+                        if (c.GetType() == typeof(TextBox))
+                            (c as TextBox).ReadOnly = false;
+                        if (c.GetType() == typeof(DateTimePicker))
+                            (c as DateTimePicker).Enabled = true;
+                    }
+                    pnlEstadisticas.Enabled = false;
+                    btnEditar.Tag = "Guardar";
+                    btnEliminar.Tag = "Cancelar";
+                    break;
+
+                case "Guardar":
+                    // guarda
+                    btnEditar.Tag = "Editar";
+                    btnEliminar.Tag = "Eliminar";
+                    break;
+
+                case "Cancelar":
+                    btnEditar.Tag = "Editar";
+                    btnEliminar.Tag = "Eliminar";
+                    break;
+            }
+            if ( sender_tag == "Guardar" || sender_tag == "Cancelar" )
+            {
+                foreach (Control c in pnlInformacion.Controls)
+                {
+                    if (c.GetType() == typeof(TextBox))
+                        (c as TextBox).ReadOnly = true;
+                    if (c.GetType() == typeof(DateTimePicker))
+                        (c as DateTimePicker).Enabled = false;
+                }
+                pnlEstadisticas.Enabled = true;
+            }
+        }
+
+        private void tcDatos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch(tcDatos.SelectedTab.Name)
+            {
+                case "tpFechas":
+                    cbFiltroFecha.Items.Clear();
+                    string[] opciones = { "Hoy", "Semana", "Mes", "Año" };
+                    cbFiltroFecha.Items.AddRange(opciones);
+                    cbFiltroFecha.SelectedIndex = 0;
+                    break;
+
+                case "tpRendimiento":
+                    llenarDtRendimiento();
+                    break;
+            }
+        }
+
+        private void cbFiltroFecha_SelectedIndexChanged(object sender, EventArgs e)
+        {
             //  Limpio los Points de cada Chart
-            foreach (Control c in tc.SelectedTab.Controls)
+            foreach (Control c in tpFechas.Controls)
             {
                 if (c.GetType() == typeof(Chart))
                 {
@@ -62,52 +127,30 @@ namespace WindowsFormsApplication1
                 }
             }
             DateTime fechaAUX = DateTime.Today;
-            switch (tc.SelectedTab.Name)
+            switch (cbFiltroFecha.SelectedItem.ToString())
             {
-                case "tpHoy":
-                        //fechaAUX = DateTime.Today;
-                        fechaAUX = Convert.ToDateTime("2018-04-17");
-                        break;
-
-                case "tpSemana":
-                        fechaAUX = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
-                        break;
-
-                case "tpMes":
-                        fechaAUX = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-                        //DateTime aux = new DateTime(2018, 5, 12);
-                        //fechaAUX = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
-                        //fechaAUX = aux.AddDays(-(int)aux.DayOfWeek + (int)DayOfWeek.Monday);
-                        break;
-            }
-            llenarCharts(fechaAUX, tc.SelectedTab.Name);
-        }
-
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            foreach (Control c in gbInformacion.Controls)
-            {
-                if (c.GetType() == typeof(TextBox))
-                    (c as TextBox).ReadOnly = false;
-                if (c.GetType() == typeof(DateTimePicker))
-                    (c as DateTimePicker).Enabled = true;
-            }
-        }
-
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            // funcion de eliminar lo que sea
-            switch (clase)
-            {
-                case "empleado":
+                case "Hoy":
+                    //fechaAUX = DateTime.Today;
+                    fechaAUX = Convert.ToDateTime("2018-04-17");
                     break;
-                case "cliente":
+
+                case "Semana":
+                    fechaAUX = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
                     break;
-                case "campaña":
+
+                case "Mes":
+                    fechaAUX = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+                    //DateTime aux = new DateTime(2018, 5, 12);
+                    //fechaAUX = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
+                    //fechaAUX = aux.AddDays(-(int)aux.DayOfWeek + (int)DayOfWeek.Monday);
+                    break;
+
+                case "Año":
+                    fechaAUX = new DateTime(DateTime.Today.Year, 1, 1);
                     break;
             }
+            llenarCharts(fechaAUX, cbFiltroFecha.SelectedItem.ToString());
         }
-
 
         #region Funciones
         private void setearForm()
@@ -188,7 +231,7 @@ namespace WindowsFormsApplication1
                     tb04.Text = cliente.Contacto;
                     tb05.Text = cliente.Telefono.ToString();
                     tb06.Text = cliente.Mail;
-                    tb07.Text = campaña.Descripion;
+                    tb07.Text = campaña.Descripcion;
                     dtp01.Value = Convert.ToDateTime(campaña.Fecha_inicio);
                     dtp02.Value = Convert.ToDateTime(campaña.Fecha_fin);
                     break;
@@ -203,7 +246,7 @@ namespace WindowsFormsApplication1
             dtp01.Enabled = false;
             dtp02.Enabled = false;
 
-            llenarCharts(DateTime.Today, tcFechas.SelectedTab.Name);
+            llenarCharts(DateTime.Today, tcDatos.SelectedTab.Name);
         }
 
         private void llenarCharts(DateTime fecha, string filtro)
@@ -302,24 +345,85 @@ namespace WindowsFormsApplication1
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        #endregion
-
-        private void label13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlEstadisticas_Paint(object sender, PaintEventArgs e)
+        
+        private void llenarDtRendimiento()
         {
             DataTable rendimientos = new DataTable();
             rendimientos = conectar.rendimientoCampaña(campaña.IdCampaña);
 
             dgvTabla.DataSource = rendimientos;
         }
-
-        private void tabPage1_Click(object sender, EventArgs e)
+        
+        private void checkCampos()
         {
-          
+            switch (clase)
+            {
+                case "Empleado":
+                    clsEmpleado emp = new clsEmpleado();
+                    if (Int32.TryParse(tb03.Text, out int aux_dni) && !string.IsNullOrWhiteSpace(tb04.Text) && !string.IsNullOrWhiteSpace(tb05.Text)
+                        && !string.IsNullOrWhiteSpace(tb06.Text) && !string.IsNullOrWhiteSpace(tb07.Text) && dtp01.Value < DateTime.Now)
+                    {
+                        emp.Nombre = tb01.Text;
+                        emp.Apellido = tb02.Text;
+                        emp.Dni = aux_dni;
+                        emp.Telefono = tb04.Text; // guardar como int? checkear eso?
+                        emp.Mail = tb05.Text;
+                        emp.Domicilio = tb06.Text;
+                        emp.FechaNaciemiento = dtp01.Value;
+                        emp.FechaInicio = dtp02.Value;
+                        //emp.Id_campaña = (tb07.Text);    //CAMPAÑA
+                        SeGuardo(conectar.actualizar_empleado(emp));
+                    }
+                    else
+                        msjError("Falta completar campos");
+                    break;
+
+                case "Cliente":
+                    if (!string.IsNullOrWhiteSpace(tb04.Text) && !string.IsNullOrWhiteSpace(tb05.Text) && Int32.TryParse(tb06.Text, out int aux_tel))
+                    {
+                        clsCliente cli = new clsCliente();
+                        cli.Nombre = tb01.Text;
+                        cli.Cuil = Convert.ToInt32(tb02.Text);
+                        cli.Domicilio = tb03.Text;
+                        cli.Contacto = tb04.Text;
+                        cli.Mail = tb05.Text;
+                        cli.Telefono = aux_tel;
+                        SeGuardo(conectar.actualizar_cliente(cli));
+                    }
+                    else
+                        msjError("Falta completar campos");
+                    break;
+
+                case "Campaña":
+                    if (Int32.TryParse(tb02.Text, out int aux_precio) && dtp01.Value < dtp02.Value)
+                    {
+                        campaña.Nombre = tb01.Text;
+                        campaña.Precio = aux_precio;
+                        campaña.Descripcion = tb07.Text;
+                        campaña.Fecha_inicio = dtp01.Value;
+                        campaña.Fecha_fin = dtp02.Value;
+                        // especificaciones
+                        //camp.IdCliente = (lbLista.SelectedItem as clsCliente).Id;   // CLIENTE
+                        SeGuardo(conectar.actualizar_campaña(campaña));
+                    }
+                    else
+                        msjError("Falta completar campos");
+                    break;
+            }
         }
+
+        public void SeGuardo(bool r)
+        {
+            if (r)
+                MessageBox.Show("Se actualizó correctamente la información ingresada.", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public void msjError(string msj)
+        {
+            MessageBox.Show(msj, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        #endregion
+
+
     }
 }

@@ -13,10 +13,10 @@ namespace WindowsFormsApplication1.clases
         string descripion;
         int  precio; // double???
         DateTime fecha_inicio;
-        // Null o 0 lógico en DateTime es el MinValue
-        DateTime fecha_fin; 
+        DateTime fecha_fin;     // Null o 0 lógico en DateTime es el MinValue
         int idCliente;
         string nombreCliente;
+        int lider; // ??
 
         public int IdCampaña
         {
@@ -30,74 +30,15 @@ namespace WindowsFormsApplication1.clases
                 idCampaña = value;
             }
         }
-
-        public string Nombre
-        {
-            get
-            {
-                return nombre;
-            }
-
-            set
-            {
-                nombre = value;
-            }
-        }
-
-        public string Descripion
-        {
-            get
-            {
-                return descripion;
-            }
-
-            set
-            {
-                descripion = value;
-            }
-        }
-
+        
+        public string Nombre { get => nombre; set => nombre = value; }
+        public string Descripcion { get => descripion; set => descripion = value; }
         public DateTime Fecha_inicio { get => fecha_inicio; set => fecha_inicio = value; }
         public DateTime Fecha_fin { get => fecha_fin; set => fecha_fin = value; }
-
-        public int IdCliente
-        {
-            get
-            {
-                return idCliente;
-            }
-
-            set
-            {
-                idCliente = value;
-            }
-        }
-
-        public string NombreCliente
-        {
-            get
-            {
-                return nombreCliente;
-            }
-
-            set
-            {
-                nombreCliente = value;
-            }
-        }
-
-        public int Precio
-        {
-            get
-            {
-                return precio;
-            }
-
-            set
-            {
-                precio = value;
-            }
-        }
+        public int IdCliente { get => idCliente; set => idCliente = value; }
+        public string NombreCliente { get => nombreCliente; set => nombreCliente = value; }
+        public int Precio { get => precio; set => precio = value; }
+        
 
         public string Cliente { get; internal set; }
     }
