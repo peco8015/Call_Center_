@@ -2558,7 +2558,34 @@ namespace WindowsFormsApplication1.clases
                 con.Close();
             }
         }
-        
+
+        public int dniEmpleado(int id)//consulta y devuelve datos de un empleado
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT dni from empleado where id_empleado=@usuario", con);
+                cmd.Parameters.AddWithValue("usuario", id);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                int dni = 0;
+             
+                dni = Convert.ToInt32(dt.Rows[0]["dni"]);
+                
+                return dni;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return 0;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public DataTable listarEmpleados()
         {
             try
@@ -3134,21 +3161,30 @@ namespace WindowsFormsApplication1.clases
             rendimientos.Columns.Add("Id", typeof(int));
             rendimientos.Columns.Add("Empleado", typeof(String));
             rendimientos.Columns.Add("Ventas", typeof(float));
-            rendimientos.Columns.Add("Promedio Duracion llamadas Vendidas (min)", typeof(float));
-            rendimientos.Columns.Add("Llamadas", typeof(int));
+            rendimientos.Columns.Add("Efectividad", typeof(string));
+            rendimientos.Columns.Add("Promedio Duracion llamadas Vendidas (min)", typeof(float));           
             rendimientos.Columns.Add("Promedio Duracion llamadas(min)", typeof(float));
-            
+            rendimientos.Columns.Add("PromedioEfect", typeof(float));
 
+            float promEfectividad = 0;
+            int tot = 0;
             foreach (DataRow dtRow in miembros.Rows)
              {
                 int  idempleado =  Convert.ToInt32(dtRow.ItemArray[0]);
                 float[] cantLlamadas = LlamadasCampaña(idempleado, id);
                 float[] canVentas = VentasCampaña(idempleado, id);
 
-                rendimientos.Rows.Add(dtRow.ItemArray[0], dtRow.ItemArray[1], canVentas[0], canVentas[1], cantLlamadas[0], cantLlamadas[1]);
+                float efectividad = Convert.ToInt32((canVentas[0] * 100) / cantLlamadas[0]);
 
+                promEfectividad = promEfectividad + efectividad;
+                tot = tot + 1;
+                promEfectividad = promEfectividad / tot;
+                rendimientos.Rows.Add(dtRow.ItemArray[0], dtRow.ItemArray[1], canVentas[0],efectividad, canVentas[1], cantLlamadas[1], promEfectividad);
+
+                
 
              }
+           
            
 
 

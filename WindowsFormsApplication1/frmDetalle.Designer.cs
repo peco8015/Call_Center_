@@ -377,6 +377,7 @@
             this.dgvTabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTabla.Size = new System.Drawing.Size(795, 395);
             this.dgvTabla.TabIndex = 6;
+            this.dgvTabla.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellClick);
             // 
             // label14
             // 
@@ -392,18 +393,18 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(453, 21);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(148, 20);
+            this.label13.Size = new System.Drawing.Size(86, 20);
             this.label13.TabIndex = 1;
-            this.label13.Text = "Promedio de llamadas";
+            this.label13.Text = "Total Ventas";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(9, 25);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(137, 20);
+            this.label12.Size = new System.Drawing.Size(162, 20);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Promedio de Ventas";
+            this.label12.Text = "Promedio de Efectividad";
             // 
             // tpFechas
             // 

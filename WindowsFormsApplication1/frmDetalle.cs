@@ -352,57 +352,63 @@ namespace WindowsFormsApplication1
 
             float[] canLlamadas = conectar.promedioLlamadasCamapaña(campaña.IdCampaña);
 
-            lbPromVentas.Text =Convert.ToString( canVentas[0]);
-            lbPromDurLlamVent.Text= Convert.ToString(canVentas[1]);
-            lbPromLlamadas.Text = Convert.ToString(canLlamadas[0]);
-            lbPromDurLlam.Text = Convert.ToString(canLlamadas[1]);
+         
 
             DataTable rendimientos = new DataTable();
             rendimientos = conectar.rendimientoCampaña(campaña.IdCampaña);
 
             dgvTabla.DataSource = rendimientos;
+
+            float promEfectTotal = float.Parse(dgvTabla.Rows[dgvTabla.Rows.Count -1].Cells["PromedioEfect"].Value.ToString());
+
+            lbPromVentas.Text = promEfectTotal.ToString()+"%";
+            lbPromDurLlamVent.Text = Convert.ToString(canVentas[1]);
+            lbPromLlamadas.Text = Convert.ToString(canVentas[0]);
+            lbPromDurLlam.Text = Convert.ToString(canLlamadas[1]);
+
+            dgvTabla.Columns["PromedioEfect"].Visible = false;
+            dgvTabla.Columns["Id"].Width = 25;
+            dgvTabla.Columns["Ventas"].Width = 75;
+            dgvTabla.Columns["Efectividad"].Width = 80;
+
             foreach (DataGridViewRow row in dgvTabla.Rows)
             {
-                /*if ((Convert.ToInt32(row.Cells["Ventas"].Value))> canVentas[0]) {
-                    row.Cells["Ventas"].Style.BackColor = Color.Green;
+              
+
+                 if ((Convert.ToInt32(row.Cells["Efectividad"].Value)) > promEfectTotal) {
+                    row.Cells["Ventas"].Style.ForeColor= Color.Green;
+                    row.Cells["Efectividad"].Value = (row.Cells["Efectividad"].Value ).ToString()+"%";
+                    row.Cells["Efectividad"].Style.ForeColor = Color.Green;
                 }
                 else
                 {
-                    row.Cells["Ventas"].Style.BackColor = Color.Red;
-                }*/
+                    row.Cells["Ventas"].Style.ForeColor = Color.Red;
+                    row.Cells["Efectividad"].Value = (row.Cells["Efectividad"].Value).ToString() + "%";
+                    row.Cells["Efectividad"].Style.ForeColor = Color.Red;
+                }
 
-
-
-
-                if ((Convert.ToInt32(row.Cells["Promedio Duracion llamadas Vendidas (min)"].Value)) > canVentas[1])
+               
+                if ((float.Parse(row.Cells["Promedio Duracion llamadas Vendidas (min)"].Value.ToString())) > canVentas[1])
                 {
-                    row.Cells["Promedio Duracion llamadas Vendidas (min)"].Style.BackColor = Color.Green;
+                    row.Cells["Promedio Duracion llamadas Vendidas (min)"].Style.ForeColor = Color.Red;
                 }
                 else
                 {
-                    row.Cells["Promedio Duracion llamadas Vendidas (min)"].Style.BackColor = Color.Red;
+                    row.Cells["Promedio Duracion llamadas Vendidas (min)"].Style.ForeColor = Color.Green;
                 }
 
 
-                /*if ((Convert.ToInt32(row.Cells["Llamadas"].Value)) > canLlamadas[0])
+
+
+
+
+                if ((float.Parse(row.Cells["Promedio Duracion llamadas(min)"].Value.ToString())) > canLlamadas[1])
                 {
-                    row.Cells["Llamadas"].Style.BackColor = Color.Green;
-                }
-                else
-                {
-                    row.Cells["Llamadas"].Style.BackColor = Color.Red;
-                }*/
-
-
-
-
-                if ((Convert.ToInt32(row.Cells["Promedio Duracion llamadas(min)"].Value)) > canLlamadas[1])
-                {
-                    row.Cells["Promedio Duracion llamadas(min)"].Style.BackColor = Color.Green;
+                    row.Cells["Promedio Duracion llamadas(min)"].Style.ForeColor = Color.Red;
                 }
                 else
                 {
-                    row.Cells["Promedio Duracion llamadas(min)"].Style.BackColor = Color.Red;
+                    row.Cells["Promedio Duracion llamadas(min)"].Style.ForeColor = Color.Green;
                 }
             }
 
@@ -476,8 +482,28 @@ namespace WindowsFormsApplication1
         {
             MessageBox.Show(msj, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
         #endregion
 
+        private void dgvTabla_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                
+                frmDatos frmDato;
+               int dni=conectar.dniEmpleado(Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["Id"].Value.ToString()));
 
+
+                frmDato = new frmDatos(this,dni , "Datos Empleado");
+                frmDato.Show();/*
+                frmDetalleCliente = new frmDetalles("empleado", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()));
+                frmDetalleCliente.Show();*/
+                      
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
