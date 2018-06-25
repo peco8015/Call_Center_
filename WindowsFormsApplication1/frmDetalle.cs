@@ -404,6 +404,7 @@ namespace WindowsFormsApplication1
                         campaña.Fecha_fin = dtp02.Value;
                         // especificaciones
                         //camp.IdCliente = (lbLista.SelectedItem as clsCliente).Id;   // CLIENTE
+                        // lider
                         SeGuardo(conectar.actualizar_campaña(campaña));
                     }
                     else

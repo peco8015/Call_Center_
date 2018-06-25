@@ -300,9 +300,9 @@
             // 
             this.gbContacto.BackColor = System.Drawing.Color.Transparent;
             this.gbContacto.Font = new System.Drawing.Font("Microsoft YaHei Light", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbContacto.Location = new System.Drawing.Point(6, 166);
+            this.gbContacto.Location = new System.Drawing.Point(6, 171);
             this.gbContacto.Name = "gbContacto";
-            this.gbContacto.Size = new System.Drawing.Size(344, 171);
+            this.gbContacto.Size = new System.Drawing.Size(344, 166);
             this.gbContacto.TabIndex = 21;
             this.gbContacto.TabStop = false;
             this.gbContacto.Text = "Contacto";
@@ -345,7 +345,7 @@
             this.tpRendimiento.Location = new System.Drawing.Point(4, 28);
             this.tpRendimiento.Name = "tpRendimiento";
             this.tpRendimiento.Padding = new System.Windows.Forms.Padding(3);
-            this.tpRendimiento.Size = new System.Drawing.Size(822, 543);
+            this.tpRendimiento.Size = new System.Drawing.Size(822, 580);
             this.tpRendimiento.TabIndex = 2;
             this.tpRendimiento.Text = "Rendimientos Empleados";
             this.tpRendimiento.UseVisualStyleBackColor = true;

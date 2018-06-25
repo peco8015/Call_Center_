@@ -35,6 +35,7 @@ namespace WindowsFormsApplication1.clases
         public string Descripcion { get => descripion; set => descripion = value; }
         public DateTime Fecha_inicio { get => fecha_inicio; set => fecha_inicio = value; }
         public DateTime Fecha_fin { get => fecha_fin; set => fecha_fin = value; }
+        public int Lider { get => lider; set => lider = value; }
         public int IdCliente { get => idCliente; set => idCliente = value; }
         public string NombreCliente { get => nombreCliente; set => nombreCliente = value; }
         public int Precio { get => precio; set => precio = value; }

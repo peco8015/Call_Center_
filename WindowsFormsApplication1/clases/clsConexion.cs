@@ -2805,7 +2805,7 @@ namespace WindowsFormsApplication1.clases
                 clsCampaña campaña = new clsCampaña();
                 campaña.IdCampaña = Convert.ToInt32(dt.Rows[0]["Id_campaña"]);
                 campaña.Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
-                campaña.Descripion = Convert.ToString(dt.Rows[0]["Descripcion"]);
+                campaña.Descripcion = Convert.ToString(dt.Rows[0]["Descripcion"]);
                 campaña.Precio = Convert.ToInt32(dt.Rows[0]["Precio"]);
                 campaña.Fecha_inicio = Convert.ToDateTime(dt.Rows[0]["F_inicio"]);
                 campaña.Fecha_fin = (dt.Rows[0]["F_fin"] != null)? Convert.ToDateTime(dt.Rows[0]["F_fin"]) : DateTime.MinValue;
@@ -2837,7 +2837,7 @@ namespace WindowsFormsApplication1.clases
                 clsCampaña campaña = new clsCampaña();
                 campaña.IdCampaña = Convert.ToInt32(dt.Rows[0]["Id_campaña"]);
                 campaña.Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
-                campaña.Descripion = Convert.ToString(dt.Rows[0]["Descripcion"]);
+                campaña.Descripcion = Convert.ToString(dt.Rows[0]["Descripcion"]);
                 campaña.Precio = Convert.ToInt32(dt.Rows[0]["Precio"]);
                 campaña.NombreCliente = Convert.ToString(dt.Rows[0]["Nombre2"]);
                 return campaña;
@@ -2863,7 +2863,7 @@ namespace WindowsFormsApplication1.clases
                 SqlCommand cmd = new SqlCommand("INSERT INTO campaña(nombre, descripcion, precio, f_inicio, f_fin, id_cliente)" +
                     " VALUES(@nombre, @descripcion, @precio, @f_inicio, @f_fin, @id_cliente);SELECT SCOPE_IDENTITY();", con); // id_especificacion?
                 cmd.Parameters.AddWithValue("nombre", campaña.Nombre);
-                cmd.Parameters.AddWithValue("descripcion", campaña.Descripion);
+                cmd.Parameters.AddWithValue("descripcion", campaña.Descripcion);
                 cmd.Parameters.AddWithValue("precio", campaña.Precio);
                 cmd.Parameters.AddWithValue("f_inicio", f_inicio);
                 cmd.Parameters.AddWithValue("f_fin", f_fin);
@@ -2889,7 +2889,7 @@ namespace WindowsFormsApplication1.clases
                 string f_ini = campaña.Fecha_inicio.ToString("yyyy/MM/dd").Replace('-', '/');
                 string f_fin = campaña.Fecha_fin.ToString("yyyy/MM/dd").Replace('-', '/');
                 con.Open();
-                SqlCommand cmd = new SqlCommand("UPDATE SET nombre = @nombre, descripcion = @descripcion, precio = @precio, f_inicio = @f_inicio, f_fin = @f_fin, id_cliente = @id_cliente, id_especificacion = @id_especificacion, lider = @lider" +
+                SqlCommand cmd = new SqlCommand("UPDATE SET nombre = @nombre, descripcion = @descripcion, precio = @precio, f_inicio = @f_ini, f_fin = @f_fin, id_cliente = @id_ciente" +
                     " WHERE id_campaña = @id_campaña", con);
                 cmd.Parameters.AddWithValue("id_campaña", campaña.IdCampaña);
                 cmd.Parameters.AddWithValue("nombre", campaña.Nombre);
