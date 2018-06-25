@@ -291,7 +291,7 @@ namespace WindowsFormsApplication1
             lblPrecio.Text = campaña.Precio.ToString();
             lblFI.Text = campaña.Fecha_inicio.ToLongDateString();
             lblFF.Text = campaña.Fecha_fin.ToLongDateString();
-            rtbDesc.Text = campaña.Descripion;
+            rtbDesc.Text = campaña.Descripcion;
 
 
 
