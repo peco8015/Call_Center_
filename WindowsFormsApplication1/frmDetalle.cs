@@ -157,7 +157,7 @@ namespace WindowsFormsApplication1
         {
             try
             {
-                frmDatos frmDato;
+               // frmDatos frmDato;
                 int dni = conectar.dniEmpleado(Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["Id"].Value.ToString()));
                 /*frmDato = new frmDatos(this, dni, "Datos Empleado");
                 frmDato.Show();*/
@@ -267,7 +267,10 @@ namespace WindowsFormsApplication1
 
             llenarCharts(DateTime.Today, tcDatos.SelectedTab.Name);
             if (tcDatos.TabPages.Count >= 2)     // Si son 2 existe la tpRendimiento
-                llenarDtRendimiento();
+                if (tcDatos.TabPages[1].Text != "Historial Campañas")
+                {
+                    llenarDtRendimiento();
+                }
         }
 
         private void llenarCharts(DateTime fecha, string filtro)
@@ -502,5 +505,24 @@ namespace WindowsFormsApplication1
 
         #endregion
 
+        private void dgvTabla_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tabCampañaDeEmpleado_Click(object sender, EventArgs e)
+        {
+            
+
+            DataTable dt = new DataTable();
+            dt = conectar.misCampañas(empleado.Id_empleado);
+
+            dgvTableEmpl.DataSource = dt;
+
+           
+           
+
+
+        }
     }
 }

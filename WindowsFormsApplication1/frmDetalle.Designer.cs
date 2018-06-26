@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
@@ -45,6 +45,7 @@
             System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint8 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
             System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
@@ -88,6 +89,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pnlInformacion = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
+            this.tabCampañaDeEmpleado = new System.Windows.Forms.TabPage();
+            this.dgvTableEmpl = new System.Windows.Forms.DataGridView();
             this.pnlEstadisticas.SuspendLayout();
             this.tcDatos.SuspendLayout();
             this.tpRendimiento.SuspendLayout();
@@ -97,6 +100,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cPorcentajeVentas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cTiempos)).BeginInit();
             this.pnlInformacion.SuspendLayout();
+            this.tabCampañaDeEmpleado.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTableEmpl)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -333,6 +338,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcDatos.Controls.Add(this.tpRendimiento);
             this.tcDatos.Controls.Add(this.tpFechas);
+            this.tcDatos.Controls.Add(this.tabCampañaDeEmpleado);
             this.tcDatos.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tcDatos.Location = new System.Drawing.Point(23, 41);
             this.tcDatos.Name = "tcDatos";
@@ -421,12 +427,13 @@
             this.dgvTabla.Location = new System.Drawing.Point(13, 125);
             this.dgvTabla.Name = "dgvTabla";
             this.dgvTabla.ReadOnly = true;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvTabla.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvTabla.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvTabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTabla.Size = new System.Drawing.Size(795, 434);
             this.dgvTabla.TabIndex = 6;
             this.dgvTabla.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellClick);
+            this.dgvTabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellContentClick);
             // 
             // label14
             // 
@@ -631,6 +638,36 @@
             this.label20.TabIndex = 0;
             this.label20.Text = "Información";
             // 
+            // tabCampañaDeEmpleado
+            // 
+            this.tabCampañaDeEmpleado.Controls.Add(this.dgvTableEmpl);
+            this.tabCampañaDeEmpleado.Location = new System.Drawing.Point(4, 28);
+            this.tabCampañaDeEmpleado.Name = "tabCampañaDeEmpleado";
+            this.tabCampañaDeEmpleado.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCampañaDeEmpleado.Size = new System.Drawing.Size(822, 576);
+            this.tabCampañaDeEmpleado.TabIndex = 3;
+            this.tabCampañaDeEmpleado.Text = "Historial Campañas";
+            this.tabCampañaDeEmpleado.UseVisualStyleBackColor = true;
+            this.tabCampañaDeEmpleado.Click += new System.EventHandler(this.tabCampañaDeEmpleado_Click);
+            // 
+            // dgvTableEmpl
+            // 
+            this.dgvTableEmpl.AllowUserToAddRows = false;
+            this.dgvTableEmpl.AllowUserToDeleteRows = false;
+            this.dgvTableEmpl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvTableEmpl.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvTableEmpl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTableEmpl.Location = new System.Drawing.Point(14, 71);
+            this.dgvTableEmpl.Name = "dgvTableEmpl";
+            this.dgvTableEmpl.ReadOnly = true;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvTableEmpl.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvTableEmpl.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTableEmpl.Size = new System.Drawing.Size(795, 434);
+            this.dgvTableEmpl.TabIndex = 7;
+            // 
             // frmDetalle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -657,6 +694,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cTiempos)).EndInit();
             this.pnlInformacion.ResumeLayout(false);
             this.pnlInformacion.PerformLayout();
+            this.tabCampañaDeEmpleado.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTableEmpl)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -706,5 +745,7 @@
         private System.Windows.Forms.Label lbPromLlamadas;
         private System.Windows.Forms.Label lbPromDurLlamVent;
         private System.Windows.Forms.Label lbPromVentas;
+        private System.Windows.Forms.TabPage tabCampañaDeEmpleado;
+        private System.Windows.Forms.DataGridView dgvTableEmpl;
     }
 }
