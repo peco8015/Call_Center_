@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1.clases
         //@"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
         SqlConnection con;
-        string conx = @"Data Source=CLAUDIO\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
+        string conx = @"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
 
         public clsConexion()
@@ -2538,7 +2538,7 @@ namespace WindowsFormsApplication1.clases
                 usuario.Nombre = Convert.ToString(dt.Rows[0]["nombre"]);
                 usuario.Apellido = Convert.ToString(dt.Rows[0]["apellido"]);
                 usuario.Dni = Convert.ToInt32(dt.Rows[0]["dni"]);
-                usuario.FechaInicio = (DateTime)dt.Rows[0]["f_comienza"];
+                usuario.FechaInicio = (DateTime)dt.Rows[0]["f_inicio"];
                 usuario.Jefe = Convert.ToInt32(dt.Rows[0]["jefe"]);
                 usuario.Password = Convert.ToString(dt.Rows[0]["password"]);
                 usuario.FechaNaciemiento = (DateTime)(dt.Rows[0]["f_nacimiento"]);
@@ -3153,9 +3153,8 @@ namespace WindowsFormsApplication1.clases
 
         public DataTable rendimientoCampaña(int id)
         {
-            DataTable rendimientos= new DataTable();
-            DataTable miembros = new DataTable();
-
+            DataTable rendimientos = new DataTable();
+            DataTable miembros = new DataTable(); 
             miembros = miembros_de_campaña(id);
 
             rendimientos.Columns.Add("Id", typeof(int));
@@ -3169,7 +3168,7 @@ namespace WindowsFormsApplication1.clases
             float promEfectividad = 0;
             int tot = 0;
             foreach (DataRow dtRow in miembros.Rows)
-             {
+            {
                 int  idempleado =  Convert.ToInt32(dtRow.ItemArray[0]);
                 float[] cantLlamadas = LlamadasCampaña(idempleado, id);
                 float[] canVentas = VentasCampaña(idempleado, id);
@@ -3180,14 +3179,8 @@ namespace WindowsFormsApplication1.clases
                 tot = tot + 1;
                 promEfectividad = promEfectividad / tot;
                 rendimientos.Rows.Add(dtRow.ItemArray[0], dtRow.ItemArray[1], canVentas[0],efectividad, canVentas[1], cantLlamadas[1], promEfectividad);
-
                 
-
-             }
-           
-           
-
-
+            }
             return rendimientos;
         }
 
@@ -3266,7 +3259,7 @@ namespace WindowsFormsApplication1.clases
                 cliente.Contacto = Convert.ToString(dt.Rows[0]["Contacto"]);
                 cliente.Mail = Convert.ToString(dt.Rows[0]["Mail"]);
                 cliente.Telefono = Convert.ToInt32(dt.Rows[0]["Telefono"]);
-                cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilioLegal"]);
+                cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilio_legal"]);
                 return cliente;
             }
             catch (Exception e)
