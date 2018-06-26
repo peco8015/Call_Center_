@@ -217,12 +217,13 @@ namespace WindowsFormsApplication1
         private void btnAddEmpleados_Click(object sender, EventArgs e)
         {
             // ACTUALIZAR JEFE CAMPAÑA.
+            camp.IdCampaña = ((clsEmpleado)lbLider.SelectedItem).Id_empleado;
             List<int> empleados = new List<int>();
             foreach (clsEmpleado aux in lbLista.SelectedItems)
             {
                 empleados.Add(aux.Id_empleado);
             }
-            if (conectar.actualizar_campaña_empleados(camp.IdCampaña, empleados))
+            if (conectar.actualizar_campaña_empleados(camp.IdCampaña, empleados) && conectar.actualizar_campaña(camp))
                 this.Close();
             else
                 noInserto();

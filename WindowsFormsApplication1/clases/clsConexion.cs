@@ -2591,7 +2591,7 @@ namespace WindowsFormsApplication1.clases
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id_empleado, empleado.nombre +' '+ apellido as Empleado, dni as DNI, campaña.nombre as 'Campaña actual', f_inicio as 'Fecha de ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento " +
+                SqlCommand cmd = new SqlCommand("SELECT id_empleado, empleado.nombre +' '+ apellido as Empleado, dni as DNI, campaña.nombre as 'Campaña actual', empleado.f_inicio as 'Fecha de ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento " +
                     "FROM empleado JOIN campaña ON (empleado.id_campaña = campaña.id_campaña) WHERE jefe = 0", con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();

@@ -110,25 +110,25 @@ namespace WindowsFormsApplication1
         {
             try
             {
-                frmDetalle frmDetalleCliente;
+                frmDetalle frmDetalle;
                 frmDatos frmDato;
                 switch (dgvTabla.Columns[0].Name)//la tabla cambia,esto es para controlar q tabla esta visible al momento del click en la celda
                 {
                     case "id_empleado":
-                        frmDato = new frmDatos(this, Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()), "Datos Empleado");
-                        frmDato.Show();/*
-                        frmDetalleCliente = new frmDetalles("empleado", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()));
-                        frmDetalleCliente.Show();*/
+                        /*frmDato = new frmDatos(this, Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()), "Datos Empleado");
+                        frmDato.Show();*/
+                        frmDetalle = new frmDetalle("empleado", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()));
+                        frmDetalle.Show();
                         break;
 
                     case "id_cliente":
-                        frmDetalleCliente = new frmDetalle("cliente", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_cliente"].Value.ToString()));
-                        frmDetalleCliente.Show();
+                        frmDetalle = new frmDetalle("cliente", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_cliente"].Value.ToString()));
+                        frmDetalle.Show();
                         break;
 
                     case "id_campaña":
-                        frmDetalleCliente = new frmDetalle("campaña", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_campaña"].Value.ToString()));
-                        frmDetalleCliente.Show();
+                        frmDetalle = new frmDetalle("campaña", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_campaña"].Value.ToString()));
+                        frmDetalle.Show();
                         break;
                 }
             }
