@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1.clases
         //@"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
         SqlConnection con;
-        string conx = @"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
+        string conx = @"Data Source=CLAUDIO\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
 
         public clsConexion()
@@ -2538,7 +2538,8 @@ namespace WindowsFormsApplication1.clases
                 usuario.Nombre = Convert.ToString(dt.Rows[0]["nombre"]);
                 usuario.Apellido = Convert.ToString(dt.Rows[0]["apellido"]);
                 usuario.Dni = Convert.ToInt32(dt.Rows[0]["dni"]);
-                usuario.FechaInicio = (DateTime)dt.Rows[0]["f_inicio"];
+               // usuario.FechaInicio = (DateTime)dt.Rows[0]["f_inicio"];
+                usuario.FechaInicio = (DateTime)dt.Rows[0]["f_comienza"];
                 usuario.Jefe = Convert.ToInt32(dt.Rows[0]["jefe"]);
                 usuario.Password = Convert.ToString(dt.Rows[0]["password"]);
                 usuario.FechaNaciemiento = (DateTime)(dt.Rows[0]["f_nacimiento"]);
@@ -2813,6 +2814,70 @@ namespace WindowsFormsApplication1.clases
             {
                 con.Close();
             }
+        }
+
+        public DataTable historial_campañas(int id)
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT distinct c.nombre,c.id_campaña   FROM [Call_Center].[dbo].[llamada] a join [Call_Center].[dbo].[empleado] e on (a.id_empleado=e.id_empleado) join [Call_Center].[dbo].[campaña] c on(a.id_campaña =c.id_campaña) where e.id_empleado=@id", con);
+                cmd.Parameters.AddWithValue("id", id);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                return dt;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public DataTable misCampañas(int id)
+        {
+            DataTable rendimientos = new DataTable();
+            DataTable miembros = new DataTable();
+            miembros = historial_campañas(id);
+
+            rendimientos.Columns.Add("IdCampaña", typeof(int));
+            rendimientos.Columns.Add("Campaña", typeof(String));
+            rendimientos.Columns.Add("Ventas", typeof(float));
+            rendimientos.Columns.Add("Efectividad", typeof(string));
+            
+            
+            float promEfectividad = 0;
+            int tot = 0;
+           foreach (DataRow dtRow in miembros.Rows)
+            {
+               
+                 float[] cantLlamadas = LlamadasCampaña(id, Convert.ToInt32(dtRow.ItemArray[1]));
+                 float[] canVentas = VentasCampaña(id, Convert.ToInt32(dtRow.ItemArray[1]));
+
+                 float efectividad = Convert.ToInt32((canVentas[0] * 100) / cantLlamadas[0]);
+
+                 promEfectividad = promEfectividad + efectividad;
+                 tot = tot + 1;
+                if (tot > 0)
+                {
+                    promEfectividad = promEfectividad / tot;
+                }
+                else
+                {
+                    efectividad = 0;
+                }
+                string ef= efectividad.ToString() + "%";
+
+                 rendimientos.Rows.Add(dtRow.ItemArray[1], dtRow.ItemArray[0], canVentas[0], ef);
+                 
+               
+            }
+            return rendimientos;
         }
 
         #endregion
@@ -3177,7 +3242,14 @@ namespace WindowsFormsApplication1.clases
 
                 promEfectividad = promEfectividad + efectividad;
                 tot = tot + 1;
-                promEfectividad = promEfectividad / tot;
+                if (tot > 0)
+                {
+                    promEfectividad = promEfectividad / tot;
+                }
+                else
+                {
+                    promEfectividad = 0;
+                }
                 rendimientos.Rows.Add(dtRow.ItemArray[0], dtRow.ItemArray[1], canVentas[0],efectividad, canVentas[1], cantLlamadas[1], promEfectividad);
                 
             }
@@ -3259,7 +3331,8 @@ namespace WindowsFormsApplication1.clases
                 cliente.Contacto = Convert.ToString(dt.Rows[0]["Contacto"]);
                 cliente.Mail = Convert.ToString(dt.Rows[0]["Mail"]);
                 cliente.Telefono = Convert.ToInt32(dt.Rows[0]["Telefono"]);
-                cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilio_legal"]);
+                //cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilio_legal"]);
+                cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilioLegal"]);
                 return cliente;
             }
             catch (Exception e)

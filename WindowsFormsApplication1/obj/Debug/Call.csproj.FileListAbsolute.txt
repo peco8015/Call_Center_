@@ -129,11 +129,11 @@ C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.
 C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csproj.CoreCompileInputs.cache
 C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmDetalle.resources
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\bin\Debug\Resources\jefe.png
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
-D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csprojResolveAssemblyReference.cache
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmNuevo.resources
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmAusente.resources
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmDatos.resources
@@ -152,4 +152,3 @@ D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csproj.G
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csproj.CoreCompileInputs.cache
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
-C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmDetalle.resources
