@@ -152,3 +152,4 @@ D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csproj.G
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csproj.CoreCompileInputs.cache
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csprojResolveAssemblyReference.cache
