@@ -374,18 +374,20 @@ namespace WindowsFormsApplication1
         {
             try
             {
-                float[] canVentas = conectar.promedioVentasCamapaña(campaña.IdCampaña);
+                string[] canVentas = conectar.promedioVentasCamapaña(campaña.IdCampaña);
                 float[] canLlamadas = conectar.promedioLlamadasCamapaña(campaña.IdCampaña);
 
                 DataTable rendimientos = conectar.rendimientoCampaña(campaña.IdCampaña);
                 dgvTabla.DataSource = rendimientos;
 
-                float promEfectTotal = float.Parse(dgvTabla.Rows[dgvTabla.Rows.Count - 1].Cells["PromedioEfect"].Value.ToString());
+                //float promEfectTotal = float.Parse(dgvTabla.Rows[dgvTabla.Rows.Count - 1].Cells["PromedioEfect"].Value.ToString());
+
+                float promEfectTotal = Convert.ToInt32(canVentas[1]) * 100 / canLlamadas[0];
 
                 lbPromVentas.Text = promEfectTotal.ToString() + "%";
-                lbPromDurLlamVent.Text = Convert.ToString(canVentas[1]);
-                lbPromLlamadas.Text = Convert.ToString(canVentas[0]);
-                lbPromDurLlam.Text = Convert.ToString(canLlamadas[1]);
+                lbPromDurLlamVent.Text = Convert.ToString(canVentas[2]) + " min";
+                lbPromLlamadas.Text = Convert.ToString(canVentas[1]);
+                lbPromDurLlam.Text = canLlamadas[1].ToString("0.00") + " min";
 
                 dgvTabla.Columns["PromedioEfect"].Visible = false;
                 dgvTabla.Columns["Id"].Width = 25;
@@ -408,7 +410,7 @@ namespace WindowsFormsApplication1
                     }
 
 
-                    if ((float.Parse(row.Cells["Promedio Duracion llamadas Vendidas (min)"].Value.ToString())) > canVentas[1])
+                    if ((float.Parse(row.Cells["Promedio Duracion llamadas Vendidas (min)"].Value.ToString())) > 0)//canVentas[1])
                     {
                         row.Cells["Promedio Duracion llamadas Vendidas (min)"].Style.ForeColor = Color.Red;
                     }

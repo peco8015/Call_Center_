@@ -3176,11 +3176,12 @@ namespace WindowsFormsApplication1.clases
             }
         }        
 
-        public float[] promedioVentasCamapaña( int idcamp)
+        public string[] promedioVentasCamapaña( int idcamp)
         {
             try
             {
-                float[] cant = new float[2];
+                
+                string[] cant1 = new string[3];
                 con.Open();
                 SqlCommand cmd = new SqlCommand("select  llamada.duracion from llamada join empleado on(llamada.id_empleado = empleado.id_empleado) where llamada.id_campaña=@idcamp  and llamada.resultado='Vendido'", con);
             
@@ -3190,20 +3191,29 @@ namespace WindowsFormsApplication1.clases
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
-                cant[0] = dt.Rows.Count;
-                cant[1] = 0;
+                
+                TimeSpan timefirst = new TimeSpan(00, 00, 00);
+
                 foreach (DataRow dtRow in dt.Rows)
                 {
                     object cell = dtRow.ItemArray[0];
                     TimeSpan time = TimeSpan.Parse((cell).ToString());
-
-                    cant[1] = cant[1] + Convert.ToInt32(time.TotalMinutes);
+                    timefirst = timefirst + time;
+                    
+                    
 
                 }
-                cant[1] = cant[1] / cant[0];
+                
+                    
+                    cant1[0]=timefirst.ToString();//total tiempos de ventas
+                    cant1[1] = dt.Rows.Count.ToString();//total ventas
+                    float a =  timefirst.Minutes;
+                    float b=dt.Rows.Count;
+                    float prom = a / b;//promedio llamadas de ventas
+                     cant1[2] = prom.ToString("0.00");
 
-
-                return cant;
+                //return cant;
+                return cant1;
             }
             catch (Exception e)
             {
