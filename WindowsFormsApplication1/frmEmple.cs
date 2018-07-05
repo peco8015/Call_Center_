@@ -66,7 +66,7 @@ namespace WindowsFormsApplication1
             pnlProgramada.Visible = false;
             btnCortar.Enabled = false;
             user = conectar.datos_empleado(user.Dni);//obtengo datos del empleado
-            jornada = conectar.buscar_jornada(user.Id_empleado, fechaHoy);
+            jornada = conectar.buscar_jornada(user.Id_empleado, user.Id_campaña, fechaHoy);
             if (jornada == null)
                 guardarJornada();
 

@@ -115,10 +115,10 @@ namespace WindowsFormsApplication1
                 switch (dgvTabla.Columns[0].Name)//la tabla cambia,esto es para controlar q tabla esta visible al momento del click en la celda
                 {
                     case "id_empleado":
-                        /*frmDato = new frmDatos(this, Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()), "Datos Empleado");
-                        frmDato.Show();*/
+                        frmDato = new frmDatos(this, Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()), "Datos Empleado");
+                        frmDato.Show();/*
                         frmDetalle = new frmDetalle("empleado", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()));
-                        frmDetalle.Show();
+                        frmDetalle.Show();*/
                         break;
 
                     case "id_cliente":

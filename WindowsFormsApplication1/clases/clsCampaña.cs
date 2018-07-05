@@ -13,10 +13,10 @@ namespace WindowsFormsApplication1.clases
         string descripion;
         int  precio; // double???
         DateTime fecha_inicio;
-        DateTime fecha_fin;     // Null o 0 lógico en DateTime es el MinValue
+        DateTime fecha_fin; // Null o 0 lógico en DateTime es el MinValue
         int idCliente;
         string nombreCliente;
-        int lider; // ??
+        int lider;
 
         public int IdCampaña
         {

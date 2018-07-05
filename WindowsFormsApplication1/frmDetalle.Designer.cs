@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
@@ -45,7 +45,7 @@
             System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint8 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
             System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
@@ -86,11 +86,20 @@
             this.cVentasCampaña = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cPorcentajeVentas = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cTiempos = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tpCampañaDeEmpleado = new System.Windows.Forms.TabPage();
+            this.dgvTableEmpl = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlInformacion = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
-            this.tabCampañaDeEmpleado = new System.Windows.Forms.TabPage();
-            this.dgvTableEmpl = new System.Windows.Forms.DataGridView();
+            this.gb01 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.lblInfo04 = new System.Windows.Forms.Label();
+            this.lblInfo03 = new System.Windows.Forms.Label();
+            this.lblInfo02 = new System.Windows.Forms.Label();
+            this.lblInfo01 = new System.Windows.Forms.Label();
             this.pnlEstadisticas.SuspendLayout();
             this.tcDatos.SuspendLayout();
             this.tpRendimiento.SuspendLayout();
@@ -99,9 +108,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.cVentasCampaña)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cPorcentajeVentas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cTiempos)).BeginInit();
-            this.pnlInformacion.SuspendLayout();
-            this.tabCampañaDeEmpleado.SuspendLayout();
+            this.tpCampañaDeEmpleado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTableEmpl)).BeginInit();
+            this.pnlInformacion.SuspendLayout();
+            this.gb01.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -338,7 +348,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcDatos.Controls.Add(this.tpRendimiento);
             this.tcDatos.Controls.Add(this.tpFechas);
-            this.tcDatos.Controls.Add(this.tabCampañaDeEmpleado);
+            this.tcDatos.Controls.Add(this.tpCampañaDeEmpleado);
             this.tcDatos.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tcDatos.Location = new System.Drawing.Point(23, 41);
             this.tcDatos.Name = "tcDatos";
@@ -427,8 +437,8 @@
             this.dgvTabla.Location = new System.Drawing.Point(13, 125);
             this.dgvTabla.Name = "dgvTabla";
             this.dgvTabla.ReadOnly = true;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvTabla.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvTabla.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvTabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTabla.Size = new System.Drawing.Size(795, 434);
             this.dgvTabla.TabIndex = 6;
@@ -464,6 +474,7 @@
             // 
             // tpFechas
             // 
+            this.tpFechas.Controls.Add(this.gb01);
             this.tpFechas.Controls.Add(this.label15);
             this.tpFechas.Controls.Add(this.cbFiltroFecha);
             this.tpFechas.Controls.Add(this.cVentasCampaña);
@@ -585,6 +596,36 @@
             title6.Text = "Detalle de Tiempos";
             this.cTiempos.Titles.Add(title6);
             // 
+            // tpCampañaDeEmpleado
+            // 
+            this.tpCampañaDeEmpleado.Controls.Add(this.dgvTableEmpl);
+            this.tpCampañaDeEmpleado.Location = new System.Drawing.Point(4, 28);
+            this.tpCampañaDeEmpleado.Name = "tpCampañaDeEmpleado";
+            this.tpCampañaDeEmpleado.Padding = new System.Windows.Forms.Padding(3);
+            this.tpCampañaDeEmpleado.Size = new System.Drawing.Size(822, 576);
+            this.tpCampañaDeEmpleado.TabIndex = 3;
+            this.tpCampañaDeEmpleado.Text = "Historial Campañas";
+            this.tpCampañaDeEmpleado.UseVisualStyleBackColor = true;
+            this.tpCampañaDeEmpleado.Click += new System.EventHandler(this.tabCampañaDeEmpleado_Click);
+            // 
+            // dgvTableEmpl
+            // 
+            this.dgvTableEmpl.AllowUserToAddRows = false;
+            this.dgvTableEmpl.AllowUserToDeleteRows = false;
+            this.dgvTableEmpl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvTableEmpl.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvTableEmpl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTableEmpl.Location = new System.Drawing.Point(14, 71);
+            this.dgvTableEmpl.Name = "dgvTableEmpl";
+            this.dgvTableEmpl.ReadOnly = true;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvTableEmpl.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvTableEmpl.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTableEmpl.Size = new System.Drawing.Size(795, 434);
+            this.dgvTableEmpl.TabIndex = 7;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -638,35 +679,104 @@
             this.label20.TabIndex = 0;
             this.label20.Text = "Información";
             // 
-            // tabCampañaDeEmpleado
+            // gb01
             // 
-            this.tabCampañaDeEmpleado.Controls.Add(this.dgvTableEmpl);
-            this.tabCampañaDeEmpleado.Location = new System.Drawing.Point(4, 28);
-            this.tabCampañaDeEmpleado.Name = "tabCampañaDeEmpleado";
-            this.tabCampañaDeEmpleado.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCampañaDeEmpleado.Size = new System.Drawing.Size(822, 576);
-            this.tabCampañaDeEmpleado.TabIndex = 3;
-            this.tabCampañaDeEmpleado.Text = "Historial Campañas";
-            this.tabCampañaDeEmpleado.UseVisualStyleBackColor = true;
-            this.tabCampañaDeEmpleado.Click += new System.EventHandler(this.tabCampañaDeEmpleado_Click);
+            this.gb01.BackColor = System.Drawing.Color.Transparent;
+            this.gb01.Controls.Add(this.lblInfo04);
+            this.gb01.Controls.Add(this.lblInfo03);
+            this.gb01.Controls.Add(this.lblInfo02);
+            this.gb01.Controls.Add(this.lblInfo01);
+            this.gb01.Controls.Add(this.label21);
+            this.gb01.Controls.Add(this.label19);
+            this.gb01.Controls.Add(this.label18);
+            this.gb01.Controls.Add(this.label17);
+            this.gb01.Font = new System.Drawing.Font("Microsoft YaHei Light", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gb01.Location = new System.Drawing.Point(12, 57);
+            this.gb01.Name = "gb01";
+            this.gb01.Size = new System.Drawing.Size(305, 219);
+            this.gb01.TabIndex = 22;
+            this.gb01.TabStop = false;
+            this.gb01.Text = "Números";
             // 
-            // dgvTableEmpl
+            // label17
             // 
-            this.dgvTableEmpl.AllowUserToAddRows = false;
-            this.dgvTableEmpl.AllowUserToDeleteRows = false;
-            this.dgvTableEmpl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvTableEmpl.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvTableEmpl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTableEmpl.Location = new System.Drawing.Point(14, 71);
-            this.dgvTableEmpl.Name = "dgvTableEmpl";
-            this.dgvTableEmpl.ReadOnly = true;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvTableEmpl.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvTableEmpl.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTableEmpl.Size = new System.Drawing.Size(795, 434);
-            this.dgvTableEmpl.TabIndex = 7;
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(90, 41);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(101, 20);
+            this.label17.TabIndex = 4;
+            this.label17.Text = "Cant Llamadas:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(5, 80);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(186, 20);
+            this.label18.TabIndex = 5;
+            this.label18.Text = "Cant de Contactos llamados:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(40, 119);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(151, 20);
+            this.label19.TabIndex = 6;
+            this.label19.Text = "Cant Ventas realizadas:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(59, 158);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(132, 20);
+            this.label21.TabIndex = 7;
+            this.label21.Text = "Tiempo productivo:";
+            // 
+            // lblInfo04
+            // 
+            this.lblInfo04.AutoSize = true;
+            this.lblInfo04.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo04.Location = new System.Drawing.Point(222, 158);
+            this.lblInfo04.Name = "lblInfo04";
+            this.lblInfo04.Size = new System.Drawing.Size(14, 20);
+            this.lblInfo04.TabIndex = 11;
+            this.lblInfo04.Text = "1";
+            // 
+            // lblInfo03
+            // 
+            this.lblInfo03.AutoSize = true;
+            this.lblInfo03.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo03.Location = new System.Drawing.Point(222, 119);
+            this.lblInfo03.Name = "lblInfo03";
+            this.lblInfo03.Size = new System.Drawing.Size(14, 20);
+            this.lblInfo03.TabIndex = 10;
+            this.lblInfo03.Text = "1";
+            // 
+            // lblInfo02
+            // 
+            this.lblInfo02.AutoSize = true;
+            this.lblInfo02.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo02.Location = new System.Drawing.Point(222, 80);
+            this.lblInfo02.Name = "lblInfo02";
+            this.lblInfo02.Size = new System.Drawing.Size(14, 20);
+            this.lblInfo02.TabIndex = 9;
+            this.lblInfo02.Text = "1";
+            // 
+            // lblInfo01
+            // 
+            this.lblInfo01.AutoSize = true;
+            this.lblInfo01.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo01.Location = new System.Drawing.Point(222, 41);
+            this.lblInfo01.Name = "lblInfo01";
+            this.lblInfo01.Size = new System.Drawing.Size(14, 20);
+            this.lblInfo01.TabIndex = 8;
+            this.lblInfo01.Text = "1";
             // 
             // frmDetalle
             // 
@@ -692,10 +802,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.cVentasCampaña)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cPorcentajeVentas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cTiempos)).EndInit();
+            this.tpCampañaDeEmpleado.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTableEmpl)).EndInit();
             this.pnlInformacion.ResumeLayout(false);
             this.pnlInformacion.PerformLayout();
-            this.tabCampañaDeEmpleado.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTableEmpl)).EndInit();
+            this.gb01.ResumeLayout(false);
+            this.gb01.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -745,7 +857,16 @@
         private System.Windows.Forms.Label lbPromLlamadas;
         private System.Windows.Forms.Label lbPromDurLlamVent;
         private System.Windows.Forms.Label lbPromVentas;
-        private System.Windows.Forms.TabPage tabCampañaDeEmpleado;
+        private System.Windows.Forms.TabPage tpCampañaDeEmpleado;
         private System.Windows.Forms.DataGridView dgvTableEmpl;
+        private System.Windows.Forms.GroupBox gb01;
+        private System.Windows.Forms.Label lblInfo04;
+        private System.Windows.Forms.Label lblInfo03;
+        private System.Windows.Forms.Label lblInfo02;
+        private System.Windows.Forms.Label lblInfo01;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
     }
 }

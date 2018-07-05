@@ -15,8 +15,6 @@ namespace WindowsFormsApplication1
         clsEmpleado empleado;
         clsCliente cliente;
         clsCampaña campaña;
-        List<clsEstadisticas> estadisticas;
-        List<clsJornada> jornadas;
         string clase;
         int identificador;
 
@@ -44,6 +42,7 @@ namespace WindowsFormsApplication1
                 case "campaña":
                     campaña = conectar.datos_campaña(identificador);
                     cliente = conectar.datos_cliente(campaña.IdCliente);
+                    tcDatos.TabPages.RemoveByKey("tpCampañaDeEmpleado");
                     break;
             }
             setearForm();
@@ -110,6 +109,10 @@ namespace WindowsFormsApplication1
                 case "tpRendimiento":
                     llenarDtRendimiento();
                     break;
+
+                case "tpCampañaDeEmpleado":
+                    rendimientoDeEmpleado();
+                    break;
             }
         }
 
@@ -130,8 +133,8 @@ namespace WindowsFormsApplication1
             switch (cbFiltroFecha.SelectedItem.ToString())
             {
                 case "Hoy":
-                    //fechaAUX = DateTime.Today;
-                    fechaAUX = Convert.ToDateTime("2018-04-17");
+                    fechaAUX = DateTime.Today;
+                    //fechaAUX = Convert.ToDateTime("2018-04-17");
                     break;
 
                 case "Semana":
@@ -149,7 +152,7 @@ namespace WindowsFormsApplication1
                     fechaAUX = new DateTime(DateTime.Today.Year, 1, 1);
                     break;
             }
-            llenarCharts(fechaAUX, cbFiltroFecha.SelectedItem.ToString());
+            mostrarNumeros(fechaAUX, cbFiltroFecha.SelectedItem.ToString());
         }
 
 
@@ -208,10 +211,10 @@ namespace WindowsFormsApplication1
                     label3.Text = "Nombre";
                     label4.Text = "CUIL";
                     label5.Text = "Domicilio";
-                    gbContacto.Visible = true;
                     label6.Text = "Nombre";
                     label7.Text = "Mail";
                     label8.Text = "Telefono";
+                    gbContacto.Visible = true;
                     label9.Visible = false;
                     label10.Visible = false;
                     label11.Visible = false;
@@ -234,13 +237,13 @@ namespace WindowsFormsApplication1
                     label3.Text = "Campaña";
                     label4.Text = "Precio";
                     label5.Text = "Cliente";
-                    gbContacto.Visible = true;
                     label6.Text = "Nombre";
                     label7.Text = "Telefono";
                     label8.Text = "Mail";
                     label9.Text = "Fecha de inicio";
                     label10.Text = "Fecha de fin";
                     label11.Text = "Descripción";
+                    gbContacto.Visible = true;
                     // especificaciones?
 
                     // Datos de obj
@@ -265,7 +268,7 @@ namespace WindowsFormsApplication1
             dtp01.Enabled = false;
             dtp02.Enabled = false;
 
-            llenarCharts(DateTime.Today, tcDatos.SelectedTab.Name);
+            mostrarNumeros(DateTime.Today, tcDatos.SelectedTab.Name);
             if (tcDatos.TabPages.Count >= 2)     // Si son 2 existe la tpRendimiento
                 if (tcDatos.TabPages[1].Text != "Historial Campañas")
                 {
@@ -273,7 +276,37 @@ namespace WindowsFormsApplication1
                 }
         }
 
-        private void llenarCharts(DateTime fecha, string filtro)
+        private void mostrarNumeros(DateTime fecha, string filtro)
+        {
+            try
+            {
+                List<clsEstadisticas> estadisticas = new List<clsEstadisticas>();
+                List<clsEstadisticas> estadisticasCampañas = new List<clsEstadisticas>();
+                List<clsJornada> jornadas = new List<clsJornada>();
+                switch (clase)
+                {
+                    case "empleado":
+
+                        break;
+
+                    case "cliente":
+                        estadisticas = conectar.numeros_cliente(cliente.Id, filtro, fecha);
+                        estadisticasCampañas = conectar.campañas_cliente(cliente.Id, filtro, fecha);
+                        jornadas = conectar.jornadas_cliente(cliente.Id, filtro, fecha);
+                        break;
+
+                    case "campaña":
+                        break;
+                }
+                llenarCharts(estadisticas, estadisticasCampañas, jornadas);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void llenarCharts(List<clsEstadisticas> estadisticas, List<clsEstadisticas> est_campañas, List<clsJornada> jornadas)
         {
             TimeSpan t_atendiendo = TimeSpan.Zero;
             TimeSpan t_descanso = TimeSpan.Zero;
@@ -287,84 +320,72 @@ namespace WindowsFormsApplication1
             TimeSpan t_almuerzo = TimeSpan.Zero;
             try
             {
-                switch (clase)
+                if (estadisticas != null)
                 {
-                    case "empleado":
-                        break;
+                    float total_ventas = estadisticas.Find(x => x.Clave == "Cant ventas").Valor;
+                    float total_llamadas = estadisticas.Find(x => x.Clave == "Cant llamadas").Valor;
 
-                    case "cliente":
-                        estadisticas = conectar.numeros_cliente(cliente.Id, filtro, fecha);
-                        if (estadisticas != null)
-                        {
-                            float total_ventas = estadisticas.Find(x => x.Clave == "Cant ventas").Valor;
-                            float total_llamadas = estadisticas.Find(x => x.Clave == "Cant llamadas").Valor;
-
-                            //cPorcentajeVentas.Series["Ventas"].IsValueShownAsLabel = true;
-                            cPorcentajeVentas.Series["Ventas"].Label = "#PERCENT";
-                            cPorcentajeVentas.Series["Ventas"].LegendText = "#VALX";
-                            cPorcentajeVentas.Series["Ventas"].Points.AddXY("Ventas", total_ventas);
-                            cPorcentajeVentas.Series["Ventas"].Points.AddXY("Llamadas", total_llamadas);
-                        }
-                        else
-                            MessageBox.Show("No es posible mostrar el PORCENTAJE DE VENTAS, ya que no se encuentran disponibles.", "Notificación de datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        estadisticas = conectar.campañas_cliente(cliente.Id, filtro, fecha);
-                        if (estadisticas != null)
-                        {
-                            if (estadisticas.Count == 1)
-                                cVentasCampaña.Series["Campañas"].ChartType = SeriesChartType.Column;
-                            foreach (clsEstadisticas est in estadisticas)
-                            {
-                                cVentasCampaña.Series["Campañas"].Points.AddXY(est.Clave,est.Valor);
-                            }
-                        }
-                        else
-                            MessageBox.Show("No es posible mostrar las VENTAS POR CAMPAÑA, ya que no se encuentran disponibles.", "Notificación de datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        jornadas = conectar.jornadas_cliente(cliente.Id, filtro, fecha);
-                        if (jornadas != null)
-                        {
-                            foreach (clsJornada j in jornadas)
-                            {
-                                // Tiempos productivos
-                                t_atendiendo = t_atendiendo.Add(j.T_atendiendo);
-                                t_capacitacion = t_capacitacion.Add(j.T_capacitacion);
-                                t_reunion = t_reunion.Add(j.T_reunion);
-                                t_llenadoFormularios = t_llenadoFormularios.Add(j.T_llenadoFormularios);
-                                // Tiempos no productivos
-                                t_descanso = t_descanso.Add(j.T_descanso);
-                                t_sinContactos = t_sinContactos.Add(j.T_sinContactos);
-                                t_sinCampaña = t_sinCampaña.Add(j.T_sinCampaña);
-                                t_inactivo = t_inactivo.Add(j.T_inactivo);
-                                t_baño = t_baño.Add(j.T_baño);
-                                t_almuerzo = t_almuerzo.Add(j.T_almuerzo);
-                            }
-                            cTiempos.ChartAreas["ChartArea1"].AxisX.LabelStyle.Interval = 1;
-                            // Serie Productivo
-                            cTiempos.Series["Productivo"].Points.AddXY("Atendiendo", t_atendiendo.TotalMinutes);
-                            cTiempos.Series["Productivo"].Points.AddXY("Capacitación", t_capacitacion.TotalMinutes);
-                            cTiempos.Series["Productivo"].Points.AddXY("Reunión", t_reunion.TotalMinutes);
-                            cTiempos.Series["Productivo"].Points.AddXY("Formularios", t_llenadoFormularios.TotalMinutes);
-                            // Serie No productiva
-                            cTiempos.Series["Productivo"].Points.AddXY("Descanso", t_descanso.TotalMinutes);
-                            cTiempos.Series["Productivo"].Points.AddXY("Inactivo", t_inactivo.TotalMinutes);
-                            cTiempos.Series["Productivo"].Points.AddXY("Baño", t_baño.TotalMinutes);
-                            cTiempos.Series["Productivo"].Points.AddXY("Almuerzo", t_almuerzo.TotalMinutes);
-                            cTiempos.Series["Productivo"].Points.AddXY("Sin Contactos", t_sinContactos.TotalMinutes);
-                            cTiempos.Series["Productivo"].Points.AddXY("Sin Campaña", t_sinCampaña.TotalMinutes);
-                            for (int i = 4; i < cTiempos.Series["Productivo"].Points.Count; i++)
-                            {
-                                cTiempos.Series["Productivo"].Points[i].Color = Color.LimeGreen; //pale
-                            }
-
-                        }
-                        break;
-
-                    case "campaña":
-                        break;
+                    //cPorcentajeVentas.Series["Ventas"].IsValueShownAsLabel = true;
+                    cPorcentajeVentas.Series["Ventas"].Label = "#PERCENT";
+                    cPorcentajeVentas.Series["Ventas"].LegendText = "#VALX";
+                    cPorcentajeVentas.Series["Ventas"].Points.AddXY("Ventas", total_ventas);
+                    cPorcentajeVentas.Series["Ventas"].Points.AddXY("Llamadas", total_llamadas);
                 }
+                //else
+                    //lblInfo01.Text
+                
+                if (est_campañas != null)
+                {
+                    if (est_campañas.Count == 1)
+                        cVentasCampaña.Series["Campañas"].ChartType = SeriesChartType.Column;
+                    foreach (clsEstadisticas est in est_campañas)
+                    {
+                        cVentasCampaña.Series["Campañas"].Points.AddXY(est.Clave, est.Valor);
+                    }
+                }
+                //else
+                //lblInfo01.Text
+
+                if (jornadas != null)
+                {
+                    foreach (clsJornada j in jornadas)
+                    {
+                        // Tiempos productivos
+                        t_atendiendo = t_atendiendo.Add(j.T_atendiendo);
+                        t_capacitacion = t_capacitacion.Add(j.T_capacitacion);
+                        t_reunion = t_reunion.Add(j.T_reunion);
+                        t_llenadoFormularios = t_llenadoFormularios.Add(j.T_llenadoFormularios);
+                        // Tiempos no productivos
+                        t_descanso = t_descanso.Add(j.T_descanso);
+                        t_sinContactos = t_sinContactos.Add(j.T_sinContactos);
+                        t_sinCampaña = t_sinCampaña.Add(j.T_sinCampaña);
+                        t_inactivo = t_inactivo.Add(j.T_inactivo);
+                        t_baño = t_baño.Add(j.T_baño);
+                        t_almuerzo = t_almuerzo.Add(j.T_almuerzo);
+                    }
+                    cTiempos.ChartAreas["ChartArea1"].AxisX.LabelStyle.Interval = 1;
+                    // Serie Productivo
+                    cTiempos.Series["Productivo"].Points.AddXY("Atendiendo", t_atendiendo.TotalMinutes);
+                    cTiempos.Series["Productivo"].Points.AddXY("Capacitación", t_capacitacion.TotalMinutes);
+                    cTiempos.Series["Productivo"].Points.AddXY("Reunión", t_reunion.TotalMinutes);
+                    cTiempos.Series["Productivo"].Points.AddXY("Formularios", t_llenadoFormularios.TotalMinutes);
+                    // Serie No productiva
+                    cTiempos.Series["Productivo"].Points.AddXY("Descanso", t_descanso.TotalMinutes);
+                    cTiempos.Series["Productivo"].Points.AddXY("Inactivo", t_inactivo.TotalMinutes);
+                    cTiempos.Series["Productivo"].Points.AddXY("Baño", t_baño.TotalMinutes);
+                    cTiempos.Series["Productivo"].Points.AddXY("Almuerzo", t_almuerzo.TotalMinutes);
+                    cTiempos.Series["Productivo"].Points.AddXY("Sin Contactos", t_sinContactos.TotalMinutes);
+                    cTiempos.Series["Productivo"].Points.AddXY("Sin Campaña", t_sinCampaña.TotalMinutes);
+                    for (int i = 4; i < cTiempos.Series["Productivo"].Points.Count; i++)
+                    {
+                        cTiempos.Series["Productivo"].Points[i].Color = Color.LimeGreen; //pale
+                    }
+
+                }
+                //else
+                //lblInfo01.Text
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -376,17 +397,14 @@ namespace WindowsFormsApplication1
             {
                 float[] canVentas = conectar.promedioVentasCamapaña(campaña.IdCampaña);
                 float[] canLlamadas = conectar.promedioLlamadasCamapaña(campaña.IdCampaña);
-
                 DataTable rendimientos = conectar.rendimientoCampaña(campaña.IdCampaña);
                 dgvTabla.DataSource = rendimientos;
-
                 float promEfectTotal = float.Parse(dgvTabla.Rows[dgvTabla.Rows.Count - 1].Cells["PromedioEfect"].Value.ToString());
 
                 lbPromVentas.Text = promEfectTotal.ToString() + "%";
                 lbPromDurLlamVent.Text = Convert.ToString(canVentas[1]);
                 lbPromLlamadas.Text = Convert.ToString(canVentas[0]);
                 lbPromDurLlam.Text = Convert.ToString(canLlamadas[1]);
-
                 dgvTabla.Columns["PromedioEfect"].Visible = false;
                 dgvTabla.Columns["Id"].Width = 25;
                 dgvTabla.Columns["Ventas"].Width = 75;
@@ -406,8 +424,7 @@ namespace WindowsFormsApplication1
                         row.Cells["Efectividad"].Value = (row.Cells["Efectividad"].Value).ToString() + "%";
                         row.Cells["Efectividad"].Style.ForeColor = Color.Red;
                     }
-
-
+                    
                     if ((float.Parse(row.Cells["Promedio Duracion llamadas Vendidas (min)"].Value.ToString())) > canVentas[1])
                     {
                         row.Cells["Promedio Duracion llamadas Vendidas (min)"].Style.ForeColor = Color.Red;
@@ -431,6 +448,13 @@ namespace WindowsFormsApplication1
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public void rendimientoDeEmpleado()
+        {
+            DataTable dt = new DataTable();
+            dt = conectar.misCampañas(empleado.Id_empleado);
+            dgvTableEmpl.DataSource = dt;
         }
         
         private void checkCampos()
@@ -512,17 +536,10 @@ namespace WindowsFormsApplication1
 
         private void tabCampañaDeEmpleado_Click(object sender, EventArgs e)
         {
-            
-
             DataTable dt = new DataTable();
             dt = conectar.misCampañas(empleado.Id_empleado);
-
             dgvTableEmpl.DataSource = dt;
-
-           
-           
-
-
         }
+        
     }
 }

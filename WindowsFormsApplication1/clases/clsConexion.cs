@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1.clases
         //@"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
         SqlConnection con;
-        string conx = @"Data Source=CLAUDIO\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
+        string conx = @"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
 
         public clsConexion()
@@ -2538,8 +2538,8 @@ namespace WindowsFormsApplication1.clases
                 usuario.Nombre = Convert.ToString(dt.Rows[0]["nombre"]);
                 usuario.Apellido = Convert.ToString(dt.Rows[0]["apellido"]);
                 usuario.Dni = Convert.ToInt32(dt.Rows[0]["dni"]);
-               // usuario.FechaInicio = (DateTime)dt.Rows[0]["f_inicio"];
-                usuario.FechaInicio = (DateTime)dt.Rows[0]["f_comienza"];
+                usuario.FechaInicio = (DateTime)dt.Rows[0]["f_inicio"];
+                //usuario.FechaInicio = (DateTime)dt.Rows[0]["f_comienza"];
                 usuario.Jefe = Convert.ToInt32(dt.Rows[0]["jefe"]);
                 usuario.Password = Convert.ToString(dt.Rows[0]["password"]);
                 usuario.FechaNaciemiento = (DateTime)(dt.Rows[0]["f_nacimiento"]);
@@ -2615,7 +2615,7 @@ namespace WindowsFormsApplication1.clases
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id_empleado, empleado.nombre +' '+ apellido as Empleado, dni as DNI, campaña.nombre as 'Campaña actual', f_inicio as 'Fecha de ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento " +
+                SqlCommand cmd = new SqlCommand("SELECT id_empleado, empleado.nombre +' '+ apellido as Empleado, dni as DNI, campaña.nombre as 'Campaña actual', empleado.f_inicio as 'Fecha de ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento " +
                     "FROM empleado JOIN campaña ON (empleado.id_campaña = campaña.id_campaña) WHERE jefe = 1", con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -2854,29 +2854,21 @@ namespace WindowsFormsApplication1.clases
             float promEfectividad = 0;
             int tot = 0;
            foreach (DataRow dtRow in miembros.Rows)
-            {
-               
-                 float[] cantLlamadas = LlamadasCampaña(id, Convert.ToInt32(dtRow.ItemArray[1]));
-                 float[] canVentas = VentasCampaña(id, Convert.ToInt32(dtRow.ItemArray[1]));
-
-                 float efectividad = Convert.ToInt32((canVentas[0] * 100) / cantLlamadas[0]);
-
-                 promEfectividad = promEfectividad + efectividad;
-                 tot = tot + 1;
-                if (tot > 0)
-                {
+           {
+                float[] cantLlamadas = LlamadasCampaña(id, Convert.ToInt32(dtRow.ItemArray[1]));
+                float[] canVentas = VentasCampaña(id, Convert.ToInt32(dtRow.ItemArray[1]));
+                float efectividad = Convert.ToInt32((canVentas[0] * 100) / cantLlamadas[0]);
+                promEfectividad = promEfectividad + efectividad;
+                tot = tot + 1;
+                if (tot > 0) {
                     promEfectividad = promEfectividad / tot;
                 }
-                else
-                {
+                else {
                     efectividad = 0;
                 }
-                string ef= efectividad.ToString() + "%";
-
-                 rendimientos.Rows.Add(dtRow.ItemArray[1], dtRow.ItemArray[0], canVentas[0], ef);
-                 
-               
-            }
+                string ef = efectividad.ToString() + "%";
+                rendimientos.Rows.Add(dtRow.ItemArray[1], dtRow.ItemArray[0], canVentas[0], ef);
+           }
             return rendimientos;
         }
 
@@ -2903,6 +2895,7 @@ namespace WindowsFormsApplication1.clases
                 campaña.Fecha_fin = (dt.Rows[0]["F_fin"] != null)? Convert.ToDateTime(dt.Rows[0]["F_fin"]) : DateTime.MinValue;
                 campaña.IdCliente = Convert.ToInt32(dt.Rows[0]["id_cliente"]);
                 campaña.NombreCliente = Convert.ToString(dt.Rows[0]["Nombre1"]);
+                campaña.Lider = Convert.ToInt32(dt.Rows[0]["Lider"]);
                 return campaña;
             }
             catch (Exception e)
@@ -2931,7 +2924,11 @@ namespace WindowsFormsApplication1.clases
                 campaña.Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
                 campaña.Descripcion = Convert.ToString(dt.Rows[0]["Descripcion"]);
                 campaña.Precio = Convert.ToInt32(dt.Rows[0]["Precio"]);
+                campaña.Fecha_inicio = Convert.ToDateTime(dt.Rows[0]["f_inicio"]);
+                campaña.Fecha_fin = Convert.ToDateTime(dt.Rows[0]["f_fin"]);
+                campaña.IdCliente = Convert.ToInt32(dt.Rows[0]["id_cliente"]);
                 campaña.NombreCliente = Convert.ToString(dt.Rows[0]["Nombre2"]);
+                campaña.Lider = Convert.ToInt32(dt.Rows[0]["Lider"]);
                 return campaña;
             }
             catch (Exception e)
@@ -3331,8 +3328,8 @@ namespace WindowsFormsApplication1.clases
                 cliente.Contacto = Convert.ToString(dt.Rows[0]["Contacto"]);
                 cliente.Mail = Convert.ToString(dt.Rows[0]["Mail"]);
                 cliente.Telefono = Convert.ToInt32(dt.Rows[0]["Telefono"]);
-                //cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilio_legal"]);
-                cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilioLegal"]);
+                cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilio_legal"]);
+                //cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilioLegal"]);
                 return cliente;
             }
             catch (Exception e)
@@ -3584,15 +3581,65 @@ namespace WindowsFormsApplication1.clases
 
         #region funciones de JORNADA
 
-        public clsJornada buscar_jornada(int empleado, DateTime fecha)
+        public List<clsJornada> buscar_jornada(int empleado, DateTime fecha)
+        {
+            string fecha_consulta = String.Format("{0:yyyy-MM-dd}", fecha);
+            try
+            {
+                List<clsJornada> jornadas = new List<clsJornada>();
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT *, (select count(id_llamada) from llamada where fecha = @fecha_consulta  AND id_empleado = @id_empleado) as CantLlamadas, (select count(id_llamada) from llamada where resultado = 'Vendido' AND fecha = @fecha_consulta  AND id_empleado = @id_empleado) as CantVentas FROM jornada_laboral WHERE id_empleado = @id_empleado AND fecha = @fecha_consulta", con); //'2018-02-16'
+                cmd.Parameters.AddWithValue("id_empleado", empleado);
+                cmd.Parameters.AddWithValue("fecha_consulta", fecha_consulta);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    clsJornada jornada = new clsJornada();
+                    jornada.Id_empleado = Convert.ToInt32(dr["id_empleado"]);
+                    jornada.Id_campaña = Convert.ToInt32(dr["id_campaña"]);
+                    jornada.Fecha = Convert.ToDateTime(dr["fecha"]);
+                    jornada.T_atendiendo = TimeSpan.Parse(Convert.ToString(dr["t_atendiendo"]));
+                    jornada.T_descanso = TimeSpan.Parse(Convert.ToString(dr["t_descanso"]));
+                    jornada.T_reunion = TimeSpan.Parse(Convert.ToString(dr["t_reunion"]));
+                    jornada.T_llenadoFormularios = TimeSpan.Parse(Convert.ToString(dr["t_llenadoFormularios"]));
+                    jornada.T_sinContactos = TimeSpan.Parse(Convert.ToString(dr["t_sinContactos"]));
+                    jornada.T_sinCampaña = TimeSpan.Parse(Convert.ToString(dr["t_sinCampaña"]));
+                    jornada.T_inactivo = TimeSpan.Parse(Convert.ToString(dr["t_inactivo"]));
+                    jornada.T_baño = TimeSpan.Parse(Convert.ToString(dr["t_baño"]));
+                    jornada.T_capacitacion = TimeSpan.Parse(Convert.ToString(dr["t_capacitacion"]));
+                    jornada.T_almuerzo = TimeSpan.Parse(Convert.ToString(dr["t_almuerzo"]));
+                    jornada.Inicio_sesion = TimeSpan.Parse(Convert.ToString(dr["inicio_sesion"]));
+                    jornada.CantLlamadas = Convert.ToInt32(dr["CantLlamadas"]);
+                    jornada.CantVentas = Convert.ToInt32(dr["CantVentas"]);
+                    jornada.Cierre_sesion = (string.IsNullOrEmpty(dr["cierre_sesion"].ToString())) ? TimeSpan.Parse("0") : TimeSpan.Parse(Convert.ToString(dr["cierre_sesion"]));
+                    jornadas.Add(jornada);
+                }
+                return jornadas;
+            }
+            catch (Exception e)
+            {
+               // MessageBox.Show(e.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public clsJornada buscar_jornada(int empleado, int campaña, DateTime fecha)
         {
             string fecha_consulta = String.Format("{0:yyyy-MM-dd}", fecha);
             try
             {
                 clsJornada jornada = null;
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT *, (select count(id_llamada) from llamada where fecha = @fecha_consulta  AND id_empleado = @id_empleado) as CantLlamadas, (select count(id_llamada) from llamada where resultado = 'Vendido' AND fecha = @fecha_consulta  AND id_empleado = @id_empleado) as CantVentas FROM jornada_laboral WHERE id_empleado = @id_empleado AND fecha = @fecha_consulta", con); //'2018-02-16'
+                SqlCommand cmd = new SqlCommand("SELECT *, (select count(id_llamada) from llamada where fecha = @fecha_consulta  AND id_empleado = @id_empleado) as CantLlamadas, (select count(id_llamada) from llamada where resultado = 'Vendido' AND fecha = @fecha_consulta  AND id_empleado = @id_empleado) as CantVentas FROM jornada_laboral" +
+                    " WHERE id_empleado = @id_empleado AND fecha = @fecha_consulta AND id_campaña = @id_campaña", con); //'2018-02-16'
                 cmd.Parameters.AddWithValue("id_empleado", empleado);
+                cmd.Parameters.AddWithValue("id_campaña", campaña);
                 cmd.Parameters.AddWithValue("fecha_consulta", fecha_consulta);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -3602,6 +3649,7 @@ namespace WindowsFormsApplication1.clases
                     //MessageBox.Show("La jornada para la fecha actual fue guardada. Los nuevos datos erán agregados a los valores existentes.", "Atención: Jornada existente", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     jornada = new clsJornada();
                     jornada.Id_empleado = Convert.ToInt32(dt.Rows[0]["id_empleado"]);
+                    jornada.Id_campaña = Convert.ToInt32(dt.Rows[0]["id_campaña"]);
                     jornada.Fecha = Convert.ToDateTime(dt.Rows[0]["fecha"]);
                     jornada.T_atendiendo = TimeSpan.Parse(Convert.ToString(dt.Rows[0]["t_atendiendo"]));
                     jornada.T_descanso = TimeSpan.Parse(Convert.ToString(dt.Rows[0]["t_descanso"]));
@@ -3622,7 +3670,7 @@ namespace WindowsFormsApplication1.clases
             }
             catch (Exception e)
             {
-               // MessageBox.Show(e.Message);
+                // MessageBox.Show(e.Message);
                 return null;
             }
             finally
@@ -3636,9 +3684,11 @@ namespace WindowsFormsApplication1.clases
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("INSERT INTO jornada_laboral (id_empleado,fecha,inicio_sesion,t_atendiendo,t_descanso,t_reunion,t_llenadoFormularios,t_sinContactos,t_sinCampaña,t_inactivo,t_baño,t_capacitacion,t_almuerzo) values (@idempleado,@fecha,@inicio_sesion,@t_atendiendo,@t_descanso,@t_reunion,@t_llenadoFormularios,@t_sinContactos,@t_sinCampaña,@t_inactivo,@t_baño,@t_capacitacion,@t_almuerzo)", con);
+                SqlCommand cmd = new SqlCommand("INSERT INTO jornada_laboral (id_empleado,id_campaña,fecha,inicio_sesion,t_atendiendo,t_descanso,t_reunion,t_llenadoFormularios,t_sinContactos,t_sinCampaña,t_inactivo,t_baño,t_capacitacion,t_almuerzo)" +
+                    " values (@id_empleado,@id_campaña,@fecha,@inicio_sesion,@t_atendiendo,@t_descanso,@t_reunion,@t_llenadoFormularios,@t_sinContactos,@t_sinCampaña,@t_inactivo,@t_baño,@t_capacitacion,@t_almuerzo)", con);
 
-                cmd.Parameters.AddWithValue("idempleado", jornada.Id_empleado);
+                cmd.Parameters.AddWithValue("id_empleado", jornada.Id_empleado);
+                cmd.Parameters.AddWithValue("id_campaña", jornada.Id_campaña);
                 cmd.Parameters.AddWithValue("fecha", jornada.Fecha);
                 cmd.Parameters.AddWithValue("inicio_sesion", jornada.Inicio_sesion);
                 cmd.Parameters.AddWithValue("t_atendiendo", jornada.T_atendiendo);
@@ -3672,9 +3722,11 @@ namespace WindowsFormsApplication1.clases
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("UPDATE jornada_laboral SET t_atendiendo=@t_atendiendo,t_descanso=@t_descanso,t_reunion=@t_reunion,t_llenadoFormularios=@t_llenadoFormularios,t_sinContactos=@t_sinContactos,t_sinCampaña=@t_sinCampaña,t_inactivo=@t_inactivo,t_baño=@t_baño,t_capacitacion=@t_capacitacion,t_almuerzo=@t_almuerzo,cierre_sesion=@cierre_sesion WHERE id_empleado=@id_empleado AND fecha=@fecha", con);//fecha='2018-02-16'", con);
+                SqlCommand cmd = new SqlCommand("UPDATE jornada_laboral SET t_atendiendo=@t_atendiendo,t_descanso=@t_descanso,t_reunion=@t_reunion,t_llenadoFormularios=@t_llenadoFormularios,t_sinContactos=@t_sinContactos,t_sinCampaña=@t_sinCampaña,t_inactivo=@t_inactivo,t_baño=@t_baño,t_capacitacion=@t_capacitacion,t_almuerzo=@t_almuerzo,cierre_sesion=@cierre_sesion" +
+                    " WHERE id_empleado = @id_empleado AND fecha = @fecha AND id_campaña = @id_campaña", con);//fecha='2018-02-16'", con);
 
                 cmd.Parameters.AddWithValue("id_empleado", jornada.Id_empleado);
+                cmd.Parameters.AddWithValue("id_campaña", jornada.Id_campaña);
                 cmd.Parameters.AddWithValue("fecha", jornada.Fecha);
                 cmd.Parameters.AddWithValue("t_atendiendo", jornada.T_atendiendo);
                 cmd.Parameters.AddWithValue("t_descanso", jornada.T_descanso);

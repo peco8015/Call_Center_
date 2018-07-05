@@ -9,6 +9,7 @@ namespace WindowsFormsApplication1.clases
     public class clsJornada
     {
         private int id_empleado;
+        private int id_campaña;
         private DateTime fecha { get; set; }
         private int cantLlamadas;
         private int cantVentas;
@@ -29,6 +30,7 @@ namespace WindowsFormsApplication1.clases
         {        }
 
         public int Id_empleado { get => id_empleado; set => id_empleado = value; }
+        public int Id_campaña { get => id_campaña; set => id_campaña = value; }
         public DateTime Fecha { get => fecha; set => fecha = value; }
         public int CantLlamadas { get => cantLlamadas; set => cantLlamadas = value; }
         public int CantVentas { get => cantVentas; set => cantVentas = value; }
