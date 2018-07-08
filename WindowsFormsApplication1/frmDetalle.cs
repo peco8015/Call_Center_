@@ -392,7 +392,7 @@ namespace WindowsFormsApplication1
         }
         
         private void llenarDtRendimiento()
-        {
+         {
             try
             {
                 string[] canVentas = conectar.promedioVentasCamapaña(campaña.IdCampaña);
@@ -408,6 +408,8 @@ namespace WindowsFormsApplication1
                 lbPromDurLlamVent.Text = Convert.ToString(canVentas[2]) + " min";
                 lbPromLlamadas.Text = Convert.ToString(canVentas[1]);
                 lbPromDurLlam.Text = canLlamadas[1].ToString("0.00") + " min";
+                lbPromTimeProd.Text = conectar.totalTiempoPromedioCampaña(campaña.IdCampaña);//corregir query
+                lbPromTimeImddProd.Text= conectar.totalTiempoImproPromedioCampaña(campaña.IdCampaña);// corregir query
 
                 dgvTabla.Columns["PromedioEfect"].Visible = false;
                 dgvTabla.Columns["Id"].Width = 25;
