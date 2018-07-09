@@ -12,10 +12,10 @@ namespace WindowsFormsApplication1.clases
         string nombre;
         string apellido;
         int dni;
-        DateTime fechaInicio;
+        DateTime fecha_inicio;
         int jefe;//null es empleado,con valor 1 es jefe
         string password;
-        DateTime fechaNaciemiento;
+        DateTime fecha_naciemiento;
         int id_campaña;
         string domicilio;
         string telefono;
@@ -73,16 +73,16 @@ namespace WindowsFormsApplication1.clases
             }
         }
 
-        public DateTime FechaInicio
+        public DateTime Fecha_inicio
         {
             get
             {
-                return fechaInicio;
+                return fecha_inicio;
             }
 
             set
             {
-                fechaInicio = value;
+                fecha_inicio = value;
             }
         }
 
@@ -99,16 +99,16 @@ namespace WindowsFormsApplication1.clases
             }
         }
 
-        public DateTime FechaNaciemiento
+        public DateTime Fecha_naciemiento
         {
             get
             {
-                return fechaNaciemiento;
+                return fecha_naciemiento;
             }
 
             set
             {
-                fechaNaciemiento = value;
+                fecha_naciemiento = value;
             }
         }
 

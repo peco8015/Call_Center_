@@ -188,6 +188,11 @@ namespace WindowsFormsApplication1
             frmNuevo.Show();
         }
 
+        private void frmJefee_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            cerrarForm();
+        }
+
         private void queryFiltrado()
         {
             DataView dv = new DataView(dTable);
@@ -242,5 +247,19 @@ namespace WindowsFormsApplication1
                         DataRow[] dtRows = dTable.Select(query);
                         dgvTabla.DataSource = dtRows.CopyToDataTable();*/
         }
+
+        public void cerrarForm()
+        {
+            if (Application.OpenForms.Count > 2)
+            {
+                foreach (Form f in Application.OpenForms.Cast<Form>().Where(x => x.Name != padre.Name && x.Name != this.Name))
+                {
+                    f.Close();
+                }
+            }
+            padre.Show();
+            this.Hide();
+        }
+
     }
 }

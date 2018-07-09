@@ -12,7 +12,7 @@ namespace WindowsFormsApplication1.clases
         int dni;
         string nombre;
         string apellido;
-        DateTime fecha_nac;
+        DateTime fecha_nacimiento;
         string ocupacion;
         string est_civil;
         string nacionalidad;
@@ -152,16 +152,16 @@ namespace WindowsFormsApplication1.clases
             }
         }
 
-        public DateTime Fecha_nac
+        public DateTime Fecha_nacimiento
         {
             get
             {
-                return fecha_nac;
+                return fecha_nacimiento;
             }
 
             set
             {
-                fecha_nac = value;
+                fecha_nacimiento = value;
             }
         }
 

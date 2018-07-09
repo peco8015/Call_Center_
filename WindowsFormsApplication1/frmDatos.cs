@@ -44,8 +44,8 @@ namespace WindowsFormsApplication1
             tbApellido.Text = empleado.Apellido;
             tbNombre.Text = empleado.Nombre;
             tbDni.Text = empleado.Dni.ToString();
-            tbInicio.Text = empleado.FechaInicio.ToString();
-            tbNacimiento.Text = empleado.FechaNaciemiento.ToString();
+            tbInicio.Text = empleado.Fecha_inicio.ToString();
+            tbNacimiento.Text = empleado.Fecha_naciemiento.ToString();
             tbDomicilio.Text = empleado.Domicilio;
             tbTel.Text = empleado.Telefono;
             tbMail.Text = empleado.Mail;
@@ -133,8 +133,8 @@ namespace WindowsFormsApplication1
             empleado.Apellido = tbApellido.Text;
             empleado.Nombre = tbNombre.Text;
             empleado.Dni = Convert.ToInt32(tbDni.Text);
-            empleado.FechaInicio = Convert.ToDateTime(tbInicio.Text);
-            empleado.FechaNaciemiento= Convert.ToDateTime(tbNacimiento.Text);
+            empleado.Fecha_inicio = Convert.ToDateTime(tbInicio.Text);
+            empleado.Fecha_naciemiento= Convert.ToDateTime(tbNacimiento.Text);
             empleado.Domicilio = tbDomicilio.Text;
             empleado.Telefono = tbTel.Text;
             empleado.Mail = tbMail.Text;

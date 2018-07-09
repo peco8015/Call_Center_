@@ -41,7 +41,7 @@ namespace WindowsFormsApplication1
 
                 case "campaña":
                     campaña = conectar.datos_campaña(identificador);
-                    cliente = conectar.datos_cliente(campaña.IdCliente);
+                    cliente = conectar.datos_cliente(campaña.Id_cliente);
                     tcDatos.TabPages.RemoveByKey("tpCampañaDeEmpleado");
                     break;
             }
@@ -201,8 +201,8 @@ namespace WindowsFormsApplication1
                     tb05.Text = empleado.Mail;
                     tb06.Text = empleado.Domicilio;
                     tb07.Text = empleado.Id_campaña.ToString(); // NOOOO tiene que ir el nombre de la campaña
-                    dtp01.Value = Convert.ToDateTime(empleado.FechaNaciemiento);
-                    dtp02.Value = Convert.ToDateTime(empleado.FechaInicio);
+                    dtp01.Value = Convert.ToDateTime(empleado.Fecha_naciemiento);
+                    dtp02.Value = Convert.ToDateTime(empleado.Fecha_inicio);
                     break;
 
                 case "cliente":
@@ -233,7 +233,7 @@ namespace WindowsFormsApplication1
 
                 case "campaña":
                     this.Text = "Detalles de campaña";
-                    label1.Text = "# " + campaña.IdCampaña.ToString() + " - " + campaña.Nombre;
+                    label1.Text = "# " + campaña.Id_campaña.ToString() + " - " + campaña.Nombre;
                     label3.Text = "Campaña";
                     label4.Text = "Precio";
                     label5.Text = "Cliente";
@@ -395,9 +395,9 @@ namespace WindowsFormsApplication1
          {
             try
             {
-                string[] canVentas = conectar.promedioVentasCamapaña(campaña.IdCampaña);
-                float[] canLlamadas = conectar.promedioLlamadasCamapaña(campaña.IdCampaña);
-                DataTable rendimientos = conectar.rendimientoCampaña(campaña.IdCampaña);
+                string[] canVentas = conectar.promedioVentasCamapaña(campaña.Id_campaña);
+                float[] canLlamadas = conectar.promedioLlamadasCamapaña(campaña.Id_campaña);
+                DataTable rendimientos = conectar.rendimientoCampaña(campaña.Id_campaña);
                 dgvTabla.DataSource = rendimientos;
 
                 //float promEfectTotal = float.Parse(dgvTabla.Rows[dgvTabla.Rows.Count - 1].Cells["PromedioEfect"].Value.ToString());
@@ -408,8 +408,8 @@ namespace WindowsFormsApplication1
                 lbPromDurLlamVent.Text = Convert.ToString(canVentas[2]) + " min";
                 lbPromLlamadas.Text = Convert.ToString(canVentas[1]);
                 lbPromDurLlam.Text = canLlamadas[1].ToString("0.00") + " min";
-                lbPromTimeProd.Text = conectar.totalTiempoPromedioCampaña(campaña.IdCampaña);//corregir query
-                lbPromTimeImddProd.Text= conectar.totalTiempoImproPromedioCampaña(campaña.IdCampaña);// corregir query
+                lbPromTimeProd.Text = conectar.totalTiempoPromedioCampaña(campaña.Id_campaña);//corregir query
+                lbPromTimeImddProd.Text= conectar.totalTiempoImproPromedioCampaña(campaña.Id_campaña);// corregir query
 
                 dgvTabla.Columns["PromedioEfect"].Visible = false;
                 dgvTabla.Columns["Id"].Width = 25;
@@ -479,8 +479,8 @@ namespace WindowsFormsApplication1
                         emp.Telefono = tb04.Text; // guardar como int? checkear eso?
                         emp.Mail = tb05.Text;
                         emp.Domicilio = tb06.Text;
-                        emp.FechaNaciemiento = dtp01.Value;
-                        emp.FechaInicio = dtp02.Value;
+                        emp.Fecha_naciemiento = dtp01.Value;
+                        emp.Fecha_inicio = dtp02.Value;
                         //emp.Id_campaña = (tb07.Text);    //CAMPAÑA
                         SeGuardo(conectar.actualizar_empleado(emp));
                     }

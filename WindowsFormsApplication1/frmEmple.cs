@@ -66,9 +66,16 @@ namespace WindowsFormsApplication1
             pnlProgramada.Visible = false;
             btnCortar.Enabled = false;
             user = conectar.datos_empleado(user.Dni);//obtengo datos del empleado
-            jornada = conectar.buscar_jornada(user.Id_empleado, user.Id_campaña, fechaHoy);
-            if (jornada == null)
-                guardarJornada();
+            try
+            {
+                jornada = conectar.buscar_jornada(user.Id_empleado, user.Id_campaña, fechaHoy); // User.IdCampaña NULL?
+                if (jornada == null)
+                    guardarJornada();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             //Datos del empleado
             ucDatosUsuario1.NombreCompleto = user.Apellido.ToUpper()+", "+user.Nombre;
@@ -81,6 +88,9 @@ namespace WindowsFormsApplication1
             //Datos de la campaña
             cargarCampaña();
             sw_inactivo.Start();
+
+            //Lógica de llamadaProgramada | CargarContacto
+            programacionDeLlamada(control_id_cliente);
         }
 
         #region Guardo jornada: tiempos (timespand .ToString), fecha e id_empleado
@@ -196,14 +206,14 @@ namespace WindowsFormsApplication1
             sw_llenandoFormularios.Stop();
             sw_inactivo.Start();
 
-            if (llamadaProgramada.IdNuevallamada != -1)
-                conectar.eliminarLlamadaDeNuevo(llamadaProgramada.IdNuevallamada);
+            if (llamadaProgramada.Id_nueva_llamada != -1)
+                conectar.eliminarLlamadaDeNuevo(llamadaProgramada.Id_nueva_llamada);
             
             llamada = new clsLlamada();
-            llamada.Id_campaña = campaña.IdCampaña;
+            //llamada.Id_llamada = conectar.obtener_id_llamada();
+            llamada.Id_campaña = campaña.Id_campaña;
             llamada.Id_empleado = user.Id_empleado;
             llamada.Id_contacto = contacto.Id;
-            llamada.Id_llamada = conectar.obtener_id_llamada();
             llamada.Duracion_total = sw_llamada.Elapsed;
             llamada.T_espera = sw_enEspera.Elapsed;
             llamada.Fecha = fechaHoy;
@@ -214,11 +224,11 @@ namespace WindowsFormsApplication1
             if (rbNoAtendio.Checked == true) llamada.Resultado = "No Atendido ";
 
             // Inserta en BD 
-            conectar.insertar_llamada(llamada); // Llamada realizada
+            llamada.Id_llamada = conectar.insertar_llamada(llamada); // Llamada realizada
             if (llamada.Resultado == "Vendido") // VENTA
             {
                 clsVenta venta = new clsVenta();
-                venta.IdVenta = conectar.obtener_id_venta();
+                venta.Id_venta = conectar.obtener_id_venta();
                 venta.Id_llamada = llamada.Id_llamada;
                 venta.Fecha_venta = llamada.Fecha;
 
@@ -228,10 +238,10 @@ namespace WindowsFormsApplication1
             if (llamada.Resultado == "LLamarDeNuevo")
             {
                 clsLLamadaDeNuevo nuevaLlamada = new clsLLamadaDeNuevo();
-                nuevaLlamada.IdContacto = contacto.Id;
-                nuevaLlamada.IdEmpleado = user.Id_empleado;
-                nuevaLlamada.IdLlamada = llamada.Id_llamada;
-                nuevaLlamada.IdNuevallamada = conectar.obtener_id_llamadaDeNuevo();
+                nuevaLlamada.Id_contacto = contacto.Id;
+                nuevaLlamada.Id_empleado = user.Id_empleado;
+                nuevaLlamada.Id_llamada = llamada.Id_llamada;
+                nuevaLlamada.Id_nueva_llamada = conectar.obtener_id_llamadaDeNuevo();
                 nuevaLlamada.Fecha = dtpVFecha.Value.Date;
                 nuevaLlamada.Hora = dtpVHora.Value.Hour;
                 nuevaLlamada.Minutos = dtpVHora.Value.Minute;
@@ -246,14 +256,14 @@ namespace WindowsFormsApplication1
             sw_llamada.Reset();
 
             if (!conectar.check_campaña(user.Id_empleado, user.Id_campaña))
+            {
+                user = conectar.datos_empleado(user.Dni);
                 cargarCampaña();
+                programacionDeLlamada(++control_id_cliente);
+            }
             else
             {
-                llamadaProgramada = conectar.hayLLamadaEnEstaHora(fechaHoy,user.Id_campaña); //controlo antes de pedir nuevo contacto  para llamar si hay algunn
-                if (llamadaProgramada.IdNuevallamada != -1)  // Hay llamada programada
-                    cargarLlamProgramada(llamadaProgramada);
-                else
-                    cargarContacto(++control_id_cliente);
+                programacionDeLlamada(++control_id_cliente);
             }
         }
 
@@ -273,10 +283,20 @@ namespace WindowsFormsApplication1
         }
 
         #region FUNCIONES
+        public void programacionDeLlamada(int control_id_cliente)
+        {
+            //Datos del cliente a llamar
+            llamadaProgramada = conectar.hayLLamadaEnEstaHora(fechaHoy, user.Id_campaña); //controlo antes de pedir nuevo contacto  para llamar si hay algunn
+            if (llamadaProgramada.Id_nueva_llamada != -1)
+                cargarLlamProgramada(llamadaProgramada);
+            else
+                cargarContacto(control_id_cliente);// Obtener ids que cumplan especificaciones de campaña
+        }
+
         /* Carga llamada programada y llama funciones */
         public void cargarLlamProgramada(clsLLamadaDeNuevo llamadaProgramada)
         {
-            cargarContacto(llamadaProgramada.IdContacto);// traigo al cliente programado para esta hora
+            cargarContacto(llamadaProgramada.Id_contacto);// traigo al cliente programado para esta hora
             dtpHorarioProg.Value = new DateTime(llamadaProgramada.Fecha.Year, llamadaProgramada.Fecha.Month, llamadaProgramada.Fecha.Day, llamadaProgramada.Hora, llamadaProgramada.Minutos, 00);
             rtbObsProg.Text = llamadaProgramada.Observaciones;
             pnlProgramada.Visible = true;
@@ -292,15 +312,6 @@ namespace WindowsFormsApplication1
             lblFI.Text = campaña.Fecha_inicio.ToLongDateString();
             lblFF.Text = campaña.Fecha_fin.ToLongDateString();
             rtbDesc.Text = campaña.Descripcion;
-
-
-
-            //Datos del cliente a llamar
-            llamadaProgramada = conectar.hayLLamadaEnEstaHora(fechaHoy, user.Id_campaña); //controlo antes de pedir nuevo contacto  para llamar si hay algunn
-            if (llamadaProgramada.IdNuevallamada != -1)
-                cargarLlamProgramada(llamadaProgramada);
-            else
-                cargarContacto(control_id_cliente);// Obtener ids que cumplan especificaciones de campaña
         }
 
         /* Llena datos del CONTACTO a llamar. */
@@ -314,7 +325,7 @@ namespace WindowsFormsApplication1
                 lblApellidoCon.Text = contacto.Apellido;
                 lblDniCon.Text = contacto.Dni.ToString();
                 lblECCon.Text = contacto.Est_civil;
-                lblFNCon.Text = String.Format("{0:M/d/yyyy}", contacto.Fecha_nac);
+                lblFNCon.Text = String.Format("{0:M/d/yyyy}", contacto.Fecha_nacimiento);
                 lblOcupCon.Text = contacto.Ocupacion;
                 lblNacCon.Text = contacto.Nacionalidad;
                 lblProvCon.Text = contacto.Provincia;
@@ -351,6 +362,7 @@ namespace WindowsFormsApplication1
             {
                 jornada = new clsJornada();
                 jornada.Id_empleado = user.Id_empleado;
+                jornada.Id_campaña = user.Id_campaña;
                 jornada.Fecha = fechaHoy;
                 jornada.Inicio_sesion = inicio_sesion;
                 checkStopWatchs();

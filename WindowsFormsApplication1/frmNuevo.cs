@@ -69,7 +69,7 @@ namespace WindowsFormsApplication1
                     foreach (DataRow fila in dTable.Rows)
                     {
                         clsCampaña aux = new clsCampaña();
-                        aux.IdCampaña = Convert.ToInt32(fila["id_campaña"]);
+                        aux.Id_campaña = Convert.ToInt32(fila["id_campaña"]);
                         aux.Nombre = Convert.ToString(fila["nombre"]);
                         lbLista.Items.Add(aux); //Convert.ToString(fila[0]) + "-" + Convert.ToString(fila[0])
                     }
@@ -165,11 +165,11 @@ namespace WindowsFormsApplication1
                             emp.Telefono = tb04.Text; // guardar como int? checkear eso?
                             emp.Mail = tb05.Text;
                             emp.Domicilio = tb06.Text;
-                            emp.FechaNaciemiento = dtp01.Value;
-                            emp.FechaInicio = DateTime.Now;
+                            emp.Fecha_naciemiento = dtp01.Value;
+                            emp.Fecha_inicio = DateTime.Now;
                             emp.Jefe = (rbJefe.Checked) ? 0 : 1;
                             emp.Password = tb07.Text;
-                            emp.Id_campaña = (lbLista.SelectedItem as clsCampaña).IdCampaña;    //CAMPAÑA
+                            emp.Id_campaña = (lbLista.SelectedItem as clsCampaña).Id_campaña;    //CAMPAÑA
                             SeGuardo(conectar.insertar_empleado(emp));
                         }
                         else
@@ -202,7 +202,7 @@ namespace WindowsFormsApplication1
                             camp.Fecha_inicio = dtp01.Value;
                             camp.Fecha_fin = dtp02.Value;
                             // especificaciones
-                            camp.IdCliente = (lbLista.SelectedItem as clsCliente).Id;   // CLIENTE
+                            camp.Id_cliente = (lbLista.SelectedItem as clsCliente).Id;   // CLIENTE
                             SeGuardo(conectar.insertar_campaña(camp));
                         }
                         else
@@ -217,13 +217,13 @@ namespace WindowsFormsApplication1
         private void btnAddEmpleados_Click(object sender, EventArgs e)
         {
             // ACTUALIZAR JEFE CAMPAÑA.
-            camp.IdCampaña = ((clsEmpleado)lbLider.SelectedItem).Id_empleado;
+            camp.Id_campaña = ((clsEmpleado)lbLider.SelectedItem).Id_empleado;
             List<int> empleados = new List<int>();
             foreach (clsEmpleado aux in lbLista.SelectedItems)
             {
                 empleados.Add(aux.Id_empleado);
             }
-            if (conectar.actualizar_campaña_empleados(camp.IdCampaña, empleados) && conectar.actualizar_campaña(camp))
+            if (conectar.actualizar_campaña_empleados(camp.Id_campaña, empleados) && conectar.actualizar_campaña(camp))
                 this.Close();
             else
                 noInserto();

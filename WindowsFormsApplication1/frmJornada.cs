@@ -37,7 +37,7 @@ namespace WindowsFormsApplication1
             TimeSpan t_sinCampaña = TimeSpan.Zero;
             TimeSpan t_inactivo= TimeSpan.Zero;
 
-            List<clsJornada> jornadas = conexion.buscar_jornada(idEmpleado, DateTime.Now);
+            List<clsJornada> jornadas = conexion.buscar_jornadas(idEmpleado, DateTime.Now);
             foreach(clsJornada j in jornadas)
             {
                 t_atendiendo = t_atendiendo.Add(j.T_atendiendo);

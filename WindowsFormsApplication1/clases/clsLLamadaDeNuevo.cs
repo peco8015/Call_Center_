@@ -8,64 +8,64 @@ namespace WindowsFormsApplication1.clases
 {
     public class clsLLamadaDeNuevo
     {
-        int _idLlamada;
-        int _idEmpleado;
-        int _idContacto;
-        int _idNuevallamada;
+        int _id_llamada;
+        int _id_empleado;
+        int _id_contacto;
+        int _id_nueva_llamada;
         DateTime fecha;
         int hora;
         int minutos;
         string observaciones;
 
-        public int IdLlamada
+        public int Id_llamada
         {
             get
             {
-                return _idLlamada;
+                return _id_llamada;
             }
 
             set
             {
-                _idLlamada = value;
+                _id_llamada = value;
             }
         }
 
-        public int IdEmpleado
+        public int Id_empleado
         {
             get
             {
-                return _idEmpleado;
+                return _id_empleado;
             }
 
             set
             {
-                _idEmpleado = value;
+                _id_empleado = value;
             }
         }
 
-        public int IdContacto
+        public int Id_contacto
         {
             get
             {
-                return _idContacto;
+                return _id_contacto;
             }
 
             set
             {
-                _idContacto = value;
+                _id_contacto = value;
             }
         }
 
-        public int IdNuevallamada
+        public int Id_nueva_llamada
         {
             get
             {
-                return _idNuevallamada;
+                return _id_nueva_llamada;
             }
 
             set
             {
-                _idNuevallamada = value;
+                _id_nueva_llamada = value;
             }
         }
 

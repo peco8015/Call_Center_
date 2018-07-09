@@ -8,26 +8,26 @@ namespace WindowsFormsApplication1.clases
 {
     class clsCampaña
     {
-        int idCampaña;
+        int id_campaña;
         string nombre;
         string descripion;
         int  precio; // double???
         DateTime fecha_inicio;
         DateTime fecha_fin; // Null o 0 lógico en DateTime es el MinValue
-        int idCliente;
-        string nombreCliente;
+        int id_cliente;
+        string nombre_cliente;
         int lider;
 
-        public int IdCampaña
+        public int Id_campaña
         {
             get
             {
-                return idCampaña;
+                return id_campaña;
             }
 
             set
             {
-                idCampaña = value;
+                id_campaña = value;
             }
         }
         
@@ -36,8 +36,8 @@ namespace WindowsFormsApplication1.clases
         public DateTime Fecha_inicio { get => fecha_inicio; set => fecha_inicio = value; }
         public DateTime Fecha_fin { get => fecha_fin; set => fecha_fin = value; }
         public int Lider { get => lider; set => lider = value; }
-        public int IdCliente { get => idCliente; set => idCliente = value; }
-        public string NombreCliente { get => nombreCliente; set => nombreCliente = value; }
+        public int Id_cliente { get => id_cliente; set => id_cliente = value; }
+        public string NombreCliente { get => nombre_cliente; set => nombre_cliente = value; }
         public int Precio { get => precio; set => precio = value; }
         
 

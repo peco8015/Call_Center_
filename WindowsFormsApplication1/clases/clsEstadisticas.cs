@@ -34,7 +34,7 @@ namespace WindowsFormsApplication1.clases
 
                 case "campaña":
                     campaña = conectar.datos_campaña(id);
-                    cliente = conectar.datos_cliente(campaña.IdCliente);
+                    cliente = conectar.datos_cliente(campaña.Id_cliente);
                     break;
             }
         }

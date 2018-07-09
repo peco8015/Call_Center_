@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1.clases
         //@"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
         SqlConnection con;
-        string conx = @"Data Source=CLAUDIO\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
+        string conx = @"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
 
         public clsConexion()
@@ -67,7 +67,7 @@ namespace WindowsFormsApplication1.clases
                     contacto.Nombre = Convert.ToString(dt.Rows[0][1]);
                     contacto.Apellido = Convert.ToString(dt.Rows[0][2]);
                     contacto.Dni = Convert.ToInt32(dt.Rows[0][3]);
-                    contacto.Fecha_nac = (DateTime)dt.Rows[0][4];
+                    contacto.Fecha_nacimiento = (DateTime)dt.Rows[0][4];
                     contacto.Ocupacion = Convert.ToString(dt.Rows[0][5]);
                     contacto.Est_civil = Convert.ToString(dt.Rows[0][6]);
                     contacto.Nacionalidad = Convert.ToString(dt.Rows[0][7]);
@@ -126,7 +126,7 @@ namespace WindowsFormsApplication1.clases
                 con.Open();
                 SqlCommand cmd = new SqlCommand("INSERT INTO venta (id_venta,id_llamada, fecha_venta) values (@id_venta, @id_llamada, @fecha_venta)", con);
 
-                cmd.Parameters.AddWithValue("id_venta", venta.IdVenta);
+                cmd.Parameters.AddWithValue("id_venta", venta.Id_venta);
                 cmd.Parameters.AddWithValue("id_llamada", venta.Id_llamada);
                 cmd.Parameters.AddWithValue("fecha_venta", venta.Fecha_venta);
 
@@ -504,7 +504,7 @@ namespace WindowsFormsApplication1.clases
 
        
 
-          public string totalTiempoPromedioCampaña(int id)//ajustar query con  id campaña
+        public string totalTiempoPromedioCampaña(int id)//ajustar query con  id campaña
         {
 
             clsCampaña campaña = new clsCampaña();
@@ -2712,8 +2712,8 @@ namespace WindowsFormsApplication1.clases
             try
             {
                 con.Open();
-                string f1 = emp.FechaInicio.ToString("dd/M/yyyy");
-                string f2 = emp.FechaNaciemiento.ToString("dd/M/yyyy");
+                string f1 = emp.Fecha_inicio.ToString("dd/M/yyyy");
+                string f2 = emp.Fecha_naciemiento.ToString("dd/M/yyyy");
 
                 SqlCommand cmd = new SqlCommand("UPDATE empleado SET nombre= '" + emp.Nombre + "',apellido = '" + emp.Apellido + "',dni= " + emp.Dni + ", = '" + f1 + "',jefe = " + emp.Jefe + ",password= " + emp.Password + ",f_nacimiento = '" + f2 + "',id_campaña = " + emp.Id_campaña + ",domicilio = '" + emp.Domicilio + "' ,telefono = " + emp.Telefono + ",mail = '" + emp.Mail + "' WHERE id_empleado=" + emp.Id_empleado, con);
                 cmd.ExecuteNonQuery();
@@ -2745,11 +2745,11 @@ namespace WindowsFormsApplication1.clases
                 usuario.Nombre = Convert.ToString(dt.Rows[0]["nombre"]);
                 usuario.Apellido = Convert.ToString(dt.Rows[0]["apellido"]);
                 usuario.Dni = Convert.ToInt32(dt.Rows[0]["dni"]);
-                usuario.FechaInicio = (DateTime)dt.Rows[0]["f_comienza"];
+                usuario.Fecha_inicio = (DateTime)dt.Rows[0]["f_comienza"];
                 //usuario.FechaInicio = (DateTime)dt.Rows[0]["f_comienza"];
                 usuario.Jefe = Convert.ToInt32(dt.Rows[0]["jefe"]);
                 usuario.Password = Convert.ToString(dt.Rows[0]["password"]);
-                usuario.FechaNaciemiento = (DateTime)(dt.Rows[0]["f_nacimiento"]);
+                usuario.Fecha_naciemiento = (DateTime)(dt.Rows[0]["f_nacimiento"]);
                 usuario.Id_campaña = Convert.ToInt32(dt.Rows[0]["id_campaña"]);
                 usuario.Domicilio = Convert.ToString(dt.Rows[0]["domicilio"]);
                 usuario.Telefono = Convert.ToString(dt.Rows[0]["telefono"]);
@@ -2844,8 +2844,8 @@ namespace WindowsFormsApplication1.clases
         {
             try
             {
-                string f_inicio = empleado.FechaInicio.ToString("yyyy/MM/dd").Replace('-', '/');
-                string f_nacimiento = empleado.FechaNaciemiento.ToString("yyyy/MM/dd").Replace('-', '/');
+                string f_inicio = empleado.Fecha_inicio.ToString("yyyy/MM/dd").Replace('-', '/');
+                string f_nacimiento = empleado.Fecha_naciemiento.ToString("yyyy/MM/dd").Replace('-', '/');
                 con.Open();
                 SqlCommand cmd = new SqlCommand("INSERT INTO empleado(nombre, apellido, dni, f_inicio, jefe, password, f_nacimiento, id_campaña, domicilio, telefono, mail)" +
                     " VALUES(@nombre, @apellido, @dni, @f_inicio, @jefe, @password, @f_nacimiento, @id_campaña, @domicilio, @telefono, @mail)", con);
@@ -2877,8 +2877,8 @@ namespace WindowsFormsApplication1.clases
         {
             try
             {
-                string f_nac = empleado.FechaNaciemiento.ToString("yyyy/MM/dd").Replace('-', '/');
-                string f_ini = empleado.FechaInicio.ToString("yyyy/MM/dd").Replace('-', '/');
+                string f_nac = empleado.Fecha_naciemiento.ToString("yyyy/MM/dd").Replace('-', '/');
+                string f_ini = empleado.Fecha_inicio.ToString("yyyy/MM/dd").Replace('-', '/');
                 con.Open();
                 SqlCommand cmd = new SqlCommand("UPDATE SET nombre = @nombre, apellido = @apellido, dni = @dni, telefono = @telefono, mail = @mail, @domicilio = @domicilio, f_nacimiento = @f_nacimiento, f_inicio = @f_inicio, id_campaña = @id_campaña" +
                     " WHERE id_empleado = @id_empleado", con);
@@ -3094,13 +3094,13 @@ namespace WindowsFormsApplication1.clases
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
                 clsCampaña campaña = new clsCampaña();
-                campaña.IdCampaña = Convert.ToInt32(dt.Rows[0]["Id_campaña"]);
+                campaña.Id_campaña = Convert.ToInt32(dt.Rows[0]["Id_campaña"]);
                 campaña.Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
                 campaña.Descripcion = Convert.ToString(dt.Rows[0]["Descripcion"]);
                 campaña.Precio = Convert.ToInt32(dt.Rows[0]["Precio"]);
                 campaña.Fecha_inicio = Convert.ToDateTime(dt.Rows[0]["F_inicio"]);
                 campaña.Fecha_fin = (dt.Rows[0]["F_fin"] != null)? Convert.ToDateTime(dt.Rows[0]["F_fin"]) : DateTime.MinValue;
-                campaña.IdCliente = Convert.ToInt32(dt.Rows[0]["id_cliente"]);
+                campaña.Id_cliente = Convert.ToInt32(dt.Rows[0]["id_cliente"]);
                 campaña.NombreCliente = Convert.ToString(dt.Rows[0]["Nombre1"]);
                 campaña.Lider = Convert.ToInt32(dt.Rows[0]["Lider"]);
                 return campaña;
@@ -3127,13 +3127,13 @@ namespace WindowsFormsApplication1.clases
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
                 clsCampaña campaña = new clsCampaña();
-                campaña.IdCampaña = Convert.ToInt32(dt.Rows[0]["Id_campaña"]);
+                campaña.Id_campaña = Convert.ToInt32(dt.Rows[0]["Id_campaña"]);
                 campaña.Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
                 campaña.Descripcion = Convert.ToString(dt.Rows[0]["Descripcion"]);
                 campaña.Precio = Convert.ToInt32(dt.Rows[0]["Precio"]);
                 campaña.Fecha_inicio = Convert.ToDateTime(dt.Rows[0]["f_inicio"]);
                 campaña.Fecha_fin = Convert.ToDateTime(dt.Rows[0]["f_fin"]);
-                campaña.IdCliente = Convert.ToInt32(dt.Rows[0]["id_cliente"]);
+                campaña.Id_cliente = Convert.ToInt32(dt.Rows[0]["id_cliente"]);
                 campaña.NombreCliente = Convert.ToString(dt.Rows[0]["Nombre2"]);
                 campaña.Lider = Convert.ToInt32(dt.Rows[0]["Lider"]);
                 return campaña;
@@ -3163,8 +3163,8 @@ namespace WindowsFormsApplication1.clases
                 cmd.Parameters.AddWithValue("precio", campaña.Precio);
                 cmd.Parameters.AddWithValue("f_inicio", f_inicio);
                 cmd.Parameters.AddWithValue("f_fin", f_fin);
-                cmd.Parameters.AddWithValue("id_cliente", campaña.IdCliente);
-                campaña.IdCampaña = Convert.ToInt32(cmd.ExecuteScalar());
+                cmd.Parameters.AddWithValue("id_cliente", campaña.Id_cliente);
+                campaña.Id_campaña = Convert.ToInt32(cmd.ExecuteScalar());
                 return true;
             }
             catch (Exception e)
@@ -3187,13 +3187,13 @@ namespace WindowsFormsApplication1.clases
                 con.Open();
                 SqlCommand cmd = new SqlCommand("UPDATE SET nombre = @nombre, descripcion = @descripcion, precio = @precio, f_inicio = @f_ini, f_fin = @f_fin, id_cliente = @id_ciente" +
                     " WHERE id_campaña = @id_campaña", con);
-                cmd.Parameters.AddWithValue("id_campaña", campaña.IdCampaña);
+                cmd.Parameters.AddWithValue("id_campaña", campaña.Id_campaña);
                 cmd.Parameters.AddWithValue("nombre", campaña.Nombre);
                 cmd.Parameters.AddWithValue("descripcion", campaña.Descripcion);
                 cmd.Parameters.AddWithValue("precio", campaña.Precio);
                 cmd.Parameters.AddWithValue("f_ini", f_ini);
                 cmd.Parameters.AddWithValue("f_fin", f_fin);
-                cmd.Parameters.AddWithValue("id_cliente", campaña.IdCliente);
+                cmd.Parameters.AddWithValue("id_cliente", campaña.Id_cliente);
                 //cmd.Parameters.AddWithValue("id_especificacion", campaña.);
                 //cmd.Parameters.AddWithValue("lider", campaña.);
                 if (cmd.ExecuteNonQuery() == 1)
@@ -3596,7 +3596,7 @@ namespace WindowsFormsApplication1.clases
 
         #region funciones de LLAMADAS (+ programadas)
 
-        public int obtener_id_llamada()
+        public int obtener_id_llamada() // ELIMINAR ESTA FUNCION
         {
             try
             {
@@ -3648,15 +3648,14 @@ namespace WindowsFormsApplication1.clases
             }
         }//obtengo el numero de llamadas y le sumo para tener un ID unico
         
-        public void insertar_llamada(clsLlamada llam)//nueva llamadaDenuevo
+        public int insertar_llamada(clsLlamada llam)//nueva llamadaDenuevo
         {
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("INSERT INTO llamada (id_llamada, id_contacto, id_campaña, duracion, t_espera, resultado, observaciones, fecha, id_empleado)" +
-                    " VALUES (@idllamada, @idcontacto, @idcampaña, @duracion, @t_espera, @resultado, @observaciones, @fecha, @idempleado)", con);
-
-                cmd.Parameters.AddWithValue("idllamada", llam.Id_llamada);
+                SqlCommand cmd = new SqlCommand("INSERT INTO llamada (id_contacto, id_campaña, duracion, t_espera, resultado, observaciones, fecha, id_empleado)" +
+                    " VALUES (@idcontacto, @idcampaña, @duracion, @t_espera, @resultado, @observaciones, @fecha, @idempleado)", con);
+                
                 cmd.Parameters.AddWithValue("idcontacto", llam.Id_contacto);
                 cmd.Parameters.AddWithValue("idcampaña", llam.Id_campaña);
                 cmd.Parameters.AddWithValue("resultado", llam.Resultado);
@@ -3666,10 +3665,11 @@ namespace WindowsFormsApplication1.clases
                 cmd.Parameters.AddWithValue("fecha", llam.Fecha);
                 cmd.Parameters.AddWithValue("idempleado", llam.Id_empleado);
 
-                int result = cmd.ExecuteNonQuery();
+                return cmd.ExecuteNonQuery();
             }
             catch (Exception e)
             {
+                return -1;
                // MessageBox.Show(e.Message);
             }
             finally
@@ -3723,14 +3723,14 @@ namespace WindowsFormsApplication1.clases
                 sda.Fill(dt);
                 if (dt.Rows.Count == 0)
                 {
-                    llmda.IdNuevallamada = -1;
+                    llmda.Id_nueva_llamada = -1;
                 }
                 else
                 {
-                    llmda.IdNuevallamada = Convert.ToInt32(dt.Rows[0]["IdNueva"]);
-                    llmda.IdEmpleado = Convert.ToInt32(dt.Rows[0]["IdEmpleado"]);
-                    llmda.IdContacto = Convert.ToInt32(dt.Rows[0]["IdContacto"]);
-                    llmda.IdLlamada = Convert.ToInt32(dt.Rows[0]["IdLlamada"]);
+                    llmda.Id_nueva_llamada = Convert.ToInt32(dt.Rows[0]["IdNueva"]);
+                    llmda.Id_empleado = Convert.ToInt32(dt.Rows[0]["IdEmpleado"]);
+                    llmda.Id_contacto = Convert.ToInt32(dt.Rows[0]["IdContacto"]);
+                    llmda.Id_llamada = Convert.ToInt32(dt.Rows[0]["IdLlamada"]);
                     llmda.Fecha = Convert.ToDateTime(dt.Rows[0]["Fecha"]); //(DateTime)dt.Rows[0]["Fecha"];
                     llmda.Hora = Convert.ToInt32(dt.Rows[0]["Hora"]);
                     llmda.Minutos = Convert.ToInt32(dt.Rows[0]["Minutos"]);
@@ -3756,10 +3756,10 @@ namespace WindowsFormsApplication1.clases
                 con.Open();
                 SqlCommand cmd = new SqlCommand("INSERT INTO LlamadaDeNuevo (idnueva, idempleado, idcontacto, idllamada, fecha, hora, minutos) values (@idnueva, @idempleado, @idcontacto, @idllamada, @fecha, @hora, @minutos)", con);
 
-                cmd.Parameters.AddWithValue("idnueva", llam.IdNuevallamada);
-                cmd.Parameters.AddWithValue("idempleado", llam.IdEmpleado);
-                cmd.Parameters.AddWithValue("idcontacto", llam.IdContacto);
-                cmd.Parameters.AddWithValue("idllamada", llam.IdLlamada);
+                cmd.Parameters.AddWithValue("idnueva", llam.Id_nueva_llamada);
+                cmd.Parameters.AddWithValue("idempleado", llam.Id_empleado);
+                cmd.Parameters.AddWithValue("idcontacto", llam.Id_contacto);
+                cmd.Parameters.AddWithValue("idllamada", llam.Id_llamada);
                 cmd.Parameters.AddWithValue("fecha", llam.Fecha);
                 cmd.Parameters.AddWithValue("hora", llam.Hora);
                 cmd.Parameters.AddWithValue("minutos", llam.Minutos);
@@ -3803,7 +3803,7 @@ namespace WindowsFormsApplication1.clases
 
         #region funciones de JORNADA
 
-        public List<clsJornada> buscar_jornada(int empleado, DateTime fecha)
+        public List<clsJornada> buscar_jornadas(int empleado, DateTime fecha)
         {
             string fecha_consulta = String.Format("{0:yyyy-MM-dd}", fecha);
             try

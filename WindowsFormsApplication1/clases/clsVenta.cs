@@ -8,7 +8,7 @@ namespace WindowsFormsApplication1.clases
 {
     public class clsVenta
     {
-        private int idVenta;
+        private int id_venta;
         private DateTime fecha_venta;
         private int id_llamada;
 
@@ -16,7 +16,7 @@ namespace WindowsFormsApplication1.clases
         {
         }
 
-        public int IdVenta { get => idVenta; set => idVenta = value; }
+        public int Id_venta { get => id_venta; set => id_venta = value; }
         public DateTime Fecha_venta { get => fecha_venta; set => fecha_venta = value; }
         public int Id_llamada { get => id_llamada; set => id_llamada = value; }
     }
