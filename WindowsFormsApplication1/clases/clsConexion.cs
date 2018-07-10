@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1.clases
         //@"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
         SqlConnection con;
-        string conx = @"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
+        string conx = @"Data Source=CLAUDIO\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
 
         public clsConexion()
@@ -504,7 +504,7 @@ namespace WindowsFormsApplication1.clases
 
        
 
-        public string totalTiempoPromedioCampaña(int id)//ajustar query con  id campaña
+        public string totalTiempoPromedioCampaña(int id)
         {
 
             clsCampaña campaña = new clsCampaña();
@@ -513,7 +513,7 @@ namespace WindowsFormsApplication1.clases
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("select t_capacitacion,t_reunion,t_llenadoFormularios,t_atendiendo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where  jornada_laboral.id_empleado=" + id, con);
+                SqlCommand cmd = new SqlCommand("select t_capacitacion,t_reunion,t_llenadoFormularios,t_atendiendo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where  jornada_laboral.id_campaña=" + id, con);
 
 
 
@@ -546,7 +546,7 @@ namespace WindowsFormsApplication1.clases
 
         }
 
-        public string totalTiempoImproPromedioCampaña(int id)//ajustar query con  id campaña
+        public string totalTiempoImproPromedioCampaña(int id)
         {
 
             clsCampaña campaña = new clsCampaña();
@@ -555,7 +555,7 @@ namespace WindowsFormsApplication1.clases
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("select t_descanso, t_sinContactos, t_sinCampaña,t_inactivo, t_baño,  t_almuerzo  from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where  jornada_laboral.id_empleado=" + id, con);
+                SqlCommand cmd = new SqlCommand("select t_descanso, t_sinContactos, t_sinCampaña,t_inactivo, t_baño,  t_almuerzo  from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where  jornada_laboral.id_campaña=" + id, con);
 
 
 
@@ -3101,7 +3101,7 @@ namespace WindowsFormsApplication1.clases
                 campaña.Fecha_fin = (dt.Rows[0]["F_fin"] != null)? Convert.ToDateTime(dt.Rows[0]["F_fin"]) : DateTime.MinValue;
                 campaña.Id_cliente = Convert.ToInt32(dt.Rows[0]["id_cliente"]);
                 campaña.NombreCliente = Convert.ToString(dt.Rows[0]["Nombre1"]);
-                campaña.Lider = Convert.ToInt32(dt.Rows[0]["Lider"]);
+                //campaña.Lider = Convert.ToInt32(dt.Rows[0]["Lider"]);
                 return campaña;
             }
             catch (Exception e)

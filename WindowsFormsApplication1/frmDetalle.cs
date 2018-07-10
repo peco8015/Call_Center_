@@ -408,8 +408,8 @@ namespace WindowsFormsApplication1
                 lbPromDurLlamVent.Text = Convert.ToString(canVentas[2]) + " min";
                 lbPromLlamadas.Text = Convert.ToString(canVentas[1]);
                 lbPromDurLlam.Text = canLlamadas[1].ToString("0.00") + " min";
-                lbPromTimeProd.Text = conectar.totalTiempoPromedioCampaña(campaña.Id_campaña);//corregir query
-                lbPromTimeImddProd.Text= conectar.totalTiempoImproPromedioCampaña(campaña.Id_campaña);// corregir query
+                lbPromTimeProd.Text = conectar.totalTiempoPromedioCampaña(campaña.Id_campaña) + " min";
+                lbPromTimeImddProd.Text= conectar.totalTiempoImproPromedioCampaña(campaña.Id_campaña)+ " min";
 
                 dgvTabla.Columns["PromedioEfect"].Visible = false;
                 dgvTabla.Columns["Id"].Width = 25;
