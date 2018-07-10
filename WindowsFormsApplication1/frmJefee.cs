@@ -184,7 +184,7 @@ namespace WindowsFormsApplication1
 
         private void btnNewEmpleado_Click(object sender, EventArgs e)
         {
-            frmNuevo frmNuevo = new frmNuevo();
+            frmNuevo frmNuevo = new frmNuevo("Campaña");
             frmNuevo.Show();
         }
 

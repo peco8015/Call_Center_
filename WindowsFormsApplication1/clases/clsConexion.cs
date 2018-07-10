@@ -2745,8 +2745,7 @@ namespace WindowsFormsApplication1.clases
                 usuario.Nombre = Convert.ToString(dt.Rows[0]["nombre"]);
                 usuario.Apellido = Convert.ToString(dt.Rows[0]["apellido"]);
                 usuario.Dni = Convert.ToInt32(dt.Rows[0]["dni"]);
-                usuario.Fecha_inicio = (DateTime)dt.Rows[0]["f_comienza"];
-                //usuario.FechaInicio = (DateTime)dt.Rows[0]["f_comienza"];
+                usuario.Fecha_inicio = (DateTime)dt.Rows[0]["f_inicio"];
                 usuario.Jefe = Convert.ToInt32(dt.Rows[0]["jefe"]);
                 usuario.Password = Convert.ToString(dt.Rows[0]["password"]);
                 usuario.Fecha_naciemiento = (DateTime)(dt.Rows[0]["f_nacimiento"]);

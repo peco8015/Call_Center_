@@ -13,6 +13,7 @@ namespace WindowsFormsApplication1
 {
     public partial class frmNuevo : Form
     {
+        string tipo;
         clsEmpleado user = new clsEmpleado();
         clsConexion conectar = new clsConexion();
         clsCampaña camp;
@@ -23,128 +24,69 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
+        public frmNuevo(string entidad)
+        {
+            InitializeComponent();
+            tipo = entidad;
+        }
+
         private void frmNuevo_Load(object sender, EventArgs e)
         {
-            pnlRegistro.Enabled = false;
-            rbEmpleado.Checked = true;
-            btnAddEmpleados.Visible = false;
+            if (tipo == "")
+            {
+                pnlRegistro.Enabled = false;
+            }
+            else
+            {
+                cbTipoRegistro.Visible = false;
+                setForm();
+            }
         }
 
         private void cbTipoRegistro_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lbLista.SelectionMode = SelectionMode.One;
             pnlRegistro.Enabled = true;
-            switch(cbTipoRegistro.SelectedItem)
+            tipo = cbTipoRegistro.SelectedItem.ToString();
+            setForm();
+        }
+
+        private void check02_CheckedChanged(object sender, EventArgs e)
+        {
+            switch (tipo)
             {
                 case "Empleado":
-                    btnAdd.Enabled = true;
-                    label1.Text = "Nombre";
-                    label2.Text = "Apellido";
-                    label3.Text = "DNI";
-                    label4.Text = "Teléfono";
-                    label5.Text = "Mail";
-                    label6.Text = "Domicilio";
-                    label7.Text = "Nacimiento";
-                    label8.Text = "Contraseña";
-                    tb03.Size = new Size(191, 25);
-                    label4.Visible = true;
-                    label5.Visible = true;
-                    label6.Visible = true;
-                    label7.Visible = true;
-                    label8.Visible = true;
-                    label9.Visible = true;
-                    tb04.Visible = true;
-                    tb05.Visible = true;
-                    tb06.Visible = true;
-                    tb07.Visible = true;
-                    dtp01.Visible = true;
-                    dtp02.Visible = false;
-                    rbEmpleado.Visible = true;
-                    rbJefe.Visible = true;
-
-                    pnlRelacion.Enabled = true;
-                    lblLista.Text = "Asignar campaña al empleado";
-                    lbLista.Items.Clear();
-                    dTable = conectar.obtenerCampañas(); //ACTIVAS
-                    foreach (DataRow fila in dTable.Rows)
-                    {
-                        clsCampaña aux = new clsCampaña();
-                        aux.Id_campaña = Convert.ToInt32(fila["id_campaña"]);
-                        aux.Nombre = Convert.ToString(fila["nombre"]);
-                        lbLista.Items.Add(aux); //Convert.ToString(fila[0]) + "-" + Convert.ToString(fila[0])
-                    }
-                    lbLista.DisplayMember = "nombre";
-                    break;
-
-                case "Cliente":
-                    btnAdd.Enabled = true;
-                    pnlRelacion.Enabled = false;
-                    lbLista.Items.Clear();
-                    label1.Text = "Nombre";
-                    label2.Text = "CUIL";
-                    label3.Text = "Domicilio";
-                    label4.Text = "Nombre contacto";
-                    label5.Text = "Mail contacto";
-                    label6.Text = "Telefono contacto";
-                    tb03.Size = new Size(191, 25);
-                    label7.Visible = false;
-                    label8.Visible = false;
-                    label9.Visible = false;
-                    tb07.Visible = false;
-                    dtp01.Visible = false;
-                    dtp02.Visible = false;
-                    rbEmpleado.Visible = false;
-                    rbJefe.Visible = false;
+                    if (check02.Checked)
+                        cb02.Visible = true;
+                    else
+                        cb02.Visible = false;
                     break;
 
                 case "Campaña":
-                    btnAdd.Enabled = false;
-                    label1.Text = "Campaña";
-                    label2.Text = "Precio";
-                    label3.Text = "Descripción";
-                    label7.Text = "Fecha de inicio";
-                    label8.Text = "Fecha de fin";
-                    tb03.Size = new Size(191, 139);
-                    label4.Visible = false;
-                    label5.Visible = false;
-                    label6.Visible = false;
-                    label7.Visible = true;
-                    label8.Visible = true;
-                    label9.Visible = false;
-                    tb04.Visible = false;
-                    tb05.Visible = false;
-                    tb06.Visible = false;
-                    tb07.Visible = false;
-                    dtp01.Visible = true;
-                    dtp02.Visible = true;
-                    rbEmpleado.Visible = false;
-                    rbJefe.Visible = false;
-
-                    pnlRelacion.Enabled = true;
-                    lblLista.Text = "Seleccione el cliente propietario";
-                    lbLista.Items.Clear();
-                    dTable = conectar.listarClientes();
-                    foreach (DataRow fila in dTable.Rows)
+                    if (check02.Checked)
                     {
-                        clsCliente aux = new clsCliente();
-                        aux.Id = Convert.ToInt32(fila["id_cliente"]);
-                        aux.Nombre = Convert.ToString(fila["Cliente"]);
-                        lbLista.Items.Add(aux);
+                        dTable = conectar.listarJefes();
+                        cb02.DataSource = dTable;
+                        cb02.DisplayMember = "Empleado";
+                        cb02.ValueMember = "id_empleado";
+                        cb02.Visible = true;
                     }
-                    lbLista.DisplayMember = "nombre";
+                    else
+                        cb02.Visible = false;
                     break;
             }
         }
 
-        private void lbLista_SelectedIndexChanged(object sender, EventArgs e)
+        private void check01_CheckedChanged_1(object sender, EventArgs e)
         {
-            if((sender as ListBox).SelectedItem != null)
+            if (check01.Checked)
             {
-                btnAdd.Enabled = true;
-                if (lbLider.SelectedItem !=null)
-                {
-                    btnAddEmpleados.Enabled = true;
-                }
+                cb02.Visible = false;
+                check02.Visible = false;
+            }
+            else
+            {
+                cb02.Visible = true;
+                check02.Visible = true;
             }
         }
 
@@ -152,7 +94,7 @@ namespace WindowsFormsApplication1
         {
             if (!string.IsNullOrWhiteSpace(tb01.Text) && !string.IsNullOrWhiteSpace(tb02.Text) && !string.IsNullOrWhiteSpace(tb03.Text))
             {
-                switch (cbTipoRegistro.SelectedItem)
+                switch (tipo)
                 {
                     case "Empleado":
                         clsEmpleado emp = new clsEmpleado();
@@ -167,9 +109,9 @@ namespace WindowsFormsApplication1
                             emp.Domicilio = tb06.Text;
                             emp.Fecha_naciemiento = dtp01.Value;
                             emp.Fecha_inicio = DateTime.Now;
-                            emp.Jefe = (rbJefe.Checked) ? 0 : 1;
+                            emp.Jefe = (check01.Checked) ? 0 : 1;
                             emp.Password = tb07.Text;
-                            emp.Id_campaña = (lbLista.SelectedItem as clsCampaña).Id_campaña;    //CAMPAÑA
+                            emp.Id_campaña = (check02.Checked)? (int)cb02.SelectedValue : 0;    //CAMPAÑA
                             SeGuardo(conectar.insertar_empleado(emp));
                         }
                         else
@@ -202,7 +144,7 @@ namespace WindowsFormsApplication1
                             camp.Fecha_inicio = dtp01.Value;
                             camp.Fecha_fin = dtp02.Value;
                             // especificaciones
-                            camp.Id_cliente = (lbLista.SelectedItem as clsCliente).Id;   // CLIENTE
+                            camp.Id_cliente = (int)cb01.SelectedValue;   // CLIENTE
                             SeGuardo(conectar.insertar_campaña(camp));
                         }
                         else
@@ -214,65 +156,86 @@ namespace WindowsFormsApplication1
                 msjError("Falta completar campos");
         }
 
-        private void btnAddEmpleados_Click(object sender, EventArgs e)
+        public void setForm()
         {
-            // ACTUALIZAR JEFE CAMPAÑA.
-            camp.Id_campaña = ((clsEmpleado)lbLider.SelectedItem).Id_empleado;
-            List<int> empleados = new List<int>();
-            foreach (clsEmpleado aux in lbLista.SelectedItems)
+            switch (tipo)
             {
-                empleados.Add(aux.Id_empleado);
+                case "Empleado":
+                    label1.Text = "Nombre";
+                    label2.Text = "Apellido";
+                    label3.Text = "DNI";
+                    label4.Text = "Teléfono";
+                    label5.Text = "Mail";
+                    label6.Text = "Domicilio";
+                    label7.Text = "Nacimiento";
+                    label8.Text = "Contraseña";
+                    label9.Visible = false;
+                    dtp02.Visible = false;
+                    cb01.Visible = false;
+
+                    dTable = conectar.obtenerCampañas(); //ACTIVAS
+                    cb02.DataSource = dTable;
+                    cb02.DisplayMember = "nombre";
+                    cb02.ValueMember = "id_campaña";
+                    break;
+
+                case "Cliente":
+                    label1.Text = "Nombre";
+                    label2.Text = "CUIL";
+                    label3.Text = "Domicilio";
+                    label4.Text = "Nombre contacto";
+                    label5.Text = "Mail contacto";
+                    label6.Text = "Telefono contacto";
+                    label7.Visible = false;
+                    label8.Visible = false;
+                    label9.Visible = false;
+                    check01.Visible = false;
+                    check02.Visible = false;
+                    tb07.Visible = false;
+                    dtp01.Visible = false;
+                    dtp02.Visible = false;
+                    cb01.Visible = false;
+                    cb02.Visible = false;
+                    break;
+
+                case "Campaña":
+                    label1.Text = "Campaña";
+                    label2.Text = "Precio";
+                    label3.Text = "Descripción";
+                    label7.Text = "Fecha de inicio";
+                    label8.Text = "Fecha de fin";
+                    label9.Text = "Cliente";
+                    check02.Text = "Lider de campaña";
+                    tb03.Size = new Size(261, 139);
+                    label4.Visible = false;
+                    label5.Visible = false;
+                    label6.Visible = false;
+                    tb04.Visible = false;
+                    tb05.Visible = false;
+                    tb06.Visible = false;
+                    tb07.Visible = false;
+                    cb02.Visible = false;
+                    check01.Visible = false;
+
+                    dTable = conectar.listarClientes(); //ACTIVAS
+                    cb01.DataSource = dTable;
+                    cb01.DisplayMember = "Cliente";
+                    cb01.ValueMember = "id_cliente";
+                    break;
             }
-            if (conectar.actualizar_campaña_empleados(camp.Id_campaña, empleados) && conectar.actualizar_campaña(camp))
-                this.Close();
-            else
-                noInserto();
         }
-
-
+        
         public void limpiarControles()
         {
             MessageBox.Show("Se guardó correctamente el registro.", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            if (cbTipoRegistro.SelectedItem.ToString() == "Campaña")
+            // PERMITIMOS DESDE ACA?
+            /*if (cbTipoRegistro.SelectedItem.ToString() == "Campaña")
             {
                 if(DialogResult.Yes == MessageBox.Show("¿Desea asignar empleados a esta campaña?", "Completar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
-                {
-                    lbLista.SelectionMode = SelectionMode.MultiExtended;
-                    lblLista.Text = "Seleccione empleados";
-                    lbLista.Items.Clear();
-                    dTable = conectar.listarEmpleados();
-                    foreach (DataRow fila in dTable.Rows)
-                    {
-                        clsEmpleado aux = new clsEmpleado();
-                        aux.Id_empleado = Convert.ToInt32(fila["id_empleado"]);
-                        aux.Nombre = Convert.ToString(fila["Empleado"]);
-                        lbLista.Items.Add(aux);
-                    }
-                    lbLista.DisplayMember = "nombre";
-                    dTable = conectar.listarJefes();
-                    foreach (DataRow fila in dTable.Rows)
-                    {
-                        clsEmpleado aux = new clsEmpleado();
-                        aux.Id_empleado = Convert.ToInt32(fila["id_empleado"]);
-                        aux.Nombre = Convert.ToString(fila["Empleado"]);
-                        lbLista.Items.Add(aux);
-                    }
-                    lbLista.DisplayMember = "nombre";
-
-                    pnlInformacion.Visible = false;
-                    pnlLider.Visible = true;
-                    btnAdd.Visible = false;
-                    btnAddEmpleados.Visible = true;
-                    btnAddEmpleados.Enabled = false;
-                }
+                {  }
             }
-            else
-                this.Close();
-        }
-
-        public void noInserto()
-        {
-            MessageBox.Show("Se produjo un error al guardar los registros en la base de datos. Intente nuevamente.","No se guardo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else*/
+            this.Close();
         }
 
         public void msjError(string msj)
@@ -285,7 +248,8 @@ namespace WindowsFormsApplication1
             if (se_guardo)
                 limpiarControles();
             else
-                noInserto();
+                MessageBox.Show("Se produjo un error al guardar los registros en la base de datos. Intente nuevamente.", "No se guardo", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
     }
 }
