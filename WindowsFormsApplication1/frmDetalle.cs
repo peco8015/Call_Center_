@@ -418,15 +418,38 @@ namespace WindowsFormsApplication1
 
                 foreach (DataGridViewRow row in dgvTabla.Rows)
                 {
+
+                    if ((Convert.ToInt32(row.Cells["Productivo"].Value)) > float.Parse(conectar.totalTiempoPromedioCampaña(campaña.Id_campaña)))
+                    {
+                        row.Cells["Productivo"].Style.ForeColor = Color.Green;
+                       
+                    }
+                    else
+                    {
+                        row.Cells["Productivo"].Style.ForeColor = Color.Red;
+                       
+                    }
+
+
+                    if ((Convert.ToInt32(row.Cells["No Productivo"].Value)) > float.Parse(conectar.totalTiempoImproPromedioCampaña(campaña.Id_campaña)))
+                    {
+                        row.Cells["No Productivo"].Style.ForeColor = Color.Green;
+                      
+                    }
+                    else
+                    {
+                        row.Cells["No Productivo"].Style.ForeColor = Color.Red;
+                    
+                    }
+
+
                     if ((Convert.ToInt32(row.Cells["Efectividad"].Value)) > promEfectTotal)
                     {
-                        row.Cells["Ventas"].Style.ForeColor = Color.Green;
                         row.Cells["Efectividad"].Value = (row.Cells["Efectividad"].Value).ToString() + "%";
                         row.Cells["Efectividad"].Style.ForeColor = Color.Green;
                     }
                     else
                     {
-                        row.Cells["Ventas"].Style.ForeColor = Color.Red;
                         row.Cells["Efectividad"].Value = (row.Cells["Efectividad"].Value).ToString() + "%";
                         row.Cells["Efectividad"].Style.ForeColor = Color.Red;
                     }
