@@ -3198,7 +3198,7 @@ namespace WindowsFormsApplication1.clases
                 campaña.Fecha_fin = (dt.Rows[0]["F_fin"] != null)? Convert.ToDateTime(dt.Rows[0]["F_fin"]) : DateTime.MinValue;
                 campaña.Id_cliente = Convert.ToInt32(dt.Rows[0]["id_cliente"]);
                 campaña.NombreCliente = Convert.ToString(dt.Rows[0]["Nombre1"]);
-               // campaña.Lider = Convert.ToInt32(dt.Rows[0]["Lider"]);
+                campaña.Lider = Convert.ToInt32(dt.Rows[0]["Lider"]);
                 return campaña;
             }
             catch (Exception e)

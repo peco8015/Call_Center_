@@ -32,6 +32,7 @@ namespace WindowsFormsApplication1
                 case "empleado":
                     empleado = conectar.datos_empleado(identificador); // DNI para empleado
                     tcDatos.TabPages.RemoveByKey("tpRendimiento");
+                    tcDatos.TabPages.RemoveByKey("tpFechas");
                     break;
 
                 case "cliente":
