@@ -71,6 +71,10 @@
             this.pnlEstadisticas = new System.Windows.Forms.Panel();
             this.tcDatos = new System.Windows.Forms.TabControl();
             this.tpRendimiento = new System.Windows.Forms.TabPage();
+            this.lbPromTimeImddProd = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.lbPromTimeProd = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.lbPromDurLlam = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.lbPromLlamadas = new System.Windows.Forms.Label();
@@ -78,7 +82,6 @@
             this.lbPromVentas = new System.Windows.Forms.Label();
             this.dgvTabla = new System.Windows.Forms.DataGridView();
             this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.tpFechas = new System.Windows.Forms.TabPage();
             this.gb01 = new System.Windows.Forms.GroupBox();
@@ -100,10 +103,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pnlInformacion = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
-            this.lbPromTimeProd = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.lbPromTimeImddProd = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.lbTimeEspera = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
             this.pnlEstadisticas.SuspendLayout();
             this.tcDatos.SuspendLayout();
             this.tpRendimiento.SuspendLayout();
@@ -363,6 +365,9 @@
             // 
             // tpRendimiento
             // 
+            this.tpRendimiento.Controls.Add(this.lbTimeEspera);
+            this.tpRendimiento.Controls.Add(this.label24);
+            this.tpRendimiento.Controls.Add(this.label22);
             this.tpRendimiento.Controls.Add(this.lbPromTimeImddProd);
             this.tpRendimiento.Controls.Add(this.label25);
             this.tpRendimiento.Controls.Add(this.lbPromTimeProd);
@@ -374,7 +379,6 @@
             this.tpRendimiento.Controls.Add(this.lbPromVentas);
             this.tpRendimiento.Controls.Add(this.dgvTabla);
             this.tpRendimiento.Controls.Add(this.label14);
-            this.tpRendimiento.Controls.Add(this.label13);
             this.tpRendimiento.Controls.Add(this.label12);
             this.tpRendimiento.Location = new System.Drawing.Point(4, 28);
             this.tpRendimiento.Name = "tpRendimiento";
@@ -384,11 +388,49 @@
             this.tpRendimiento.Text = "Rendimientos Empleados";
             this.tpRendimiento.UseVisualStyleBackColor = true;
             // 
+            // lbPromTimeImddProd
+            // 
+            this.lbPromTimeImddProd.AutoSize = true;
+            this.lbPromTimeImddProd.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lbPromTimeImddProd.Location = new System.Drawing.Point(562, 102);
+            this.lbPromTimeImddProd.Name = "lbPromTimeImddProd";
+            this.lbPromTimeImddProd.Size = new System.Drawing.Size(137, 20);
+            this.lbPromTimeImddProd.TabIndex = 15;
+            this.lbPromTimeImddProd.Text = "Promedio de Ventas";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(412, 102);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(144, 20);
+            this.label25.TabIndex = 14;
+            this.label25.Text = "Tiempo Improductivo";
+            // 
+            // lbPromTimeProd
+            // 
+            this.lbPromTimeProd.AutoSize = true;
+            this.lbPromTimeProd.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lbPromTimeProd.Location = new System.Drawing.Point(206, 102);
+            this.lbPromTimeProd.Name = "lbPromTimeProd";
+            this.lbPromTimeProd.Size = new System.Drawing.Size(137, 20);
+            this.lbPromTimeProd.TabIndex = 13;
+            this.lbPromTimeProd.Text = "Promedio de Ventas";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(9, 102);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(133, 20);
+            this.label23.TabIndex = 12;
+            this.label23.Text = " Tiempo Productivo";
+            // 
             // lbPromDurLlam
             // 
             this.lbPromDurLlam.AutoSize = true;
             this.lbPromDurLlam.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lbPromDurLlam.Location = new System.Drawing.Point(671, 63);
+            this.lbPromDurLlam.Location = new System.Drawing.Point(559, 39);
             this.lbPromDurLlam.Name = "lbPromDurLlam";
             this.lbPromDurLlam.Size = new System.Drawing.Size(137, 20);
             this.lbPromDurLlam.TabIndex = 11;
@@ -397,17 +439,17 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(453, 63);
+            this.label16.Location = new System.Drawing.Point(409, 39);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(213, 20);
+            this.label16.Size = new System.Drawing.Size(147, 20);
             this.label16.TabIndex = 10;
-            this.label16.Text = "Promedio Duracion de llamadas ";
+            this.label16.Text = "Duracion de llamadas ";
             // 
             // lbPromLlamadas
             // 
             this.lbPromLlamadas.AutoSize = true;
-            this.lbPromLlamadas.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lbPromLlamadas.Location = new System.Drawing.Point(671, 24);
+            this.lbPromLlamadas.ForeColor = System.Drawing.Color.Blue;
+            this.lbPromLlamadas.Location = new System.Drawing.Point(616, 3);
             this.lbPromLlamadas.Name = "lbPromLlamadas";
             this.lbPromLlamadas.Size = new System.Drawing.Size(137, 20);
             this.lbPromLlamadas.TabIndex = 9;
@@ -417,7 +459,7 @@
             // 
             this.lbPromDurLlamVent.AutoSize = true;
             this.lbPromDurLlamVent.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lbPromDurLlamVent.Location = new System.Drawing.Point(270, 63);
+            this.lbPromDurLlamVent.Location = new System.Drawing.Point(206, 73);
             this.lbPromDurLlamVent.Name = "lbPromDurLlamVent";
             this.lbPromDurLlamVent.Size = new System.Drawing.Size(137, 20);
             this.lbPromDurLlamVent.TabIndex = 8;
@@ -427,7 +469,7 @@
             // 
             this.lbPromVentas.AutoSize = true;
             this.lbPromVentas.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lbPromVentas.Location = new System.Drawing.Point(270, 25);
+            this.lbPromVentas.Location = new System.Drawing.Point(206, 39);
             this.lbPromVentas.Name = "lbPromVentas";
             this.lbPromVentas.Size = new System.Drawing.Size(137, 20);
             this.lbPromVentas.TabIndex = 7;
@@ -442,13 +484,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTabla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTabla.Location = new System.Drawing.Point(13, 125);
+            this.dgvTabla.Location = new System.Drawing.Point(13, 154);
             this.dgvTabla.Name = "dgvTabla";
             this.dgvTabla.ReadOnly = true;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvTabla.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvTabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTabla.Size = new System.Drawing.Size(764, 422);
+            this.dgvTabla.Size = new System.Drawing.Size(764, 393);
             this.dgvTabla.TabIndex = 6;
             this.dgvTabla.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellClick);
             this.dgvTabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellContentClick);
@@ -456,29 +498,20 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(9, 63);
+            this.label14.Location = new System.Drawing.Point(9, 73);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(255, 20);
+            this.label14.Size = new System.Drawing.Size(189, 20);
             this.label14.TabIndex = 2;
-            this.label14.Text = "Promedio Duracion de llamadas Ventas";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(453, 21);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(86, 20);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "Total Ventas";
+            this.label14.Text = "Duracion de llamadas Ventas";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(9, 25);
+            this.label12.Location = new System.Drawing.Point(6, 39);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(162, 20);
+            this.label12.Size = new System.Drawing.Size(80, 20);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Promedio de Efectividad";
+            this.label12.Text = " Efectividad";
             // 
             // tpFechas
             // 
@@ -491,7 +524,7 @@
             this.tpFechas.Location = new System.Drawing.Point(4, 28);
             this.tpFechas.Name = "tpFechas";
             this.tpFechas.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFechas.Size = new System.Drawing.Size(822, 576);
+            this.tpFechas.Size = new System.Drawing.Size(791, 564);
             this.tpFechas.TabIndex = 0;
             this.tpFechas.Text = "Fechas";
             this.tpFechas.UseVisualStyleBackColor = true;
@@ -709,7 +742,7 @@
             this.tpCampañaDeEmpleado.Location = new System.Drawing.Point(4, 28);
             this.tpCampañaDeEmpleado.Name = "tpCampañaDeEmpleado";
             this.tpCampañaDeEmpleado.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCampañaDeEmpleado.Size = new System.Drawing.Size(822, 576);
+            this.tpCampañaDeEmpleado.Size = new System.Drawing.Size(791, 564);
             this.tpCampañaDeEmpleado.TabIndex = 3;
             this.tpCampañaDeEmpleado.Text = "Historial Campañas";
             this.tpCampañaDeEmpleado.UseVisualStyleBackColor = true;
@@ -786,43 +819,33 @@
             this.label20.TabIndex = 0;
             this.label20.Text = "Información";
             // 
-            // lbPromTimeProd
+            // label22
             // 
-            this.lbPromTimeProd.AutoSize = true;
-            this.lbPromTimeProd.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lbPromTimeProd.Location = new System.Drawing.Point(270, 102);
-            this.lbPromTimeProd.Name = "lbPromTimeProd";
-            this.lbPromTimeProd.Size = new System.Drawing.Size(137, 20);
-            this.lbPromTimeProd.TabIndex = 13;
-            this.lbPromTimeProd.Text = "Promedio de Ventas";
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(286, 3);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(240, 20);
+            this.label22.TabIndex = 16;
+            this.label22.Text = "Promedios Generales de la Campaña";
             // 
-            // label23
+            // lbTimeEspera
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(9, 102);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(195, 20);
-            this.label23.TabIndex = 12;
-            this.label23.Text = "Promedio Tiempo Productivo";
+            this.lbTimeEspera.AutoSize = true;
+            this.lbTimeEspera.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lbTimeEspera.Location = new System.Drawing.Point(559, 74);
+            this.lbTimeEspera.Name = "lbTimeEspera";
+            this.lbTimeEspera.Size = new System.Drawing.Size(137, 20);
+            this.lbTimeEspera.TabIndex = 18;
+            this.lbTimeEspera.Text = "Promedio de Ventas";
             // 
-            // lbPromTimeImddProd
+            // label24
             // 
-            this.lbPromTimeImddProd.AutoSize = true;
-            this.lbPromTimeImddProd.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lbPromTimeImddProd.Location = new System.Drawing.Point(676, 102);
-            this.lbPromTimeImddProd.Name = "lbPromTimeImddProd";
-            this.lbPromTimeImddProd.Size = new System.Drawing.Size(137, 20);
-            this.lbPromTimeImddProd.TabIndex = 15;
-            this.lbPromTimeImddProd.Text = "Promedio de Ventas";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(453, 102);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(206, 20);
-            this.label25.TabIndex = 14;
-            this.label25.Text = "PromedioTiempo Improductivo";
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(409, 74);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(127, 20);
+            this.label24.TabIndex = 17;
+            this.label24.Text = " Tiempo de Espera";
             // 
             // frmDetalle
             // 
@@ -891,7 +914,6 @@
         private System.Windows.Forms.ComboBox cbFiltroFecha;
         private System.Windows.Forms.TabPage tpRendimiento;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.DataGridView dgvTabla;
         private System.Windows.Forms.Label label15;
@@ -918,5 +940,8 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label lbPromTimeProd;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label lbTimeEspera;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label22;
     }
 }

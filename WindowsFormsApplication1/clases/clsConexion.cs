@@ -508,13 +508,14 @@ namespace WindowsFormsApplication1.clases
         {
 
             clsCampaña campaña = new clsCampaña();
-            string total = "";
+            string res = "no hay registros";
+         
 
             try
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand("select t_capacitacion,t_reunion,t_llenadoFormularios,t_atendiendo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where  jornada_laboral.id_campaña=" + id, con);
-
+                
 
 
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
@@ -524,11 +525,13 @@ namespace WindowsFormsApplication1.clases
                 int minutos = 0;
 
                 minutos = dameMinutos(dt);
-                total = minutos.ToString();
+                if (dt.Rows.Count > 0)
+                {
+                    float prom = float.Parse((minutos).ToString()) / float.Parse((dt.Rows.Count).ToString());
+                    res = prom.ToString();
+                }
 
-
-
-                return total;
+                return res;
 
 
 
@@ -550,7 +553,7 @@ namespace WindowsFormsApplication1.clases
         {
 
             clsCampaña campaña = new clsCampaña();
-            string total = "";
+            string res = "no hay registros";
 
             try
             {
@@ -564,13 +567,14 @@ namespace WindowsFormsApplication1.clases
                 sda.Fill(dt);
 
                 int minutos = 0;
-
                 minutos = dameMinutos(dt);
+                if (dt.Rows.Count>0)
+                {
+                    float prom = float.Parse((minutos).ToString()) / float.Parse((dt.Rows.Count).ToString());
+                    res = prom.ToString();
+                }
 
-                total = minutos.ToString();
-
-
-                return total;
+                return res;
 
 
 
@@ -588,31 +592,33 @@ namespace WindowsFormsApplication1.clases
 
         }
 
-        public string totalTiempoProductivo(int id)//ajustar para q reciba id campaña
+        public string promedioEspera(int idcamp)
+
         {
 
             clsCampaña campaña = new clsCampaña();
-            string total="";
+            string res = "no hay registros";
 
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("select t_capacitacion,t_reunion,t_llenadoFormularios,t_atendiendo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where  jornada_laboral.id_empleado=" + id, con);
+                SqlCommand cmd = new SqlCommand("SELECT[id_campaña],[id_empleado],[t_espera] FROM [Call_Center].[dbo].[llamada] where [id_campaña]=" + idcamp, con);
 
-                
+
 
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
                 int minutos = 0;
-
                 minutos = dameMinutos(dt);
-                total = minutos.ToString();
-                
+                if (dt.Rows.Count > 0)
+                {
+                    float prom = float.Parse((minutos).ToString()) / float.Parse((dt.Rows.Count).ToString());
+                    res = prom.ToString();
+                }
 
-
-                return total;
+                return res;
 
 
 
@@ -630,16 +636,60 @@ namespace WindowsFormsApplication1.clases
 
         }
 
-        public string totalTiempoImproductivo(int id)//ajustar para q reciba id campaña
+        public string totalTiempoProductivo(int id,int idcamp)
         {
 
             clsCampaña campaña = new clsCampaña();
-            string total = "";
+            string res="no hay registros";
 
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("select t_descanso, t_sinContactos, t_sinCampaña,t_inactivo, t_baño,  t_almuerzo  from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where  jornada_laboral.id_empleado=" + id, con);
+                SqlCommand cmd = new SqlCommand("select [t_capacitacion],[t_reunion],[t_llenadoFormularios],[t_atendiendo] from [Call_Center].[dbo].[jornada_laboral]  where [jornada_laboral].id_empleado=" +id+ " and [jornada_laboral].id_campaña=" +idcamp, con);
+
+                
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+
+                int minutos = 0;
+                minutos = dameMinutos(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    float prom = float.Parse((minutos).ToString()) / float.Parse((dt.Rows.Count).ToString());
+                    res = prom.ToString();
+                }
+
+                return res;
+
+
+
+            }
+
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message);//
+                return "";
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+
+        public string totalTiempoImproductivo(int id,int idcamp)
+
+        {
+
+            clsCampaña campaña = new clsCampaña();
+            string res = "no hay registros";
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("select [t_descanso], [t_sinContactos], [t_sinCampaña],[t_inactivo], [t_baño],  [t_almuerzo]  from [Call_Center].[dbo].[jornada_laboral]  where [jornada_laboral].id_empleado=" + id + " and [jornada_laboral].id_campaña=" + idcamp, con);
 
 
 
@@ -648,13 +698,60 @@ namespace WindowsFormsApplication1.clases
                 sda.Fill(dt);
 
                 int minutos = 0;
-
                 minutos = dameMinutos(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    float prom = float.Parse((minutos).ToString()) / float.Parse((dt.Rows.Count).ToString());
+                    res = prom.ToString();
+                }
 
-                total = minutos.ToString();
+                return res;
 
 
-                return total;
+
+            }
+
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message);//
+                return "";
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+
+      
+
+        public string totalEspera(int id,int idcamp)
+
+        {
+
+            clsCampaña campaña = new clsCampaña();
+            string res = "no hay registros";
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT[id_campaña],[id_empleado],[t_espera] FROM [Call_Center].[dbo].[llamada] where [id_campaña]="+ idcamp +"and [id_empleado]=" + id, con);
+
+
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+
+                int minutos = 0;
+                minutos = dameMinutos(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    float prom = float.Parse((minutos).ToString()) / float.Parse((dt.Rows.Count).ToString());
+                    res = prom.ToString();
+                }
+
+                return res;
 
 
 
@@ -3101,7 +3198,7 @@ namespace WindowsFormsApplication1.clases
                 campaña.Fecha_fin = (dt.Rows[0]["F_fin"] != null)? Convert.ToDateTime(dt.Rows[0]["F_fin"]) : DateTime.MinValue;
                 campaña.Id_cliente = Convert.ToInt32(dt.Rows[0]["id_cliente"]);
                 campaña.NombreCliente = Convert.ToString(dt.Rows[0]["Nombre1"]);
-                campaña.Lider = Convert.ToInt32(dt.Rows[0]["Lider"]);
+               // campaña.Lider = Convert.ToInt32(dt.Rows[0]["Lider"]);
                 return campaña;
             }
             catch (Exception e)
@@ -3437,12 +3534,13 @@ namespace WindowsFormsApplication1.clases
 
             rendimientos.Columns.Add("Id", typeof(int));
             rendimientos.Columns.Add("Empleado", typeof(String));
-            rendimientos.Columns.Add("Productivo", typeof(String));
-            rendimientos.Columns.Add("No Productivo", typeof(String));
+            rendimientos.Columns.Add("Tiempo Productivo(min)", typeof(String));
+            rendimientos.Columns.Add("Tiempo Improductivo(min)", typeof(String));
+            rendimientos.Columns.Add("Tiempo de Espera(min)", typeof(String));
             rendimientos.Columns.Add("Ventas", typeof(float));
             rendimientos.Columns.Add("Efectividad", typeof(string));
-            rendimientos.Columns.Add("Promedio Duracion llamadas Vendidas (min)", typeof(float));           
-            rendimientos.Columns.Add("Promedio Duracion llamadas(min)", typeof(float));
+            rendimientos.Columns.Add("Duracion llamadas Vendidas(min)", typeof(float));           
+            rendimientos.Columns.Add("Duracion llamadas(min)", typeof(float));
             rendimientos.Columns.Add("PromedioEfect", typeof(float));
 
             float promEfectividad = 0;
@@ -3451,8 +3549,9 @@ namespace WindowsFormsApplication1.clases
             {
                 int  idempleado =  Convert.ToInt32(dtRow.ItemArray[0]);
                 float[] cantLlamadas = LlamadasCampaña(idempleado, id);
-                string totProd = totalTiempoProductivo(idempleado);
-                string totImp = totalTiempoImproductivo(idempleado);
+                string totProd = totalTiempoProductivo(idempleado,id);
+                string totImp = totalTiempoImproductivo(idempleado,id);
+                string espera = totalEspera(idempleado,id);
                 float[] canVentas = VentasCampaña(idempleado, id);
                 float efectividad = Convert.ToInt32((canVentas[0] * 100) / cantLlamadas[0]);
 
@@ -3468,7 +3567,7 @@ namespace WindowsFormsApplication1.clases
                     promEfectividad = 0;
                 }
 
-                rendimientos.Rows.Add(dtRow.ItemArray[0], dtRow.ItemArray[1], totProd,totImp,canVentas[0],efectividad, canVentas[1], cantLlamadas[1], promEfectividad);
+                rendimientos.Rows.Add(dtRow.ItemArray[0], dtRow.ItemArray[1], totProd,totImp,espera,canVentas[0],efectividad, canVentas[1], cantLlamadas[1], promEfectividad);
                 
             }
             return rendimientos;

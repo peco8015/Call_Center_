@@ -406,44 +406,46 @@ namespace WindowsFormsApplication1
 
                 lbPromVentas.Text = promEfectTotal.ToString() + "%";
                 lbPromDurLlamVent.Text = Convert.ToString(canVentas[2]) + " min";
-                lbPromLlamadas.Text = Convert.ToString(canVentas[1]);
+                lbPromLlamadas.Text = Convert.ToString(canVentas[1]) + " Ventas Totales";
                 lbPromDurLlam.Text = canLlamadas[1].ToString("0.00") + " min";
                 lbPromTimeProd.Text = conectar.totalTiempoPromedioCampaña(campaña.Id_campaña) + " min";
                 lbPromTimeImddProd.Text= conectar.totalTiempoImproPromedioCampaña(campaña.Id_campaña)+ " min";
+                lbTimeEspera.Text = conectar.promedioEspera(campaña.Id_campaña) +" min";
 
                 dgvTabla.Columns["PromedioEfect"].Visible = false;
                 dgvTabla.Columns["Id"].Width = 25;
                 dgvTabla.Columns["Ventas"].Width = 75;
                 dgvTabla.Columns["Efectividad"].Width = 80;
+                
 
                 foreach (DataGridViewRow row in dgvTabla.Rows)
                 {
 
-                    if ((Convert.ToInt32(row.Cells["Productivo"].Value)) > float.Parse(conectar.totalTiempoPromedioCampaña(campaña.Id_campaña)))
+                    if (float.Parse(row.Cells["Tiempo Productivo(min)"].Value.ToString()) > float.Parse(conectar.totalTiempoPromedioCampaña(campaña.Id_campaña)))
                     {
-                        row.Cells["Productivo"].Style.ForeColor = Color.Green;
+                        row.Cells["Tiempo Productivo(min)"].Style.ForeColor = Color.Green;
                        
                     }
                     else
                     {
-                        row.Cells["Productivo"].Style.ForeColor = Color.Red;
+                        row.Cells["Tiempo Productivo(min)"].Style.ForeColor = Color.Red;
                        
                     }
 
 
-                    if ((Convert.ToInt32(row.Cells["No Productivo"].Value)) > float.Parse(conectar.totalTiempoImproPromedioCampaña(campaña.Id_campaña)))
+                    if ((float.Parse(row.Cells["Tiempo Improductivo(min)"].Value.ToString())) > float.Parse(conectar.totalTiempoImproPromedioCampaña(campaña.Id_campaña)))
                     {
-                        row.Cells["No Productivo"].Style.ForeColor = Color.Green;
+                        row.Cells["Tiempo Improductivo(min)"].Style.ForeColor = Color.Green;
                       
                     }
                     else
                     {
-                        row.Cells["No Productivo"].Style.ForeColor = Color.Red;
+                        row.Cells["Tiempo Improductivo(min)"].Style.ForeColor = Color.Red;
                     
                     }
 
 
-                    if ((Convert.ToInt32(row.Cells["Efectividad"].Value)) > promEfectTotal)
+                    if ((float.Parse(row.Cells["Efectividad"].Value.ToString())) > promEfectTotal)
                     {
                         row.Cells["Efectividad"].Value = (row.Cells["Efectividad"].Value).ToString() + "%";
                         row.Cells["Efectividad"].Style.ForeColor = Color.Green;
@@ -455,22 +457,31 @@ namespace WindowsFormsApplication1
                     }
 
 
-                    if ((float.Parse(row.Cells["Promedio Duracion llamadas Vendidas (min)"].Value.ToString())) > 0)//canVentas[1])
+                    if ((float.Parse(row.Cells["Duracion llamadas Vendidas(min)"].Value.ToString())) > 0)//canVentas[1])
                     {
-                        row.Cells["Promedio Duracion llamadas Vendidas (min)"].Style.ForeColor = Color.Red;
+                        row.Cells["Duracion llamadas Vendidas(min)"].Style.ForeColor = Color.Red;
                     }
                     else
                     {
-                        row.Cells["Promedio Duracion llamadas Vendidas (min)"].Style.ForeColor = Color.Green;
+                        row.Cells["Duracion llamadas Vendidas(min)"].Style.ForeColor = Color.Green;
                     }
 
-                    if ((float.Parse(row.Cells["Promedio Duracion llamadas(min)"].Value.ToString())) > canLlamadas[1])
+                    if ((float.Parse(row.Cells["Duracion llamadas(min)"].Value.ToString())) > canLlamadas[1])
                     {
-                        row.Cells["Promedio Duracion llamadas(min)"].Style.ForeColor = Color.Red;
+                        row.Cells["Duracion llamadas(min)"].Style.ForeColor = Color.Red;
                     }
                     else
                     {
-                        row.Cells["Promedio Duracion llamadas(min)"].Style.ForeColor = Color.Green;
+                        row.Cells["Duracion llamadas(min)"].Style.ForeColor = Color.Green;
+                    }
+
+                    if ((float.Parse(row.Cells["Tiempo de Espera(min)"].Value.ToString())) > float.Parse(conectar.promedioEspera(campaña.Id_campaña)))
+                    {
+                        row.Cells["Tiempo de Espera(min)"].Style.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        row.Cells["Tiempo de Espera(min)"].Style.ForeColor = Color.Green;
                     }
                 }
             }
