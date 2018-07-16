@@ -111,23 +111,24 @@ namespace WindowsFormsApplication1
             try
             {
                 frmDetalle frmDetalle;
-                frmDatos frmDato;
+                
                 switch (dgvTabla.Columns[0].Name)//la tabla cambia,esto es para controlar q tabla esta visible al momento del click en la celda
                 {
                     case "id_empleado":
                         /*frmDato = new frmDatos(this, Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()), "Datos Empleado");
                         frmDato.Show();*/
-                        frmDetalle = new frmDetalle("empleado", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()));
+                        frmDetalle = new frmDetalle("empleado", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()),0);
                         frmDetalle.Show();
                         break;
 
                     case "id_cliente":
-                        frmDetalle = new frmDetalle("cliente", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_cliente"].Value.ToString()));
+                        frmDetalle = new frmDetalle("cliente", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_cliente"].Value.ToString()),0);
                         frmDetalle.Show();
                         break;
 
                     case "id_campaña":
-                        frmDetalle = new frmDetalle("campaña", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_campaña"].Value.ToString()));
+                        int idcamp = Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells[0].Value);
+                        frmDetalle = new frmDetalle("campaña", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_campaña"].Value.ToString()), idcamp);                        
                         frmDetalle.Show();
                         break;
                 }

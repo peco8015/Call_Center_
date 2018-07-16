@@ -17,12 +17,15 @@ namespace WindowsFormsApplication1
         clsCampaña campaña;
         string clase;
         int identificador;
+        int idPrevio;
+        
 
-        public frmDetalle(string t, int id)
+        public frmDetalle(string t, int id,int prev)
         {
             InitializeComponent();
             clase = t;
             identificador = id;
+            idPrevio = prev;
         }
 
         private void frmDetalles_Load(object sender, EventArgs e)
@@ -32,7 +35,7 @@ namespace WindowsFormsApplication1
                 case "empleado":
                     empleado = conectar.datos_empleado(identificador); // DNI para empleado
                     tcDatos.TabPages.RemoveByKey("tpRendimiento");
-                    tcDatos.TabPages.RemoveByKey("tpFechas");
+                   
                     break;
 
                 case "cliente":
@@ -105,6 +108,8 @@ namespace WindowsFormsApplication1
                     string[] opciones = { "Hoy", "Semana", "Mes", "Año" };
                     cbFiltroFecha.Items.AddRange(opciones);
                     cbFiltroFecha.SelectedIndex = 0;
+                    
+                    llenarEstadisticasEmpleadoEnCampaña();
                     break;
 
                 case "tpRendimiento":
@@ -165,7 +170,7 @@ namespace WindowsFormsApplication1
                 int dni = conectar.dniEmpleado(Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["Id"].Value.ToString()));
                 /*frmDato = new frmDatos(this, dni, "Datos Empleado");
                 frmDato.Show();*/
-                frmDetalle frmDetalleCliente = new frmDetalle("empleado", dni);
+                frmDetalle frmDetalleCliente = new frmDetalle("empleado", dni,idPrevio);
                 frmDetalleCliente.Show();
             }
             catch (Exception ex)
@@ -498,7 +503,46 @@ namespace WindowsFormsApplication1
             dt = conectar.misCampañas(empleado.Id_empleado);
             dgvTableEmpl.DataSource = dt;
         }
-        
+
+        public void llenarEstadisticasEmpleadoEnCampaña()
+        {
+            double[] tiempos = new double[10];
+
+            
+            DateTime desde = new DateTime();
+            DateTime hasta = new DateTime();
+
+           
+
+             tiempos = conectar.tiemposCampañaEmpleado(empleado.Id_empleado, idPrevio, desde,hasta);
+            foreach (var series in cTiempos.Series)
+            {
+                series.Points.Clear();
+            }
+
+            cTiempos.Series["tiempos"].LegendText = "(minutos)";
+
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+
+            dic.Add("En Reunión", Convert.ToInt32(tiempos[0]));
+            dic.Add("Atendiendo", Convert.ToInt32(tiempos[1]));
+            dic.Add("Llenando Formularios", Convert.ToInt32(tiempos[2]));
+            dic.Add("En Capacitación", Convert.ToInt32(tiempos[3]));
+            dic.Add("Descanso", Convert.ToInt32(tiempos[4]));
+            dic.Add("Sin Contactos", Convert.ToInt32(tiempos[5]));
+            dic.Add("Inactivo", Convert.ToInt32(tiempos[6]));
+            dic.Add("Baño", Convert.ToInt32(tiempos[7]));
+            dic.Add("Almuerzo", Convert.ToInt32(tiempos[8]));
+            dic.Add("Sin Campaña", Convert.ToInt32(tiempos[9]));
+
+            foreach (KeyValuePair<string, int> d in dic)
+            {
+                cTiempos.Series["tiempos"].Points.AddXY(d.Key, d.Value);
+            }
+
+        }
+
+
         private void checkCampos()
         {
             switch (clase)
@@ -582,6 +626,10 @@ namespace WindowsFormsApplication1
             dt = conectar.misCampañas(empleado.Id_empleado);
             dgvTableEmpl.DataSource = dt;
         }
-        
+
+        private void cTiempos_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

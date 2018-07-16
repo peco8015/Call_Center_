@@ -770,1090 +770,53 @@ namespace WindowsFormsApplication1.clases
         }
 
         #region Funciones de tiempo  CHEKC HECK CHECK
-        public int tiempoHoyProductivo(DateTime hoy,int id)
+
+        public double[] tiemposCampañaEmpleado(int idemp,int idcamp,DateTime desde,DateTime hasta)
         {
+            double[] res = new double[10];
 
-            clsCampaña campaña = new clsCampaña();
-            int cant = 0;
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
+            res[0] = tiempoAtendiendo(idemp,idcamp,"");
+            res[1] = tiempoFormulario(idemp, idcamp, "");
+            res[2] = tiempoCapacitacion(idemp, idcamp, "");
+            res[3] = tiempoDescanso(idemp, idcamp, "");
+            res[4] = tiempoSinContacto(idemp, idcamp, "");
+            res[5] = tiempoInactivo(idemp, idcamp, "");
+            res[6] = tiempoReunion(idemp, idcamp, "");
+            res[7] = tiempoBaño(idemp, idcamp, "");
+            res[8] = tiempoAlmuerzo(idemp, idcamp, "");
+            res[9] = tiempoSinCampaña(idemp, idcamp, "");
 
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT DATEPART(MINUTE, t_atendiendo) + DATEPART(HOUR, t_atendiendo) * 60 + DATEPART(MINUTE, t_reunion) + DATEPART(HOUR, t_reunion) * 60 + DATEPART(MINUTE, t_llenadoFormularios) + DATEPART(HOUR, t_llenadoFormularios) * 60 + DATEPART(MINUTE, t_capacitacion) + DATEPART(HOUR, t_capacitacion) * 60   as 'TotalTime' from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where jornada_laboral.id_empleado =" + id+" and fecha ='" + fecha + "'", con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                cant = Convert.ToInt32(dt.Rows[0][0]);
-
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-                //MessageBox.Show(e.Message);
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
+            return res;
         }
 
-        public int tiempoHoyImproductivo(DateTime hoy)
+        public double tiempoAtendiendo( int idEmp,int idCamp,string fecha)
         {
 
-            clsCampaña campaña = new clsCampaña();
-            int cant = 0;
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT DATEPART(MINUTE, t_descanso) + DATEPART(HOUR, t_descanso) * 60 + DATEPART(MINUTE, t_sinContactos) + DATEPART(HOUR, t_sinContactos) * 60 + DATEPART(MINUTE, t_sinCampaña) + DATEPART(HOUR, t_sinCampaña) * 60 + DATEPART(MINUTE, t_inactivo) + DATEPART(HOUR, t_inactivo) * 60 + DATEPART(MINUTE, t_baño) + DATEPART(HOUR, t_baño) * 60 + DATEPART(MINUTE, t_almuerzo) + DATEPART(HOUR, t_almuerzo) * 60  as 'TotalTime' from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado  where fecha ='" + fecha + "'", con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                cant = Convert.ToInt32(dt.Rows[0][0]);
-
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-                //MessageBox.Show(e.Message);
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoSemanaProductivo(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
             
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_capacitacion,t_reunion,t_llenadoFormularios,t_atendiendo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where fecha between DATEADD(wk,DATEDIFF(wk,0,GETDATE()),0) and DATEADD(wk,DATEDIFF(wk,0,GETDATE()),6) and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                
-                int minutos = 0;
-
-               minutos = dameMinutos(dt);
-
-
-
-
-                return minutos;
-
-
-            }
-
-            catch (Exception e)
-            {
-                //// MessageBox.Show(e.Message);
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoSemanaImproductivo(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT   t_descanso, t_sinContactos, t_sinCampaña,t_inactivo, t_baño,  t_almuerzo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where fecha between DATEADD(wk,DATEDIFF(wk,0,GETDATE()),0) and DATEADD(wk,DATEDIFF(wk,0,GETDATE()),6) and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-
-                minutos = dameMinutos(dt);
-
-
-
-
-                return minutos;
-
-
-
-            }
-
-            catch (Exception e)
-            {
-                //// MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoMesProductivo(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_capacitacion,t_reunion,t_llenadoFormularios,t_atendiendo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(mm, Fecha) = datepart(mm, getdate())  and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-
-                minutos = dameMinutos(dt);
-
-
-
-
-                return minutos;
-
-
-
-            }
-
-            catch (Exception e)
-            {
-                //MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoMesImproductivo(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT   t_descanso, t_sinContactos, t_sinCampaña,t_inactivo, t_baño,  t_almuerzo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(mm, Fecha) = datepart(mm, getdate())  and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-
-                minutos = dameMinutos(dt);
-
-
-
-
-                return minutos;
-
-
-
-            }
-
-            catch (Exception e)
-            {
-                //MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoAñoProductivo(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_capacitacion,t_reunion,t_llenadoFormularios,t_atendiendo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(yy, Fecha) = datepart(yy, getdate())  and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-
-                minutos = dameMinutos(dt);
-
-
-
-
-                return minutos;
-
-
-
-            }
-
-            catch (Exception e)
-            {
-                //// MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-
-        public int tiempoAñoImproductivo(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT   t_descanso, t_sinContactos, t_sinCampaña,t_inactivo, t_baño,  t_almuerzo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(yy, Fecha) = datepart(yy, getdate())  and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-
-                minutos = dameMinutos(dt);
-
-
-
-
-                return minutos;
-
-
-
-            }
-
-            catch (Exception e)
-            {
-                //// MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleCapacitacionHoyProductivo(DateTime hoy, int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            int cant = 0;
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT t_capacitacion   FROM jornada_laboral, empleado  where jornada_laboral.id_empleado =" + id + " and fecha ='" + fecha + "'", con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-               
-                
-
-                TimeSpan time = TimeSpan.Parse((dt.Rows[0][0]).ToString());
-
-                cant = Convert.ToInt32(time.TotalMinutes);
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-                //// MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleFormularioHoyProductivo(DateTime hoy, int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            int cant = 0;
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT t_llenadoFormularios   FROM jornada_laboral, empleado  where jornada_laboral.id_empleado =" + id + " and fecha ='" + fecha + "'", con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-
-
-                TimeSpan time = TimeSpan.Parse((dt.Rows[0][0]).ToString());
-
-                cant = Convert.ToInt32(time.TotalMinutes);
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-                //MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleAtendiendoHoyProductivo(DateTime hoy, int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            int cant = 0;
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT t_atendiendo   FROM jornada_laboral, empleado  where jornada_laboral.id_empleado =" + id + " and fecha ='" + fecha + "'", con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-
-
-                TimeSpan time = TimeSpan.Parse((dt.Rows[0][0]).ToString());
-
-                cant = Convert.ToInt32(time.TotalMinutes);
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-                //// MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleReunionHoyProductivo(DateTime hoy, int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            int cant = 0;
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT t_reunion   FROM jornada_laboral, empleado  where jornada_laboral.id_empleado =" + id + " and fecha ='" + fecha + "'", con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-
-
-                TimeSpan time = TimeSpan.Parse((dt.Rows[0][0]).ToString());
-
-                cant = Convert.ToInt32(time.TotalMinutes);
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-                //// MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleDescansoHoyProductivo(DateTime hoy, int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            int cant = 0;
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT t_descanso   FROM jornada_laboral, empleado  where jornada_laboral.id_empleado =" + id + " and fecha ='" + fecha + "'", con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-
-
-                TimeSpan time = TimeSpan.Parse((dt.Rows[0][0]).ToString());
-
-                cant = Convert.ToInt32(time.TotalMinutes);
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-                //// MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleSinContactoHoyProductivo(DateTime hoy, int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            int cant = 0;
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT t_sinContactos   FROM jornada_laboral, empleado  where jornada_laboral.id_empleado =" + id + " and fecha ='" + fecha + "'", con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-
-
-                TimeSpan time = TimeSpan.Parse((dt.Rows[0][0]).ToString());
-
-                cant = Convert.ToInt32(time.TotalMinutes);
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-                //// MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleSinCampañaHoyProductivo(DateTime hoy, int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            int cant = 0;
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT t_sinCampaña   FROM jornada_laboral, empleado  where jornada_laboral.id_empleado =" + id + " and fecha ='" + fecha + "'", con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-
-
-                TimeSpan time = TimeSpan.Parse((dt.Rows[0][0]).ToString());
-
-                cant = Convert.ToInt32(time.TotalMinutes);
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-                // //////MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleInactivoHoyProductivo(DateTime hoy, int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            int cant = 0;
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT t_inactivo   FROM jornada_laboral, empleado  where jornada_laboral.id_empleado =" + id + " and fecha ='" + fecha + "'", con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-
-
-                TimeSpan time = TimeSpan.Parse((dt.Rows[0][0]).ToString());
-
-                cant = Convert.ToInt32(time.TotalMinutes);
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleBañoHoyProductivo(DateTime hoy, int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            int cant = 0;
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT t_baño   FROM jornada_laboral, empleado  where jornada_laboral.id_empleado =" + id + " and fecha ='" + fecha + "'", con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-
-
-                TimeSpan time = TimeSpan.Parse((dt.Rows[0][0]).ToString());
-
-                cant = Convert.ToInt32(time.TotalMinutes);
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleAlmuerzoHoyProductivo(DateTime hoy, int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            int cant = 0;
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT t_almuerzo  FROM jornada_laboral, empleado  where jornada_laboral.id_empleado =" + id + " and fecha ='" + fecha + "'", con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-
-
-                TimeSpan time = TimeSpan.Parse((dt.Rows[0][0]).ToString());
-
-                cant = Convert.ToInt32(time.TotalMinutes);
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
- /*semana*/    public int tiempoDetalleCapacitacionSemana( int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
            
-           
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_capacitacion from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(ww, Fecha) = datepart(ww, getdate())  and jornada_laboral.id_empleado=" + id, con);
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-                
-
-                return minutos;
-                                         
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleFormularioSemana( int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-           
-           
-
-            try
-            {
-                con.Open(); 
-
-                SqlCommand cmd = new SqlCommand("select t_llenadoFormularios from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(ww, Fecha) = datepart(ww, getdate())  and jornada_laboral.id_empleado=" + id, con);
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleAtendiendoSemana(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_atendiendo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(ww, Fecha) = datepart(ww, getdate())  and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleReunionSemana(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            
-
-            try
-            {
-                con.Open(); 
-              SqlCommand cmd = new SqlCommand("select t_reunion from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(ww, Fecha) = datepart(ww, getdate())  and jornada_laboral.id_empleado=" + id, con);
-
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleDescansoSemana(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-           
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_descanso from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(ww, Fecha) = datepart(ww, getdate())  and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleSinContactoSemana( int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-         
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_sinContactos from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(ww, Fecha) = datepart(ww, getdate())  and jornada_laboral.id_empleado=" + id, con);
-             
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleSinCampañaSemana(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_sinCampaña from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(ww, Fecha) = datepart(ww, getdate())  and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleInactivoSemana(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
       
 
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("select t_inactivo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(ww, Fecha) = datepart(ww, getdate())  and jornada_laboral.id_empleado=" + id, con);
-
-
-
+                SqlCommand cmd = new SqlCommand("SELECT [t_atendiendo]   FROM [Call_Center].[dbo].[jornada_laboral] where [jornada_laboral].id_empleado="+idEmp + " and[jornada_laboral].id_campaña="+idCamp, con);
+                
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
 
-                int minutos = 0;
-                minutos = dameMinutos(dt);
+                Double horas = dameHoras(dt);
 
-
-                return minutos;
+                return horas;
+                
 
 
             }
 
             catch (Exception e)
             {
-               // MessageBox.Show(e.Message);//
+                //// MessageBox.Show(e.Message);//
                 return 0000;
             }
             finally
@@ -1863,30 +826,55 @@ namespace WindowsFormsApplication1.clases
 
         }
 
-        public int tiempoDetalleBañoSemana( int id)
+        public double tiempoFormulario(int idEmp, int idCamp, string fecha)
         {
+            
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT [t_llenadoFormularios]   FROM [Call_Center].[dbo].[jornada_laboral] where [jornada_laboral].id_empleado=" + idEmp + " and[jornada_laboral].id_campaña=" + idCamp, con);
 
-            clsCampaña campaña = new clsCampaña();
-     
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+
+
+                Double horas = dameHoras(dt);
+
+                return horas;
+
+
+
+            }
+
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message);//
+                return 0000;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+
+        public double tiempoCapacitacion(int idEmp, int idCamp, string fecha)
+        {
 
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("select t_baño from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(ww, Fecha) = datepart(ww, getdate())  and jornada_laboral.id_empleado=" + id, con);
-
-
+                SqlCommand cmd = new SqlCommand("SELECT [t_capacitacion]   FROM [Call_Center].[dbo].[jornada_laboral] where [jornada_laboral].id_empleado=" + idEmp + " and[jornada_laboral].id_campaña=" + idCamp, con);
 
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
-                int minutos = 0;
-                minutos = dameMinutos(dt);
 
+                Double horas = dameHoras(dt);
 
-                return minutos;
-
-
+                return horas;
 
 
 
@@ -1894,7 +882,7 @@ namespace WindowsFormsApplication1.clases
 
             catch (Exception e)
             {
-               // MessageBox.Show(e.Message);//
+                //MessageBox.Show(e.Message);//
                 return 0000;
             }
             finally
@@ -1904,31 +892,55 @@ namespace WindowsFormsApplication1.clases
 
         }
 
-        public int tiempoDetalleAlmuerzoSemana( int id)
+        public double tiempoDescanso(int idEmp, int idCamp, string fecha)
         {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT [t_descanso]   FROM [Call_Center].[dbo].[jornada_laboral] where [jornada_laboral].id_empleado=" + idEmp + " and[jornada_laboral].id_campaña=" + idCamp, con);
 
-            clsCampaña campaña = new clsCampaña();
-         
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+
+
+                Double horas = dameHoras(dt);
+
+                return horas;
+
+
+
+            }
+
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message);//
+                return 0000;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+
+        }
+
+        public double tiempoSinContacto(int idEmp, int idCamp, string fecha)
+        {
 
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("select t_almuerzo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(ww, Fecha) = datepart(ww, getdate())  and jornada_laboral.id_empleado=" + id, con);
-
-
+                SqlCommand cmd = new SqlCommand("SELECT [t_sinContactos]   FROM [Call_Center].[dbo].[jornada_laboral] where [jornada_laboral].id_empleado=" + idEmp + " and[jornada_laboral].id_campaña=" + idCamp, con);
 
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
 
-                int minutos = 0;
-                minutos = dameMinutos(dt);
+                Double horas = dameHoras(dt);
 
-
-                return minutos;
-
-
+                return horas;
 
 
 
@@ -1936,7 +948,7 @@ namespace WindowsFormsApplication1.clases
 
             catch (Exception e)
             {
-               // MessageBox.Show(e.Message);//
+                //MessageBox.Show(e.Message);//
                 return 0000;
             }
             finally
@@ -1946,28 +958,22 @@ namespace WindowsFormsApplication1.clases
 
         }
 
-    /**/    public int tiempoDetalleCapacitacionMes(int id)
+        public double tiempoInactivo(int idEmp, int idCamp, string fecha)
         {
-
-            clsCampaña campaña = new clsCampaña();
-
-
 
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("select t_capacitacion from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(mm, Fecha) = datepart(mm, getdate()) and jornada_laboral.id_empleado=" + id, con);
+                SqlCommand cmd = new SqlCommand("SELECT [t_inactivo]   FROM [Call_Center].[dbo].[jornada_laboral] where [jornada_laboral].id_empleado=" + idEmp + " and[jornada_laboral].id_campaña=" + idCamp, con);
 
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
 
-                int minutos = 0;
-                minutos = dameMinutos(dt);
+                Double horas = dameHoras(dt);
 
-
-                return minutos;
+                return horas;
 
 
 
@@ -1975,7 +981,7 @@ namespace WindowsFormsApplication1.clases
 
             catch (Exception e)
             {
-               // MessageBox.Show(e.Message);//
+                //MessageBox.Show(e.Message);//
                 return 0000;
             }
             finally
@@ -1985,36 +991,30 @@ namespace WindowsFormsApplication1.clases
 
         }
 
-        public int tiempoDetalleFormularioMes(int id)
+        public double tiempoReunion(int idEmp, int idCamp, string fecha)
         {
-
-            clsCampaña campaña = new clsCampaña();
-
-
 
             try
             {
                 con.Open();
-
-                SqlCommand cmd = new SqlCommand("select t_llenadoFormularios from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(mm, Fecha) = datepart(mm, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
+                SqlCommand cmd = new SqlCommand("SELECT [t_reunion]   FROM [Call_Center].[dbo].[jornada_laboral] where [jornada_laboral].id_empleado=" + idEmp + " and[jornada_laboral].id_campaña=" + idCamp, con);
 
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
-                int minutos = 0;
-                minutos = dameMinutos(dt);
 
+                Double horas = dameHoras(dt);
 
-                return minutos;
+                return horas;
+
 
 
             }
 
             catch (Exception e)
             {
-               // MessageBox.Show(e.Message);//
+                //MessageBox.Show(e.Message);//
                 return 0000;
             }
             finally
@@ -2024,27 +1024,22 @@ namespace WindowsFormsApplication1.clases
 
         }
 
-        public int tiempoDetalleAtendiendoMes(int id)
+        public double tiempoBaño(int idEmp, int idCamp, string fecha)
         {
-
-            clsCampaña campaña = new clsCampaña();
 
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("select t_atendiendo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(mm, Fecha) = datepart(mm, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
+                SqlCommand cmd = new SqlCommand("SELECT [t_baño]   FROM [Call_Center].[dbo].[jornada_laboral] where [jornada_laboral].id_empleado=" + idEmp + " and[jornada_laboral].id_campaña=" + idCamp, con);
 
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
-                int minutos = 0;
-                minutos = dameMinutos(dt);
 
+                Double horas = dameHoras(dt);
 
-                return minutos;
+                return horas;
 
 
 
@@ -2052,7 +1047,7 @@ namespace WindowsFormsApplication1.clases
 
             catch (Exception e)
             {
-               // MessageBox.Show(e.Message);//
+                //MessageBox.Show(e.Message);//
                 return 0000;
             }
             finally
@@ -2062,36 +1057,30 @@ namespace WindowsFormsApplication1.clases
 
         }
 
-        public int tiempoDetalleReunionMes(int id)
+        public double tiempoAlmuerzo(int idEmp, int idCamp, string fecha)
         {
-
-            clsCampaña campaña = new clsCampaña();
-
 
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("select t_reunion from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(mm, Fecha) = datepart(mm, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-
+                SqlCommand cmd = new SqlCommand("SELECT [t_almuerzo]   FROM [Call_Center].[dbo].[jornada_laboral] where [jornada_laboral].id_empleado=" + idEmp + " and[jornada_laboral].id_campaña=" + idCamp, con);
 
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
-                int minutos = 0;
-                minutos = dameMinutos(dt);
 
+                Double horas = dameHoras(dt);
 
-                return minutos;
+                return horas;
+
 
 
             }
 
             catch (Exception e)
             {
-               // MessageBox.Show(e.Message);//
+                //MessageBox.Show(e.Message);//
                 return 0000;
             }
             finally
@@ -2099,30 +1088,25 @@ namespace WindowsFormsApplication1.clases
                 con.Close();
             }
 
+
         }
 
-        public int tiempoDetalleDescansoMes(int id)
+        public double tiempoSinCampaña(int idEmp, int idCamp, string fecha)
         {
-
-            clsCampaña campaña = new clsCampaña();
-
 
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("select t_descanso from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(mm, Fecha) = datepart(mm, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
+                SqlCommand cmd = new SqlCommand("SELECT [t_sinCampaña]   FROM [Call_Center].[dbo].[jornada_laboral] where [jornada_laboral].id_empleado=" + idEmp + " and[jornada_laboral].id_campaña=" + idCamp, con);
 
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
-                int minutos = 0;
-                minutos = dameMinutos(dt);
 
+                Double horas = dameHoras(dt);
 
-                return minutos;
+                return horas;
 
 
 
@@ -2130,7 +1114,7 @@ namespace WindowsFormsApplication1.clases
 
             catch (Exception e)
             {
-               // MessageBox.Show(e.Message);//
+                //MessageBox.Show(e.Message);//
                 return 0000;
             }
             finally
@@ -2140,600 +1124,22 @@ namespace WindowsFormsApplication1.clases
 
         }
 
-        public int tiempoDetalleSinContactoMes(int id)
-        {
+      
 
-            clsCampaña campaña = new clsCampaña();
+   
 
+        
 
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_sinContactos from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(mm, Fecha) = datepart(mm, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleSinCampañaMes(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_sinCampaña from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(mm, Fecha) = datepart(mm, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleInactivoMes(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_inactivo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(mm, Fecha) = datepart(mm, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleBañoMes(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_baño from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(mm, Fecha) = datepart(mm, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleAlmuerzoMes(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_almuerzo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(mm, Fecha) = datepart(mm, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleCapacitacionAño(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_capacitacion from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(yy, Fecha) = datepart(yy, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-                //SqlCommand cmd = new SqlCommand("select t_capacitacion from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where  where datepart(yy, Fecha) = datepart(yy, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleFormularioAño(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-
-            try
-            {
-                con.Open();
-
-                SqlCommand cmd = new SqlCommand("select t_llenadoFormularios from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(yy, Fecha) = datepart(yy, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleAtendiendoAño(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_atendiendo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(yy, Fecha) = datepart(yy, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleReunionAño(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_reunion from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(yy, Fecha) = datepart(yy, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleDescansoAño(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_descanso from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(yy, Fecha) = datepart(yy, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-            }
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleSinContactoAño(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_sinContactos from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(yy, Fecha) = datepart(yy, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleSinCampañaAño(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_sinCampaña from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(yy, Fecha) = datepart(yy, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleInactivoAño(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_inactivo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(mm, Fecha) = datepart(mm, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleBañoAño(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_baño from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(yy, Fecha) = datepart(yy, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int tiempoDetalleAlmuerzoAño(int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select t_almuerzo from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where datepart(yy, Fecha) = datepart(yy, getdate()) and jornada_laboral.id_empleado=" + id, con);
-
-
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-
-                int minutos = 0;
-                minutos = dameMinutos(dt);
-
-
-                return minutos;
-
-
-
-
-
-            }
-
-            catch (Exception e)
-            {
-               // MessageBox.Show(e.Message);//
-                return 0000;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
+ 
 
 
         //SqlCommand cmd = new SqlCommand("select t_capacitacion from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where  where datepart(yy, Fecha) = datepart(yy, getdate()) and jornada_laboral.id_empleado=" + id, con);
 
 
-        public String dameMinutos2(DataTable dt)
+        public double dameHoras(DataTable dt)
         {
 
-            TimeSpan minuts = new TimeSpan(00, 00, 00);
+            TimeSpan hours = new TimeSpan(00, 00, 00);
 
 
             int countRow = dt.Rows.Count;
@@ -2742,31 +1148,20 @@ namespace WindowsFormsApplication1.clases
             for (int iCol = 0; iCol < countCol; iCol++)
             {
                 DataColumn col = dt.Columns[iCol];
-                /*  
-                TimeSpan timefirst = new TimeSpan(00, 00, 00);
-
-                foreach (DataRow dtRow in dt.Rows)
-                {
-                    object cell = dtRow.ItemArray[0];
-                    TimeSpan time = TimeSpan.Parse((cell).ToString());
-                    timefirst = timefirst + time;
-                    
-                    
-
-                }
-                */
+                
                 for (int iRow = 0; iRow < countRow; iRow++)
                 {
                     object cell = dt.Rows[iRow].ItemArray[iCol];
                     TimeSpan time = TimeSpan.Parse((cell).ToString());
 
-                    minuts = minuts + time;
+                    hours = hours + time;
 
                 }
+              
             }
 
 
-            return minuts.ToString();
+            return hours.TotalHours;
         }
         public int dameMinutos(DataTable dt)
         {
@@ -3198,7 +1593,7 @@ namespace WindowsFormsApplication1.clases
                 campaña.Fecha_fin = (dt.Rows[0]["F_fin"] != null)? Convert.ToDateTime(dt.Rows[0]["F_fin"]) : DateTime.MinValue;
                 campaña.Id_cliente = Convert.ToInt32(dt.Rows[0]["id_cliente"]);
                 campaña.NombreCliente = Convert.ToString(dt.Rows[0]["Nombre1"]);
-                campaña.Lider = Convert.ToInt32(dt.Rows[0]["Lider"]);
+               // campaña.Lider = Convert.ToInt32(dt.Rows[0]["Lider"]);
                 return campaña;
             }
             catch (Exception e)

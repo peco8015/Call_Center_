@@ -159,7 +159,6 @@ D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\bin\Debug\WindowsFormsA
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmNuevo.resources
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmAusente.resources
-D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmDatos.resources
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmDetalle.resources
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmEmple.resources
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmEstado.resources
