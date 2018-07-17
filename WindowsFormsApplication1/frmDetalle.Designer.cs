@@ -71,6 +71,9 @@
             this.pnlEstadisticas = new System.Windows.Forms.Panel();
             this.tcDatos = new System.Windows.Forms.TabControl();
             this.tpRendimiento = new System.Windows.Forms.TabPage();
+            this.lbTimeEspera = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.lbPromTimeImddProd = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.lbPromTimeProd = new System.Windows.Forms.Label();
@@ -103,9 +106,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pnlInformacion = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.lbTimeEspera = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
             this.pnlEstadisticas.SuspendLayout();
             this.tcDatos.SuspendLayout();
             this.tpRendimiento.SuspendLayout();
@@ -387,6 +387,34 @@
             this.tpRendimiento.TabIndex = 2;
             this.tpRendimiento.Text = "Rendimientos Empleados";
             this.tpRendimiento.UseVisualStyleBackColor = true;
+            // 
+            // lbTimeEspera
+            // 
+            this.lbTimeEspera.AutoSize = true;
+            this.lbTimeEspera.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lbTimeEspera.Location = new System.Drawing.Point(559, 74);
+            this.lbTimeEspera.Name = "lbTimeEspera";
+            this.lbTimeEspera.Size = new System.Drawing.Size(137, 20);
+            this.lbTimeEspera.TabIndex = 18;
+            this.lbTimeEspera.Text = "Promedio de Ventas";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(409, 74);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(127, 20);
+            this.label24.TabIndex = 17;
+            this.label24.Text = " Tiempo de Espera";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(286, 3);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(240, 20);
+            this.label22.TabIndex = 16;
+            this.label22.Text = "Promedios Generales de la Campaña";
             // 
             // lbPromTimeImddProd
             // 
@@ -819,34 +847,6 @@
             this.label20.Size = new System.Drawing.Size(98, 21);
             this.label20.TabIndex = 0;
             this.label20.Text = "Información";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(286, 3);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(240, 20);
-            this.label22.TabIndex = 16;
-            this.label22.Text = "Promedios Generales de la Campaña";
-            // 
-            // lbTimeEspera
-            // 
-            this.lbTimeEspera.AutoSize = true;
-            this.lbTimeEspera.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lbTimeEspera.Location = new System.Drawing.Point(559, 74);
-            this.lbTimeEspera.Name = "lbTimeEspera";
-            this.lbTimeEspera.Size = new System.Drawing.Size(137, 20);
-            this.lbTimeEspera.TabIndex = 18;
-            this.lbTimeEspera.Text = "Promedio de Ventas";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(409, 74);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(127, 20);
-            this.label24.TabIndex = 17;
-            this.label24.Text = " Tiempo de Espera";
             // 
             // frmDetalle
             // 

@@ -723,6 +723,8 @@ namespace WindowsFormsApplication1.clases
 
         }
 
+
+
       
 
         public string totalEspera(int id,int idcamp)
@@ -770,7 +772,9 @@ namespace WindowsFormsApplication1.clases
         }
 
         #region Funciones de tiempo  CHEKC HECK CHECK
+        
 
+        
         public double[] tiemposCampañaEmpleado(int idemp,int idcamp,DateTime desde,DateTime hasta)
         {
             double[] res = new double[10];
@@ -1124,13 +1128,147 @@ namespace WindowsFormsApplication1.clases
 
         }
 
-      
+        public int totalLLamarDeNuevo(int idEmp, int idCamp, string fecha)
+        {
+            int total = 0;
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT  [resultado]  FROM [dbo].[llamada] where [resultado] like 'LLamarDeNuevo'and [llamada].id_empleado=" + idEmp + " and[llamada].id_campaña=" + idCamp, con);
 
-   
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                total = dt.Rows.Count;
 
+                return total;
+
+
+
+            }
+
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message);//
+                return 0000;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+
+        public int totalNoAtendido(int idEmp, int idCamp, string fecha)
+        {
+            int total = 0;
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT  [resultado]  FROM [dbo].[llamada] where [resultado] like 'No Atendido 'and [llamada].id_empleado=" + idEmp + " and[llamada].id_campaña=" + idCamp, con);
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                total = dt.Rows.Count;
+
+                return total;
+
+
+
+            }
+
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message);//
+                return 0000;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+
+        public int totalNoVendido(int idEmp, int idCamp, string fecha)
+        {
+            int total = 0;
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT  [resultado]  FROM [dbo].[llamada] where [resultado] like 'No Vendido'and [llamada].id_empleado=" + idEmp + " and[llamada].id_campaña=" + idCamp, con);
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                total = dt.Rows.Count;
+
+                return total;
+
+
+
+            }
+
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message);//
+                return 0000;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
         
+        public int totalVendido(int idEmp, int idCamp, string fecha)
+        {
+            int total = 0;
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT  [resultado]  FROM [dbo].[llamada] where [resultado] like 'Vendido'and [llamada].id_empleado=" + idEmp + " and[llamada].id_campaña=" + idCamp, con);
 
- 
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                total = dt.Rows.Count;
+
+                return total;
+
+
+
+            }
+
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message);//
+                return 0000;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+
+        public int[] llamadasCampañaEmpleado(int idemp, int idcamp, DateTime desde, DateTime hasta)
+        {
+            int[] res = new int[4];
+
+            res[0] = totalLLamarDeNuevo(idemp, idcamp, "");
+            res[1] = totalNoAtendido(idemp, idcamp, "");
+            res[2] = totalNoVendido(idemp, idcamp, "");
+            res[3] = totalVendido(idemp, idcamp, "");
+           
+
+            return res;
+        }
+
+
+
+
+
 
 
         //SqlCommand cmd = new SqlCommand("select t_capacitacion from jornada_laboral INNER Join  empleado on empleado.id_empleado = jornada_laboral.id_empleado where  where datepart(yy, Fecha) = datepart(yy, getdate()) and jornada_laboral.id_empleado=" + id, con);
@@ -2516,202 +2654,7 @@ namespace WindowsFormsApplication1.clases
 
         #endregion
 
-        #region Funciones estadisticas ventas empleado
-
-
-        public int[] totalTodasLlamadasHoy(DateTime hoy, int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            int[] cant = new int[] { 0, 0, 0, 0 };
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT count(resultado) as total,resultado FROM llamada where llamada.id_empleado = " + id + "  and llamada.fecha = '" + fecha + "'  group by resultado", con);
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int i = 0;
-
-                foreach (DataRow fila in dt.Rows)
-                {
-
-                    cant[i] = Convert.ToInt32(fila["total"]);
-                    i++;
-
-                }
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);//
-                return null;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int[] totalTodasLlamadasSemana(DateTime hoy, int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            int[] cant = new int[] { 0, 0, 0, 0, 0 };
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-
-
-                SqlCommand cmd = new SqlCommand("SELECT count(resultado) as total,resultado FROM llamada where llamada.id_empleado = " + id + " and datepart(ww, Fecha) = datepart(ww, getdate()) group by resultado", con);
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int i = 0;
-
-                foreach (DataRow fila in dt.Rows)
-                {
-
-                    cant[i] = Convert.ToInt32(fila["total"]);
-                    i++;
-
-                }
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);//
-                return null;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int[] totalTodasLlamadasMes(DateTime hoy, int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            int[] cant = new int[] { 0, 0, 0, 0, 0 };
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-
-
-                SqlCommand cmd = new SqlCommand("SELECT count(resultado) as total,resultado FROM llamada where llamada.id_empleado = " + id + " and datepart(mm, Fecha) = datepart(mm, getdate())   group by resultado", con);
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int i = 0;
-
-                foreach (DataRow fila in dt.Rows)
-                {
-
-                    cant[i] = Convert.ToInt32(fila["total"]);
-                    i++;
-
-                }
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);//
-                return null;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public int[] totalTodasLlamadasAño(DateTime hoy, int id)
-        {
-
-            clsCampaña campaña = new clsCampaña();
-            int[] cant = new int[] { 0, 0, 0, 0, 0 };
-            string fecha = hoy.ToString("yyy/MM/dd").Replace('/', '-');
-
-            try
-            {
-                con.Open();
-
-
-                SqlCommand cmd = new SqlCommand(" SELECT count(resultado) as total,resultado FROM llamada where llamada.id_empleado = " + id + " and  datepart(yy, Fecha) = datepart(yy, getdate())   group by resultado", con);
-
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                int i = 0;
-
-                foreach (DataRow fila in dt.Rows)
-                {
-
-                    cant[i] = Convert.ToInt32(fila["total"]);
-                    i++;
-
-                }
-
-
-
-
-                return cant;
-
-
-            }
-
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);//
-                return null;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-
-
-        #endregion
+      
 
 
         #region Estadisticas cliente
