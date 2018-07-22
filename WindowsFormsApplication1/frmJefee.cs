@@ -126,7 +126,7 @@ namespace WindowsFormsApplication1
                         break;
 
                     case "id_campaña":
-                        int idcamp = Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells[0].Value);
+                        
                         frmDetalle = new frmDetalle("campaña", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_campaña"].Value.ToString()));                        
                         frmDetalle.Show();
                         break;

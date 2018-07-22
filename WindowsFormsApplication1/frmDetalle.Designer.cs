@@ -692,7 +692,7 @@
             series1.Points.Add(dataPoint1);
             series1.Points.Add(dataPoint2);
             this.cVentasCampaña.Series.Add(series1);
-            this.cVentasCampaña.Size = new System.Drawing.Size(456, 36);
+            this.cVentasCampaña.Size = new System.Drawing.Size(456, 244);
             this.cVentasCampaña.TabIndex = 2;
             this.cVentasCampaña.Text = "Ventas por Campaña";
             title1.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
@@ -740,7 +740,7 @@
             legend2.Name = "Legend1";
             legend2.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
             this.cTiempos.Legends.Add(legend2);
-            this.cTiempos.Location = new System.Drawing.Point(341, 57);
+            this.cTiempos.Location = new System.Drawing.Point(341, 281);
             this.cTiempos.Name = "cTiempos";
             this.cTiempos.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
             series3.ChartArea = "ChartArea1";
@@ -756,7 +756,7 @@
             series4.Name = "Improductivo";
             this.cTiempos.Series.Add(series3);
             this.cTiempos.Series.Add(series4);
-            this.cTiempos.Size = new System.Drawing.Size(456, 508);
+            this.cTiempos.Size = new System.Drawing.Size(456, 284);
             this.cTiempos.TabIndex = 0;
             this.cTiempos.Text = "Detalle de Tiempos";
             title3.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);

@@ -153,10 +153,6 @@ D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csproj.C
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
 D:\Repo\pruebaCall\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csprojResolveAssemblyReference.cache
-D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\bin\Debug\Resources\jefe.png
-D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
-D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
-D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmNuevo.resources
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmAusente.resources
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmDetalle.resources
@@ -172,6 +168,11 @@ D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsA
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.ucPantallaAusente1.resources
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csproj.GenerateResource.Cache
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csproj.CoreCompileInputs.cache
+D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\bin\Debug\Resources\jefe.png
+D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csprojResolveAssemblyReference.cache
+D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmEpleadoCampaña.resources
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
-D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csprojResolveAssemblyReference.cache

@@ -57,6 +57,12 @@
     <Compile Include="clases\clsLLamadaDeNuevo.cs" />
     <Compile Include="clases\clsLlamada.cs" />
     <Compile Include="clases\clsVenta.cs" />
+    <Compile Include="frmEpleadoCampaña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEpleadoCampaña.Designer.cs">
+      <DependentUpon>frmEpleadoCampaña.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmNuevo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +137,9 @@
     <Compile Include="ucPantallaAusente1.Designer.cs">
       <DependentUpon>ucPantallaAusente1.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmEpleadoCampaña.resx">
+      <DependentUpon>frmEpleadoCampaña.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmNuevo.resx">
       <DependentUpon>frmNuevo.cs</DependentUpon>
     </EmbeddedResource>

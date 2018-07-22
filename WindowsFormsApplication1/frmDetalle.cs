@@ -165,11 +165,13 @@ namespace WindowsFormsApplication1
         {
             try
             {
-               // frmDatos frmDato;
-                int dni = conectar.dniEmpleado(Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["Id"].Value.ToString()));
+                // frmDatos frmDato;
+              
+               
+                int idEMp = Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["Id"].Value);
                 /*frmDato = new frmDatos(this, dni, "Datos Empleado");
                 frmDato.Show();*/
-                frmDetalle frmDetalleCliente = new frmDetalle("empleado", dni);
+               frmEpleadoCampaña frmDetalleCliente = new frmEpleadoCampaña(campaña.Id_campaña,idEMp);
                 frmDetalleCliente.Show();
             }
             catch (Exception ex)
