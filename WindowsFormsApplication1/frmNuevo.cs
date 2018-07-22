@@ -27,7 +27,12 @@ namespace WindowsFormsApplication1
         public frmNuevo(string entidad)
         {
             InitializeComponent();
-            tipo = entidad;
+            if (entidad == "empleados")
+                tipo = "Empleado";
+            if (entidad == "campañas")
+                tipo = "Campaña";
+            if (entidad == "clientes")
+                tipo = "Cliente";
         }
 
         private void frmNuevo_Load(object sender, EventArgs e)

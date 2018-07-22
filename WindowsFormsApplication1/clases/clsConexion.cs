@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1.clases
         //@"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
         SqlConnection con;
-        string conx = @"Data Source=CLAUDIO\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
+        string conx = @"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
 
         public clsConexion()
@@ -3549,8 +3549,8 @@ namespace WindowsFormsApplication1.clases
                 cliente.Contacto = Convert.ToString(dt.Rows[0]["Contacto"]);
                 cliente.Mail = Convert.ToString(dt.Rows[0]["Mail"]);
                 cliente.Telefono = Convert.ToInt32(dt.Rows[0]["Telefono"]);
-                //cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilio_legal"]);
-                cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilioLegal"]);
+                cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilio_legal"]);
+                //cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilioLegal"]);
                 return cliente;
             }
             catch (Exception e)

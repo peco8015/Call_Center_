@@ -27,11 +27,19 @@ namespace WindowsFormsApplication1
 
         private void frmDetalles_Load(object sender, EventArgs e)
         {
+            List<TabPage> tabPage_col = new List<TabPage>();
             switch (clase)
             {
                 case "empleado":
                     empleado = conectar.datos_empleado(identificador); // DNI para empleado
-                    tcDatos.TabPages.RemoveByKey("tpRendimiento");
+                    foreach (TabPage tp in tcDatos.TabPages)
+                    {
+                        if (tp.Name == "tpCampañaDeEmpleado" || tp.Name == "tpFechas")
+                            tabPage_col.Add(tp);
+                    }
+                    tcDatos.TabPages.Clear();
+                    tcDatos.TabPages.AddRange(tabPage_col.ToArray());
+                    //tcDatos.TabPages.RemoveByKey("tpRendimiento");
                     break;
 
                 case "cliente":
@@ -97,22 +105,22 @@ namespace WindowsFormsApplication1
 
         private void tcDatos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch(tcDatos.SelectedTab.Name)
+            if (tcDatos.TabPages.Count > 0)
             {
-                case "tpFechas":
-                    cbFiltroFecha.Items.Clear();
-                    string[] opciones = { "Hoy", "Semana", "Mes", "Año" };
-                    cbFiltroFecha.Items.AddRange(opciones);
-                    cbFiltroFecha.SelectedIndex = 0;
-                    break;
+                switch (tcDatos.SelectedTab.Name)
+                {
+                    case "tpFechas":
 
-                case "tpRendimiento":
-                    llenarDtRendimiento();
-                    break;
+                        break;
 
-                case "tpCampañaDeEmpleado":
-                    rendimientoDeEmpleado();
-                    break;
+                    case "tpRendimiento":
+                        llenarDtRendimiento();
+                        break;
+
+                    case "tpCampañaDeEmpleado":
+                        rendimientoDeEmpleado();
+                        break;
+                }
             }
         }
 
@@ -130,7 +138,7 @@ namespace WindowsFormsApplication1
                 }
             }
             DateTime fechaAUX = DateTime.Today;
-            switch (cbFiltroFecha.SelectedItem.ToString())
+            /*switch ("Hoy")
             {
                 case "Hoy":
                     fechaAUX = DateTime.Today;
@@ -151,8 +159,8 @@ namespace WindowsFormsApplication1
                 case "Año":
                     fechaAUX = new DateTime(DateTime.Today.Year, 1, 1);
                     break;
-            }
-            mostrarNumeros(fechaAUX, cbFiltroFecha.SelectedItem.ToString());
+            }*/
+            mostrarNumeros(fechaAUX, "Hoy"); //cbFiltroFecha.SelectedItem.ToString());
         }
 
 
@@ -570,6 +578,10 @@ namespace WindowsFormsApplication1
             dt = conectar.misCampañas(empleado.Id_empleado);
             dgvTableEmpl.DataSource = dt;
         }
-        
+
+        private void cbHasta_CheckedChanged(object sender, EventArgs e)
+        {
+            dtpFiltroHasta.Enabled = (sender as CheckBox).Checked;
+        }
     }
 }

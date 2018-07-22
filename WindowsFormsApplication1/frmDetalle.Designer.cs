@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint7 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 5D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint8 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea13 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint17 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint18 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
+            System.Windows.Forms.DataVisualization.Charting.Title title13 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea14 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title14 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea15 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint19 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 5D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint20 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
+            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title15 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
@@ -70,17 +70,10 @@
             this.gbContacto = new System.Windows.Forms.GroupBox();
             this.pnlEstadisticas = new System.Windows.Forms.Panel();
             this.tcDatos = new System.Windows.Forms.TabControl();
-            this.tpRendimiento = new System.Windows.Forms.TabPage();
-            this.lbPromDurLlam = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.lbPromLlamadas = new System.Windows.Forms.Label();
-            this.lbPromDurLlamVent = new System.Windows.Forms.Label();
-            this.lbPromVentas = new System.Windows.Forms.Label();
-            this.dgvTabla = new System.Windows.Forms.DataGridView();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.tpFechas = new System.Windows.Forms.TabPage();
+            this.dtpFiltroFecha = new System.Windows.Forms.DateTimePicker();
+            this.dtpFiltroHasta = new System.Windows.Forms.DateTimePicker();
+            this.cbHasta = new System.Windows.Forms.CheckBox();
             this.gb01 = new System.Windows.Forms.GroupBox();
             this.lblInfo04 = new System.Windows.Forms.Label();
             this.lblInfo03 = new System.Windows.Forms.Label();
@@ -91,31 +84,76 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.cbFiltroFecha = new System.Windows.Forms.ComboBox();
             this.cVentasCampaña = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cPorcentajeVentas = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cTiempos = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tpRendimiento = new System.Windows.Forms.TabPage();
+            this.lbPromTimeImddProd = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.lbPromTimeProd = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.lbPromDurLlam = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.lbPromLlamadas = new System.Windows.Forms.Label();
+            this.lbPromDurLlamVent = new System.Windows.Forms.Label();
+            this.lbPromVentas = new System.Windows.Forms.Label();
+            this.dgvTabla = new System.Windows.Forms.DataGridView();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.tpCampañaDeEmpleado = new System.Windows.Forms.TabPage();
             this.dgvTableEmpl = new System.Windows.Forms.DataGridView();
+            this.tpListadoEmpleados = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlInformacion = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
-            this.lbPromTimeProd = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.lbPromTimeImddProd = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
+            this.tpConfiguracion = new System.Windows.Forms.TabPage();
+            this.dgvEnCampaña = new System.Windows.Forms.DataGridView();
+            this.dgvEmpleados = new System.Windows.Forms.DataGridView();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.btnEliminarDeCampaña = new System.Windows.Forms.Button();
+            this.btnAgregarACampaña = new System.Windows.Forms.Button();
+            this.label26 = new System.Windows.Forms.Label();
+            this.tcObjetivos = new System.Windows.Forms.TabControl();
+            this.tpEspecificaciones = new System.Windows.Forms.TabPage();
+            this.tpEfectividad = new System.Windows.Forms.TabPage();
+            this.tpEstimacionTiempos = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBox3 = new System.Windows.Forms.CheckedListBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.pnlEstadisticas.SuspendLayout();
             this.tcDatos.SuspendLayout();
-            this.tpRendimiento.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).BeginInit();
             this.tpFechas.SuspendLayout();
             this.gb01.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cVentasCampaña)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cPorcentajeVentas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cTiempos)).BeginInit();
+            this.tpRendimiento.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).BeginInit();
             this.tpCampañaDeEmpleado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTableEmpl)).BeginInit();
+            this.tpListadoEmpleados.SuspendLayout();
             this.pnlInformacion.SuspendLayout();
+            this.tpConfiguracion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEnCampaña)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleados)).BeginInit();
+            this.tcObjetivos.SuspendLayout();
+            this.tpEspecificaciones.SuspendLayout();
+            this.tpEfectividad.SuspendLayout();
+            this.tpEstimacionTiempos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -143,7 +181,7 @@
             // 
             this.btnEliminar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnEliminar.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(225, 584);
+            this.btnEliminar.Location = new System.Drawing.Point(225, 612);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(87, 47);
             this.btnEliminar.TabIndex = 19;
@@ -231,7 +269,7 @@
             // 
             this.btnEditar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnEditar.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.Location = new System.Drawing.Point(36, 584);
+            this.btnEditar.Location = new System.Drawing.Point(36, 612);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(87, 47);
             this.btnEditar.TabIndex = 9;
@@ -342,7 +380,7 @@
             this.pnlEstadisticas.Font = new System.Drawing.Font("Microsoft YaHei Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlEstadisticas.Location = new System.Drawing.Point(397, 62);
             this.pnlEstadisticas.Name = "pnlEstadisticas";
-            this.pnlEstadisticas.Size = new System.Drawing.Size(843, 647);
+            this.pnlEstadisticas.Size = new System.Drawing.Size(843, 675);
             this.pnlEstadisticas.TabIndex = 3;
             // 
             // tcDatos
@@ -350,16 +388,260 @@
             this.tcDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tcDatos.Controls.Add(this.tpRendimiento);
             this.tcDatos.Controls.Add(this.tpFechas);
             this.tcDatos.Controls.Add(this.tpCampañaDeEmpleado);
+            this.tcDatos.Controls.Add(this.tpConfiguracion);
+            this.tcDatos.Controls.Add(this.tpRendimiento);
+            this.tcDatos.Controls.Add(this.tpListadoEmpleados);
             this.tcDatos.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tcDatos.Location = new System.Drawing.Point(23, 41);
             this.tcDatos.Name = "tcDatos";
             this.tcDatos.SelectedIndex = 0;
-            this.tcDatos.Size = new System.Drawing.Size(799, 596);
+            this.tcDatos.Size = new System.Drawing.Size(799, 624);
             this.tcDatos.TabIndex = 1;
             this.tcDatos.SelectedIndexChanged += new System.EventHandler(this.tcDatos_SelectedIndexChanged);
+            // 
+            // tpFechas
+            // 
+            this.tpFechas.Controls.Add(this.dtpFiltroFecha);
+            this.tpFechas.Controls.Add(this.dtpFiltroHasta);
+            this.tpFechas.Controls.Add(this.cbHasta);
+            this.tpFechas.Controls.Add(this.gb01);
+            this.tpFechas.Controls.Add(this.label15);
+            this.tpFechas.Controls.Add(this.cVentasCampaña);
+            this.tpFechas.Controls.Add(this.cPorcentajeVentas);
+            this.tpFechas.Controls.Add(this.cTiempos);
+            this.tpFechas.Location = new System.Drawing.Point(4, 28);
+            this.tpFechas.Name = "tpFechas";
+            this.tpFechas.Padding = new System.Windows.Forms.Padding(3);
+            this.tpFechas.Size = new System.Drawing.Size(791, 592);
+            this.tpFechas.TabIndex = 0;
+            this.tpFechas.Text = "Fechas";
+            this.tpFechas.UseVisualStyleBackColor = true;
+            // 
+            // dtpFiltroFecha
+            // 
+            this.dtpFiltroFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFiltroFecha.Location = new System.Drawing.Point(146, 11);
+            this.dtpFiltroFecha.Name = "dtpFiltroFecha";
+            this.dtpFiltroFecha.Size = new System.Drawing.Size(171, 25);
+            this.dtpFiltroFecha.TabIndex = 26;
+            // 
+            // dtpFiltroHasta
+            // 
+            this.dtpFiltroHasta.Enabled = false;
+            this.dtpFiltroHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFiltroHasta.Location = new System.Drawing.Point(146, 54);
+            this.dtpFiltroHasta.Name = "dtpFiltroHasta";
+            this.dtpFiltroHasta.Size = new System.Drawing.Size(171, 25);
+            this.dtpFiltroHasta.TabIndex = 25;
+            // 
+            // cbHasta
+            // 
+            this.cbHasta.AutoSize = true;
+            this.cbHasta.Location = new System.Drawing.Point(11, 54);
+            this.cbHasta.Name = "cbHasta";
+            this.cbHasta.Size = new System.Drawing.Size(87, 24);
+            this.cbHasta.TabIndex = 24;
+            this.cbHasta.Text = "Hasta día:";
+            this.cbHasta.UseVisualStyleBackColor = true;
+            this.cbHasta.CheckedChanged += new System.EventHandler(this.cbHasta_CheckedChanged);
+            // 
+            // gb01
+            // 
+            this.gb01.BackColor = System.Drawing.Color.Transparent;
+            this.gb01.Controls.Add(this.lblInfo04);
+            this.gb01.Controls.Add(this.lblInfo03);
+            this.gb01.Controls.Add(this.lblInfo02);
+            this.gb01.Controls.Add(this.lblInfo01);
+            this.gb01.Controls.Add(this.label21);
+            this.gb01.Controls.Add(this.label19);
+            this.gb01.Controls.Add(this.label18);
+            this.gb01.Controls.Add(this.label17);
+            this.gb01.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gb01.Location = new System.Drawing.Point(20, 93);
+            this.gb01.Name = "gb01";
+            this.gb01.Size = new System.Drawing.Size(297, 201);
+            this.gb01.TabIndex = 22;
+            this.gb01.TabStop = false;
+            this.gb01.Text = "Números";
+            // 
+            // lblInfo04
+            // 
+            this.lblInfo04.AutoSize = true;
+            this.lblInfo04.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo04.Location = new System.Drawing.Point(222, 149);
+            this.lblInfo04.Name = "lblInfo04";
+            this.lblInfo04.Size = new System.Drawing.Size(14, 20);
+            this.lblInfo04.TabIndex = 11;
+            this.lblInfo04.Text = "1";
+            // 
+            // lblInfo03
+            // 
+            this.lblInfo03.AutoSize = true;
+            this.lblInfo03.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo03.Location = new System.Drawing.Point(222, 110);
+            this.lblInfo03.Name = "lblInfo03";
+            this.lblInfo03.Size = new System.Drawing.Size(14, 20);
+            this.lblInfo03.TabIndex = 10;
+            this.lblInfo03.Text = "1";
+            // 
+            // lblInfo02
+            // 
+            this.lblInfo02.AutoSize = true;
+            this.lblInfo02.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo02.Location = new System.Drawing.Point(222, 71);
+            this.lblInfo02.Name = "lblInfo02";
+            this.lblInfo02.Size = new System.Drawing.Size(14, 20);
+            this.lblInfo02.TabIndex = 9;
+            this.lblInfo02.Text = "1";
+            // 
+            // lblInfo01
+            // 
+            this.lblInfo01.AutoSize = true;
+            this.lblInfo01.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo01.Location = new System.Drawing.Point(222, 32);
+            this.lblInfo01.Name = "lblInfo01";
+            this.lblInfo01.Size = new System.Drawing.Size(14, 20);
+            this.lblInfo01.TabIndex = 8;
+            this.lblInfo01.Text = "1";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(59, 149);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(132, 20);
+            this.label21.TabIndex = 7;
+            this.label21.Text = "Tiempo productivo:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(40, 110);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(151, 20);
+            this.label19.TabIndex = 6;
+            this.label19.Text = "Cant Ventas realizadas:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(5, 71);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(186, 20);
+            this.label18.TabIndex = 5;
+            this.label18.Text = "Cant de Contactos llamados:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(90, 32);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(101, 20);
+            this.label17.TabIndex = 4;
+            this.label17.Text = "Cant Llamadas:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(25, 13);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(103, 20);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "Fecha / Desde:";
+            // 
+            // cVentasCampaña
+            // 
+            this.cVentasCampaña.BorderlineColor = System.Drawing.Color.Black;
+            this.cVentasCampaña.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea13.Name = "ChartArea1";
+            this.cVentasCampaña.ChartAreas.Add(chartArea13);
+            this.cVentasCampaña.Location = new System.Drawing.Point(340, 10);
+            this.cVentasCampaña.Name = "cVentasCampaña";
+            series17.ChartArea = "ChartArea1";
+            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series17.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            series17.Legend = "Legend1";
+            series17.Name = "Campañas";
+            series17.Points.Add(dataPoint17);
+            series17.Points.Add(dataPoint18);
+            this.cVentasCampaña.Series.Add(series17);
+            this.cVentasCampaña.Size = new System.Drawing.Size(444, 284);
+            this.cVentasCampaña.TabIndex = 2;
+            this.cVentasCampaña.Text = "Ventas por Campaña";
+            title13.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            title13.Name = "Title1";
+            title13.Text = "Ventas por Campaña";
+            this.cVentasCampaña.Titles.Add(title13);
+            // 
+            // cPorcentajeVentas
+            // 
+            chartArea14.Name = "ChartArea1";
+            this.cPorcentajeVentas.ChartAreas.Add(chartArea14);
+            legend9.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend9.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            legend9.IsTextAutoFit = false;
+            legend9.Name = "Legend1";
+            legend9.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            this.cPorcentajeVentas.Legends.Add(legend9);
+            this.cPorcentajeVentas.Location = new System.Drawing.Point(12, 304);
+            this.cPorcentajeVentas.Name = "cPorcentajeVentas";
+            this.cPorcentajeVentas.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
+            series18.BorderColor = System.Drawing.Color.Black;
+            series18.ChartArea = "ChartArea1";
+            series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series18.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            series18.Legend = "Legend1";
+            series18.Name = "Ventas";
+            this.cPorcentajeVentas.Series.Add(series18);
+            this.cPorcentajeVentas.Size = new System.Drawing.Size(322, 278);
+            this.cPorcentajeVentas.TabIndex = 1;
+            this.cPorcentajeVentas.Text = "Porcentaje de Ventas";
+            title14.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            title14.Name = "Title01";
+            title14.Text = "% Ventas";
+            this.cPorcentajeVentas.Titles.Add(title14);
+            // 
+            // cTiempos
+            // 
+            this.cTiempos.BorderlineColor = System.Drawing.Color.Black;
+            this.cTiempos.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea15.Name = "ChartArea1";
+            this.cTiempos.ChartAreas.Add(chartArea15);
+            legend10.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend10.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            legend10.IsTextAutoFit = false;
+            legend10.Name = "Legend1";
+            legend10.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            this.cTiempos.Legends.Add(legend10);
+            this.cTiempos.Location = new System.Drawing.Point(340, 304);
+            this.cTiempos.Name = "cTiempos";
+            this.cTiempos.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
+            series19.ChartArea = "ChartArea1";
+            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
+            series19.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            series19.Legend = "Legend1";
+            series19.Name = "Productivo";
+            series19.Points.Add(dataPoint19);
+            series19.Points.Add(dataPoint20);
+            series20.ChartArea = "ChartArea1";
+            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
+            series20.Legend = "Legend1";
+            series20.Name = "Improductivo";
+            this.cTiempos.Series.Add(series19);
+            this.cTiempos.Series.Add(series20);
+            this.cTiempos.Size = new System.Drawing.Size(444, 282);
+            this.cTiempos.TabIndex = 0;
+            this.cTiempos.Text = "Detalle de Tiempos";
+            title15.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            title15.Name = "Title01";
+            title15.Text = "Detalle de Tiempos";
+            this.cTiempos.Titles.Add(title15);
             // 
             // tpRendimiento
             // 
@@ -379,10 +661,48 @@
             this.tpRendimiento.Location = new System.Drawing.Point(4, 28);
             this.tpRendimiento.Name = "tpRendimiento";
             this.tpRendimiento.Padding = new System.Windows.Forms.Padding(3);
-            this.tpRendimiento.Size = new System.Drawing.Size(791, 564);
+            this.tpRendimiento.Size = new System.Drawing.Size(791, 592);
             this.tpRendimiento.TabIndex = 2;
             this.tpRendimiento.Text = "Rendimientos Empleados";
             this.tpRendimiento.UseVisualStyleBackColor = true;
+            // 
+            // lbPromTimeImddProd
+            // 
+            this.lbPromTimeImddProd.AutoSize = true;
+            this.lbPromTimeImddProd.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lbPromTimeImddProd.Location = new System.Drawing.Point(676, 102);
+            this.lbPromTimeImddProd.Name = "lbPromTimeImddProd";
+            this.lbPromTimeImddProd.Size = new System.Drawing.Size(137, 20);
+            this.lbPromTimeImddProd.TabIndex = 15;
+            this.lbPromTimeImddProd.Text = "Promedio de Ventas";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(453, 102);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(206, 20);
+            this.label25.TabIndex = 14;
+            this.label25.Text = "PromedioTiempo Improductivo";
+            // 
+            // lbPromTimeProd
+            // 
+            this.lbPromTimeProd.AutoSize = true;
+            this.lbPromTimeProd.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lbPromTimeProd.Location = new System.Drawing.Point(270, 102);
+            this.lbPromTimeProd.Name = "lbPromTimeProd";
+            this.lbPromTimeProd.Size = new System.Drawing.Size(137, 20);
+            this.lbPromTimeProd.TabIndex = 13;
+            this.lbPromTimeProd.Text = "Promedio de Ventas";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(9, 102);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(195, 20);
+            this.label23.TabIndex = 12;
+            this.label23.Text = "Promedio Tiempo Productivo";
             // 
             // lbPromDurLlam
             // 
@@ -442,13 +762,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTabla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTabla.Location = new System.Drawing.Point(13, 125);
+            this.dgvTabla.Location = new System.Drawing.Point(13, 131);
             this.dgvTabla.Name = "dgvTabla";
             this.dgvTabla.ReadOnly = true;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvTabla.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvTabla.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvTabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTabla.Size = new System.Drawing.Size(764, 422);
+            this.dgvTabla.Size = new System.Drawing.Size(764, 450);
             this.dgvTabla.TabIndex = 6;
             this.dgvTabla.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellClick);
             this.dgvTabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellContentClick);
@@ -480,236 +800,13 @@
             this.label12.TabIndex = 0;
             this.label12.Text = "Promedio de Efectividad";
             // 
-            // tpFechas
-            // 
-            this.tpFechas.Controls.Add(this.gb01);
-            this.tpFechas.Controls.Add(this.label15);
-            this.tpFechas.Controls.Add(this.cbFiltroFecha);
-            this.tpFechas.Controls.Add(this.cVentasCampaña);
-            this.tpFechas.Controls.Add(this.cPorcentajeVentas);
-            this.tpFechas.Controls.Add(this.cTiempos);
-            this.tpFechas.Location = new System.Drawing.Point(4, 28);
-            this.tpFechas.Name = "tpFechas";
-            this.tpFechas.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFechas.Size = new System.Drawing.Size(822, 576);
-            this.tpFechas.TabIndex = 0;
-            this.tpFechas.Text = "Fechas";
-            this.tpFechas.UseVisualStyleBackColor = true;
-            // 
-            // gb01
-            // 
-            this.gb01.BackColor = System.Drawing.Color.Transparent;
-            this.gb01.Controls.Add(this.lblInfo04);
-            this.gb01.Controls.Add(this.lblInfo03);
-            this.gb01.Controls.Add(this.lblInfo02);
-            this.gb01.Controls.Add(this.lblInfo01);
-            this.gb01.Controls.Add(this.label21);
-            this.gb01.Controls.Add(this.label19);
-            this.gb01.Controls.Add(this.label18);
-            this.gb01.Controls.Add(this.label17);
-            this.gb01.Font = new System.Drawing.Font("Microsoft YaHei Light", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb01.Location = new System.Drawing.Point(12, 57);
-            this.gb01.Name = "gb01";
-            this.gb01.Size = new System.Drawing.Size(305, 219);
-            this.gb01.TabIndex = 22;
-            this.gb01.TabStop = false;
-            this.gb01.Text = "Números";
-            // 
-            // lblInfo04
-            // 
-            this.lblInfo04.AutoSize = true;
-            this.lblInfo04.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfo04.Location = new System.Drawing.Point(222, 158);
-            this.lblInfo04.Name = "lblInfo04";
-            this.lblInfo04.Size = new System.Drawing.Size(14, 20);
-            this.lblInfo04.TabIndex = 11;
-            this.lblInfo04.Text = "1";
-            // 
-            // lblInfo03
-            // 
-            this.lblInfo03.AutoSize = true;
-            this.lblInfo03.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfo03.Location = new System.Drawing.Point(222, 119);
-            this.lblInfo03.Name = "lblInfo03";
-            this.lblInfo03.Size = new System.Drawing.Size(14, 20);
-            this.lblInfo03.TabIndex = 10;
-            this.lblInfo03.Text = "1";
-            // 
-            // lblInfo02
-            // 
-            this.lblInfo02.AutoSize = true;
-            this.lblInfo02.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfo02.Location = new System.Drawing.Point(222, 80);
-            this.lblInfo02.Name = "lblInfo02";
-            this.lblInfo02.Size = new System.Drawing.Size(14, 20);
-            this.lblInfo02.TabIndex = 9;
-            this.lblInfo02.Text = "1";
-            // 
-            // lblInfo01
-            // 
-            this.lblInfo01.AutoSize = true;
-            this.lblInfo01.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfo01.Location = new System.Drawing.Point(222, 41);
-            this.lblInfo01.Name = "lblInfo01";
-            this.lblInfo01.Size = new System.Drawing.Size(14, 20);
-            this.lblInfo01.TabIndex = 8;
-            this.lblInfo01.Text = "1";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(59, 158);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(132, 20);
-            this.label21.TabIndex = 7;
-            this.label21.Text = "Tiempo productivo:";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(40, 119);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(151, 20);
-            this.label19.TabIndex = 6;
-            this.label19.Text = "Cant Ventas realizadas:";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(5, 80);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(186, 20);
-            this.label18.TabIndex = 5;
-            this.label18.Text = "Cant de Contactos llamados:";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(90, 41);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(101, 20);
-            this.label17.TabIndex = 4;
-            this.label17.Text = "Cant Llamadas:";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(8, 14);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(148, 20);
-            this.label15.TabIndex = 3;
-            this.label15.Text = "Seleccione fecha filtro";
-            // 
-            // cbFiltroFecha
-            // 
-            this.cbFiltroFecha.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFiltroFecha.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbFiltroFecha.FormattingEnabled = true;
-            this.cbFiltroFecha.Location = new System.Drawing.Point(162, 12);
-            this.cbFiltroFecha.Name = "cbFiltroFecha";
-            this.cbFiltroFecha.Size = new System.Drawing.Size(155, 25);
-            this.cbFiltroFecha.TabIndex = 2;
-            this.cbFiltroFecha.SelectedIndexChanged += new System.EventHandler(this.cbFiltroFecha_SelectedIndexChanged);
-            // 
-            // cVentasCampaña
-            // 
-            this.cVentasCampaña.BorderlineColor = System.Drawing.Color.Black;
-            this.cVentasCampaña.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea4.Name = "ChartArea1";
-            this.cVentasCampaña.ChartAreas.Add(chartArea4);
-            this.cVentasCampaña.Location = new System.Drawing.Point(341, 12);
-            this.cVentasCampaña.Name = "cVentasCampaña";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            series5.Legend = "Legend1";
-            series5.Name = "Campañas";
-            series5.Points.Add(dataPoint5);
-            series5.Points.Add(dataPoint6);
-            this.cVentasCampaña.Series.Add(series5);
-            this.cVentasCampaña.Size = new System.Drawing.Size(456, 264);
-            this.cVentasCampaña.TabIndex = 2;
-            this.cVentasCampaña.Text = "Ventas por Campaña";
-            title4.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            title4.Name = "Title1";
-            title4.Text = "Ventas por Campaña";
-            this.cVentasCampaña.Titles.Add(title4);
-            // 
-            // cPorcentajeVentas
-            // 
-            chartArea5.Name = "ChartArea1";
-            this.cPorcentajeVentas.ChartAreas.Add(chartArea5);
-            legend3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend3.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            legend3.IsTextAutoFit = false;
-            legend3.Name = "Legend1";
-            legend3.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            this.cPorcentajeVentas.Legends.Add(legend3);
-            this.cPorcentajeVentas.Location = new System.Drawing.Point(12, 301);
-            this.cPorcentajeVentas.Name = "cPorcentajeVentas";
-            this.cPorcentajeVentas.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
-            series6.BorderColor = System.Drawing.Color.Black;
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series6.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            series6.Legend = "Legend1";
-            series6.Name = "Ventas";
-            this.cPorcentajeVentas.Series.Add(series6);
-            this.cPorcentajeVentas.Size = new System.Drawing.Size(322, 264);
-            this.cPorcentajeVentas.TabIndex = 1;
-            this.cPorcentajeVentas.Text = "Porcentaje de Ventas";
-            title5.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            title5.Name = "Title01";
-            title5.Text = "% Ventas";
-            this.cPorcentajeVentas.Titles.Add(title5);
-            // 
-            // cTiempos
-            // 
-            this.cTiempos.BorderlineColor = System.Drawing.Color.Black;
-            this.cTiempos.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea6.Name = "ChartArea1";
-            this.cTiempos.ChartAreas.Add(chartArea6);
-            legend4.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend4.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            legend4.IsTextAutoFit = false;
-            legend4.Name = "Legend1";
-            legend4.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            this.cTiempos.Legends.Add(legend4);
-            this.cTiempos.Location = new System.Drawing.Point(341, 301);
-            this.cTiempos.Name = "cTiempos";
-            this.cTiempos.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
-            series7.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            series7.Legend = "Legend1";
-            series7.Name = "Productivo";
-            series7.Points.Add(dataPoint7);
-            series7.Points.Add(dataPoint8);
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
-            series8.Legend = "Legend1";
-            series8.Name = "Improductivo";
-            this.cTiempos.Series.Add(series7);
-            this.cTiempos.Series.Add(series8);
-            this.cTiempos.Size = new System.Drawing.Size(456, 264);
-            this.cTiempos.TabIndex = 0;
-            this.cTiempos.Text = "Detalle de Tiempos";
-            title6.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            title6.Name = "Title01";
-            title6.Text = "Detalle de Tiempos";
-            this.cTiempos.Titles.Add(title6);
-            // 
             // tpCampañaDeEmpleado
             // 
             this.tpCampañaDeEmpleado.Controls.Add(this.dgvTableEmpl);
             this.tpCampañaDeEmpleado.Location = new System.Drawing.Point(4, 28);
             this.tpCampañaDeEmpleado.Name = "tpCampañaDeEmpleado";
             this.tpCampañaDeEmpleado.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCampañaDeEmpleado.Size = new System.Drawing.Size(822, 576);
+            this.tpCampañaDeEmpleado.Size = new System.Drawing.Size(791, 592);
             this.tpCampañaDeEmpleado.TabIndex = 3;
             this.tpCampañaDeEmpleado.Text = "Historial Campañas";
             this.tpCampañaDeEmpleado.UseVisualStyleBackColor = true;
@@ -724,14 +821,29 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTableEmpl.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTableEmpl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTableEmpl.Location = new System.Drawing.Point(14, 71);
+            this.dgvTableEmpl.Location = new System.Drawing.Point(13, 130);
             this.dgvTableEmpl.Name = "dgvTableEmpl";
             this.dgvTableEmpl.ReadOnly = true;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvTableEmpl.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvTableEmpl.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvTableEmpl.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTableEmpl.Size = new System.Drawing.Size(795, 434);
+            this.dgvTableEmpl.Size = new System.Drawing.Size(764, 450);
             this.dgvTableEmpl.TabIndex = 7;
+            // 
+            // tpListadoEmpleados
+            // 
+            this.tpListadoEmpleados.Controls.Add(this.btnAgregarACampaña);
+            this.tpListadoEmpleados.Controls.Add(this.btnEliminarDeCampaña);
+            this.tpListadoEmpleados.Controls.Add(this.label24);
+            this.tpListadoEmpleados.Controls.Add(this.label22);
+            this.tpListadoEmpleados.Controls.Add(this.dgvEmpleados);
+            this.tpListadoEmpleados.Controls.Add(this.dgvEnCampaña);
+            this.tpListadoEmpleados.Location = new System.Drawing.Point(4, 28);
+            this.tpListadoEmpleados.Name = "tpListadoEmpleados";
+            this.tpListadoEmpleados.Size = new System.Drawing.Size(791, 592);
+            this.tpListadoEmpleados.TabIndex = 4;
+            this.tpListadoEmpleados.Text = "Listado de empleados";
+            this.tpListadoEmpleados.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -773,7 +885,7 @@
             this.pnlInformacion.Font = new System.Drawing.Font("Microsoft YaHei Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlInformacion.Location = new System.Drawing.Point(24, 62);
             this.pnlInformacion.Name = "pnlInformacion";
-            this.pnlInformacion.Size = new System.Drawing.Size(356, 647);
+            this.pnlInformacion.Size = new System.Drawing.Size(356, 675);
             this.pnlInformacion.TabIndex = 4;
             // 
             // label20
@@ -786,50 +898,256 @@
             this.label20.TabIndex = 0;
             this.label20.Text = "Información";
             // 
-            // lbPromTimeProd
+            // tpConfiguracion
             // 
-            this.lbPromTimeProd.AutoSize = true;
-            this.lbPromTimeProd.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lbPromTimeProd.Location = new System.Drawing.Point(270, 102);
-            this.lbPromTimeProd.Name = "lbPromTimeProd";
-            this.lbPromTimeProd.Size = new System.Drawing.Size(137, 20);
-            this.lbPromTimeProd.TabIndex = 13;
-            this.lbPromTimeProd.Text = "Promedio de Ventas";
+            this.tpConfiguracion.Controls.Add(this.tcObjetivos);
+            this.tpConfiguracion.Controls.Add(this.label26);
+            this.tpConfiguracion.Location = new System.Drawing.Point(4, 28);
+            this.tpConfiguracion.Name = "tpConfiguracion";
+            this.tpConfiguracion.Size = new System.Drawing.Size(791, 592);
+            this.tpConfiguracion.TabIndex = 5;
+            this.tpConfiguracion.Text = "Objetivos";
+            this.tpConfiguracion.UseVisualStyleBackColor = true;
             // 
-            // label23
+            // dgvEnCampaña
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(9, 102);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(195, 20);
-            this.label23.TabIndex = 12;
-            this.label23.Text = "Promedio Tiempo Productivo";
+            this.dgvEnCampaña.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEnCampaña.Location = new System.Drawing.Point(24, 50);
+            this.dgvEnCampaña.Name = "dgvEnCampaña";
+            this.dgvEnCampaña.Size = new System.Drawing.Size(743, 232);
+            this.dgvEnCampaña.TabIndex = 0;
             // 
-            // lbPromTimeImddProd
+            // dgvEmpleados
             // 
-            this.lbPromTimeImddProd.AutoSize = true;
-            this.lbPromTimeImddProd.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lbPromTimeImddProd.Location = new System.Drawing.Point(676, 102);
-            this.lbPromTimeImddProd.Name = "lbPromTimeImddProd";
-            this.lbPromTimeImddProd.Size = new System.Drawing.Size(137, 20);
-            this.lbPromTimeImddProd.TabIndex = 15;
-            this.lbPromTimeImddProd.Text = "Promedio de Ventas";
+            this.dgvEmpleados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEmpleados.Location = new System.Drawing.Point(24, 346);
+            this.dgvEmpleados.Name = "dgvEmpleados";
+            this.dgvEmpleados.Size = new System.Drawing.Size(743, 232);
+            this.dgvEmpleados.TabIndex = 1;
             // 
-            // label25
+            // label22
             // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(453, 102);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(206, 20);
-            this.label25.TabIndex = 14;
-            this.label25.Text = "PromedioTiempo Improductivo";
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(20, 16);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(166, 20);
+            this.label22.TabIndex = 2;
+            this.label22.Text = "Pertenecen a la campaña";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(20, 313);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(109, 20);
+            this.label24.TabIndex = 3;
+            this.label24.Text = "Lista empleados";
+            // 
+            // btnEliminarDeCampaña
+            // 
+            this.btnEliminarDeCampaña.Location = new System.Drawing.Point(677, 10);
+            this.btnEliminarDeCampaña.Name = "btnEliminarDeCampaña";
+            this.btnEliminarDeCampaña.Size = new System.Drawing.Size(90, 33);
+            this.btnEliminarDeCampaña.TabIndex = 4;
+            this.btnEliminarDeCampaña.Text = "Quitar";
+            this.btnEliminarDeCampaña.UseVisualStyleBackColor = true;
+            // 
+            // btnAgregarACampaña
+            // 
+            this.btnAgregarACampaña.Location = new System.Drawing.Point(677, 307);
+            this.btnAgregarACampaña.Name = "btnAgregarACampaña";
+            this.btnAgregarACampaña.Size = new System.Drawing.Size(90, 33);
+            this.btnAgregarACampaña.TabIndex = 5;
+            this.btnAgregarACampaña.Text = "Agregar ↑";
+            this.btnAgregarACampaña.UseVisualStyleBackColor = true;
+            // 
+            // label26
+            // 
+            this.label26.Location = new System.Drawing.Point(31, 27);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(733, 100);
+            this.label26.TabIndex = 0;
+            this.label26.Text = "*Objetivos*\r\nEsta pestaña permite setear las preferencias de una campaña, como pu" +
+    "ede ser los tiempos estimados para realizar una acción o bien si es considerado " +
+    "tiemp productivo para la actividad.";
+            // 
+            // tcObjetivos
+            // 
+            this.tcObjetivos.Controls.Add(this.tpEspecificaciones);
+            this.tcObjetivos.Controls.Add(this.tpEfectividad);
+            this.tcObjetivos.Controls.Add(this.tpEstimacionTiempos);
+            this.tcObjetivos.Location = new System.Drawing.Point(35, 151);
+            this.tcObjetivos.Name = "tcObjetivos";
+            this.tcObjetivos.SelectedIndex = 0;
+            this.tcObjetivos.Size = new System.Drawing.Size(720, 411);
+            this.tcObjetivos.TabIndex = 1;
+            // 
+            // tpEspecificaciones
+            // 
+            this.tpEspecificaciones.Controls.Add(this.checkedListBox1);
+            this.tpEspecificaciones.Controls.Add(this.button1);
+            this.tpEspecificaciones.Controls.Add(this.dataGridView1);
+            this.tpEspecificaciones.Location = new System.Drawing.Point(4, 28);
+            this.tpEspecificaciones.Name = "tpEspecificaciones";
+            this.tpEspecificaciones.Padding = new System.Windows.Forms.Padding(3);
+            this.tpEspecificaciones.Size = new System.Drawing.Size(712, 379);
+            this.tpEspecificaciones.TabIndex = 0;
+            this.tpEspecificaciones.Text = "Especificaciones";
+            this.tpEspecificaciones.UseVisualStyleBackColor = true;
+            // 
+            // tpEfectividad
+            // 
+            this.tpEfectividad.Controls.Add(this.textBox1);
+            this.tpEfectividad.Location = new System.Drawing.Point(4, 28);
+            this.tpEfectividad.Name = "tpEfectividad";
+            this.tpEfectividad.Padding = new System.Windows.Forms.Padding(3);
+            this.tpEfectividad.Size = new System.Drawing.Size(712, 379);
+            this.tpEfectividad.TabIndex = 1;
+            this.tpEfectividad.Text = "Efectividad";
+            this.tpEfectividad.UseVisualStyleBackColor = true;
+            // 
+            // tpEstimacionTiempos
+            // 
+            this.tpEstimacionTiempos.Controls.Add(this.button5);
+            this.tpEstimacionTiempos.Controls.Add(this.button4);
+            this.tpEstimacionTiempos.Controls.Add(this.button3);
+            this.tpEstimacionTiempos.Controls.Add(this.checkedListBox3);
+            this.tpEstimacionTiempos.Controls.Add(this.checkedListBox2);
+            this.tpEstimacionTiempos.Controls.Add(this.button2);
+            this.tpEstimacionTiempos.Controls.Add(this.textBox4);
+            this.tpEstimacionTiempos.Controls.Add(this.textBox3);
+            this.tpEstimacionTiempos.Controls.Add(this.textBox2);
+            this.tpEstimacionTiempos.Controls.Add(this.comboBox1);
+            this.tpEstimacionTiempos.Location = new System.Drawing.Point(4, 28);
+            this.tpEstimacionTiempos.Name = "tpEstimacionTiempos";
+            this.tpEstimacionTiempos.Size = new System.Drawing.Size(712, 379);
+            this.tpEstimacionTiempos.TabIndex = 2;
+            this.tpEstimacionTiempos.Text = "Estimación de tiempos";
+            this.tpEstimacionTiempos.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(20, 164);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(677, 199);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(607, 23);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(90, 32);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Items.AddRange(new object[] {
+            "Soltera/o",
+            "Casada/o",
+            "Viuda/o"});
+            this.checkedListBox1.Location = new System.Drawing.Point(460, 23);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(120, 84);
+            this.checkedListBox1.TabIndex = 2;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(338, 94);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(136, 25);
+            this.textBox1.TabIndex = 0;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(175, 49);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(162, 27);
+            this.comboBox1.TabIndex = 0;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(517, 46);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(38, 25);
+            this.textBox2.TabIndex = 1;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(565, 46);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(38, 25);
+            this.textBox3.TabIndex = 2;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(613, 46);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(38, 25);
+            this.textBox4.TabIndex = 3;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(557, 92);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(94, 30);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // checkedListBox2
+            // 
+            this.checkedListBox2.FormattingEnabled = true;
+            this.checkedListBox2.Location = new System.Drawing.Point(69, 142);
+            this.checkedListBox2.Name = "checkedListBox2";
+            this.checkedListBox2.Size = new System.Drawing.Size(202, 224);
+            this.checkedListBox2.TabIndex = 5;
+            // 
+            // checkedListBox3
+            // 
+            this.checkedListBox3.FormattingEnabled = true;
+            this.checkedListBox3.Location = new System.Drawing.Point(442, 142);
+            this.checkedListBox3.Name = "checkedListBox3";
+            this.checkedListBox3.Size = new System.Drawing.Size(202, 224);
+            this.checkedListBox3.TabIndex = 6;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(282, 183);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(149, 41);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "A Improductivo →";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(282, 230);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(149, 41);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "Eliminar";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(282, 277);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(149, 41);
+            this.button5.TabIndex = 9;
+            this.button5.Text = "← A Productivo";
+            this.button5.UseVisualStyleBackColor = true;
             // 
             // frmDetalle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlText;
-            this.ClientSize = new System.Drawing.Size(1260, 729);
+            this.ClientSize = new System.Drawing.Size(1260, 749);
             this.Controls.Add(this.pnlInformacion);
             this.Controls.Add(this.pnlEstadisticas);
             this.Controls.Add(this.label1);
@@ -840,9 +1158,6 @@
             this.pnlEstadisticas.ResumeLayout(false);
             this.pnlEstadisticas.PerformLayout();
             this.tcDatos.ResumeLayout(false);
-            this.tpRendimiento.ResumeLayout(false);
-            this.tpRendimiento.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).EndInit();
             this.tpFechas.ResumeLayout(false);
             this.tpFechas.PerformLayout();
             this.gb01.ResumeLayout(false);
@@ -850,10 +1165,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.cVentasCampaña)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cPorcentajeVentas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cTiempos)).EndInit();
+            this.tpRendimiento.ResumeLayout(false);
+            this.tpRendimiento.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).EndInit();
             this.tpCampañaDeEmpleado.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTableEmpl)).EndInit();
+            this.tpListadoEmpleados.ResumeLayout(false);
+            this.tpListadoEmpleados.PerformLayout();
             this.pnlInformacion.ResumeLayout(false);
             this.pnlInformacion.PerformLayout();
+            this.tpConfiguracion.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEnCampaña)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleados)).EndInit();
+            this.tcObjetivos.ResumeLayout(false);
+            this.tpEspecificaciones.ResumeLayout(false);
+            this.tpEfectividad.ResumeLayout(false);
+            this.tpEfectividad.PerformLayout();
+            this.tpEstimacionTiempos.ResumeLayout(false);
+            this.tpEstimacionTiempos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -888,7 +1218,6 @@
         private System.Windows.Forms.TextBox tb01;
         private System.Windows.Forms.DateTimePicker dtp01;
         private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.ComboBox cbFiltroFecha;
         private System.Windows.Forms.TabPage tpRendimiento;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
@@ -918,5 +1247,35 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label lbPromTimeProd;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TabPage tpListadoEmpleados;
+        private System.Windows.Forms.CheckBox cbHasta;
+        private System.Windows.Forms.DateTimePicker dtpFiltroHasta;
+        private System.Windows.Forms.DateTimePicker dtpFiltroFecha;
+        private System.Windows.Forms.TabPage tpConfiguracion;
+        private System.Windows.Forms.DataGridView dgvEmpleados;
+        private System.Windows.Forms.DataGridView dgvEnCampaña;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TabControl tcObjetivos;
+        private System.Windows.Forms.TabPage tpEspecificaciones;
+        private System.Windows.Forms.TabPage tpEfectividad;
+        private System.Windows.Forms.TabPage tpEstimacionTiempos;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Button btnAgregarACampaña;
+        private System.Windows.Forms.Button btnEliminarDeCampaña;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.CheckedListBox checkedListBox3;
+        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
