@@ -503,11 +503,6 @@ namespace WindowsFormsApplication1
             string sender_tag = (sender as Button).Tag.ToString();
             switch (sender_tag)
             {
-                case "Eliminar":
-                    //aca elimina
-                    this.Close();
-                    break;
-
                 case "Editar":
                     foreach (Control c in pnlInformacion.Controls)
                     {
@@ -517,19 +512,17 @@ namespace WindowsFormsApplication1
                             (c as DateTimePicker).Enabled = true;
                     }
                     pnlEstadisticas.Enabled = false;
-                    btnEditar.Tag = "Guardar";
-                    btnEliminar.Tag = "Cancelar";
+                    btnEditar.Tag = "Cancelar";
+                    btnEditar.Text = "Cancelar";
                     break;
 
                 case "Guardar":
                     checkCampos();
                     btnEditar.Tag = "Editar";
-                    btnEliminar.Tag = "Eliminar";
                     break;
 
                 case "Cancelar":
                     btnEditar.Tag = "Editar";
-                    btnEliminar.Tag = "Eliminar";
                     break;
             }
             if ( sender_tag == "Guardar" || sender_tag == "Cancelar" )
@@ -542,6 +535,7 @@ namespace WindowsFormsApplication1
                         (c as DateTimePicker).Enabled = false;
                 }
                 pnlEstadisticas.Enabled = true;
+                btnGuardar.Visible = false;
             }
         }
 
@@ -574,8 +568,7 @@ namespace WindowsFormsApplication1
         {
             try
             {
-                int dni = conectar.dniEmpleado(Convert.ToInt32(dgvRendimiento.Rows[e.RowIndex].Cells["Id"].Value.ToString()));
-                frmDetalle frmDetalleCliente = new frmDetalle("empleado", dni);
+                frmEmpleadoCampaña frmDetalleCliente = new frmEmpleadoCampaña(campaña.Id_campaña, Convert.ToInt32(dgvRendimiento.Rows[e.RowIndex].Cells["Id"].Value.ToString()));
                 frmDetalleCliente.Show();
             }
             catch (Exception ex)

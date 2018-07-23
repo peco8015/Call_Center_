@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint13 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint14 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
-            System.Windows.Forms.DataVisualization.Charting.Title title10 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title11 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint15 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 5D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint16 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
-            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title12 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 5D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.dtp02 = new System.Windows.Forms.DateTimePicker();
             this.tb07 = new System.Windows.Forms.TextBox();
             this.tb06 = new System.Windows.Forms.TextBox();
@@ -92,12 +92,17 @@
             this.tpConfiguracion = new System.Windows.Forms.TabPage();
             this.tcObjetivos = new System.Windows.Forms.TabControl();
             this.tpEspecificaciones = new System.Windows.Forms.TabPage();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.checkedListBox4 = new System.Windows.Forms.CheckedListBox();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tpEfectividad = new System.Windows.Forms.TabPage();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tpEstimacionTiempos = new System.Windows.Forms.TabPage();
+            this.textBox6 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -133,11 +138,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pnlInformacion = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.checkedListBox4 = new System.Windows.Forms.CheckedListBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
             this.pnlEstadisticas.SuspendLayout();
             this.tcDatos.SuspendLayout();
             this.tpFechas.SuspendLayout();
@@ -150,6 +150,8 @@
             this.tpConfiguracion.SuspendLayout();
             this.tcObjetivos.SuspendLayout();
             this.tpEspecificaciones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tpEfectividad.SuspendLayout();
             this.tpEstimacionTiempos.SuspendLayout();
@@ -159,8 +161,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEnCampaña)).BeginInit();
             this.pnlInformacion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -184,18 +184,21 @@
             this.label5.TabIndex = 2;
             this.label5.Text = "DNI";
             // 
-            // btnEliminar
+            // btnGuardar
             // 
-            this.btnEliminar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnEliminar.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(225, 594);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(87, 47);
-            this.btnEliminar.TabIndex = 19;
-            this.btnEliminar.Tag = "Eliminar";
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEditar_Click);
+            this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnGuardar.BackColor = System.Drawing.Color.Teal;
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardar.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar.Location = new System.Drawing.Point(225, 594);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(87, 47);
+            this.btnGuardar.TabIndex = 19;
+            this.btnGuardar.Tag = "Guardar";
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Visible = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // dtp02
             // 
@@ -275,6 +278,8 @@
             // btnEditar
             // 
             this.btnEditar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnEditar.BackColor = System.Drawing.Color.Teal;
+            this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditar.Font = new System.Drawing.Font("Microsoft YaHei Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditar.Location = new System.Drawing.Point(36, 594);
             this.btnEditar.Name = "btnEditar";
@@ -282,7 +287,7 @@
             this.btnEditar.TabIndex = 9;
             this.btnEditar.Tag = "Editar";
             this.btnEditar.Text = "Editar";
-            this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.UseVisualStyleBackColor = false;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // label11
@@ -570,89 +575,89 @@
             // 
             this.cVentasCampaña.BorderlineColor = System.Drawing.Color.Black;
             this.cVentasCampaña.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea10.Name = "ChartArea1";
-            this.cVentasCampaña.ChartAreas.Add(chartArea10);
+            chartArea1.Name = "ChartArea1";
+            this.cVentasCampaña.ChartAreas.Add(chartArea1);
             this.cVentasCampaña.Location = new System.Drawing.Point(340, 30);
             this.cVentasCampaña.Name = "cVentasCampaña";
-            series13.ChartArea = "ChartArea1";
-            series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series13.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            series13.Legend = "Legend1";
-            series13.Name = "Campañas";
-            series13.Points.Add(dataPoint13);
-            series13.Points.Add(dataPoint14);
-            this.cVentasCampaña.Series.Add(series13);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            series1.Legend = "Legend1";
+            series1.Name = "Campañas";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            this.cVentasCampaña.Series.Add(series1);
             this.cVentasCampaña.Size = new System.Drawing.Size(444, 264);
             this.cVentasCampaña.TabIndex = 2;
             this.cVentasCampaña.Text = "Ventas por Campaña";
-            title10.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            title10.Name = "Title1";
-            title10.Text = "Ventas por Campaña";
-            this.cVentasCampaña.Titles.Add(title10);
+            title1.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            title1.Name = "Title1";
+            title1.Text = "Ventas por Campaña";
+            this.cVentasCampaña.Titles.Add(title1);
             // 
             // cPorcentajeVentas
             // 
-            chartArea11.Name = "ChartArea1";
-            this.cPorcentajeVentas.ChartAreas.Add(chartArea11);
-            legend7.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend7.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            legend7.IsTextAutoFit = false;
-            legend7.Name = "Legend1";
-            legend7.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            this.cPorcentajeVentas.Legends.Add(legend7);
+            chartArea2.Name = "ChartArea1";
+            this.cPorcentajeVentas.ChartAreas.Add(chartArea2);
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend1.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            legend1.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            this.cPorcentajeVentas.Legends.Add(legend1);
             this.cPorcentajeVentas.Location = new System.Drawing.Point(12, 304);
             this.cPorcentajeVentas.Name = "cPorcentajeVentas";
             this.cPorcentajeVentas.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
-            series14.BorderColor = System.Drawing.Color.Black;
-            series14.ChartArea = "ChartArea1";
-            series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series14.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            series14.Legend = "Legend1";
-            series14.Name = "Ventas";
-            this.cPorcentajeVentas.Series.Add(series14);
+            series2.BorderColor = System.Drawing.Color.Black;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            series2.Legend = "Legend1";
+            series2.Name = "Ventas";
+            this.cPorcentajeVentas.Series.Add(series2);
             this.cPorcentajeVentas.Size = new System.Drawing.Size(322, 264);
             this.cPorcentajeVentas.TabIndex = 1;
             this.cPorcentajeVentas.Text = "Porcentaje de Ventas";
-            title11.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            title11.Name = "Title01";
-            title11.Text = "% Ventas";
-            this.cPorcentajeVentas.Titles.Add(title11);
+            title2.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            title2.Name = "Title01";
+            title2.Text = "% Ventas";
+            this.cPorcentajeVentas.Titles.Add(title2);
             // 
             // cTiempos
             // 
             this.cTiempos.BorderlineColor = System.Drawing.Color.Black;
             this.cTiempos.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea12.Name = "ChartArea1";
-            this.cTiempos.ChartAreas.Add(chartArea12);
-            legend8.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend8.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            legend8.IsTextAutoFit = false;
-            legend8.Name = "Legend1";
-            legend8.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            this.cTiempos.Legends.Add(legend8);
+            chartArea3.Name = "ChartArea1";
+            this.cTiempos.ChartAreas.Add(chartArea3);
+            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend2.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            legend2.IsTextAutoFit = false;
+            legend2.Name = "Legend1";
+            legend2.TitleFont = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            this.cTiempos.Legends.Add(legend2);
             this.cTiempos.Location = new System.Drawing.Point(340, 304);
             this.cTiempos.Name = "cTiempos";
             this.cTiempos.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series15.ChartArea = "ChartArea1";
-            series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
-            series15.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
-            series15.Legend = "Legend1";
-            series15.Name = "Productivo";
-            series15.Points.Add(dataPoint15);
-            series15.Points.Add(dataPoint16);
-            series16.ChartArea = "ChartArea1";
-            series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
-            series16.Legend = "Legend1";
-            series16.Name = "Improductivo";
-            this.cTiempos.Series.Add(series15);
-            this.cTiempos.Series.Add(series16);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
+            series3.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F);
+            series3.Legend = "Legend1";
+            series3.Name = "Productivo";
+            series3.Points.Add(dataPoint3);
+            series3.Points.Add(dataPoint4);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
+            series4.Legend = "Legend1";
+            series4.Name = "Improductivo";
+            this.cTiempos.Series.Add(series3);
+            this.cTiempos.Series.Add(series4);
             this.cTiempos.Size = new System.Drawing.Size(444, 264);
             this.cTiempos.TabIndex = 0;
             this.cTiempos.Text = "Detalle de Tiempos";
-            title12.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
-            title12.Name = "Title01";
-            title12.Text = "Detalle de Tiempos";
-            this.cTiempos.Titles.Add(title12);
+            title3.Font = new System.Drawing.Font("Microsoft YaHei Light", 8F, System.Drawing.FontStyle.Bold);
+            title3.Name = "Title01";
+            title3.Text = "Detalle de Tiempos";
+            this.cTiempos.Titles.Add(title3);
             // 
             // tpCampañaDeEmpleado
             // 
@@ -677,8 +682,8 @@
             this.dgvTableEmpl.Location = new System.Drawing.Point(13, 58);
             this.dgvTableEmpl.Name = "dgvTableEmpl";
             this.dgvTableEmpl.ReadOnly = true;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvTableEmpl.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvTableEmpl.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTableEmpl.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTableEmpl.Size = new System.Drawing.Size(764, 450);
             this.dgvTableEmpl.TabIndex = 7;
@@ -721,6 +726,40 @@
             this.tpEspecificaciones.TabIndex = 0;
             this.tpEspecificaciones.Text = "Especificaciones";
             this.tpEspecificaciones.UseVisualStyleBackColor = true;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(467, 28);
+            this.textBox5.Multiline = true;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(120, 84);
+            this.textBox5.TabIndex = 6;
+            // 
+            // checkedListBox4
+            // 
+            this.checkedListBox4.FormattingEnabled = true;
+            this.checkedListBox4.Items.AddRange(new object[] {
+            "Soltera/o",
+            "Casada/o",
+            "Viuda/o"});
+            this.checkedListBox4.Location = new System.Drawing.Point(173, 28);
+            this.checkedListBox4.Name = "checkedListBox4";
+            this.checkedListBox4.Size = new System.Drawing.Size(120, 84);
+            this.checkedListBox4.TabIndex = 5;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(66, 79);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(80, 25);
+            this.numericUpDown2.TabIndex = 4;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(66, 33);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(80, 25);
+            this.numericUpDown1.TabIndex = 3;
             // 
             // checkedListBox1
             // 
@@ -788,6 +827,13 @@
             this.tpEstimacionTiempos.TabIndex = 2;
             this.tpEstimacionTiempos.Text = "Estimación de tiempos";
             this.tpEstimacionTiempos.UseVisualStyleBackColor = true;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(69, 49);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(149, 25);
+            this.textBox6.TabIndex = 10;
             // 
             // button5
             // 
@@ -1002,8 +1048,8 @@
             this.dgvRendimiento.Location = new System.Drawing.Point(13, 131);
             this.dgvRendimiento.Name = "dgvRendimiento";
             this.dgvRendimiento.ReadOnly = true;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvRendimiento.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvRendimiento.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvRendimiento.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRendimiento.Size = new System.Drawing.Size(764, 424);
             this.dgvRendimiento.TabIndex = 6;
@@ -1128,7 +1174,7 @@
             this.pnlInformacion.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.pnlInformacion.Controls.Add(this.label5);
             this.pnlInformacion.Controls.Add(this.label20);
-            this.pnlInformacion.Controls.Add(this.btnEliminar);
+            this.pnlInformacion.Controls.Add(this.btnGuardar);
             this.pnlInformacion.Controls.Add(this.label3);
             this.pnlInformacion.Controls.Add(this.dtp02);
             this.pnlInformacion.Controls.Add(this.tb07);
@@ -1164,47 +1210,6 @@
             this.label20.TabIndex = 0;
             this.label20.Text = "Información";
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(66, 33);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(80, 25);
-            this.numericUpDown1.TabIndex = 3;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(66, 79);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(80, 25);
-            this.numericUpDown2.TabIndex = 4;
-            // 
-            // checkedListBox4
-            // 
-            this.checkedListBox4.FormattingEnabled = true;
-            this.checkedListBox4.Items.AddRange(new object[] {
-            "Soltera/o",
-            "Casada/o",
-            "Viuda/o"});
-            this.checkedListBox4.Location = new System.Drawing.Point(173, 28);
-            this.checkedListBox4.Name = "checkedListBox4";
-            this.checkedListBox4.Size = new System.Drawing.Size(120, 84);
-            this.checkedListBox4.TabIndex = 5;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(467, 28);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(120, 84);
-            this.textBox5.TabIndex = 6;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(69, 49);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(149, 25);
-            this.textBox6.TabIndex = 10;
-            // 
             // frmDetalle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1234,6 +1239,8 @@
             this.tcObjetivos.ResumeLayout(false);
             this.tpEspecificaciones.ResumeLayout(false);
             this.tpEspecificaciones.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tpEfectividad.ResumeLayout(false);
             this.tpEfectividad.PerformLayout();
@@ -1248,8 +1255,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvEnCampaña)).EndInit();
             this.pnlInformacion.ResumeLayout(false);
             this.pnlInformacion.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1283,7 +1288,7 @@
         private System.Windows.Forms.TextBox tb02;
         private System.Windows.Forms.TextBox tb01;
         private System.Windows.Forms.DateTimePicker dtp01;
-        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.TabPage tpRendimiento;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
