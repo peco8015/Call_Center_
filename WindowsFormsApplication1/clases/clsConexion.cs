@@ -1379,7 +1379,8 @@ namespace WindowsFormsApplication1.clases
                 usuario.Jefe = Convert.ToInt32(dt.Rows[0]["jefe"]);
                 usuario.Password = Convert.ToString(dt.Rows[0]["password"]);
                 usuario.Fecha_naciemiento = (DateTime)(dt.Rows[0]["f_nacimiento"]);
-                usuario.Id_campaña = Convert.ToInt32(dt.Rows[0]["id_campaña"]);
+                usuario.Fecha_eliminado = (string.IsNullOrEmpty(dt.Rows[0]["f_eliminado"].ToString())) ? DateTime.MinValue : (DateTime)(dt.Rows[0]["f_eliminado"]);
+                usuario.Id_campaña = (string.IsNullOrEmpty(dt.Rows[0]["id_campaña"].ToString()))? -1 : Convert.ToInt32(dt.Rows[0]["id_campaña"]);
                 usuario.Domicilio = Convert.ToString(dt.Rows[0]["domicilio"]);
                 usuario.Telefono = Convert.ToString(dt.Rows[0]["telefono"]);
                 usuario.Mail = Convert.ToString(dt.Rows[0]["mail"]);
@@ -1428,8 +1429,31 @@ namespace WindowsFormsApplication1.clases
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id_empleado, empleado.nombre +' '+ apellido as Empleado, dni as DNI, campaña.nombre as 'Campaña actual', empleado.f_inicio as 'Fecha de ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento " +
-                    "FROM empleado JOIN campaña ON (empleado.id_campaña = campaña.id_campaña) WHERE jefe = 0", con);
+                SqlCommand cmd = new SqlCommand("SELECT id_empleado, empleado.nombre +' '+ apellido as Empleado, dni as DNI, campaña.nombre as 'Campaña actual', empleado.f_inicio as 'Fecha de ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento, empleado.f_eliminado as Eliminado " +
+                    "FROM empleado LEFT JOIN campaña ON (empleado.id_campaña = campaña.id_campaña) WHERE jefe = 0", con);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                return dt;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public DataTable listar_empleados_activos()
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT id_empleado, empleado.nombre +' '+ apellido as Empleado, dni as DNI, empleado.id_campaña as '# Campaña', empleado.f_inicio as 'Fecha ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento" +
+                    " FROM empleado WHERE jefe = 0 AND empleado.f_eliminado IS NULL", con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
@@ -1473,11 +1497,12 @@ namespace WindowsFormsApplication1.clases
         {
             try
             {
+                string campaña = (empleado.Id_campaña == -1) ? "NULL" : empleado.Id_campaña.ToString();
                 string f_inicio = empleado.Fecha_inicio.ToString("yyyy/MM/dd").Replace('-', '/');
                 string f_nacimiento = empleado.Fecha_naciemiento.ToString("yyyy/MM/dd").Replace('-', '/');
                 con.Open();
                 SqlCommand cmd = new SqlCommand("INSERT INTO empleado(nombre, apellido, dni, f_inicio, jefe, password, f_nacimiento, id_campaña, domicilio, telefono, mail)" +
-                    " VALUES(@nombre, @apellido, @dni, @f_inicio, @jefe, @password, @f_nacimiento, @id_campaña, @domicilio, @telefono, @mail)", con);
+                    " VALUES(@nombre, @apellido, @dni, @f_inicio, @jefe, @password, @f_nacimiento, " + campaña + ", @domicilio, @telefono, @mail)", con);
                 cmd.Parameters.AddWithValue("nombre", empleado.Nombre);
                 cmd.Parameters.AddWithValue("apellido", empleado.Apellido);
                 cmd.Parameters.AddWithValue("dni", empleado.Dni);
@@ -1485,7 +1510,6 @@ namespace WindowsFormsApplication1.clases
                 cmd.Parameters.AddWithValue("jefe", empleado.Jefe);
                 cmd.Parameters.AddWithValue("password", empleado.Password);
                 cmd.Parameters.AddWithValue("f_nacimiento", f_nacimiento);
-                cmd.Parameters.AddWithValue("id_campaña", empleado.Id_campaña);
                 cmd.Parameters.AddWithValue("domicilio", empleado.Domicilio);
                 cmd.Parameters.AddWithValue("telefono", empleado.Telefono);
                 cmd.Parameters.AddWithValue("mail", empleado.Mail);
@@ -1525,6 +1549,54 @@ namespace WindowsFormsApplication1.clases
                     return true;
                 else
                     return false;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool eliminar_empleado(clsEmpleado empleado)
+        {
+            try
+            { 
+                string f_eliminado = empleado.Fecha_eliminado.ToString("yyyy/MM/dd").Replace('-', '/');
+                con.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE SET f_eliminado = @f_eliminado" +
+                    " WHERE id_empleado = @id_empleado", con);
+                cmd.Parameters.AddWithValue("id_empleado", empleado.Id_empleado);
+                cmd.Parameters.AddWithValue("f_eliminado", f_eliminado);
+                if (cmd.ExecuteNonQuery() == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool eliminar_empleados(List<int> ids_empleados)
+        {
+            try
+            {
+                string in_clause = "(" + string.Join(",", ids_empleados.ToArray()) + ")";
+                string f_eliminado = DateTime.Now.ToString("yyyy/MM/dd").Replace('-', '/');
+                con.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE empleado SET f_eliminado = @f_eliminado WHERE id_empleado IN " + in_clause, con);
+                cmd.Parameters.AddWithValue("f_eliminado", f_eliminado);
+                return (cmd.ExecuteNonQuery() == ids_empleados.Count) ? true : false;
             }
             catch (Exception e)
             {
@@ -1582,15 +1654,15 @@ namespace WindowsFormsApplication1.clases
             }
         }
 
-        public bool actualizar_campaña_empleados(int idCamp, List<int> l_empleados)
+        public bool actualizar_campaña_empleados(int id_campaña, List<int> l_empleados)
         {
             try
             {
                 con.Open();
-                //string ids_empleados = "(" + string.Join(",", l_empleados) + ")";
-                SqlCommand cmd = new SqlCommand("UPDATE empleado SET id_campaña = @id_campaña WHERE id_empleado IN (@empleados)", con);
-                cmd.Parameters.AddWithValue("id_campaña", idCamp);
-                cmd.Parameters.AddWithValue("empleados", string.Join(",", l_empleados));
+                string id_camp = (id_campaña == -1) ? "NULL" : id_campaña.ToString();
+                string ids_empleados = "(" + string.Join(",", l_empleados) + ")";
+                SqlCommand cmd = new SqlCommand("UPDATE empleado SET id_campaña = " + id_camp + " WHERE id_empleado IN " + ids_empleados, con);
+                //cmd.Parameters.AddWithValue("empleados", string.Join(",", l_empleados));
                 return (cmd.ExecuteNonQuery() == l_empleados.Count) ? true : false;
             }
             catch (Exception e)
@@ -1846,7 +1918,7 @@ namespace WindowsFormsApplication1.clases
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id_campaña, campaña.nombre as Campaña, precio as Costo, f_inicio as Inicia, f_fin as Finaliza, cliente.nombre as Cliente, cliente.contacto as 'Contacto de cliente', descripcion as Descripcion " +
+                SqlCommand cmd = new SqlCommand("SELECT id_campaña, campaña.nombre as Campaña, precio as Costo, f_inicio as Inicia, f_fin as Finaliza, cliente.nombre as Cliente, cliente.contacto as 'Contacto de cliente', descripcion as Descripcion, campaña.f_eliminado as Eliminado " +
                     "FROM campaña join cliente on (campaña.id_cliente = cliente.id_cliente)", con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -1864,13 +1936,60 @@ namespace WindowsFormsApplication1.clases
             }
         }
 
-        public DataTable miembros_de_campaña(int id)
+        public bool eliminar_campañas(List<int> ids_campañas)
+        {
+            try
+            {
+                string f_eliminado = DateTime.Now.ToString("yyyy/MM/dd").Replace('-', '/');
+                con.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE campaña SET f_eliminado = @f_eliminado WHERE id_campaña IN (@campañas)", con);
+                cmd.Parameters.AddWithValue("f_eliminado", f_eliminado);
+                cmd.Parameters.AddWithValue("campañas", string.Join(",", ids_campañas));
+                return (cmd.ExecuteNonQuery() == ids_campañas.Count) ? true : false;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public DataTable miembros_de_campaña(int id_campaña)
         {
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("select distinct empleado.id_empleado,empleado.nombre  +' ' + empleado.apellido as nombre from llamada join empleado on(llamada.id_empleado = empleado.id_empleado) where llamada.id_campaña=@id", con);
-                cmd.Parameters.AddWithValue("id", id);
+                SqlCommand cmd = new SqlCommand("select id_empleado, empleado.nombre +' '+ apellido as Empleado, dni as DNI, empleado.f_inicio as 'Fecha de ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento"//distinct empleado.id_empleado, empleado.nombre  + ' ' + empleado.apellido as Empleado
+                    + " FROM llamada JOIN empleado ON (llamada.id_empleado = empleado.id_empleado) WHERE llamada.id_campaña = @id", con);
+                cmd.Parameters.AddWithValue("id", id_campaña);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                return dt;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public DataTable empleados_actuales_de_campaña(int id_campaña)
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT id_empleado, empleado.nombre +' '+ apellido as Empleado, dni as DNI, empleado.f_inicio as 'Fecha de ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento"
+                    + " FROM empleado WHERE jefe = 0 AND id_campaña = @id", con);
+                cmd.Parameters.AddWithValue("id", id_campaña);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
@@ -2116,7 +2235,7 @@ namespace WindowsFormsApplication1.clases
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id_cliente, nombre as Cliente, cuil as CUIL, domicilio_legal as 'Domicilio Legal', contacto as 'Nombre de contacto', telefono as 'Telefono de contacto', mail as 'Mail de contacto' " +
+                SqlCommand cmd = new SqlCommand("SELECT id_cliente, nombre as Cliente, cuil as CUIL, domicilio_legal as 'Domicilio Legal', contacto as 'Nombre de contacto', telefono as 'Telefono de contacto', mail as 'Mail de contacto', f_eliminado as Eliminado " +
                     "FROM cliente", con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -2152,6 +2271,29 @@ namespace WindowsFormsApplication1.clases
                     return true;
                 else
                     return false;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
+        public bool eliminar_clientes(List<int> ids_clientes)
+        {
+            try
+            {
+                string in_clause = "(" + string.Join(",", ids_clientes.ToArray()) + ")";
+                string f_eliminado = DateTime.Now.ToString("yyyy/MM/dd").Replace('-', '/');
+                con.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE cliente SET f_eliminado = @f_eliminado WHERE id_cliente IN " + in_clause, con);
+                cmd.Parameters.AddWithValue("f_eliminado", f_eliminado);
+                return (cmd.ExecuteNonQuery() == ids_clientes.Count) ? true : false;
             }
             catch (Exception e)
             {
@@ -2658,7 +2800,7 @@ namespace WindowsFormsApplication1.clases
 
 
         #region Estadisticas cliente
-        public List<clsEstadisticas> numeros_cliente(int id, string filtro, DateTime fecha)
+        public List<clsEstadisticas> numeros_cliente(int id, DateTime fecha)
         {
             // No mide las campañas que arrancaron ese día o que estan activas ese día.
             try
@@ -2668,14 +2810,50 @@ namespace WindowsFormsApplication1.clases
                 SqlCommand cmd = new SqlCommand("SELECT count(distinct campaña.id_campaña) as 'Cant de campañas', count(id_venta) as 'Cant ventas', (SELECT count(id_llamada) FROM llamada JOIN campaña ON (llamada.id_campaña = campaña.id_campaña) where campaña.id_cliente = @id_cliente AND llamada.fecha = @fecha) as 'Cant llamadas'" +
                     " FROM llamada JOIN venta ON (llamada.id_llamada = venta.id_llamada) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña)" +
                     " WHERE campaña.id_cliente = @id_cliente AND llamada.fecha = @fecha", con);
-                if (filtro != "Hoy")
-                {
-                    cmd.CommandText = "SELECT count(distinct campaña.id_campaña) as 'Cant de campañas', count(id_venta) as 'Cant ventas', (SELECT count(id_llamada) FROM llamada JOIN campaña ON (llamada.id_campaña = campaña.id_campaña) where campaña.id_cliente = @id_cliente AND llamada.fecha >= @fecha) as 'Cant llamadas'" +
-                    " FROM llamada JOIN venta ON (llamada.id_llamada = venta.id_llamada) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña)" +
-                    " WHERE campaña.id_cliente = @id_cliente AND llamada.fecha >= @fecha";
-                }
                 cmd.Parameters.AddWithValue("id_cliente", id);
                 cmd.Parameters.AddWithValue("fecha", fecha_parseada);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    List<clsEstadisticas> arreglo = new List<clsEstadisticas>();
+                    foreach (DataColumn dc in dt.Columns)
+                    {
+                        clsEstadisticas aux = new clsEstadisticas();
+                        aux.Clave = dc.ColumnName;
+                        aux.Valor = (float)Convert.ToDouble(dt.Rows[0][dc.ColumnName]);
+                        arreglo.Add(aux);
+                    }
+                    return arreglo;
+                }
+                return null;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List<clsEstadisticas> numeros_cliente(int id, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            // No mide las campañas que arrancaron ese día o que estan activas ese día.
+            try
+            {
+                string fecha_parseada1 = String.Format("{0:yyyy-MM-dd}", fechaDesde);
+                string fecha_parseada2 = String.Format("{0:yyyy-MM-dd}", fechaHasta);
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT count(distinct campaña.id_campaña) as 'Cant de campañas', count(id_venta) as 'Cant ventas', (SELECT count(id_llamada) FROM llamada JOIN campaña ON (llamada.id_campaña = campaña.id_campaña) where campaña.id_cliente = @id_cliente AND llamada.fecha >= @fecha) as 'Cant llamadas'" +
+                    " FROM llamada JOIN venta ON (llamada.id_llamada = venta.id_llamada) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña)" +
+                    " WHERE campaña.id_cliente = @id_cliente AND llamada.fecha >= @fecha_desde AND llamada.fecha <= @fecha_hasta", con);
+                cmd.Parameters.AddWithValue("id_cliente", id);
+                cmd.Parameters.AddWithValue("fecha_desde", fecha_parseada1);
+                cmd.Parameters.AddWithValue("fecha_hasta", fecha_parseada2);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);

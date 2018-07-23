@@ -109,7 +109,36 @@ namespace WindowsFormsApplication1
             dgvTabla.Columns.Add(dgvCmb);
         }
 
+        public void checkEliminacion(bool result)
+        {
+            if (result)
+            {
+                switch (filtro_tabla)
+                {
+                    case "empleados":
+                        dTable = conectar.listarEmpleados();
+                        break;
+
+                    case "clientes":
+                        dTable = conectar.listarClientes();
+                        break;
+
+                    case "campañas":
+                        dTable = conectar.listarCampañas();
+                        break;
+                }
+                dgvTabla.DataSource = dTable;
+                (dgvTabla.DataSource as DataTable).DefaultView.RowFilter = "Eliminado is null";
+                MessageBox.Show("Los registros seleccionados se eliminaron y se actualizó la vista de la información.", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
+            }
+            else
+                MessageBox.Show("Se produjo un error en la continuidad de la operación, por lo cual no todos los empleados fueron eliminados correctamente.", "Operación fallida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+
         #endregion
+
+
 
         private void frmJefee_Load(object sender, EventArgs e)
         {
@@ -136,6 +165,7 @@ namespace WindowsFormsApplication1
                 dgvTabla.Columns.Clear();
             pnlFiltros.Enabled = true;
             pnlAB.Enabled = true;
+            string filtro_eliminar = string.Empty;
             dgvTabla.Height = 509;
             dgvTabla.Location = new Point(22, 172);
             filtro_tabla = (sender as Button).Tag.ToString();
@@ -143,21 +173,24 @@ namespace WindowsFormsApplication1
             {
                 case "empleados":
                     dTable = conectar.listarEmpleados();
+                    filtro_eliminar = "Eliminado is null";
+                    agregarColumnaEliminar();
                     dgvTabla.Height = 445;
                     dgvTabla.Location = new Point(22,236);
-                    agregarColumnaEliminar();
                     tbNombre.Enabled = true;
                     tbCliente.Enabled = false;
                     tbCampaña.Enabled = false; // se puede poner el nombre de la campaña asignada actualmente
                     pnlFiltroFecha.Enabled = false;
                     pnlLista.BackColor = Color.DarkBlue;
+
                     break;
 
                 case "clientes":
                     dTable = conectar.listarClientes();
+                    filtro_eliminar = "Eliminado is null";
+                    agregarColumnaEliminar();
                     dgvTabla.Height = 445;
                     dgvTabla.Location = new Point(22,236);
-                    agregarColumnaEliminar();
                     tbNombre.Enabled = false; // podriamos aca preguntar por el nombre de contacto
                     tbCliente.Enabled = true;
                     tbCampaña.Enabled = false;
@@ -167,10 +200,11 @@ namespace WindowsFormsApplication1
 
                 case "campañas":
                     dTable = conectar.listarCampañas();
+                    campo_fecha = "Inicia";
+                    filtro_eliminar = "Eliminado is null";
+                    agregarColumnaEliminar();
                     dgvTabla.Height = 445;
                     dgvTabla.Location = new Point(22,236);
-                    agregarColumnaEliminar();
-                    campo_fecha = "Inicia";
                     tbNombre.Enabled = false; // podriamos aca preguntar por el nombre de contacto
                     tbCliente.Enabled = true;
                     tbCampaña.Enabled = true;
@@ -199,6 +233,11 @@ namespace WindowsFormsApplication1
                     break;
             }
             dgvTabla.DataSource = dTable;
+            if (filtro_eliminar != string.Empty)
+            {
+                (dgvTabla.DataSource as DataTable).DefaultView.RowFilter = filtro_eliminar;
+            }
+
             foreach (DataGridViewColumn dgvC in dgvTabla.Columns)
             {
                 if (!(dgvC.CellTemplate is DataGridViewCheckBoxCell))
@@ -235,12 +274,15 @@ namespace WindowsFormsApplication1
                 switch (filtro_tabla)
                 {
                     case "empleados":
+                        checkEliminacion(conectar.eliminar_empleados(lista_eliminar));
                         break;
 
                     case "clientes":
+                        checkEliminacion(conectar.eliminar_clientes(lista_eliminar));
                         break;
 
                     case "campañas":
+                        checkEliminacion(conectar.eliminar_empleados(lista_eliminar));
                         break;
                 }
             }
@@ -300,7 +342,6 @@ namespace WindowsFormsApplication1
             try
             {
                 frmDetalle frmDetalle;
-                frmDatos frmDato;
                 switch (dgvTabla.Columns[1].Name)//la tabla cambia,esto es para controlar q tabla esta visible al momento del click en la celda
                 {
                     case "id_empleado":
@@ -329,7 +370,18 @@ namespace WindowsFormsApplication1
 
         private void cbEliminados_CheckedChanged(object sender, EventArgs e)
         {
-
+            if ((sender as CheckBox).Checked)
+            {
+                (dgvTabla.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+                dgvTabla.ReadOnly = true;
+                btnEliminar.Enabled = false;
+            }
+            else
+            {
+                (dgvTabla.DataSource as DataTable).DefaultView.RowFilter = "Eliminado is null";
+                dgvTabla.ReadOnly = false;
+                btnEliminar.Enabled = true;
+            }
         }
     }
 }
