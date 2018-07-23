@@ -723,9 +723,154 @@ namespace WindowsFormsApplication1.clases
 
         }
 
+        public string totalTiempoProductivoFormat( int idcamp, int id)
+        {
+
+            clsCampaña campaña = new clsCampaña();
+            string res = "no hay registros";
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("select [t_capacitacion],[t_reunion],[t_llenadoFormularios],[t_atendiendo] from [Call_Center].[dbo].[jornada_laboral]  where [jornada_laboral].id_empleado=" + id + " and [jornada_laboral].id_campaña=" + idcamp, con);
 
 
-      
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+
+                
+                res = dameTiempo(dt);
+               
+               
+
+                return res;
+
+
+
+            }
+
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message);//
+                return "";
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+
+        public string totalTiempoImproductivoFormat(int idcamp,int id)
+
+        {
+
+            
+            string res = "no hay registros";
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("select [t_descanso], [t_sinContactos], [t_sinCampaña],[t_inactivo], [t_baño],  [t_almuerzo]  from [Call_Center].[dbo].[jornada_laboral]  where [jornada_laboral].id_empleado=" + id + " and [jornada_laboral].id_campaña=" + idcamp, con);
+
+
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+
+
+                res = dameTiempo(dt);
+
+
+
+                return res;
+
+
+
+            }
+
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message);//
+                return "";
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+
+        public string totalLlamadaEMpleadoCampaña(int idCamp, int idEmp, string Fecha)
+        {
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[llamada] where [id_empleado]=" + idEmp + " and  [id_campaña]=" + idCamp, con);
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                
+
+                return dt.Rows.Count.ToString();
+
+
+
+            }
+
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return "No hay registros";
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            
+        }
+
+        public string totalVentasEMpleadoCampaña(int idCamp, int idEmp)
+        {
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[llamada] where [resultado] like 'Vendido'and  [id_empleado]=" + idEmp + " and  [id_campaña]=" + idCamp, con);
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+
+
+                return dt.Rows.Count.ToString();
+
+
+
+            }
+
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return "No hay registros";
+            }
+            finally
+            {
+                con.Close();
+            }
+
+
+        }
+
+
+
+
 
         public string totalEspera(int id,int idcamp)
 
@@ -1327,6 +1472,33 @@ namespace WindowsFormsApplication1.clases
 
             return minuts;
         }
+        public String  dameTiempo(DataTable dt)
+        {
+            TimeSpan minuts = new TimeSpan(0,0,0);
+            TimeSpan time;
+
+
+            int countRow = dt.Rows.Count;
+            int countCol = dt.Columns.Count;
+
+            for (int iCol = 0; iCol < countCol; iCol++)
+            {
+                DataColumn col = dt.Columns[iCol];
+
+                for (int iRow = 0; iRow < countRow; iRow++)
+                {
+                    object cell = dt.Rows[iRow].ItemArray[iCol];
+                    time = TimeSpan.Parse((cell).ToString());
+
+                    minuts = minuts + time;
+
+                }
+            }
+
+
+            return minuts.ToString();
+        }
+
 
 
         #endregion
@@ -1354,6 +1526,42 @@ namespace WindowsFormsApplication1.clases
             {
                 msjError(e.Message);
                 return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public clsEmpleado datos_empleado2(int id)//consulta y devuelve datos de un empleado
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * from empleado where id_empleado=@usuario", con);
+                cmd.Parameters.AddWithValue("usuario", id);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                clsEmpleado usuario = new clsEmpleado();
+                usuario.Id_empleado = Convert.ToInt32(dt.Rows[0]["id_empleado"]);
+                usuario.Nombre = Convert.ToString(dt.Rows[0]["nombre"]);
+                usuario.Apellido = Convert.ToString(dt.Rows[0]["apellido"]);
+                usuario.Dni = Convert.ToInt32(dt.Rows[0]["dni"]);
+                usuario.Fecha_inicio = (DateTime)dt.Rows[0]["f_inicio"];
+                usuario.Jefe = Convert.ToInt32(dt.Rows[0]["jefe"]);
+                usuario.Password = Convert.ToString(dt.Rows[0]["password"]);
+                usuario.Fecha_naciemiento = (DateTime)(dt.Rows[0]["f_nacimiento"]);
+                usuario.Id_campaña = Convert.ToInt32(dt.Rows[0]["id_campaña"]);
+                usuario.Domicilio = Convert.ToString(dt.Rows[0]["domicilio"]);
+                usuario.Telefono = Convert.ToString(dt.Rows[0]["telefono"]);
+                usuario.Mail = Convert.ToString(dt.Rows[0]["mail"]);
+                return usuario;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return null;
             }
             finally
             {
@@ -1731,7 +1939,7 @@ namespace WindowsFormsApplication1.clases
                 campaña.Fecha_fin = (dt.Rows[0]["F_fin"] != null)? Convert.ToDateTime(dt.Rows[0]["F_fin"]) : DateTime.MinValue;
                 campaña.Id_cliente = Convert.ToInt32(dt.Rows[0]["id_cliente"]);
                 campaña.NombreCliente = Convert.ToString(dt.Rows[0]["Nombre1"]);
-                campaña.Lider = Convert.ToInt32(dt.Rows[0]["Lider"]);
+                //campaña.Lider = Convert.ToInt32(dt.Rows[0]["Lider"]);
                 return campaña;
             }
             catch (Exception e)
@@ -2181,8 +2389,7 @@ namespace WindowsFormsApplication1.clases
                 cliente.Contacto = Convert.ToString(dt.Rows[0]["Contacto"]);
                 cliente.Mail = Convert.ToString(dt.Rows[0]["Mail"]);
                 cliente.Telefono = Convert.ToInt32(dt.Rows[0]["Telefono"]);
-                //cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilio_legal"]);
-                cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilioLegal"]);
+                cliente.Domicilio = Convert.ToString(dt.Rows[0]["domicilio_legal"]);
                 return cliente;
             }
             catch (Exception e)

@@ -15,9 +15,10 @@ namespace WindowsFormsApplication1
     {
         int id_Campaña;
         int id_Empleado;
+        clsEmpleado empleado = new clsEmpleado();
         clsConexion conectar = new clsConexion();
-        clsEmpleado empleado;
-        clsCampaña campaña;
+        clsCampaña campaña = new clsCampaña();
+      
         DateTime desde = new DateTime();
         DateTime hasta = new DateTime();
 
@@ -27,11 +28,28 @@ namespace WindowsFormsApplication1
             id_Campaña = idCamp;
             id_Empleado = idEmp;
 
+            
+
         }
 
      
         private void frmEpleadoCampaña_Load(object sender, EventArgs e)
         {
+            lblInfo01.Text = conectar.totalLlamadaEMpleadoCampaña(id_Campaña,id_Empleado,"");
+            lblInfo03.Text= conectar.totalVentasEMpleadoCampaña(id_Campaña, id_Empleado);
+            lblInfo04.Text = conectar.totalTiempoProductivoFormat(id_Campaña, id_Empleado);
+            lblInfo02.Text = conectar.totalTiempoImproductivoFormat(id_Campaña, id_Empleado);
+
+           
+            campaña = conectar.datos_campaña(id_Campaña);
+            empleado = conectar.datos_empleado2(id_Empleado);
+
+            lbcamp.Text = campaña.Nombre;
+            lbcamp2.Text = campaña.NombreCliente;
+
+            lbEmp.Text = empleado.Apellido + " " + empleado.Nombre;
+
+
             llenarEstadisticasEmpleadoEnCampaña();
             llenarEstadisticasLlamadasEmpleadoEnCampaña();
 
@@ -47,6 +65,11 @@ namespace WindowsFormsApplication1
 
 
             tiempos = conectar.tiemposCampañaEmpleado(id_Empleado, id_Campaña, desde, hasta);
+
+            
+            cPorcentajeVentas.Series["Ventas"].LegendText = "#VALX";
+
+
             foreach (var series in cTiempos.Series)
             {
                 series.Points.Clear();
@@ -81,6 +104,10 @@ namespace WindowsFormsApplication1
            
 
             tiempos = conectar.llamadasCampañaEmpleado(id_Empleado, id_Campaña, desde, hasta);
+            cPorcentajeVentas.Series["Ventas"].Label = "#PERCENT";
+            cPorcentajeVentas.Series["Ventas"].LegendText = "#VALX";
+
+
             foreach (var series in cPorcentajeVentas.Series)
             {
                 series.Points.Clear();
@@ -93,13 +120,26 @@ namespace WindowsFormsApplication1
             dic.Add("LLamarDeNuevo", Convert.ToInt32(tiempos[0]));
             dic.Add("No Atendido ", Convert.ToInt32(tiempos[1]));
             dic.Add("No Vendido", Convert.ToInt32(tiempos[2]));
-            dic.Add("Vendido", Convert.ToInt32(tiempos[3]));
+            dic.Add("Vendidos", Convert.ToInt32(tiempos[3]));
 
 
             foreach (KeyValuePair<string, int> d in dic)
             {
                 cPorcentajeVentas.Series["Ventas"].Points.AddXY(d.Key, d.Value);
+                
+
+
             }
+           
+        }
+
+        private void lbEmp_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
 
         }
     }
