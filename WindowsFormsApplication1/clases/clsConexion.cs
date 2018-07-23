@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1.clases
         //@"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
         SqlConnection con;
-        string conx = @"Data Source=LAPTOP-T29R0N2Q\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
+        string conx = @"Data Source=CLAUDIO\SQLEXPRESS;Initial Catalog=Call_Center;Integrated Security=True";
 
 
         public clsConexion()
@@ -2171,7 +2171,7 @@ namespace WindowsFormsApplication1.clases
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("select id_empleado, empleado.nombre +' '+ apellido as Empleado, dni as DNI, empleado.f_inicio as 'Fecha de ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento"//distinct empleado.id_empleado, empleado.nombre  + ' ' + empleado.apellido as Empleado
+                SqlCommand cmd = new SqlCommand("select  distinct (empleado.id_empleado), empleado.nombre +' '+ apellido as Empleado, dni as DNI, empleado.f_inicio as 'Fecha de ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento"//distinct empleado.id_empleado, empleado.nombre  + ' ' + empleado.apellido as Empleado
                     + " FROM llamada JOIN empleado ON (llamada.id_empleado = empleado.id_empleado) WHERE llamada.id_campaña = @id", con);
                 cmd.Parameters.AddWithValue("id", id_campaña);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);

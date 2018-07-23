@@ -172,7 +172,7 @@ D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\bin\Debug\WindowsFormsA
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\Call.csprojResolveAssemblyReference.cache
-D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmEpleadoCampaña.resources
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
 C:\Users\Jois\Source\Repos\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmEmpleadoCampaña.resources
+D:\Repo\CallCenter\Call_Center_\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmEmpleadoCampaña.resources
