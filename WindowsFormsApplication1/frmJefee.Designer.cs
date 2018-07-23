@@ -32,6 +32,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnSalir = new System.Windows.Forms.Button();
             this.pnlLista = new System.Windows.Forms.Panel();
+            this.dgvTabla = new System.Windows.Forms.DataGridView();
+            this.pnlAB = new System.Windows.Forms.Panel();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.cbEliminados = new System.Windows.Forms.CheckBox();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.pnlFiltros = new System.Windows.Forms.Panel();
             this.pnlFiltroFecha = new System.Windows.Forms.Panel();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
@@ -45,20 +50,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.dgvTabla = new System.Windows.Forms.DataGridView();
             this.btnLlamados = new System.Windows.Forms.Button();
             this.btnVentas = new System.Windows.Forms.Button();
             this.btnCampañas = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
             this.btnEmpleados = new System.Windows.Forms.Button();
             this.btnNewEmpleado = new System.Windows.Forms.Button();
-            this.ucDatosUsuario1 = new WindowsFormsApplication1.ucDatosUsuario();
             this.gbOpciones = new System.Windows.Forms.GroupBox();
+            this.ucDatosUsuario1 = new WindowsFormsApplication1.ucDatosUsuario();
             this.pnlLista.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).BeginInit();
+            this.pnlAB.SuspendLayout();
             this.pnlFiltros.SuspendLayout();
             this.pnlFiltroFecha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).BeginInit();
             this.gbOpciones.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,8 +84,9 @@
             // 
             // pnlLista
             // 
-            this.pnlLista.Controls.Add(this.pnlFiltros);
             this.pnlLista.Controls.Add(this.dgvTabla);
+            this.pnlLista.Controls.Add(this.pnlAB);
+            this.pnlLista.Controls.Add(this.pnlFiltros);
             this.pnlLista.Controls.Add(this.btnLlamados);
             this.pnlLista.Controls.Add(this.btnVentas);
             this.pnlLista.Controls.Add(this.btnCampañas);
@@ -90,6 +96,85 @@
             this.pnlLista.Name = "pnlLista";
             this.pnlLista.Size = new System.Drawing.Size(1099, 692);
             this.pnlLista.TabIndex = 3;
+            // 
+            // dgvTabla
+            // 
+            this.dgvTabla.AllowUserToAddRows = false;
+            this.dgvTabla.AllowUserToDeleteRows = false;
+            this.dgvTabla.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvTabla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTabla.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvTabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTabla.Location = new System.Drawing.Point(22, 175);
+            this.dgvTabla.Name = "dgvTabla";
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvTabla.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvTabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTabla.Size = new System.Drawing.Size(1055, 506);
+            this.dgvTabla.TabIndex = 5;
+            this.dgvTabla.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellContentDoubleClick);
+            // 
+            // pnlAB
+            // 
+            this.pnlAB.BackColor = System.Drawing.SystemColors.ControlText;
+            this.pnlAB.Controls.Add(this.btnAgregar);
+            this.pnlAB.Controls.Add(this.cbEliminados);
+            this.pnlAB.Controls.Add(this.btnEliminar);
+            this.pnlAB.Enabled = false;
+            this.pnlAB.Location = new System.Drawing.Point(22, 172);
+            this.pnlAB.Name = "pnlAB";
+            this.pnlAB.Size = new System.Drawing.Size(1055, 65);
+            this.pnlAB.TabIndex = 11;
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.BackColor = System.Drawing.Color.Teal;
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnAgregar.Location = new System.Drawing.Point(935, 10);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(95, 40);
+            this.btnAgregar.TabIndex = 10;
+            this.btnAgregar.Text = "+";
+            this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // cbEliminados
+            // 
+            this.cbEliminados.AutoSize = true;
+            this.cbEliminados.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbEliminados.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.cbEliminados.Location = new System.Drawing.Point(173, 21);
+            this.cbEliminados.Name = "cbEliminados";
+            this.cbEliminados.Size = new System.Drawing.Size(133, 21);
+            this.cbEliminados.TabIndex = 9;
+            this.cbEliminados.Text = "Mostrar eliminados";
+            this.cbEliminados.UseVisualStyleBackColor = true;
+            this.cbEliminados.CheckedChanged += new System.EventHandler(this.cbEliminados_CheckedChanged);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.BackColor = System.Drawing.Color.Maroon;
+            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminar.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnEliminar.Location = new System.Drawing.Point(23, 10);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(119, 40);
+            this.btnEliminar.TabIndex = 8;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // pnlFiltros
             // 
@@ -105,7 +190,7 @@
             this.pnlFiltros.Controls.Add(this.pictureBox1);
             this.pnlFiltros.Location = new System.Drawing.Point(22, 91);
             this.pnlFiltros.Name = "pnlFiltros";
-            this.pnlFiltros.Size = new System.Drawing.Size(1054, 82);
+            this.pnlFiltros.Size = new System.Drawing.Size(1055, 82);
             this.pnlFiltros.TabIndex = 6;
             // 
             // pnlFiltroFecha
@@ -238,33 +323,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // dgvTabla
-            // 
-            this.dgvTabla.AllowUserToAddRows = false;
-            this.dgvTabla.AllowUserToDeleteRows = false;
-            this.dgvTabla.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvTabla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTabla.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvTabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTabla.Location = new System.Drawing.Point(22, 176);
-            this.dgvTabla.Name = "dgvTabla";
-            this.dgvTabla.ReadOnly = true;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvTabla.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvTabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTabla.Size = new System.Drawing.Size(1054, 503);
-            this.dgvTabla.TabIndex = 5;
-            this.dgvTabla.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvbTabla_CellClick);
-            // 
             // btnLlamados
             // 
             this.btnLlamados.Font = new System.Drawing.Font("Microsoft YaHei Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -334,7 +392,19 @@
             this.btnNewEmpleado.TabIndex = 14;
             this.btnNewEmpleado.Text = "Nueva entidad";
             this.btnNewEmpleado.UseVisualStyleBackColor = true;
-            this.btnNewEmpleado.Click += new System.EventHandler(this.btnNewEmpleado_Click);
+            // 
+            // gbOpciones
+            // 
+            this.gbOpciones.Controls.Add(this.btnNewEmpleado);
+            this.gbOpciones.Controls.Add(this.btnSalir);
+            this.gbOpciones.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbOpciones.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.gbOpciones.Location = new System.Drawing.Point(9, 505);
+            this.gbOpciones.Name = "gbOpciones";
+            this.gbOpciones.Size = new System.Drawing.Size(220, 199);
+            this.gbOpciones.TabIndex = 15;
+            this.gbOpciones.TabStop = false;
+            this.gbOpciones.Text = "Opciones";
             // 
             // ucDatosUsuario1
             // 
@@ -350,19 +420,6 @@
             this.ucDatosUsuario1.NombreCompleto = null;
             this.ucDatosUsuario1.Size = new System.Drawing.Size(189, 498);
             this.ucDatosUsuario1.TabIndex = 0;
-            // 
-            // gbOpciones
-            // 
-            this.gbOpciones.Controls.Add(this.btnNewEmpleado);
-            this.gbOpciones.Controls.Add(this.btnSalir);
-            this.gbOpciones.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbOpciones.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.gbOpciones.Location = new System.Drawing.Point(9, 505);
-            this.gbOpciones.Name = "gbOpciones";
-            this.gbOpciones.Size = new System.Drawing.Size(220, 199);
-            this.gbOpciones.TabIndex = 15;
-            this.gbOpciones.TabStop = false;
-            this.gbOpciones.Text = "Opciones";
             // 
             // frmJefee
             // 
@@ -380,12 +437,14 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmJefee_FormClosing);
             this.Load += new System.EventHandler(this.frmJefee_Load);
             this.pnlLista.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).EndInit();
+            this.pnlAB.ResumeLayout(false);
+            this.pnlAB.PerformLayout();
             this.pnlFiltros.ResumeLayout(false);
             this.pnlFiltros.PerformLayout();
             this.pnlFiltroFecha.ResumeLayout(false);
             this.pnlFiltroFecha.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).EndInit();
             this.gbOpciones.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -417,5 +476,9 @@
         private System.Windows.Forms.Panel pnlFiltroFecha;
         private System.Windows.Forms.Button btnNewEmpleado;
         private System.Windows.Forms.GroupBox gbOpciones;
+        private System.Windows.Forms.Panel pnlAB;
+        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.CheckBox cbEliminados;
+        private System.Windows.Forms.Button btnEliminar;
     }
 }

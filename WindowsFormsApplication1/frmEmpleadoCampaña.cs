@@ -11,7 +11,7 @@ using WindowsFormsApplication1.clases;
 
 namespace WindowsFormsApplication1
 {
-    public partial class frmEpleadoCampaña : Form
+    public partial class frmEmpleadoCampaña : Form
     {
         int id_Campaña;
         int id_Empleado;
@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1
         DateTime desde = new DateTime();
         DateTime hasta = new DateTime();
 
-        public frmEpleadoCampaña( int idCamp,int idEmp)
+        public frmEmpleadoCampaña( int idCamp,int idEmp)
         {
             InitializeComponent();
             id_Campaña = idCamp;

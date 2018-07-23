@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication1
 {
-    partial class frmEpleadoCampaña
+    partial class frmEmpleadoCampaña
     {
         /// <summary>
         /// Required designer variable.

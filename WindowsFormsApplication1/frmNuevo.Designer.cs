@@ -98,7 +98,7 @@
             this.check01.AutoSize = true;
             this.check01.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
             this.check01.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.check01.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.check01.ForeColor = System.Drawing.Color.Maroon;
             this.check01.Location = new System.Drawing.Point(24, 327);
             this.check01.Name = "check01";
             this.check01.Size = new System.Drawing.Size(159, 24);
@@ -145,7 +145,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label9.ForeColor = System.Drawing.Color.Maroon;
             this.label9.Location = new System.Drawing.Point(43, 327);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(52, 20);
@@ -154,7 +154,7 @@
             // 
             // tb07
             // 
-            this.tb07.BackColor = System.Drawing.Color.DarkRed;
+            this.tb07.BackColor = System.Drawing.SystemColors.Window;
             this.tb07.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb07.Location = new System.Drawing.Point(297, 287);
             this.tb07.Name = "tb07";
@@ -185,7 +185,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label7.ForeColor = System.Drawing.Color.Maroon;
             this.label7.Location = new System.Drawing.Point(43, 251);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(81, 20);
@@ -196,7 +196,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label8.ForeColor = System.Drawing.Color.Maroon;
             this.label8.Location = new System.Drawing.Point(43, 289);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(80, 20);
@@ -221,7 +221,7 @@
             // 
             // tb03
             // 
-            this.tb03.BackColor = System.Drawing.Color.DarkRed;
+            this.tb03.BackColor = System.Drawing.SystemColors.Window;
             this.tb03.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb03.Location = new System.Drawing.Point(297, 97);
             this.tb03.Multiline = true;
@@ -272,7 +272,7 @@
             // 
             // tb02
             // 
-            this.tb02.BackColor = System.Drawing.Color.DarkRed;
+            this.tb02.BackColor = System.Drawing.SystemColors.Window;
             this.tb02.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb02.Location = new System.Drawing.Point(297, 59);
             this.tb02.Name = "tb02";
@@ -281,7 +281,7 @@
             // 
             // tb01
             // 
-            this.tb01.BackColor = System.Drawing.Color.DarkRed;
+            this.tb01.BackColor = System.Drawing.SystemColors.Window;
             this.tb01.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb01.Location = new System.Drawing.Point(297, 21);
             this.tb01.Name = "tb01";
@@ -292,7 +292,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label2.ForeColor = System.Drawing.Color.Maroon;
             this.label2.Location = new System.Drawing.Point(43, 61);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 20);
@@ -303,7 +303,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1.ForeColor = System.Drawing.Color.Maroon;
             this.label1.Location = new System.Drawing.Point(43, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 20);
@@ -314,7 +314,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label3.ForeColor = System.Drawing.Color.Maroon;
             this.label3.Location = new System.Drawing.Point(43, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(33, 20);
@@ -426,7 +426,6 @@
         private System.Windows.Forms.TextBox tb02;
         private System.Windows.Forms.TextBox tb01;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel pnlRegistro;
         private System.Windows.Forms.Label label10;
@@ -442,5 +441,6 @@
         private System.Windows.Forms.CheckBox check02;
         private System.Windows.Forms.ComboBox cb02;
         private System.Windows.Forms.CheckBox check01;
+        private System.Windows.Forms.Label label1;
     }
 }

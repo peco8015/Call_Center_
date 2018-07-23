@@ -27,7 +27,12 @@ namespace WindowsFormsApplication1
         public frmNuevo(string entidad)
         {
             InitializeComponent();
-            tipo = entidad;
+            if (entidad == "empleados")
+                tipo = "Empleado";
+            if (entidad == "campañas")
+                tipo = "Campaña";
+            if (entidad == "clientes")
+                tipo = "Cliente";
         }
 
         private void frmNuevo_Load(object sender, EventArgs e)
@@ -98,20 +103,19 @@ namespace WindowsFormsApplication1
                 {
                     case "Empleado":
                         clsEmpleado emp = new clsEmpleado();
-                        if ( Int32.TryParse(tb03.Text, out int aux_dni) && !string.IsNullOrWhiteSpace(tb04.Text) && !string.IsNullOrWhiteSpace(tb05.Text)
-                            && !string.IsNullOrWhiteSpace(tb06.Text) && !string.IsNullOrWhiteSpace(tb07.Text) && dtp01.Value < DateTime.Now )
+                        if ( Int32.TryParse(tb03.Text, out int aux_dni) && !string.IsNullOrWhiteSpace(tb07.Text) && dtp01.Value < DateTime.Now )
                         {
                             emp.Nombre = tb01.Text;
                             emp.Apellido = tb02.Text;
                             emp.Dni = aux_dni;
-                            emp.Telefono = tb04.Text; // guardar como int? checkear eso?
-                            emp.Mail = tb05.Text;
-                            emp.Domicilio = tb06.Text;
+                            emp.Telefono = (!string.IsNullOrWhiteSpace(tb04.Text)) ? tb04.Text : string.Empty; // checkear eso?
+                            emp.Mail = (!string.IsNullOrWhiteSpace(tb05.Text)) ? tb05.Text : string.Empty;
+                            emp.Domicilio = (!string.IsNullOrWhiteSpace(tb06.Text))? tb06.Text : string.Empty;
                             emp.Fecha_naciemiento = dtp01.Value;
                             emp.Fecha_inicio = DateTime.Now;
                             emp.Jefe = (check01.Checked) ? 0 : 1;
                             emp.Password = tb07.Text;
-                            emp.Id_campaña = (check02.Checked)? (int)cb02.SelectedValue : 0;    //CAMPAÑA
+                            emp.Id_campaña = (check02.Checked && !check01.Checked) ? (int)cb02.SelectedValue : -1;    //CAMPAÑA
                             SeGuardo(conectar.insertar_empleado(emp));
                         }
                         else
@@ -186,6 +190,9 @@ namespace WindowsFormsApplication1
                     label4.Text = "Nombre contacto";
                     label5.Text = "Mail contacto";
                     label6.Text = "Telefono contacto";
+                    label4.ForeColor = Color.Maroon;
+                    label5.ForeColor = Color.Maroon;
+                    label6.ForeColor = Color.Maroon;
                     label7.Visible = false;
                     label8.Visible = false;
                     label9.Visible = false;

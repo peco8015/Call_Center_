@@ -20,6 +20,7 @@ namespace WindowsFormsApplication1.clases
         string domicilio;
         string telefono;
         string mail;
+        DateTime fecha_eliminado;
 
         public int Id_empleado
         {
@@ -141,5 +142,6 @@ namespace WindowsFormsApplication1.clases
         public string Domicilio { get => domicilio; set => domicilio = value; }
         public string Telefono { get => telefono; set => telefono = value; }
         public string Mail { get => mail; set => mail = value; }
+        public DateTime Fecha_eliminado { get => fecha_eliminado; set => fecha_eliminado = value; }
     }
 }

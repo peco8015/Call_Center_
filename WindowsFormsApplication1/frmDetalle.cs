@@ -17,168 +17,14 @@ namespace WindowsFormsApplication1
         clsCampaña campaña;
         string clase;
         int identificador;
-        
-        
 
         public frmDetalle(string t, int id)
         {
             InitializeComponent();
             clase = t;
             identificador = id;
-            
         }
 
-        private void frmDetalles_Load(object sender, EventArgs e)
-        {
-            switch (clase)
-            {
-                case "empleado":
-                    empleado = conectar.datos_empleado(identificador); // DNI para empleado
-                    tcDatos.TabPages.RemoveByKey("tpRendimiento");               
-
-                    break;
-
-                case "cliente":
-                    cliente = conectar.datos_cliente(identificador);
-                    tcDatos.TabPages.RemoveByKey("tpRendimiento");
-                    break;
-
-                case "campaña":
-                    campaña = conectar.datos_campaña(identificador);
-                    cliente = conectar.datos_cliente(campaña.Id_cliente);
-                    tcDatos.TabPages.RemoveByKey("tpCampañaDeEmpleado");
-                    break;
-            }
-            setearForm();
-        }
-
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            string sender_tag = (sender as Button).Tag.ToString();
-            switch (sender_tag)
-            {
-                case "Eliminar":
-                    //aca elimina
-                    this.Close();
-                    break;
-
-                case "Editar":
-                    foreach (Control c in pnlInformacion.Controls)
-                    {
-                        if (c.GetType() == typeof(TextBox))
-                            (c as TextBox).ReadOnly = false;
-                        if (c.GetType() == typeof(DateTimePicker))
-                            (c as DateTimePicker).Enabled = true;
-                    }
-                    pnlEstadisticas.Enabled = false;
-                    btnEditar.Tag = "Guardar";
-                    btnEliminar.Tag = "Cancelar";
-                    break;
-
-                case "Guardar":
-                    checkCampos();
-                    btnEditar.Tag = "Editar";
-                    btnEliminar.Tag = "Eliminar";
-                    break;
-
-                case "Cancelar":
-                    btnEditar.Tag = "Editar";
-                    btnEliminar.Tag = "Eliminar";
-                    break;
-            }
-            if ( sender_tag == "Guardar" || sender_tag == "Cancelar" )
-            {
-                foreach (Control c in pnlInformacion.Controls)
-                {
-                    if (c.GetType() == typeof(TextBox))
-                        (c as TextBox).ReadOnly = true;
-                    if (c.GetType() == typeof(DateTimePicker))
-                        (c as DateTimePicker).Enabled = false;
-                }
-                pnlEstadisticas.Enabled = true;
-            }
-        }
-
-        private void tcDatos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch(tcDatos.SelectedTab.Name)
-            {
-                case "tpFechas":
-                    cbFiltroFecha.Items.Clear();
-                    string[] opciones = { "Hoy", "Semana", "Mes", "Año" };
-                    cbFiltroFecha.Items.AddRange(opciones);
-                    cbFiltroFecha.SelectedIndex = 0;
-                    
-                    break;
-
-                case "tpRendimiento":
-                    llenarDtRendimiento();
-                    break;
-
-                case "tpCampañaDeEmpleado":
-                    rendimientoDeEmpleado();
-                    break;
-            }
-        }
-
-        private void cbFiltroFecha_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //  Limpio los Points de cada Chart
-            foreach (Control c in tpFechas.Controls)
-            {
-                if (c.GetType() == typeof(Chart))
-                {
-                    foreach (Series sc in (c as Chart).Series)
-                    {
-                        sc.Points.Clear();
-                    }
-                }
-            }
-            DateTime fechaAUX = DateTime.Today;
-            switch (cbFiltroFecha.SelectedItem.ToString())
-            {
-                case "Hoy":
-                    fechaAUX = DateTime.Today;
-                    //fechaAUX = Convert.ToDateTime("2018-04-17");
-                    break;
-
-                case "Semana":
-                    fechaAUX = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
-                    break;
-
-                case "Mes":
-                    fechaAUX = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-                    //DateTime aux = new DateTime(2018, 5, 12);
-                    //fechaAUX = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
-                    //fechaAUX = aux.AddDays(-(int)aux.DayOfWeek + (int)DayOfWeek.Monday);
-                    break;
-
-                case "Año":
-                    fechaAUX = new DateTime(DateTime.Today.Year, 1, 1);
-                    break;
-            }
-            mostrarNumeros(fechaAUX, cbFiltroFecha.SelectedItem.ToString());
-        }
-
-
-        private void dgvTabla_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                // frmDatos frmDato;
-              
-               
-                int idEMp = Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["Id"].Value);
-                /*frmDato = new frmDatos(this, dni, "Datos Empleado");
-                frmDato.Show();*/
-               frmEpleadoCampaña frmDetalleCliente = new frmEpleadoCampaña(campaña.Id_campaña,idEMp);
-                frmDetalleCliente.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
 
         #region Funciones
@@ -263,6 +109,8 @@ namespace WindowsFormsApplication1
                     tb07.Text = campaña.Descripcion;
                     dtp01.Value = Convert.ToDateTime(campaña.Fecha_inicio);
                     dtp02.Value = Convert.ToDateTime(campaña.Fecha_fin);
+
+                    agregarColumnaEliminar();
                     break;
             }
             tb01.ReadOnly = true;
@@ -274,16 +122,23 @@ namespace WindowsFormsApplication1
             tb07.ReadOnly = true;
             dtp01.Enabled = false;
             dtp02.Enabled = false;
-
-            mostrarNumeros(DateTime.Today, tcDatos.SelectedTab.Name);
-            if (tcDatos.TabPages.Count >= 2)     // Si son 2 existe la tpRendimiento
-                if (tcDatos.TabPages[1].Text != "Historial Campañas")
-                {
-                    llenarDtRendimiento();
-                }
         }
 
-        private void mostrarNumeros(DateTime fecha, string filtro)
+        public void agregarColumnaEliminar()
+        {
+            DataGridViewCheckBoxColumn dgvCmb = new DataGridViewCheckBoxColumn();
+            dgvCmb.ValueType = typeof(bool);
+            dgvCmb.Name = "Chk";
+            dgvCmb.HeaderText = "";
+            dgvEmpleados.Columns.Add(dgvCmb);
+            DataGridViewCheckBoxColumn dgvCmb2 = new DataGridViewCheckBoxColumn();
+            dgvCmb2.ValueType = typeof(bool);
+            dgvCmb2.Name = "Chk";
+            dgvCmb2.HeaderText = "";
+            dgvEnCampaña.Columns.Add(dgvCmb2);
+        }
+
+        private void mostrarNumeros(DateTime fecha, DateTime hasta)
         {
             try
             {
@@ -293,16 +148,21 @@ namespace WindowsFormsApplication1
                 switch (clase)
                 {
                     case "empleado":
-
+                        estadisticas = conectar.numeros_empleado(empleado.Id_empleado, fecha, hasta);
+                        estadisticasCampañas = conectar.campañas_empleado(empleado.Id_empleado, fecha, hasta);
+                        jornadas = conectar.jornadas_empleado(empleado.Id_empleado, fecha, hasta);
                         break;
 
                     case "cliente":
-                        estadisticas = conectar.numeros_cliente(cliente.Id, filtro, fecha);
-                        estadisticasCampañas = conectar.campañas_cliente(cliente.Id, filtro, fecha);
-                        jornadas = conectar.jornadas_cliente(cliente.Id, filtro, fecha);
+                        estadisticas = conectar.numeros_cliente(cliente.Id, fecha, hasta);
+                        estadisticasCampañas = conectar.campañas_cliente(cliente.Id, fecha, hasta);
+                        jornadas = conectar.jornadas_cliente(cliente.Id, fecha, hasta);
                         break;
 
                     case "campaña":
+                        estadisticas = conectar.numeros_campaña(campaña.Id_campaña, fecha, hasta);
+                        //estadisticasCampañas = conectar.campañas_campaña(campaña.Id_campaña, fecha, hasta); NO TIENE SENTIDO
+                        jornadas = conectar.jornadas_campaña(campaña.Id_campaña, fecha, hasta);
                         break;
                 }
                 llenarCharts(estadisticas, estadisticasCampañas, jornadas);
@@ -327,6 +187,19 @@ namespace WindowsFormsApplication1
             TimeSpan t_almuerzo = TimeSpan.Zero;
             try
             {
+                #region Limpio los Points de cada Chart
+                foreach (Control c in tpFechas.Controls)
+                {
+                    if (c.GetType() == typeof(Chart))
+                    {
+                        foreach (Series sc in (c as Chart).Series)
+                        {
+                            sc.Points.Clear();
+                        }
+                    }
+                }
+                #endregion
+
                 if (estadisticas != null)
                 {
                     float total_ventas = estadisticas.Find(x => x.Clave == "Cant ventas").Valor;
@@ -339,8 +212,8 @@ namespace WindowsFormsApplication1
                     cPorcentajeVentas.Series["Ventas"].Points.AddXY("Llamadas", total_llamadas);
                 }
                 //else
-                    //lblInfo01.Text
-                
+                //lblInfo01.Text
+
                 if (est_campañas != null)
                 {
                     if (est_campañas.Count == 1)
@@ -397,62 +270,60 @@ namespace WindowsFormsApplication1
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         private void llenarDtRendimiento()
-         {
+        {
             try
             {
                 string[] canVentas = conectar.promedioVentasCamapaña(campaña.Id_campaña);
                 float[] canLlamadas = conectar.promedioLlamadasCamapaña(campaña.Id_campaña);
                 DataTable rendimientos = conectar.rendimientoCampaña(campaña.Id_campaña);
-                dgvTabla.DataSource = rendimientos;
+                dgvRendimiento.DataSource = rendimientos;
 
-                //float promEfectTotal = float.Parse(dgvTabla.Rows[dgvTabla.Rows.Count - 1].Cells["PromedioEfect"].Value.ToString());
+                //float promEfectTotal = float.Parse(dgvRendimiento.Rows[dgvRendimiento.Rows.Count - 1].Cells["PromedioEfect"].Value.ToString());
 
                 float promEfectTotal = Convert.ToInt32(canVentas[1]) * 100 / canLlamadas[0];
 
                 lbPromVentas.Text = promEfectTotal.ToString() + "%";
                 lbPromDurLlamVent.Text = Convert.ToString(canVentas[2]) + " min";
-                lbPromLlamadas.Text = Convert.ToString(canVentas[1]) + " Ventas Totales";
+                lbPromLlamadas.Text = Convert.ToString(canVentas[1]);
                 lbPromDurLlam.Text = canLlamadas[1].ToString("0.00") + " min";
                 lbPromTimeProd.Text = conectar.totalTiempoPromedioCampaña(campaña.Id_campaña) + " min";
-                lbPromTimeImddProd.Text= conectar.totalTiempoImproPromedioCampaña(campaña.Id_campaña)+ " min";
-                lbTimeEspera.Text = conectar.promedioEspera(campaña.Id_campaña) +" min";
+                lbPromTimeImddProd.Text = conectar.totalTiempoImproPromedioCampaña(campaña.Id_campaña) + " min";
 
-                dgvTabla.Columns["PromedioEfect"].Visible = false;
-                dgvTabla.Columns["Id"].Width = 25;
-                dgvTabla.Columns["Ventas"].Width = 75;
-                dgvTabla.Columns["Efectividad"].Width = 80;
-                
+                dgvRendimiento.Columns["PromedioEfect"].Visible = false;
+                dgvRendimiento.Columns["Id"].Width = 25;
+                dgvRendimiento.Columns["Ventas"].Width = 75;
+                dgvRendimiento.Columns["Efectividad"].Width = 80;
 
-                foreach (DataGridViewRow row in dgvTabla.Rows)
+                foreach (DataGridViewRow row in dgvRendimiento.Rows)
                 {
 
-                    if (float.Parse(row.Cells["Tiempo Productivo(min)"].Value.ToString()) > float.Parse(conectar.totalTiempoPromedioCampaña(campaña.Id_campaña)))
+                    if ((Convert.ToInt32(row.Cells["Productivo"].Value)) > float.Parse(conectar.totalTiempoPromedioCampaña(campaña.Id_campaña)))
                     {
-                        row.Cells["Tiempo Productivo(min)"].Style.ForeColor = Color.Green;
-                       
+                        row.Cells["Productivo"].Style.ForeColor = Color.Green;
+
                     }
                     else
                     {
-                        row.Cells["Tiempo Productivo(min)"].Style.ForeColor = Color.Red;
-                       
+                        row.Cells["Productivo"].Style.ForeColor = Color.Red;
+
                     }
 
 
-                    if ((float.Parse(row.Cells["Tiempo Improductivo(min)"].Value.ToString())) > float.Parse(conectar.totalTiempoImproPromedioCampaña(campaña.Id_campaña)))
+                    if ((Convert.ToInt32(row.Cells["No Productivo"].Value)) > float.Parse(conectar.totalTiempoImproPromedioCampaña(campaña.Id_campaña)))
                     {
-                        row.Cells["Tiempo Improductivo(min)"].Style.ForeColor = Color.Green;
-                      
+                        row.Cells["No Productivo"].Style.ForeColor = Color.Green;
+
                     }
                     else
                     {
-                        row.Cells["Tiempo Improductivo(min)"].Style.ForeColor = Color.Red;
-                    
+                        row.Cells["No Productivo"].Style.ForeColor = Color.Red;
+
                     }
 
 
-                    if ((float.Parse(row.Cells["Efectividad"].Value.ToString())) > promEfectTotal)
+                    if ((Convert.ToInt32(row.Cells["Efectividad"].Value)) > promEfectTotal)
                     {
                         row.Cells["Efectividad"].Value = (row.Cells["Efectividad"].Value).ToString() + "%";
                         row.Cells["Efectividad"].Style.ForeColor = Color.Green;
@@ -464,35 +335,26 @@ namespace WindowsFormsApplication1
                     }
 
 
-                    if ((float.Parse(row.Cells["Duracion llamadas Vendidas(min)"].Value.ToString())) > 0)//canVentas[1])
+                    if ((float.Parse(row.Cells["Promedio Duracion llamadas Vendidas (min)"].Value.ToString())) > 0)//canVentas[1])
                     {
-                        row.Cells["Duracion llamadas Vendidas(min)"].Style.ForeColor = Color.Red;
+                        row.Cells["Promedio Duracion llamadas Vendidas (min)"].Style.ForeColor = Color.Red;
                     }
                     else
                     {
-                        row.Cells["Duracion llamadas Vendidas(min)"].Style.ForeColor = Color.Green;
+                        row.Cells["Promedio Duracion llamadas Vendidas (min)"].Style.ForeColor = Color.Green;
                     }
 
-                    if ((float.Parse(row.Cells["Duracion llamadas(min)"].Value.ToString())) > canLlamadas[1])
+                    if ((float.Parse(row.Cells["Promedio Duracion llamadas(min)"].Value.ToString())) > canLlamadas[1])
                     {
-                        row.Cells["Duracion llamadas(min)"].Style.ForeColor = Color.Red;
+                        row.Cells["Promedio Duracion llamadas(min)"].Style.ForeColor = Color.Red;
                     }
                     else
                     {
-                        row.Cells["Duracion llamadas(min)"].Style.ForeColor = Color.Green;
-                    }
-
-                    if ((float.Parse(row.Cells["Tiempo de Espera(min)"].Value.ToString())) > float.Parse(conectar.promedioEspera(campaña.Id_campaña)))
-                    {
-                        row.Cells["Tiempo de Espera(min)"].Style.ForeColor = Color.Red;
-                    }
-                    else
-                    {
-                        row.Cells["Tiempo de Espera(min)"].Style.ForeColor = Color.Green;
+                        row.Cells["Promedio Duracion llamadas(min)"].Style.ForeColor = Color.Green;
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -505,7 +367,23 @@ namespace WindowsFormsApplication1
             dgvTableEmpl.DataSource = dt;
         }
 
-      
+        public void llenarDtEmpleados()
+        {
+            dgvEmpleados.DataSource = conectar.listar_empleados_activos();
+            dgvEnCampaña.DataSource = conectar.empleados_actuales_de_campaña(campaña.Id_campaña);
+            (dgvEmpleados.DataSource as DataTable).DefaultView.RowFilter = "[# Campaña] IS NULL OR [# Campaña] <> " + campaña.Id_campaña;
+
+            foreach (DataGridViewColumn dgvC in dgvEmpleados.Columns)
+            {
+                if (!(dgvC.CellTemplate is DataGridViewCheckBoxCell))
+                    dgvC.ReadOnly = true;
+            }
+            foreach (DataGridViewColumn dgvC in dgvEnCampaña.Columns)
+            {
+                if (!(dgvC.CellTemplate is DataGridViewCheckBoxCell))
+                    dgvC.ReadOnly = true;
+            }
+        }
 
         private void checkCampos()
         {
@@ -579,21 +457,218 @@ namespace WindowsFormsApplication1
 
         #endregion
 
-        private void dgvTabla_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
+
+        private void frmDetalles_Load(object sender, EventArgs e)
+        {
+            List<TabPage> tabPage_col = new List<TabPage>();
+            switch (clase)
+            {
+                case "empleado":
+                    empleado = conectar.datos_empleado(identificador); // DNI para empleado
+                    foreach (TabPage tp in tcDatos.TabPages)
+                    {
+                        if (tp.Name == "tpCampañaDeEmpleado" || tp.Name == "tpFechas")
+                            tabPage_col.Add(tp);
+                    }
+                    break;
+
+                case "cliente":
+                    cliente = conectar.datos_cliente(identificador);
+                    foreach (TabPage tp in tcDatos.TabPages)
+                    {
+                        if (tp.Name == "tpCampañaDeEmpleado" || tp.Name == "tpFechas")
+                            tabPage_col.Add(tp);
+                    }
+                    break;
+
+                case "campaña":
+                    campaña = conectar.datos_campaña(identificador);
+                    cliente = conectar.datos_cliente(campaña.Id_cliente);
+                    foreach (TabPage tp in tcDatos.TabPages)
+                    {
+                        if (tp.Name == "tpRendimiento" || tp.Name == "tpFechas" || tp.Name == "tpListadoEmpleados" || tp.Name == "tpConfiguracion")
+                            tabPage_col.Add(tp);
+                    }
+                    break;
+            }
+            tcDatos.TabPages.Clear();
+            tcDatos.TabPages.AddRange(tabPage_col.ToArray());
+            //tcDatos.TabPages.RemoveByKey("tpRendimiento");
+            setearForm();
         }
 
-        private void tabCampañaDeEmpleado_Click(object sender, EventArgs e)
+        private void btnEditar_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt = conectar.misCampañas(empleado.Id_empleado);
-            dgvTableEmpl.DataSource = dt;
+            string sender_tag = (sender as Button).Tag.ToString();
+            switch (sender_tag)
+            {
+                case "Eliminar":
+                    //aca elimina
+                    this.Close();
+                    break;
+
+                case "Editar":
+                    foreach (Control c in pnlInformacion.Controls)
+                    {
+                        if (c.GetType() == typeof(TextBox))
+                            (c as TextBox).ReadOnly = false;
+                        if (c.GetType() == typeof(DateTimePicker))
+                            (c as DateTimePicker).Enabled = true;
+                    }
+                    pnlEstadisticas.Enabled = false;
+                    btnEditar.Tag = "Guardar";
+                    btnEliminar.Tag = "Cancelar";
+                    break;
+
+                case "Guardar":
+                    checkCampos();
+                    btnEditar.Tag = "Editar";
+                    btnEliminar.Tag = "Eliminar";
+                    break;
+
+                case "Cancelar":
+                    btnEditar.Tag = "Editar";
+                    btnEliminar.Tag = "Eliminar";
+                    break;
+            }
+            if ( sender_tag == "Guardar" || sender_tag == "Cancelar" )
+            {
+                foreach (Control c in pnlInformacion.Controls)
+                {
+                    if (c.GetType() == typeof(TextBox))
+                        (c as TextBox).ReadOnly = true;
+                    if (c.GetType() == typeof(DateTimePicker))
+                        (c as DateTimePicker).Enabled = false;
+                }
+                pnlEstadisticas.Enabled = true;
+            }
         }
 
-        private void cTiempos_Click(object sender, EventArgs e)
+        private void tcDatos_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (tcDatos.TabPages.Count > 0)
+            {
+                switch (tcDatos.SelectedTab.Name)
+                {
+                    case "tpFechas":
+                        mostrarNumeros(DateTime.Today, DateTime.MinValue);
+                        break;
 
+                    case "tpRendimiento":
+                        llenarDtRendimiento();
+                        break;
+
+                    case "tpCampañaDeEmpleado":
+                        rendimientoDeEmpleado();
+                        break;
+
+                    case "tpListadoEmpleados":
+                        llenarDtEmpleados();
+                        break;
+                }
+            }
+        }
+
+        private void dgvRendimiento_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                int dni = conectar.dniEmpleado(Convert.ToInt32(dgvRendimiento.Rows[e.RowIndex].Cells["Id"].Value.ToString()));
+                frmDetalle frmDetalleCliente = new frmDetalle("empleado", dni);
+                frmDetalleCliente.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnEliminarDeCampaña_Click(object sender, EventArgs e)
+        {
+            List<int> lista_eliminar = new List<int>();
+            foreach (DataGridViewRow dr in dgvEnCampaña.Rows)
+            {
+                if (Convert.ToBoolean(dr.Cells["Chk"].Value))
+                {
+                    lista_eliminar.Add((int)dr.Cells[1].Value);
+                }
+            }
+            
+            if (DialogResult.Yes == MessageBox.Show("¿Esta seguro de eliminar " + lista_eliminar.Count + " empleados de la campaña " + campaña.Nombre.ToUpper() + "? En caso de requerirse, la información debe ingresarse nuevamente.", "Atención: confirme acción", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+            {
+                //ACTUALIZAR CAMPAÑA EMPL = NULL
+                if (conectar.actualizar_campaña_empleados(-1, lista_eliminar))
+                    MessageBox.Show("Se actualizó correctamente la información ingresada.", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            llenarDtEmpleados();
+        }
+
+        private void btnAgregarACampaña_Click(object sender, EventArgs e)
+        {
+            List<int> lista_agregar = new List<int>();
+            foreach (DataGridViewRow dr in dgvEmpleados.Rows)
+            {
+                if (Convert.ToBoolean(dr.Cells["Chk"].Value))
+                {
+                    lista_agregar.Add((int)dr.Cells[1].Value);
+                }
+            }
+            
+            if (DialogResult.Yes == MessageBox.Show("Agregará " + lista_agregar.Count + " empleados a la campaña " + campaña.Nombre.ToUpper() + "\n. Se necesita confirmar la acción para proceder.", "Atención: confirme acción", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+            {
+                //ACTUALIZAR CAMPAÑA EMPL = ID_CAMPAÑA
+                if (conectar.actualizar_campaña_empleados(campaña.Id_campaña, lista_agregar))
+                    MessageBox.Show("Se actualizó correctamente la información ingresada.", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            llenarDtEmpleados();
+        }
+
+        private void cbHasta_CheckedChanged(object sender, EventArgs e)
+        {
+            dtpFiltroHasta.Enabled = (sender as CheckBox).Checked;
+            //mostrarNumeros(dtpFiltroFecha.Value, "");
+            /* como manejamos para mostrar estos datos cuando deshabilitamos HASTA? */
+        }
+
+        private void dtpFiltroFecha_DragDrop(object sender, DragEventArgs e)
+        {
+            if ((sender as DateTimePicker).Tag.ToString() == "fecha")
+            {
+                DateTime fechaAux = (sender as DateTimePicker).Value;
+                mostrarNumeros(fechaAux, DateTime.MinValue);
+            }
+            else
+            {
+                DateTime fechaDesde = dtpFiltroFecha.Value;
+                DateTime fechaHasta = dtpFiltroHasta.Value;
+                mostrarNumeros(fechaDesde, fechaHasta);
+
+                /* fechaAUX = DateTime.Today;
+                 * //fechaAUX = Convert.ToDateTime("2018-04-17");
+                 * fechaAUX = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);*/
+            }
+        }
+
+        private void dtpFiltroFecha_ValueChanged(object sender, EventArgs e)
+        {
+            if ((sender as DateTimePicker).Tag.ToString() == "fecha")
+            {
+                DateTime fechaAux = (sender as DateTimePicker).Value;
+                mostrarNumeros(fechaAux, DateTime.MinValue);
+            }
+            else
+            {
+                if (dtpFiltroHasta.Enabled && dtpFiltroHasta.Value.Date > dtpFiltroFecha.Value.Date)
+                {
+                    DateTime fechaDesde = dtpFiltroFecha.Value;
+                    DateTime fechaHasta = dtpFiltroHasta.Value;
+                    mostrarNumeros(fechaDesde, fechaHasta);
+                }
+                /* fechaAUX = DateTime.Today;
+                 * //fechaAUX = Convert.ToDateTime("2018-04-17");
+                 * fechaAUX = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);*/
+            }
         }
     }
 }

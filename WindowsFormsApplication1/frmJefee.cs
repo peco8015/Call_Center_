@@ -30,168 +30,7 @@ namespace WindowsFormsApplication1
             inicio_sesion = DateTime.Now.TimeOfDay;
         }
 
-        private void frmJefee_Load(object sender, EventArgs e)
-        {
-            user = conectar.datos_empleado(user.Dni);//obtengo datos del jefe
-
-            ucDatosUsuario1.NombreCompleto = user.Apellido.ToUpper() + ", " + user.Nombre;
-            ucDatosUsuario1.Dni = user.Dni;
-            ucDatosUsuario1.EsJefe = true;
-            ucDatosUsuario1.InicioSesion = inicio_sesion;
-            //ucDatosUsuario1.D1 = "Campañas asignadas:";
-            //ucDatosUsuario1.D2 = "Empleados a cargo:";
-            pnlFiltros.Enabled = false;
-        }
-
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            padre.Show();
-            this.Hide();
-        }
-
-        private void btnEmpleados_Click(object sender, EventArgs e)
-        {
-            pnlFiltros.Enabled = true;
-            filtro_tabla = (sender as Button).Tag.ToString();
-            switch (filtro_tabla)
-            {
-                case "empleados":
-                    dTable = conectar.listarEmpleados();
-                    tbNombre.Enabled = true;
-                    tbCliente.Enabled = false;
-                    tbCampaña.Enabled = false; // se puede poner el nombre de la campaña asignada actualmente
-                    pnlFiltroFecha.Enabled = false;
-                    pnlLista.BackColor = Color.DarkBlue;
-                    break;
-
-                case "clientes":
-                    dTable = conectar.listarClientes();
-                    tbNombre.Enabled = false; // podriamos aca preguntar por el nombre de contacto
-                    tbCliente.Enabled = true;
-                    tbCampaña.Enabled = false;
-                    pnlFiltroFecha.Enabled = false;
-                    pnlLista.BackColor = Color.DarkGreen;
-                    break;
-
-                case "campañas":
-                    dTable = conectar.listarCampañas();
-                    campo_fecha = "Inicia";
-                    tbNombre.Enabled = false; // podriamos aca preguntar por el nombre de contacto
-                    tbCliente.Enabled = true;
-                    tbCampaña.Enabled = true;
-                    pnlFiltroFecha.Enabled = true;
-                    pnlLista.BackColor = Color.DarkMagenta;
-                    break;
-
-                case "ventas":
-                    dTable = conectar.listarVentas();
-                    campo_fecha = "[Fecha Venta]";
-                    tbNombre.Enabled = true;
-                    tbCliente.Enabled = true;
-                    tbCampaña.Enabled = true;
-                    pnlFiltroFecha.Enabled = true;
-                    pnlLista.BackColor = Color.DarkRed;
-                    break;
-
-                case "llamados":
-                    dTable = conectar.listarLlamadas();
-                    campo_fecha = "Fecha";
-                    tbNombre.Enabled = true;
-                    tbCliente.Enabled = true;
-                    tbCampaña.Enabled = true;
-                    pnlFiltroFecha.Enabled = true;
-                    pnlLista.BackColor = Color.DarkKhaki;
-                    break;
-            }
-            dgvTabla.DataSource = dTable;
-        }
-
-        private void dgvbTabla_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                frmDetalle frmDetalle;
-                
-                switch (dgvTabla.Columns[0].Name)//la tabla cambia,esto es para controlar q tabla esta visible al momento del click en la celda
-                {
-                    case "id_empleado":
-
-                        frmDetalle = new frmDetalle("empleado", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()));
-                        frmDetalle.Show();
-                        break;
-
-                    case "id_cliente":
-                        frmDetalle = new frmDetalle("cliente", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_cliente"].Value.ToString()));
-                        frmDetalle.Show();
-                        break;
-
-                    case "id_campaña":
-                        
-                        frmDetalle = new frmDetalle("campaña", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_campaña"].Value.ToString()));                        
-                        frmDetalle.Show();
-                        break;
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void tbNombre_KeyUp(object sender, KeyEventArgs e)
-        {
-            // ' y [ tiran error
-            if (!string.IsNullOrEmpty(tbNombre.Text) || !string.IsNullOrEmpty(tbCliente.Text) || !string.IsNullOrEmpty(tbCampaña.Text) || !cbFecha.Checked || !cbMes.Checked || !cbAño.Checked)
-                queryFiltrado();
-            else
-                dgvTabla.DataSource = dTable;
-        }
-
-        private void dtpFecha_CloseUp(object sender, EventArgs e)
-        {
-            queryFiltrado();
-        }
-
-        private void cbFecha_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!cbFecha.Checked && !cbMes.Checked && !cbAño.Checked)
-            {
-                dtpFecha.Enabled = false;
-                if (tbNombre.Enabled || tbCliente.Enabled || tbCampaña.Enabled)
-                    queryFiltrado();
-                else
-                    dgvTabla.DataSource = dTable;
-            }
-            else
-            {
-                dtpFecha.Enabled = true;
-                CheckBox s = (sender as CheckBox);
-                if (s.Checked)
-                {
-                    filtro_fecha = s.Tag.ToString();
-                    if (s.Tag.ToString() == "mes" || s.Tag.ToString() == "año")
-                        cbFecha.Checked = false;
-                    else
-                    {
-                        cbMes.Checked = false;
-                        cbAño.Checked = false;
-                    }
-                    if (cbMes.Checked && cbAño.Checked)
-                        filtro_fecha = "mesaño";
-                }
-            }
-        }
-
-        private void btnNewEmpleado_Click(object sender, EventArgs e)
-        {
-            frmNuevo frmNuevo = new frmNuevo("Campaña");
-            frmNuevo.Show();
-        }
-
-        private void frmJefee_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            cerrarForm();
-        }
+        #region Funciones
 
         private void queryFiltrado()
         {
@@ -261,5 +100,288 @@ namespace WindowsFormsApplication1
             this.Hide();
         }
 
+        public void agregarColumnaEliminar()
+        {
+            DataGridViewCheckBoxColumn dgvCmb = new DataGridViewCheckBoxColumn();
+            dgvCmb.ValueType = typeof(bool);
+            dgvCmb.Name = "Chk";
+            dgvCmb.HeaderText = "";
+            dgvTabla.Columns.Add(dgvCmb);
+        }
+
+        public void checkEliminacion(bool result)
+        {
+            if (result)
+            {
+                switch (filtro_tabla)
+                {
+                    case "empleados":
+                        dTable = conectar.listarEmpleados();
+                        break;
+
+                    case "clientes":
+                        dTable = conectar.listarClientes();
+                        break;
+
+                    case "campañas":
+                        dTable = conectar.listarCampañas();
+                        break;
+                }
+                dgvTabla.DataSource = dTable;
+                (dgvTabla.DataSource as DataTable).DefaultView.RowFilter = "Eliminado is null";
+                MessageBox.Show("Los registros seleccionados se eliminaron y se actualizó la vista de la información.", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
+            }
+            else
+                MessageBox.Show("Se produjo un error en la continuidad de la operación, por lo cual no todos los empleados fueron eliminados correctamente.", "Operación fallida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+
+        #endregion
+
+
+
+        private void frmJefee_Load(object sender, EventArgs e)
+        {
+            user = conectar.datos_empleado(user.Dni);//obtengo datos del jefe
+
+            ucDatosUsuario1.NombreCompleto = user.Apellido.ToUpper() + ", " + user.Nombre;
+            ucDatosUsuario1.Dni = user.Dni;
+            ucDatosUsuario1.EsJefe = true;
+            ucDatosUsuario1.InicioSesion = inicio_sesion;
+            //ucDatosUsuario1.D1 = "Campañas asignadas:";
+            //ucDatosUsuario1.D2 = "Empleados a cargo:";
+            pnlFiltros.Enabled = false;
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            padre.Show();
+            this.Hide();
+        }
+
+        private void btnEmpleados_Click(object sender, EventArgs e)
+        {
+            if (dgvTabla.Columns.Count > 0)
+                dgvTabla.Columns.Clear();
+            pnlFiltros.Enabled = true;
+            pnlAB.Enabled = true;
+            string filtro_eliminar = string.Empty;
+            dgvTabla.Height = 509;
+            dgvTabla.Location = new Point(22, 172);
+            filtro_tabla = (sender as Button).Tag.ToString();
+            switch (filtro_tabla)
+            {
+                case "empleados":
+                    dTable = conectar.listarEmpleados();
+                    filtro_eliminar = "Eliminado is null";
+                    agregarColumnaEliminar();
+                    dgvTabla.Height = 445;
+                    dgvTabla.Location = new Point(22,236);
+                    tbNombre.Enabled = true;
+                    tbCliente.Enabled = false;
+                    tbCampaña.Enabled = false; // se puede poner el nombre de la campaña asignada actualmente
+                    pnlFiltroFecha.Enabled = false;
+                    pnlLista.BackColor = Color.DarkBlue;
+
+                    break;
+
+                case "clientes":
+                    dTable = conectar.listarClientes();
+                    filtro_eliminar = "Eliminado is null";
+                    agregarColumnaEliminar();
+                    dgvTabla.Height = 445;
+                    dgvTabla.Location = new Point(22,236);
+                    tbNombre.Enabled = false; // podriamos aca preguntar por el nombre de contacto
+                    tbCliente.Enabled = true;
+                    tbCampaña.Enabled = false;
+                    pnlFiltroFecha.Enabled = false;
+                    pnlLista.BackColor = Color.DarkGreen;
+                    break;
+
+                case "campañas":
+                    dTable = conectar.listarCampañas();
+                    campo_fecha = "Inicia";
+                    filtro_eliminar = "Eliminado is null";
+                    agregarColumnaEliminar();
+                    dgvTabla.Height = 445;
+                    dgvTabla.Location = new Point(22,236);
+                    tbNombre.Enabled = false; // podriamos aca preguntar por el nombre de contacto
+                    tbCliente.Enabled = true;
+                    tbCampaña.Enabled = true;
+                    pnlFiltroFecha.Enabled = true;
+                    pnlLista.BackColor = Color.DarkMagenta;
+                    break;
+
+                case "ventas":
+                    dTable = conectar.listarVentas();
+                    campo_fecha = "[Fecha Venta]";
+                    tbNombre.Enabled = true;
+                    tbCliente.Enabled = true;
+                    tbCampaña.Enabled = true;
+                    pnlFiltroFecha.Enabled = true;
+                    pnlLista.BackColor = Color.DarkRed;
+                    break;
+
+                case "llamados":
+                    dTable = conectar.listarLlamadas();
+                    campo_fecha = "Fecha";
+                    tbNombre.Enabled = true;
+                    tbCliente.Enabled = true;
+                    tbCampaña.Enabled = true;
+                    pnlFiltroFecha.Enabled = true;
+                    pnlLista.BackColor = Color.DarkKhaki;
+                    break;
+            }
+            dgvTabla.DataSource = dTable;
+            if (filtro_eliminar != string.Empty)
+            {
+                (dgvTabla.DataSource as DataTable).DefaultView.RowFilter = filtro_eliminar;
+            }
+
+            foreach (DataGridViewColumn dgvC in dgvTabla.Columns)
+            {
+                if (!(dgvC.CellTemplate is DataGridViewCheckBoxCell))
+                    dgvC.ReadOnly = true;
+            }
+        }
+
+        private void btnNewEmpleado_Click(object sender, EventArgs e)
+        {
+            frmNuevo frmNuevo = new frmNuevo("Campaña");
+            frmNuevo.Show();
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmNuevo frmNuevo = new frmNuevo(filtro_tabla);
+            frmNuevo.Show();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            List<int> lista_eliminar = new List<int>();
+            foreach (DataGridViewRow dr in dgvTabla.Rows)
+            {
+                if (Convert.ToBoolean(dr.Cells["Chk"].Value))   // as DataGridViewCheckBoxColumn
+                {
+                    lista_eliminar.Add((int)dr.Cells[1].Value);
+                }
+            }
+
+            int cant_eliminar = lista_eliminar.Count;
+            if (DialogResult.Yes == MessageBox.Show("¿Esta seguro de eliminar " + cant_eliminar + " registros de forma permanente? En caso de requerirse, la información debe ingresarse nuevamente.", "Atención: confirme acción", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+            {
+                switch (filtro_tabla)
+                {
+                    case "empleados":
+                        checkEliminacion(conectar.eliminar_empleados(lista_eliminar));
+                        break;
+
+                    case "clientes":
+                        checkEliminacion(conectar.eliminar_clientes(lista_eliminar));
+                        break;
+
+                    case "campañas":
+                        checkEliminacion(conectar.eliminar_empleados(lista_eliminar));
+                        break;
+                }
+            }
+        }
+
+        private void tbNombre_KeyUp(object sender, KeyEventArgs e)
+        {
+            // ' y [ tiran error
+            if (!string.IsNullOrEmpty(tbNombre.Text) || !string.IsNullOrEmpty(tbCliente.Text) || !string.IsNullOrEmpty(tbCampaña.Text) || !cbFecha.Checked || !cbMes.Checked || !cbAño.Checked)
+                queryFiltrado();
+            else
+                dgvTabla.DataSource = dTable;
+        }
+
+        private void dtpFecha_CloseUp(object sender, EventArgs e)
+        {
+            queryFiltrado();
+        }
+
+        private void cbFecha_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!cbFecha.Checked && !cbMes.Checked && !cbAño.Checked)
+            {
+                dtpFecha.Enabled = false;
+                if (tbNombre.Enabled || tbCliente.Enabled || tbCampaña.Enabled)
+                    queryFiltrado();
+                else
+                    dgvTabla.DataSource = dTable;
+            }
+            else
+            {
+                dtpFecha.Enabled = true;
+                CheckBox s = (sender as CheckBox);
+                if (s.Checked)
+                {
+                    filtro_fecha = s.Tag.ToString();
+                    if (s.Tag.ToString() == "mes" || s.Tag.ToString() == "año")
+                        cbFecha.Checked = false;
+                    else
+                    {
+                        cbMes.Checked = false;
+                        cbAño.Checked = false;
+                    }
+                    if (cbMes.Checked && cbAño.Checked)
+                        filtro_fecha = "mesaño";
+                }
+            }
+        }
+
+        private void frmJefee_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            cerrarForm();
+        }
+        
+        private void dgvTabla_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                frmDetalle frmDetalle;
+                switch (dgvTabla.Columns[1].Name)//la tabla cambia,esto es para controlar q tabla esta visible al momento del click en la celda
+                {
+                    case "id_empleado":
+                        /*frmDato = new frmDatos(this, Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()), "Datos Empleado");
+                        frmDato.Show();*/
+                        frmDetalle = new frmDetalle("empleado", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()));
+                        frmDetalle.Show();
+                        break;
+
+                    case "id_cliente":
+                        frmDetalle = new frmDetalle("cliente", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_cliente"].Value.ToString()));
+                        frmDetalle.Show();
+                        break;
+
+                    case "id_campaña":
+                        frmDetalle = new frmDetalle("campaña", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_campaña"].Value.ToString()));
+                        frmDetalle.Show();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cbEliminados_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((sender as CheckBox).Checked)
+            {
+                (dgvTabla.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+                dgvTabla.ReadOnly = true;
+                btnEliminar.Enabled = false;
+            }
+            else
+            {
+                (dgvTabla.DataSource as DataTable).DefaultView.RowFilter = "Eliminado is null";
+                dgvTabla.ReadOnly = false;
+                btnEliminar.Enabled = true;
+            }
+        }
     }
 }
