@@ -1591,10 +1591,10 @@ namespace WindowsFormsApplication1.clases
         {
             try
             {
-                string in_clause = "(" + string.Join(",", ids_empleados.ToArray()) + ")";
+                string empleados = "(" + string.Join(",", ids_empleados.ToArray()) + ")";
                 string f_eliminado = DateTime.Now.ToString("yyyy/MM/dd").Replace('-', '/');
                 con.Open();
-                SqlCommand cmd = new SqlCommand("UPDATE empleado SET f_eliminado = @f_eliminado WHERE id_empleado IN " + in_clause, con);
+                SqlCommand cmd = new SqlCommand("UPDATE empleado SET f_eliminado = @f_eliminado WHERE id_empleado IN " + empleados, con);
                 cmd.Parameters.AddWithValue("f_eliminado", f_eliminado);
                 return (cmd.ExecuteNonQuery() == ids_empleados.Count) ? true : false;
             }
@@ -1660,9 +1660,8 @@ namespace WindowsFormsApplication1.clases
             {
                 con.Open();
                 string id_camp = (id_campaña == -1) ? "NULL" : id_campaña.ToString();
-                string ids_empleados = "(" + string.Join(",", l_empleados) + ")";
-                SqlCommand cmd = new SqlCommand("UPDATE empleado SET id_campaña = " + id_camp + " WHERE id_empleado IN " + ids_empleados, con);
-                //cmd.Parameters.AddWithValue("empleados", string.Join(",", l_empleados));
+                string empleados = "(" + string.Join(",", l_empleados) + ")";
+                SqlCommand cmd = new SqlCommand("UPDATE empleado SET id_campaña = " + id_camp + " WHERE id_empleado IN " + empleados, con);
                 return (cmd.ExecuteNonQuery() == l_empleados.Count) ? true : false;
             }
             catch (Exception e)
@@ -1940,6 +1939,7 @@ namespace WindowsFormsApplication1.clases
         {
             try
             {
+                //string campañas = "(" + string.Join(",", ids_campañas) + ")";
                 string f_eliminado = DateTime.Now.ToString("yyyy/MM/dd").Replace('-', '/');
                 con.Open();
                 SqlCommand cmd = new SqlCommand("UPDATE campaña SET f_eliminado = @f_eliminado WHERE id_campaña IN (@campañas)", con);
@@ -2288,10 +2288,10 @@ namespace WindowsFormsApplication1.clases
         {
             try
             {
-                string in_clause = "(" + string.Join(",", ids_clientes.ToArray()) + ")";
+                string clientes = "(" + string.Join(",", ids_clientes.ToArray()) + ")";
                 string f_eliminado = DateTime.Now.ToString("yyyy/MM/dd").Replace('-', '/');
                 con.Open();
-                SqlCommand cmd = new SqlCommand("UPDATE cliente SET f_eliminado = @f_eliminado WHERE id_cliente IN " + in_clause, con);
+                SqlCommand cmd = new SqlCommand("UPDATE cliente SET f_eliminado = @f_eliminado WHERE id_cliente IN " + clientes, con);
                 cmd.Parameters.AddWithValue("f_eliminado", f_eliminado);
                 return (cmd.ExecuteNonQuery() == ids_clientes.Count) ? true : false;
             }
@@ -2678,12 +2678,12 @@ namespace WindowsFormsApplication1.clases
         {
             try
             {
+                string id_campaña = (jornada.Id_campaña == -1) ? "NULL" : jornada.Id_campaña.ToString();
                 con.Open();
                 SqlCommand cmd = new SqlCommand("INSERT INTO jornada_laboral (id_empleado,id_campaña,fecha,inicio_sesion,t_atendiendo,t_descanso,t_reunion,t_llenadoFormularios,t_sinContactos,t_sinCampaña,t_inactivo,t_baño,t_capacitacion,t_almuerzo)" +
-                    " values (@id_empleado,@id_campaña,@fecha,@inicio_sesion,@t_atendiendo,@t_descanso,@t_reunion,@t_llenadoFormularios,@t_sinContactos,@t_sinCampaña,@t_inactivo,@t_baño,@t_capacitacion,@t_almuerzo)", con);
+                    " values (@id_empleado," + id_campaña + ",@fecha,@inicio_sesion,@t_atendiendo,@t_descanso,@t_reunion,@t_llenadoFormularios,@t_sinContactos,@t_sinCampaña,@t_inactivo,@t_baño,@t_capacitacion,@t_almuerzo)", con);
 
                 cmd.Parameters.AddWithValue("id_empleado", jornada.Id_empleado);
-                cmd.Parameters.AddWithValue("id_campaña", jornada.Id_campaña);
                 cmd.Parameters.AddWithValue("fecha", jornada.Fecha);
                 cmd.Parameters.AddWithValue("inicio_sesion", jornada.Inicio_sesion);
                 cmd.Parameters.AddWithValue("t_atendiendo", jornada.T_atendiendo);
@@ -2796,64 +2796,345 @@ namespace WindowsFormsApplication1.clases
 
         #endregion
 
-        
 
 
-        #region Estadisticas cliente
-        public List<clsEstadisticas> numeros_cliente(int id, DateTime fecha)
-        {
-            // No mide las campañas que arrancaron ese día o que estan activas ese día.
-            try
+
+        #region Estadisticas 
+
+        #region -> Cliente
+            public List<clsEstadisticas> numeros_cliente(int id, DateTime fechaDesde, DateTime fechaHasta)
             {
-                string fecha_parseada = String.Format("{0:yyyy-MM-dd}", fecha);
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT count(distinct campaña.id_campaña) as 'Cant de campañas', count(id_venta) as 'Cant ventas', (SELECT count(id_llamada) FROM llamada JOIN campaña ON (llamada.id_campaña = campaña.id_campaña) where campaña.id_cliente = @id_cliente AND llamada.fecha = @fecha) as 'Cant llamadas'" +
-                    " FROM llamada JOIN venta ON (llamada.id_llamada = venta.id_llamada) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña)" +
-                    " WHERE campaña.id_cliente = @id_cliente AND llamada.fecha = @fecha", con);
-                cmd.Parameters.AddWithValue("id_cliente", id);
-                cmd.Parameters.AddWithValue("fecha", fecha_parseada);
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                if (dt.Rows.Count > 0)
+                // No mide las campañas que arrancaron ese día o que estan activas ese día.
+                try
                 {
-                    List<clsEstadisticas> arreglo = new List<clsEstadisticas>();
-                    foreach (DataColumn dc in dt.Columns)
+                    string fecha_parseada1 = String.Format("{0:yyyy-MM-dd}", fechaDesde);
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT count(distinct campaña.id_campaña) as 'Cant de campañas', count(id_venta) as 'Cant ventas', (SELECT count(id_llamada) FROM llamada JOIN campaña ON (llamada.id_campaña = campaña.id_campaña) where campaña.id_cliente = @id_cliente AND llamada.fecha = @fecha) as 'Cant llamadas'" +
+                        " FROM llamada JOIN venta ON (llamada.id_llamada = venta.id_llamada) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña)" +
+                        " WHERE campaña.id_cliente = @id_cliente AND llamada.fecha = @fecha", con);
+                    if (fechaHasta != DateTime.MinValue)
                     {
-                        clsEstadisticas aux = new clsEstadisticas();
-                        aux.Clave = dc.ColumnName;
-                        aux.Valor = (float)Convert.ToDouble(dt.Rows[0][dc.ColumnName]);
-                        arreglo.Add(aux);
+                        string fecha_parseada2 = String.Format("{0:yyyy-MM-dd}", fechaHasta);
+                        cmd.CommandText = "SELECT count(distinct campaña.id_campaña) as 'Cant de campañas', count(id_venta) as 'Cant ventas', (SELECT count(id_llamada) FROM llamada JOIN campaña ON (llamada.id_campaña = campaña.id_campaña) where campaña.id_cliente = @id_cliente AND llamada.fecha >= @fecha) as 'Cant llamadas'" +
+                        " FROM llamada JOIN venta ON (llamada.id_llamada = venta.id_llamada) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña)" +
+                        " WHERE campaña.id_cliente = @id_cliente AND llamada.fecha >= @fecha AND llamada.fecha <= @fecha_hasta";
+                        cmd.Parameters.AddWithValue("fecha_hasta", fecha_parseada2);
                     }
-                    return arreglo;
+                    cmd.Parameters.AddWithValue("id_cliente", id);
+                    cmd.Parameters.AddWithValue("fecha", fecha_parseada1);
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        List<clsEstadisticas> arreglo = new List<clsEstadisticas>();
+                        foreach (DataColumn dc in dt.Columns)
+                        {
+                            clsEstadisticas aux = new clsEstadisticas();
+                            aux.Clave = dc.ColumnName;
+                            aux.Valor = (float)Convert.ToDouble(dt.Rows[0][dc.ColumnName]);
+                            arreglo.Add(aux);
+                        }
+                        return arreglo;
+                    }
+                    return null;
                 }
-                return null;
+                catch (Exception e)
+                {
+                    msjError(e.Message);
+                    return null;
+                }
+                finally
+                {
+                    con.Close();
+                }
             }
-            catch (Exception e)
-            {
-                msjError(e.Message);
-                return null;
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
 
-        public List<clsEstadisticas> numeros_cliente(int id, DateTime fechaDesde, DateTime fechaHasta)
+            public List<clsEstadisticas> campañas_cliente(int id, DateTime fechaDesde, DateTime fechaHasta)
+            {
+                // No mide las campañas que arrancaron a partir de ese día o que estan activas ese día.
+                try
+                {
+                    string fecha_parseada1 = String.Format("{0:yyyy-MM-dd}", fechaDesde);
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT campaña.nombre, count(id_venta) as 'Ventas'" +
+                        " FROM venta JOIN llamada ON (venta.id_llamada = llamada.id_llamada) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña)" +
+                        " WHERE campaña.id_cliente = @id_cliente AND llamada.fecha = @fecha" +
+                        " GROUP BY campaña.id_campaña,campaña.nombre", con);
+                    if (fechaHasta == DateTime.MinValue)
+                    {
+                        string fecha_parseada2 = String.Format("{0:yyyy-MM-dd}", fechaHasta);
+                        cmd.CommandText = "SELECT campaña.nombre, count(id_venta) as 'Ventas'" +
+                        " FROM Call_Center.dbo.venta JOIN Call_Center.dbo.llamada ON (venta.id_llamada = llamada.id_llamada) JOIN Call_Center.dbo.campaña ON (llamada.id_campaña = campaña.id_campaña)" +
+                        " WHERE campaña.id_cliente = @id_cliente AND llamada.fecha = @fecha" +
+                        " GROUP BY campaña.id_campaña,campaña.nombre";
+                        cmd.Parameters.AddWithValue("fecha_hasta", fecha_parseada2);
+                    }
+                    cmd.Parameters.AddWithValue("id_cliente", id);
+                    cmd.Parameters.AddWithValue("fecha", fecha_parseada1);
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        List<clsEstadisticas> arreglo = new List<clsEstadisticas>();
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            clsEstadisticas aux = new clsEstadisticas();
+                            aux.Clave = Convert.ToString(dr["nombre"]);
+                            aux.Valor = (float)Convert.ToDouble(dr["Ventas"]);
+                            arreglo.Add(aux);
+                        }
+                        return arreglo;
+                    }
+                    return null;
+                }
+                catch (Exception e)
+                {
+                    msjError(e.Message);
+                    return null;
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+
+            public List<clsJornada> jornadas_cliente(int id, DateTime fechaDesde, DateTime fechaHasta)
+            {
+                // No mide las campañas que arrancaron ese día o que estan activas ese día.
+                try
+                {
+                    string fecha_parseada1 = String.Format("{0:yyyy-MM-dd}", fechaDesde);
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM jornada_laboral JOIN llamada ON (jornada_laboral.id_empleado = llamada.id_empleado AND jornada_laboral.fecha = llamada.fecha) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña)" +
+                        " WHERE campaña.id_cliente = @id_cliente AND jornada_laboral.fecha = @fecha", con);
+                    if (fechaHasta != DateTime.MinValue)
+                    {
+                        string fecha_parseada2 = String.Format("{0:yyyy-MM-dd}", fechaHasta);
+                        cmd.CommandText = "SELECT * FROM jornada_laboral JOIN llamada ON (jornada_laboral.id_empleado = llamada.id_empleado AND jornada_laboral.fecha = llamada.fecha) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña)" +
+                        " WHERE campaña.id_cliente = @id_cliente AND jornada_laboral.fecha >= @fecha";
+                        cmd.Parameters.AddWithValue("fecha_hasta", fecha_parseada2);
+                    }
+                    cmd.Parameters.AddWithValue("id_cliente", id);
+                    cmd.Parameters.AddWithValue("fecha", fecha_parseada1);
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        List<clsJornada> arreglo = new List<clsJornada>();
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            clsJornada aux = new clsJornada();
+                            aux.Id_empleado = Convert.ToInt32(dr["id_empleado"]);
+                            aux.Id_campaña = (string.IsNullOrEmpty(dr["id_campaña"].ToString()))? -1 : Convert.ToInt32(dr["id_campaña"]);
+                            aux.Fecha = Convert.ToDateTime(dr["fecha"]);
+                            aux.T_atendiendo = TimeSpan.Parse(Convert.ToString(dr["t_atendiendo"]));
+                            aux.T_descanso = TimeSpan.Parse(Convert.ToString(dr["t_descanso"]));
+                            aux.T_reunion = TimeSpan.Parse(Convert.ToString(dr["t_reunion"]));
+                            aux.T_llenadoFormularios = TimeSpan.Parse(Convert.ToString(dr["t_llenadoFormularios"]));
+                            aux.T_sinContactos = TimeSpan.Parse(Convert.ToString(dr["t_sinContactos"]));
+                            aux.T_sinCampaña = TimeSpan.Parse(Convert.ToString(dr["t_sinCampaña"]));
+                            aux.T_inactivo = TimeSpan.Parse(Convert.ToString(dr["t_inactivo"]));
+                            aux.T_baño = TimeSpan.Parse(Convert.ToString(dr["t_baño"]));
+                            aux.T_capacitacion = TimeSpan.Parse(Convert.ToString(dr["t_capacitacion"]));
+                            aux.T_almuerzo = TimeSpan.Parse(Convert.ToString(dr["t_almuerzo"]));
+                            arreglo.Add(aux);
+                        }
+                        return arreglo;
+                    }
+                    return null;
+                }
+                catch (Exception e)
+                {
+                    msjError(e.Message);
+                    return null;
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+        #endregion
+
+        #region -> Empleado
+            public List<clsEstadisticas> numeros_empleado(int id, DateTime fechaDesde, DateTime fechaHasta)
+            {
+                // No mide las campañas que arrancaron ese día o que estan activas ese día.
+                try
+                {
+                    string fecha_parseada1 = String.Format("{0:yyyy-MM-dd}", fechaDesde);
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT count(distinct jornada_laboral.id_campaña) as 'Cant de campañas', count(id_venta) as 'Cant ventas', count(llamada.id_llamada) as 'Cant llamadas'" +
+                        " FROM llamada JOIN venta ON (llamada.id_llamada = venta.id_llamada) JOIN jornada_laboral ON (llamada.id_campaña = jornada_laboral.id_campaña)" +
+                        " WHERE jornada_laboral.id_empleado = @id_empleado AND llamada.fecha = @fecha", con);
+                    if (fechaHasta != DateTime.MinValue)
+                    {
+                        string fecha_parseada2 = String.Format("{0:yyyy-MM-dd}", fechaHasta);
+                        cmd.CommandText = "SELECT count(distinct jornada_laboral.id_campaña) as 'Cant de campañas', count(id_venta) as 'Cant ventas', count(llamada.id_llamada) as 'Cant llamadas'" +
+                        " FROM llamada JOIN venta ON (llamada.id_llamada = venta.id_llamada) JOIN jornada_laboral ON (llamada.id_campaña = jornada_laboral.id_campaña)" +
+                        " WHERE jornada_laboral.id_empleado = @id_empleado  AND llamada.fecha >= @fecha AND llamada.fecha <= @fecha_hasta";
+                        cmd.Parameters.AddWithValue("fecha_hasta", fecha_parseada2);
+                    }
+                    cmd.Parameters.AddWithValue("id_empleado", id);
+                    cmd.Parameters.AddWithValue("fecha", fecha_parseada1);
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        List<clsEstadisticas> arreglo = new List<clsEstadisticas>();
+                        foreach (DataColumn dc in dt.Columns)
+                        {
+                            clsEstadisticas aux = new clsEstadisticas();
+                            aux.Clave = dc.ColumnName;
+                            aux.Valor = (float)Convert.ToDouble(dt.Rows[0][dc.ColumnName]);
+                            arreglo.Add(aux);
+                        }
+                        return arreglo;
+                    }
+                    return null;
+                }
+                catch (Exception e)
+                {
+                    msjError(e.Message);
+                    return null;
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+
+            public List<clsEstadisticas> campañas_empleado(int id, DateTime fechaDesde, DateTime fechaHasta)
+            {
+                // No mide las campañas que arrancaron a partir de ese día o que estan activas ese día.
+                try
+                {
+                    string fecha_parseada1 = String.Format("{0:yyyy-MM-dd}", fechaDesde);
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT campaña.nombre, count(id_venta) as 'Ventas'" +
+                        " FROM venta JOIN llamada ON (venta.id_llamada = llamada.id_llamada) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña) JOIN jornada_laboral ON (campaña.id_campaña = jornada_laboral.id_campaña)" +
+                        " WHERE jornada_laboral.id_empleado = @id_empleado AND llamada.fecha = @fecha" +
+                        " GROUP BY campaña.id_campaña,campaña.nombre", con);
+                    if (fechaHasta == DateTime.MinValue)
+                    {
+                        string fecha_parseada2 = String.Format("{0:yyyy-MM-dd}", fechaHasta);
+                        cmd.CommandText = "SELECT campaña.nombre, count(id_venta) as 'Ventas'" +
+                        " FROM venta JOIN llamada ON (venta.id_llamada = llamada.id_llamada) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña) JOIN jornada_laboral ON (campaña.id_campaña = jornada_laboral.id_campaña)" +
+                        " WHERE jornada_laboral.id_empleado = @id_empleado AND llamada.fecha >= @fecha AND llamada.fecha <= @fecha_hasta" +
+                        " GROUP BY campaña.id_campaña,campaña.nombre";
+                        cmd.Parameters.AddWithValue("fecha_hasta", fecha_parseada2);
+                    }
+                    cmd.Parameters.AddWithValue("id_empleado", id);
+                    cmd.Parameters.AddWithValue("fecha", fecha_parseada1);
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        List<clsEstadisticas> arreglo = new List<clsEstadisticas>();
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            clsEstadisticas aux = new clsEstadisticas();
+                            aux.Clave = Convert.ToString(dr["nombre"]);
+                            aux.Valor = (float)Convert.ToDouble(dr["Ventas"]);
+                            arreglo.Add(aux);
+                        }
+                        return arreglo;
+                    }
+                    return null;
+                }
+                catch (Exception e)
+                {
+                    msjError(e.Message);
+                    return null;
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+
+            public List<clsJornada> jornadas_empleado(int id, DateTime fechaDesde, DateTime fechaHasta)
+            {
+                // No mide las campañas que arrancaron ese día o que estan activas ese día.
+                try
+                {
+                    string fecha_parseada1 = String.Format("{0:yyyy-MM-dd}", fechaDesde);
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM jornada_laboral WHERE jornada_laboral.id_empleado = @id_empleado AND jornada_laboral.fecha = @fecha", con);
+                    if (fechaHasta != DateTime.MinValue)
+                    {
+                        string fecha_parseada2 = String.Format("{0:yyyy-MM-dd}", fechaHasta);
+                        cmd.CommandText = "SELECT * FROM jornada_laboral WHERE jornada_laboral.id_empleado = @id_empleado AND jornada_laboral.fecha >= @fecha AND jornada_laboral.fecha <= @fecha_hasta";
+                        cmd.Parameters.AddWithValue("fecha_hasta", fecha_parseada2);
+                    }
+                    cmd.Parameters.AddWithValue("id_empleado", id);
+                    cmd.Parameters.AddWithValue("fecha", fecha_parseada1);
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        List<clsJornada> arreglo = new List<clsJornada>();
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            clsJornada aux = new clsJornada();
+                            aux.Id_empleado = Convert.ToInt32(dr["id_empleado"]);
+                            aux.Fecha = Convert.ToDateTime(dr["fecha"]);
+                            aux.Id_campaña = (string.IsNullOrEmpty(dr["id_campaña"].ToString()))? -1 : Convert.ToInt32(dr["id_campaña"]);
+
+                            aux.T_atendiendo = TimeSpan.Parse(Convert.ToString(dr["t_atendiendo"]));
+                            aux.T_descanso = TimeSpan.Parse(Convert.ToString(dr["t_descanso"]));
+                            aux.T_reunion = TimeSpan.Parse(Convert.ToString(dr["t_reunion"]));
+                            aux.T_llenadoFormularios = TimeSpan.Parse(Convert.ToString(dr["t_llenadoFormularios"]));
+                            aux.T_sinContactos = TimeSpan.Parse(Convert.ToString(dr["t_sinContactos"]));
+                            aux.T_sinCampaña = TimeSpan.Parse(Convert.ToString(dr["t_sinCampaña"]));
+                            aux.T_inactivo = TimeSpan.Parse(Convert.ToString(dr["t_inactivo"]));
+                            aux.T_baño = TimeSpan.Parse(Convert.ToString(dr["t_baño"]));
+                            aux.T_capacitacion = TimeSpan.Parse(Convert.ToString(dr["t_capacitacion"]));
+                            aux.T_almuerzo = TimeSpan.Parse(Convert.ToString(dr["t_almuerzo"]));
+                            arreglo.Add(aux);
+                        }
+                        return arreglo;
+                    }
+                    return null;
+                }
+                catch (Exception e)
+                {
+                    msjError(e.Message);
+                    return null;
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+        #endregion
+
+        #region -> Campaña
+        public List<clsEstadisticas> numeros_campaña(int id, DateTime fechaDesde, DateTime fechaHasta)
         {
             // No mide las campañas que arrancaron ese día o que estan activas ese día.
             try
             {
                 string fecha_parseada1 = String.Format("{0:yyyy-MM-dd}", fechaDesde);
-                string fecha_parseada2 = String.Format("{0:yyyy-MM-dd}", fechaHasta);
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT count(distinct campaña.id_campaña) as 'Cant de campañas', count(id_venta) as 'Cant ventas', (SELECT count(id_llamada) FROM llamada JOIN campaña ON (llamada.id_campaña = campaña.id_campaña) where campaña.id_cliente = @id_cliente AND llamada.fecha >= @fecha) as 'Cant llamadas'" +
-                    " FROM llamada JOIN venta ON (llamada.id_llamada = venta.id_llamada) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña)" +
-                    " WHERE campaña.id_cliente = @id_cliente AND llamada.fecha >= @fecha_desde AND llamada.fecha <= @fecha_hasta", con);
-                cmd.Parameters.AddWithValue("id_cliente", id);
-                cmd.Parameters.AddWithValue("fecha_desde", fecha_parseada1);
-                cmd.Parameters.AddWithValue("fecha_hasta", fecha_parseada2);
+                SqlCommand cmd = new SqlCommand("SELECT 0 'Cant de campañas', count(id_venta) as 'Cant ventas', count(llamada.id_llamada) as 'Cant llamadas'" +
+                    " FROM llamada JOIN venta ON (llamada.id_llamada = venta.id_llamada) " +
+                    " WHERE llamada.id_campaña = @id_campaña AND llamada.fecha = @fecha", con);
+                if (fechaHasta != DateTime.MinValue)
+                {
+                    string fecha_parseada2 = String.Format("{0:yyyy-MM-dd}", fechaHasta);
+                    cmd.CommandText = "SELECT 0 'Cant de campañas', count(id_venta) as 'Cant ventas', count(llamada.id_llamada) as 'Cant llamadas'" +
+                    " FROM llamada JOIN venta ON (llamada.id_llamada = venta.id_llamada) " +
+                    " WHERE llamada.id_campaña = @id_campaña AND llamada.fecha >= @fecha AND llamada.fecha <= @fecha_hasta";
+                    cmd.Parameters.AddWithValue("fecha_hasta", fecha_parseada2);
+                }
+                cmd.Parameters.AddWithValue("id_campaña", id);
+                cmd.Parameters.AddWithValue("fecha", fecha_parseada1);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
@@ -2882,68 +3163,22 @@ namespace WindowsFormsApplication1.clases
             }
         }
 
-        public List<clsEstadisticas> campañas_cliente(int id, string filtro, DateTime fecha)
-        {
-            // No mide las campañas que arrancaron a partir de ese día o que estan activas ese día.
-            try
-            {
-                string fecha_parseada = String.Format("{0:yyyy-MM-dd}", fecha);
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT campaña.nombre, count(id_venta) as 'Ventas'" +
-                    " FROM venta JOIN llamada ON (venta.id_llamada = llamada.id_llamada) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña) WHERE campaña.id_cliente = @id_cliente AND llamada.fecha = @fecha" +
-                    " GROUP BY campaña.id_campaña,campaña.nombre", con);
-                if(filtro != "Hoy")
-                {
-                    cmd.CommandText = "SELECT campaña.nombre, count(id_venta) as 'Ventas'" +
-                    " FROM Call_Center.dbo.venta JOIN Call_Center.dbo.llamada ON (venta.id_llamada = llamada.id_llamada) JOIN Call_Center.dbo.campaña ON (llamada.id_campaña = campaña.id_campaña) WHERE campaña.id_cliente = @id_cliente AND llamada.fecha = @fecha" +
-                    " GROUP BY campaña.id_campaña,campaña.nombre";
-                }
-                cmd.Parameters.AddWithValue("id_cliente", id);
-                cmd.Parameters.AddWithValue("fecha", fecha_parseada);
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-                    List<clsEstadisticas> arreglo = new List<clsEstadisticas>();
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        clsEstadisticas aux = new clsEstadisticas();
-                        aux.Clave = Convert.ToString(dr["nombre"]);
-                        aux.Valor = (float)Convert.ToDouble(dr["Ventas"]);
-                        arreglo.Add(aux);
-                    }
-                    return arreglo;
-                }
-                return null;
-            }
-            catch (Exception e)
-            {
-                msjError(e.Message);
-                return null;
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
-
-        public List<clsJornada> jornadas_cliente(int id, string filtro, DateTime fecha)
+        public List<clsJornada> jornadas_campaña(int id, DateTime fechaDesde, DateTime fechaHasta)
         {
             // No mide las campañas que arrancaron ese día o que estan activas ese día.
             try
             {
-                string fecha_parseada = String.Format("{0:yyyy-MM-dd}", fecha);
+                string fecha_parseada1 = String.Format("{0:yyyy-MM-dd}", fechaDesde);
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM jornada_laboral JOIN llamada ON (jornada_laboral.id_empleado = llamada.id_empleado AND jornada_laboral.fecha = llamada.fecha) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña)" +
-                    " WHERE campaña.id_cliente = @id_cliente AND jornada_laboral.fecha = @fecha", con);
-                if (filtro != "Hoy")
+                SqlCommand cmd = new SqlCommand("SELECT * FROM jornada_laboral WHERE jornada_laboral.id_campaña = @id_campaña AND jornada_laboral.fecha = @fecha", con);
+                if (fechaHasta != DateTime.MinValue)
                 {
-                    cmd.CommandText = "SELECT * FROM jornada_laboral JOIN llamada ON (jornada_laboral.id_empleado = llamada.id_empleado AND jornada_laboral.fecha = llamada.fecha) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña)" +
-                    " WHERE campaña.id_cliente = @id_cliente AND jornada_laboral.fecha >= @fecha";
+                    string fecha_parseada2 = String.Format("{0:yyyy-MM-dd}", fechaHasta);
+                    cmd.CommandText = "SELECT * FROM jornada_laboral WHERE jornada_laboral.id_campaña = @id_campaña AND jornada_laboral.fecha >= @fecha AND jornada_laboral.fecha <= @fecha_hasta";
+                    cmd.Parameters.AddWithValue("fecha_hasta", fecha_parseada2);
                 }
-                cmd.Parameters.AddWithValue("id_cliente", id);
-                cmd.Parameters.AddWithValue("fecha", fecha_parseada);
+                cmd.Parameters.AddWithValue("id_campaña", id);
+                cmd.Parameters.AddWithValue("fecha", fecha_parseada1);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
@@ -2955,6 +3190,8 @@ namespace WindowsFormsApplication1.clases
                         clsJornada aux = new clsJornada();
                         aux.Id_empleado = Convert.ToInt32(dr["id_empleado"]);
                         aux.Fecha = Convert.ToDateTime(dr["fecha"]);
+                        aux.Id_campaña = Convert.ToInt32(dr["id_campaña"]);
+
                         aux.T_atendiendo = TimeSpan.Parse(Convert.ToString(dr["t_atendiendo"]));
                         aux.T_descanso = TimeSpan.Parse(Convert.ToString(dr["t_descanso"]));
                         aux.T_reunion = TimeSpan.Parse(Convert.ToString(dr["t_reunion"]));
@@ -2981,6 +3218,9 @@ namespace WindowsFormsApplication1.clases
                 con.Close();
             }
         }
+        #endregion
+
+
         #endregion
     }
 

@@ -148,37 +148,21 @@ namespace WindowsFormsApplication1
                 switch (clase)
                 {
                     case "empleado":
-                        if (hasta == DateTime.MinValue)
-                        {
-                        }
-                        else
-                        {
-                        }
+                        estadisticas = conectar.numeros_empleado(empleado.Id_empleado, fecha, hasta);
+                        estadisticasCampañas = conectar.campañas_empleado(empleado.Id_empleado, fecha, hasta);
+                        jornadas = conectar.jornadas_empleado(empleado.Id_empleado, fecha, hasta);
                         break;
 
                     case "cliente":
-                        if (hasta == DateTime.MinValue)
-                        {
-                            estadisticas = conectar.numeros_cliente(cliente.Id, fecha);
-                            //estadisticasCampañas = conectar.campañas_cliente(cliente.Id, fecha);
-                            //jornadas = conectar.jornadas_cliente(cliente.Id, fecha);
-                        }
-                        else
-                        {
-                            estadisticas = conectar.numeros_cliente(cliente.Id, fecha, hasta);
-                            //estadisticasCampañas = conectar.campañas_cliente(cliente.Id, fecha, hasta);
-                            //jornadas = conectar.jornadas_cliente(cliente.Id, fecha, hasta);
-
-                        }
+                        estadisticas = conectar.numeros_cliente(cliente.Id, fecha, hasta);
+                        estadisticasCampañas = conectar.campañas_cliente(cliente.Id, fecha, hasta);
+                        jornadas = conectar.jornadas_cliente(cliente.Id, fecha, hasta);
                         break;
 
                     case "campaña":
-                        if (hasta == DateTime.MinValue)
-                        {
-                        }
-                        else
-                        {
-                        }
+                        estadisticas = conectar.numeros_campaña(campaña.Id_campaña, fecha, hasta);
+                        //estadisticasCampañas = conectar.campañas_campaña(campaña.Id_campaña, fecha, hasta); NO TIENE SENTIDO
+                        jornadas = conectar.jornadas_campaña(campaña.Id_campaña, fecha, hasta);
                         break;
                 }
                 llenarCharts(estadisticas, estadisticasCampañas, jornadas);
@@ -600,35 +584,6 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void cbHasta_CheckedChanged(object sender, EventArgs e)
-        {
-            dtpFiltroHasta.Enabled = (sender as CheckBox).Checked;
-            //mostrarNumeros(dtpFiltroFecha.Value, "");
-            /* como manejamos para mostrar estos datos cuando deshabilitamos HASTA? */
-        }
-
-        private void dtpFiltroFecha_DragDrop(object sender, DragEventArgs e)
-        {
-            if ((sender as DateTimePicker).Tag.ToString() == "fecha")
-            {
-                DateTime fechaAux = (sender as DateTimePicker).Value;
-                mostrarNumeros(fechaAux, DateTime.MinValue);
-            }
-            else
-            {
-                DateTime fechaDesde = dtpFiltroFecha.Value;
-                DateTime fechaHasta = dtpFiltroHasta.Value;
-                mostrarNumeros(fechaDesde, fechaHasta);
-
-                //cbFiltroFecha.SelectedItem.ToString());
-                DateTime fechaAUX = DateTime.Today;
-                /*switch ("Hoy")
-                 * fechaAUX = DateTime.Today;
-                 * //fechaAUX = Convert.ToDateTime("2018-04-17");
-                 * fechaAUX = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);*/
-            }
-        }
-
         private void btnEliminarDeCampaña_Click(object sender, EventArgs e)
         {
             List<int> lista_eliminar = new List<int>();
@@ -667,6 +622,53 @@ namespace WindowsFormsApplication1
                     MessageBox.Show("Se actualizó correctamente la información ingresada.", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             llenarDtEmpleados();
+        }
+
+        private void cbHasta_CheckedChanged(object sender, EventArgs e)
+        {
+            dtpFiltroHasta.Enabled = (sender as CheckBox).Checked;
+            //mostrarNumeros(dtpFiltroFecha.Value, "");
+            /* como manejamos para mostrar estos datos cuando deshabilitamos HASTA? */
+        }
+
+        private void dtpFiltroFecha_DragDrop(object sender, DragEventArgs e)
+        {
+            if ((sender as DateTimePicker).Tag.ToString() == "fecha")
+            {
+                DateTime fechaAux = (sender as DateTimePicker).Value;
+                mostrarNumeros(fechaAux, DateTime.MinValue);
+            }
+            else
+            {
+                DateTime fechaDesde = dtpFiltroFecha.Value;
+                DateTime fechaHasta = dtpFiltroHasta.Value;
+                mostrarNumeros(fechaDesde, fechaHasta);
+
+                /* fechaAUX = DateTime.Today;
+                 * //fechaAUX = Convert.ToDateTime("2018-04-17");
+                 * fechaAUX = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);*/
+            }
+        }
+
+        private void dtpFiltroFecha_ValueChanged(object sender, EventArgs e)
+        {
+            if ((sender as DateTimePicker).Tag.ToString() == "fecha")
+            {
+                DateTime fechaAux = (sender as DateTimePicker).Value;
+                mostrarNumeros(fechaAux, DateTime.MinValue);
+            }
+            else
+            {
+                if (dtpFiltroHasta.Enabled && dtpFiltroHasta.Value.Date > dtpFiltroFecha.Value.Date)
+                {
+                    DateTime fechaDesde = dtpFiltroFecha.Value;
+                    DateTime fechaHasta = dtpFiltroHasta.Value;
+                    mostrarNumeros(fechaDesde, fechaHasta);
+                }
+                /* fechaAUX = DateTime.Today;
+                 * //fechaAUX = Convert.ToDateTime("2018-04-17");
+                 * fechaAUX = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);*/
+            }
         }
     }
 }
