@@ -873,19 +873,14 @@ namespace WindowsFormsApplication1.clases
 
 
         public string totalEspera(int id,int idcamp)
-
         {
-
             clsCampaña campaña = new clsCampaña();
             string res = "no hay registros";
 
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT[id_campaña],[id_empleado],[t_espera] FROM [Call_Center].[dbo].[llamada] where [id_campaña]="+ idcamp +"and [id_empleado]=" + id, con);
-
-
-
+                SqlCommand cmd = new SqlCommand("SELECT t_espera FROM llamada WHERE t_espera IS NOT NULL AND id_campaña = " + idcamp + " AND id_empleado = " + id, con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
@@ -894,32 +889,25 @@ namespace WindowsFormsApplication1.clases
                 minutos = dameMinutos(dt);
                 if (dt.Rows.Count > 0)
                 {
-                    float prom = float.Parse((minutos).ToString()) / float.Parse((dt.Rows.Count).ToString());
+                    float prom = (float)minutos / (float)dt.Rows.Count;
                     res = prom.ToString();
                 }
 
                 return res;
-
-
-
             }
-
             catch (Exception e)
             {
-                //MessageBox.Show(e.Message);//
+                MessageBox.Show(e.Message);//
                 return "";
             }
             finally
             {
                 con.Close();
             }
-
         }
 
         #region Funciones de tiempo  CHEKC HECK CHECK
-        
-
-        
+                
         public double[] tiemposCampañaEmpleado(int idemp,int idcamp,DateTime desde,DateTime hasta)
         {
             double[] res = new double[10];
@@ -1442,16 +1430,13 @@ namespace WindowsFormsApplication1.clases
                 }
               
             }
-
-
             return hours.TotalHours;
         }
+
         public int dameMinutos(DataTable dt)
         {
             int minuts = 0;
             TimeSpan time;
-
-
             int countRow = dt.Rows.Count;
             int countCol = dt.Columns.Count;
 
@@ -1468,10 +1453,9 @@ namespace WindowsFormsApplication1.clases
 
                 }
             }
-
-
             return minuts;
         }
+
         public String  dameTiempo(DataTable dt)
         {
             TimeSpan minuts = new TimeSpan(0,0,0);
@@ -3068,7 +3052,7 @@ namespace WindowsFormsApplication1.clases
                         " FROM venta JOIN llamada ON (venta.id_llamada = llamada.id_llamada) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña)" +
                         " WHERE campaña.id_cliente = @id_cliente AND llamada.fecha = @fecha" +
                         " GROUP BY campaña.id_campaña,campaña.nombre", con);
-                    if (fechaHasta == DateTime.MinValue)
+                    if (fechaHasta != DateTime.MinValue)
                     {
                         string fecha_parseada2 = String.Format("{0:yyyy-MM-dd}", fechaHasta);
                         cmd.CommandText = "SELECT campaña.nombre, count(id_venta) as 'Ventas'" +
@@ -3225,7 +3209,7 @@ namespace WindowsFormsApplication1.clases
                         " FROM venta JOIN llamada ON (venta.id_llamada = llamada.id_llamada) JOIN campaña ON (llamada.id_campaña = campaña.id_campaña) JOIN jornada_laboral ON (campaña.id_campaña = jornada_laboral.id_campaña)" +
                         " WHERE jornada_laboral.id_empleado = @id_empleado AND llamada.fecha = @fecha" +
                         " GROUP BY campaña.id_campaña,campaña.nombre", con);
-                    if (fechaHasta == DateTime.MinValue)
+                    if (fechaHasta != DateTime.MinValue)
                     {
                         string fecha_parseada2 = String.Format("{0:yyyy-MM-dd}", fechaHasta);
                         cmd.CommandText = "SELECT campaña.nombre, count(id_venta) as 'Ventas'" +
@@ -3329,13 +3313,13 @@ namespace WindowsFormsApplication1.clases
             {
                 string fecha_parseada1 = String.Format("{0:yyyy-MM-dd}", fechaDesde);
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT 0 'Cant de campañas', count(id_venta) as 'Cant ventas', count(llamada.id_llamada) as 'Cant llamadas'" +
+                SqlCommand cmd = new SqlCommand("SELECT count(distinct campaña.id_campaña) 'Cant de campañas', count(id_venta) as 'Cant ventas', count(llamada.id_llamada) as 'Cant llamadas'" +
                     " FROM llamada JOIN venta ON (llamada.id_llamada = venta.id_llamada) " +
                     " WHERE llamada.id_campaña = @id_campaña AND llamada.fecha = @fecha", con);
                 if (fechaHasta != DateTime.MinValue)
                 {
                     string fecha_parseada2 = String.Format("{0:yyyy-MM-dd}", fechaHasta);
-                    cmd.CommandText = "SELECT 0 'Cant de campañas', count(id_venta) as 'Cant ventas', count(llamada.id_llamada) as 'Cant llamadas'" +
+                    cmd.CommandText = "SELECT count(distinct campaña.id_campaña) 'Cant de campañas', count(id_venta) as 'Cant ventas', count(llamada.id_llamada) as 'Cant llamadas'" +
                     " FROM llamada JOIN venta ON (llamada.id_llamada = venta.id_llamada) " +
                     " WHERE llamada.id_campaña = @id_campaña AND llamada.fecha >= @fecha AND llamada.fecha <= @fecha_hasta";
                     cmd.Parameters.AddWithValue("fecha_hasta", fecha_parseada2);

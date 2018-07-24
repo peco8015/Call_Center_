@@ -620,7 +620,8 @@ namespace WindowsFormsApplication1
         private void cbHasta_CheckedChanged(object sender, EventArgs e)
         {
             dtpFiltroHasta.Enabled = (sender as CheckBox).Checked;
-            //mostrarNumeros(dtpFiltroFecha.Value, "");
+            if(!dtpFiltroHasta.Enabled)
+                mostrarNumeros(dtpFiltroFecha.Value, DateTime.MinValue);
             /* como manejamos para mostrar estos datos cuando deshabilitamos HASTA? */
         }
 
