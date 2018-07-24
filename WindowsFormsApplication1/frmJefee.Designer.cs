@@ -55,7 +55,6 @@
             this.btnCampañas = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
             this.btnEmpleados = new System.Windows.Forms.Button();
-            this.btnNewEmpleado = new System.Windows.Forms.Button();
             this.gbOpciones = new System.Windows.Forms.GroupBox();
             this.ucDatosUsuario1 = new WindowsFormsApplication1.ucDatosUsuario();
             this.pnlLista.SuspendLayout();
@@ -74,7 +73,7 @@
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSalir.Location = new System.Drawing.Point(23, 111);
+            this.btnSalir.Location = new System.Drawing.Point(23, 54);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(174, 55);
             this.btnSalir.TabIndex = 2;
@@ -383,25 +382,14 @@
             this.btnEmpleados.UseVisualStyleBackColor = true;
             this.btnEmpleados.Click += new System.EventHandler(this.btnEmpleados_Click);
             // 
-            // btnNewEmpleado
-            // 
-            this.btnNewEmpleado.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnNewEmpleado.Location = new System.Drawing.Point(23, 33);
-            this.btnNewEmpleado.Name = "btnNewEmpleado";
-            this.btnNewEmpleado.Size = new System.Drawing.Size(174, 55);
-            this.btnNewEmpleado.TabIndex = 14;
-            this.btnNewEmpleado.Text = "Nueva entidad";
-            this.btnNewEmpleado.UseVisualStyleBackColor = true;
-            // 
             // gbOpciones
             // 
-            this.gbOpciones.Controls.Add(this.btnNewEmpleado);
             this.gbOpciones.Controls.Add(this.btnSalir);
             this.gbOpciones.Font = new System.Drawing.Font("Microsoft YaHei Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbOpciones.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.gbOpciones.Location = new System.Drawing.Point(9, 505);
+            this.gbOpciones.Location = new System.Drawing.Point(9, 520);
             this.gbOpciones.Name = "gbOpciones";
-            this.gbOpciones.Size = new System.Drawing.Size(220, 199);
+            this.gbOpciones.Size = new System.Drawing.Size(220, 162);
             this.gbOpciones.TabIndex = 15;
             this.gbOpciones.TabStop = false;
             this.gbOpciones.Text = "Opciones";
@@ -474,7 +462,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlFiltroFecha;
-        private System.Windows.Forms.Button btnNewEmpleado;
         private System.Windows.Forms.GroupBox gbOpciones;
         private System.Windows.Forms.Panel pnlAB;
         private System.Windows.Forms.Button btnAgregar;

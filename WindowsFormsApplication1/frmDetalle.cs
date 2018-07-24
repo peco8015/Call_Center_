@@ -17,12 +17,14 @@ namespace WindowsFormsApplication1
         clsCampaña campaña;
         string clase;
         int identificador;
+        int id_user;
 
-        public frmDetalle(string t, int id)
+        public frmDetalle(string t, int id, int id_user)
         {
             InitializeComponent();
             clase = t;
             identificador = id;
+            this.id_user = id_user;
         }
 
 
@@ -109,8 +111,6 @@ namespace WindowsFormsApplication1
                     tb07.Text = campaña.Descripcion;
                     dtp01.Value = Convert.ToDateTime(campaña.Fecha_inicio);
                     dtp02.Value = Convert.ToDateTime(campaña.Fecha_fin);
-
-                    agregarColumnaEliminar();
                     break;
             }
             tb01.ReadOnly = true;
@@ -298,31 +298,10 @@ namespace WindowsFormsApplication1
 
                 foreach (DataGridViewRow row in dgvRendimiento.Rows)
                 {
+                    row.Cells["Tiempo Productivo(min)"].Style.ForeColor = ((float.Parse(row.Cells["Tiempo Productivo(min)"].Value.ToString())) > float.Parse(conectar.totalTiempoPromedioCampaña(campaña.Id_campaña))) ? Color.Green : Color.Red;
 
-                    if ((float.Parse(row.Cells["Tiempo Productivo(min)"].Value.ToString())) > float.Parse(conectar.totalTiempoPromedioCampaña(campaña.Id_campaña)))
-                    {
-                        row.Cells["Tiempo Productivo(min)"].Style.ForeColor = Color.Green;
-
-                    }
-                    else
-                    {
-                        row.Cells["Tiempo Productivo(min)"].Style.ForeColor = Color.Red;
-
-                    }
-
-
-                    if ((float.Parse(row.Cells["Tiempo Improductivo(min)"].Value.ToString())) > float.Parse(conectar.totalTiempoImproPromedioCampaña(campaña.Id_campaña)))
-                    {
-                        row.Cells["Tiempo Improductivo(min)"].Style.ForeColor = Color.Green;
-
-                    }
-                    else
-                    {
-                        row.Cells["Tiempo Improductivo(min)"].Style.ForeColor = Color.Red;
-
-                    }
-
-
+                    row.Cells["Tiempo Improductivo(min)"].Style.ForeColor = ((float.Parse(row.Cells["Tiempo Improductivo(min)"].Value.ToString())) > float.Parse(conectar.totalTiempoImproPromedioCampaña(campaña.Id_campaña)))? Color.Green : Color.Red;
+                    
                     if ((Convert.ToInt32(row.Cells["Efectividad"].Value.ToString())) > promEfectTotal)
                     {
                         row.Cells["Efectividad"].Value = (row.Cells["Efectividad"].Value).ToString() + "%";
@@ -334,7 +313,6 @@ namespace WindowsFormsApplication1
                         row.Cells["Efectividad"].Style.ForeColor = Color.Red;
                     }
 
-
                     if ((float.Parse(row.Cells["Duracion llamadas Vendidas(min)"].Value.ToString())) > 0)//canVentas[1])
                     {
                         row.Cells["Duracion llamadas Vendidas(min)"].Style.ForeColor = Color.Red;
@@ -344,14 +322,8 @@ namespace WindowsFormsApplication1
                         row.Cells["Duracion llamadas Vendidas(min)"].Style.ForeColor = Color.Green;
                     }
 
-                    if ((float.Parse(row.Cells["Duracion llamadas(min)"].Value.ToString())) > canLlamadas[1])
-                    {
-                        row.Cells["Duracion llamadas(min)"].Style.ForeColor = Color.Red;
-                    }
-                    else
-                    {
-                        row.Cells["Duracion llamadas(min)"].Style.ForeColor = Color.Green;
-                    }
+                    row.Cells["Duracion llamadas(min)"].Style.ForeColor = ((float.Parse(row.Cells["Duracion llamadas(min)"].Value.ToString())) > canLlamadas[1]) ? Color.Red : Color.Green;
+                    
                 }
             }
             catch (Exception ex)
@@ -369,20 +341,37 @@ namespace WindowsFormsApplication1
 
         public void llenarDtEmpleados()
         {
+            if (conectar.check_lider(campaña.Id_campaña, id_user))
+            {
+                agregarColumnaEliminar();
+                foreach (DataGridViewColumn dgvC in dgvEmpleados.Columns)
+                {
+                    if (!(dgvC.CellTemplate is DataGridViewCheckBoxCell))
+                        dgvC.ReadOnly = true;
+                }
+                foreach (DataGridViewColumn dgvC in dgvEnCampaña.Columns)
+                {
+                    if (!(dgvC.CellTemplate is DataGridViewCheckBoxCell))
+                        dgvC.ReadOnly = true;
+                }
+            } else
+            {
+                btnEliminarDeCampaña.Visible = false;
+                btnAgregarACampaña.Visible = false;
+                dgvEmpleados.ReadOnly = true;
+                dgvEnCampaña.ReadOnly = true;
+            }
+
             dgvEmpleados.DataSource = conectar.listar_empleados_activos();
             dgvEnCampaña.DataSource = conectar.empleados_actuales_de_campaña(campaña.Id_campaña);
             (dgvEmpleados.DataSource as DataTable).DefaultView.RowFilter = "[# Campaña] IS NULL OR [# Campaña] <> " + campaña.Id_campaña;
 
-            foreach (DataGridViewColumn dgvC in dgvEmpleados.Columns)
-            {
-                if (!(dgvC.CellTemplate is DataGridViewCheckBoxCell))
-                    dgvC.ReadOnly = true;
-            }
-            foreach (DataGridViewColumn dgvC in dgvEnCampaña.Columns)
-            {
-                if (!(dgvC.CellTemplate is DataGridViewCheckBoxCell))
-                    dgvC.ReadOnly = true;
-            }
+            
+        }
+
+        public void llenarDtCampañas()
+        {
+            dgvCampañasCliente.DataSource = conectar.listado_campañas_cliente(cliente.Id);
         }
 
         private void checkCampos()
@@ -390,20 +379,19 @@ namespace WindowsFormsApplication1
             switch (clase)
             {
                 case "Empleado":
-                    clsEmpleado emp = new clsEmpleado();
                     if (Int32.TryParse(tb03.Text, out int aux_dni) && !string.IsNullOrWhiteSpace(tb04.Text) && !string.IsNullOrWhiteSpace(tb05.Text)
                         && !string.IsNullOrWhiteSpace(tb06.Text) && !string.IsNullOrWhiteSpace(tb07.Text) && dtp01.Value < DateTime.Now)
                     {
-                        emp.Nombre = tb01.Text;
-                        emp.Apellido = tb02.Text;
-                        emp.Dni = aux_dni;
-                        emp.Telefono = tb04.Text; // guardar como int? checkear eso?
-                        emp.Mail = tb05.Text;
-                        emp.Domicilio = tb06.Text;
-                        emp.Fecha_naciemiento = dtp01.Value;
-                        emp.Fecha_inicio = dtp02.Value;
+                        empleado.Nombre = tb01.Text;
+                        empleado.Apellido = tb02.Text;
+                        empleado.Dni = aux_dni;
+                        empleado.Telefono = tb04.Text; // guardar como int? checkear eso?
+                        empleado.Mail = tb05.Text;
+                        empleado.Domicilio = tb06.Text;
+                        empleado.Fecha_naciemiento = dtp01.Value;
+                        empleado.Fecha_inicio = dtp02.Value;
                         //emp.Id_campaña = (tb07.Text);    //CAMPAÑA
-                        SeGuardo(conectar.actualizar_empleado(emp));
+                        SeGuardo(conectar.actualizar_empleado(empleado));
                     }
                     else
                         msjError("Falta completar campos");
@@ -412,14 +400,13 @@ namespace WindowsFormsApplication1
                 case "Cliente":
                     if (!string.IsNullOrWhiteSpace(tb04.Text) && !string.IsNullOrWhiteSpace(tb05.Text) && Int32.TryParse(tb06.Text, out int aux_tel))
                     {
-                        clsCliente cli = new clsCliente();
-                        cli.Nombre = tb01.Text;
-                        cli.Cuil = Convert.ToInt32(tb02.Text);
-                        cli.Domicilio = tb03.Text;
-                        cli.Contacto = tb04.Text;
-                        cli.Mail = tb05.Text;
-                        cli.Telefono = aux_tel;
-                        SeGuardo(conectar.actualizar_cliente(cli));
+                        cliente.Nombre = tb01.Text;
+                        cliente.Cuil = Convert.ToInt32(tb02.Text);
+                        cliente.Domicilio = tb03.Text;
+                        cliente.Contacto = tb04.Text;
+                        cliente.Mail = tb05.Text;
+                        cliente.Telefono = aux_tel;
+                        SeGuardo(conectar.actualizar_cliente(cliente));
                     }
                     else
                         msjError("Falta completar campos");
@@ -477,7 +464,7 @@ namespace WindowsFormsApplication1
                     cliente = conectar.datos_cliente(identificador);
                     foreach (TabPage tp in tcDatos.TabPages)
                     {
-                        if (tp.Name == "tpCampañaDeEmpleado" || tp.Name == "tpFechas")
+                        if (tp.Name == "tpFechas" || tp.Name == "tpListadoCampañas")
                             tabPage_col.Add(tp);
                     }
                     break;
@@ -487,14 +474,13 @@ namespace WindowsFormsApplication1
                     cliente = conectar.datos_cliente(campaña.Id_cliente);
                     foreach (TabPage tp in tcDatos.TabPages)
                     {
-                        if (tp.Name == "tpRendimiento" || tp.Name == "tpFechas" || tp.Name == "tpListadoEmpleados" || tp.Name == "tpConfiguracion")
+                        if (tp.Name == "tpRendimiento" || tp.Name == "tpFechas" || tp.Name == "tpListadoEmpleados")
                             tabPage_col.Add(tp);
                     }
                     break;
             }
             tcDatos.TabPages.Clear();
-            tcDatos.TabPages.AddRange(tabPage_col.ToArray());
-            //tcDatos.TabPages.RemoveByKey("tpRendimiento");
+            tcDatos.TabPages.AddRange(tabPage_col.ToArray());//tcDatos.TabPages.RemoveByKey("tpRendimiento");
             setearForm();
         }
 
@@ -512,16 +498,19 @@ namespace WindowsFormsApplication1
                             (c as DateTimePicker).Enabled = true;
                     }
                     pnlEstadisticas.Enabled = false;
+                    btnGuardar.Visible = true;
                     btnEditar.Tag = "Cancelar";
                     btnEditar.Text = "Cancelar";
                     break;
 
                 case "Guardar":
                     checkCampos();
+                    setearForm();
                     btnEditar.Tag = "Editar";
                     break;
 
                 case "Cancelar":
+                    setearForm();
                     btnEditar.Tag = "Editar";
                     break;
             }
@@ -559,6 +548,10 @@ namespace WindowsFormsApplication1
 
                     case "tpListadoEmpleados":
                         llenarDtEmpleados();
+                        break;
+
+                    case "tpListadoCampañas":
+                        llenarDtCampañas();
                         break;
                 }
             }
@@ -622,22 +615,23 @@ namespace WindowsFormsApplication1
             dtpFiltroHasta.Enabled = (sender as CheckBox).Checked;
             if(!dtpFiltroHasta.Enabled)
                 mostrarNumeros(dtpFiltroFecha.Value, DateTime.MinValue);
-            /* como manejamos para mostrar estos datos cuando deshabilitamos HASTA? */
+            else
+                mostrarNumeros(dtpFiltroFecha.Value, dtpFiltroHasta.Value);
         }
 
         private void dtpFiltroFecha_DragDrop(object sender, DragEventArgs e)
         {
-            if ((sender as DateTimePicker).Tag.ToString() == "fecha")
+            DateTime fechaDesde = dtpFiltroFecha.Value;
+            if ((sender as DateTimePicker).Tag.ToString() != "fecha" && fechaDesde < (sender as DateTimePicker).Value)
             {
-                DateTime fechaAux = (sender as DateTimePicker).Value;
-                mostrarNumeros(fechaAux, DateTime.MinValue);
+                DateTime fechaHasta = DateTime.MinValue;
+                if (dtpFiltroHasta.Enabled)
+                    fechaHasta = dtpFiltroHasta.Value;
+                mostrarNumeros(fechaDesde, fechaHasta);
             }
             else
             {
-                DateTime fechaDesde = dtpFiltroFecha.Value;
-                DateTime fechaHasta = dtpFiltroHasta.Value;
-                mostrarNumeros(fechaDesde, fechaHasta);
-
+                msjError("La fecha ingresada en el campo 'Hasta' debe ser mayor que la primer fecha ingresada");
                 /* fechaAUX = DateTime.Today;
                  * //fechaAUX = Convert.ToDateTime("2018-04-17");
                  * fechaAUX = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);*/
@@ -646,7 +640,7 @@ namespace WindowsFormsApplication1
 
         private void dtpFiltroFecha_ValueChanged(object sender, EventArgs e)
         {
-            if ((sender as DateTimePicker).Tag.ToString() == "fecha")
+            /*if ((sender as DateTimePicker).Tag.ToString() == "fecha")
             {
                 DateTime fechaAux = (sender as DateTimePicker).Value;
                 mostrarNumeros(fechaAux, DateTime.MinValue);
@@ -659,6 +653,21 @@ namespace WindowsFormsApplication1
                     DateTime fechaHasta = dtpFiltroHasta.Value;
                     mostrarNumeros(fechaDesde, fechaHasta);
                 }
+                /* fechaAUX = DateTime.Today;
+                 * //fechaAUX = Convert.ToDateTime("2018-04-17");
+                 * fechaAUX = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
+            }*/
+            DateTime fechaDesde = dtpFiltroFecha.Value;
+            if ((sender as DateTimePicker).Tag.ToString() != "fecha" && fechaDesde < (sender as DateTimePicker).Value)
+            {
+                DateTime fechaHasta = DateTime.MinValue;
+                if (dtpFiltroHasta.Enabled)
+                    fechaHasta = dtpFiltroHasta.Value;
+                mostrarNumeros(fechaDesde, fechaHasta);
+            }
+            else
+            {
+                msjError("La fecha ingresada en el campo 'Hasta' debe ser mayor que la primer fecha ingresada");
                 /* fechaAUX = DateTime.Today;
                  * //fechaAUX = Convert.ToDateTime("2018-04-17");
                  * fechaAUX = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);*/

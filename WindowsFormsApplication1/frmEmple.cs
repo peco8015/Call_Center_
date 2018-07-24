@@ -470,11 +470,14 @@ namespace WindowsFormsApplication1
             pararStopWatchs();
             jornada.Cierre_sesion = DateTime.Now.TimeOfDay;
             guardarJornada();
-            if(Application.OpenForms.Count > 2)
+            if(Application.OpenForms.Count > 1)
             {
-                foreach (Form f in Application.OpenForms.Cast<Form>().Where(x => x.Name != padre.Name && x.Name != this.Name))
+                for (int i = Application.OpenForms.Count - 1; i >= 0; i--)
                 {
-                    f.Close();
+                    if (Application.OpenForms[i].Name != padre.Name && Application.OpenForms[i].Name != this.Name)
+                    {
+                        Application.OpenForms[i].Close();
+                    }
                 }
             }
             padre.Show();

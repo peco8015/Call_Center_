@@ -89,11 +89,21 @@ namespace WindowsFormsApplication1
 
         public void cerrarForm()
         {
-            if (Application.OpenForms.Count > 2)
+            if (Application.OpenForms.Count > 1)
             {
-                foreach (Form f in Application.OpenForms.Cast<Form>().Where(x => x.Name != padre.Name && x.Name != this.Name))
+                /*List<Form> col = Application.OpenForms.Cast<Form>().Where(x => x.Name != padre.Name).ToList();
+                foreach (Form f in col)
                 {
                     f.Close();
+                }*/
+                /*Application.OpenForms.Cast<Form>().Where(x => (x.Name != padre.Name))
+                    .ToList().ForEach(x => x.Close());*/
+                for (int i = Application.OpenForms.Count - 1; i >= 0; i--)
+                {
+                    if (Application.OpenForms[i].Name != padre.Name && Application.OpenForms[i].Name != this.Name)
+                    {
+                        Application.OpenForms[i].Close();
+                    }
                 }
             }
             padre.Show();
@@ -143,6 +153,7 @@ namespace WindowsFormsApplication1
         private void frmJefee_Load(object sender, EventArgs e)
         {
             user = conectar.datos_empleado(user.Dni);//obtengo datos del jefe
+            
 
             ucDatosUsuario1.NombreCompleto = user.Apellido.ToUpper() + ", " + user.Nombre;
             ucDatosUsuario1.Dni = user.Dni;
@@ -345,19 +356,17 @@ namespace WindowsFormsApplication1
                 switch (dgvTabla.Columns[1].Name)//la tabla cambia,esto es para controlar q tabla esta visible al momento del click en la celda
                 {
                     case "id_empleado":
-                        /*frmDato = new frmDatos(this, Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()), "Datos Empleado");
-                        frmDato.Show();*/
-                        frmDetalle = new frmDetalle("empleado", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()));
+                        frmDetalle = new frmDetalle("empleado", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["DNI"].Value.ToString()), user.Id_empleado);
                         frmDetalle.Show();
                         break;
 
                     case "id_cliente":
-                        frmDetalle = new frmDetalle("cliente", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_cliente"].Value.ToString()));
+                        frmDetalle = new frmDetalle("cliente", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_cliente"].Value.ToString()), user.Id_empleado);
                         frmDetalle.Show();
                         break;
 
                     case "id_campaña":
-                        frmDetalle = new frmDetalle("campaña", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_campaña"].Value.ToString()));
+                        frmDetalle = new frmDetalle("campaña", Convert.ToInt32(dgvTabla.Rows[e.RowIndex].Cells["id_campaña"].Value.ToString()), user.Id_empleado);
                         frmDetalle.Show();
                         break;
                 }

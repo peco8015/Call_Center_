@@ -1668,7 +1668,7 @@ namespace WindowsFormsApplication1.clases
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand("SELECT id_empleado, empleado.nombre +' '+ apellido as Empleado, dni as DNI, campaña.nombre as 'Campaña actual', empleado.f_inicio as 'Fecha de ingreso', telefono as Telefono, mail as Mail, f_nacimiento as Nacimiento " +
-                    "FROM empleado JOIN campaña ON (empleado.id_campaña = campaña.id_campaña) WHERE jefe = 1", con);
+                    "FROM empleado LEFT JOIN campaña ON (empleado.id_campaña = campaña.id_campaña) WHERE jefe = 1", con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
@@ -2087,7 +2087,7 @@ namespace WindowsFormsApplication1.clases
                 cmd.Parameters.AddWithValue("f_fin", f_fin);
                 cmd.Parameters.AddWithValue("id_cliente", campaña.Id_cliente);
                 //cmd.Parameters.AddWithValue("id_especificacion", campaña.);
-                //cmd.Parameters.AddWithValue("lider", campaña.);
+                cmd.Parameters.AddWithValue("lider", campaña.Lider);
                 if (cmd.ExecuteNonQuery() == 1)
                     return true;
                 else
@@ -2138,6 +2138,27 @@ namespace WindowsFormsApplication1.clases
                 cmd.Parameters.AddWithValue("f_eliminado", f_eliminado);
                 cmd.Parameters.AddWithValue("campañas", string.Join(",", ids_campañas));
                 return (cmd.ExecuteNonQuery() == ids_campañas.Count) ? true : false;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool check_lider(int id_campaña, int id_user)
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM campaña WHERE id_campaña = @id_campaña AND lider = @id_empleado", con);
+                cmd.Parameters.AddWithValue("id_campaña", id_campaña);
+                cmd.Parameters.AddWithValue("id_empleado", id_user);
+                return (cmd.ExecuteScalar() == null) ? false : true;
             }
             catch (Exception e)
             {
@@ -2555,6 +2576,30 @@ namespace WindowsFormsApplication1.clases
             }
         }
 
+        public DataTable listado_campañas_cliente(int id_cliente)
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT campaña.id_campaña, campaña.nombre, count(llamada.id_llamada) as 'Cant Llamadas', count (id_venta) as 'Cant Ventas'" +
+                    " FROM campaña LEFT JOIN llamada ON (llamada.id_campaña = campaña.id_campaña) LEFT JOIN venta ON (venta.id_llamada = llamada.id_llamada)" +
+                    " WHERE campaña.id_cliente = @id_cliente GROUP BY campaña.id_campaña, campaña.nombre", con);
+                cmd.Parameters.AddWithValue("id_cliente", id_cliente);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                return dt;
+            }
+            catch (Exception e)
+            {
+                msjError(e.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         #endregion
 
 

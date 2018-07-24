@@ -11,7 +11,7 @@ namespace WindowsFormsApplication1.clases
         int id_campaña;
         string nombre;
         string descripion;
-        int  precio; // double???
+        float  precio;
         DateTime fecha_inicio;
         DateTime fecha_fin; // Null o 0 lógico en DateTime es el MinValue
         int id_cliente;
@@ -38,7 +38,7 @@ namespace WindowsFormsApplication1.clases
         public int Lider { get => lider; set => lider = value; }
         public int Id_cliente { get => id_cliente; set => id_cliente = value; }
         public string NombreCliente { get => nombre_cliente; set => nombre_cliente = value; }
-        public int Precio { get => precio; set => precio = value; }
+        public float Precio { get => precio; set => precio = value; }
         
 
         public string Cliente { get; internal set; }

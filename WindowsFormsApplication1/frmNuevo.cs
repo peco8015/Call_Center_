@@ -35,23 +35,112 @@ namespace WindowsFormsApplication1
                 tipo = "Cliente";
         }
 
-        private void frmNuevo_Load(object sender, EventArgs e)
+        #region FUNCIONES
+
+        public void setForm()
         {
-            if (tipo == "")
+            switch (tipo)
             {
-                pnlRegistro.Enabled = false;
-            }
-            else
-            {
-                cbTipoRegistro.Visible = false;
-                setForm();
+                case "Empleado":
+                    label1.Text = "Nombre";
+                    label2.Text = "Apellido";
+                    label3.Text = "DNI";
+                    label4.Text = "Teléfono";
+                    label5.Text = "Mail";
+                    label6.Text = "Domicilio";
+                    label7.Text = "Nacimiento";
+                    label8.Text = "Contraseña";
+                    label9.Visible = false;
+                    nudPrecio.Visible = false;
+                    dtp02.Visible = false;
+                    cb01.Visible = false;
+
+                    dTable = conectar.obtenerCampañas(); //ACTIVAS
+                    cb02.DataSource = dTable;
+                    cb02.DisplayMember = "nombre";
+                    cb02.ValueMember = "id_campaña";
+                    break;
+
+                case "Cliente":
+                    label1.Text = "Nombre";
+                    label2.Text = "CUIL";
+                    label3.Text = "Domicilio";
+                    label4.Text = "Nombre contacto";
+                    label5.Text = "Mail contacto";
+                    label6.Text = "Telefono contacto";
+                    label4.ForeColor = Color.Maroon;
+                    label5.ForeColor = Color.Maroon;
+                    label6.ForeColor = Color.Maroon;
+                    label7.Visible = false;
+                    label8.Visible = false;
+                    label9.Visible = false;
+                    nudPrecio.Visible = false;
+                    check01.Visible = false;
+                    check02.Visible = false;
+                    tb07.Visible = false;
+                    dtp01.Visible = false;
+                    dtp02.Visible = false;
+                    cb01.Visible = false;
+                    cb02.Visible = false;
+                    break;
+
+                case "Campaña":
+                    label1.Text = "Campaña";
+                    label2.Text = "Precio";
+                    label3.Text = "Descripción";
+                    label7.Text = "Fecha de inicio";
+                    label8.Text = "Fecha de fin";
+                    label9.Text = "Cliente";
+                    check02.Text = "Lider de campaña";
+                    tb03.Size = new Size(261, 139);
+                    label4.Visible = false;
+                    label5.Visible = false;
+                    label6.Visible = false;
+                    tb02.Visible = false;
+                    tb04.Visible = false;
+                    tb05.Visible = false;
+                    tb06.Visible = false;
+                    tb07.Visible = false;
+                    cb02.Visible = false;
+                    check01.Visible = false;
+
+                    dTable = conectar.listarClientes(); //ACTIVAS
+                    cb01.DataSource = dTable;
+                    cb01.DisplayMember = "Cliente";
+                    cb01.ValueMember = "id_cliente";
+                    break;
             }
         }
 
-        private void cbTipoRegistro_SelectedIndexChanged(object sender, EventArgs e)
+        public void limpiarControles()
         {
-            pnlRegistro.Enabled = true;
-            tipo = cbTipoRegistro.SelectedItem.ToString();
+            string msj = "Se guardó correctamente el registro.";
+            if (tipo == "Campaña")
+            {
+                msj += "\nEn caso de asociar empleados a esta campaña, debe ingresar a la vista detalle del mismo.";
+            }
+            MessageBox.Show(msj, "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
+        }
+
+        public void msjError(string msj)
+        {
+            MessageBox.Show(msj, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public void SeGuardo(bool se_guardo)
+        {
+            if (se_guardo)
+                limpiarControles();
+            else
+                MessageBox.Show("Se produjo un error al guardar los registros en la base de datos. Intente nuevamente.", "No se guardo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        #endregion
+
+
+        private void frmNuevo_Load(object sender, EventArgs e)
+        {
             setForm();
         }
 
@@ -139,11 +228,11 @@ namespace WindowsFormsApplication1
                         break;
 
                     case "Campaña":
-                        if ( Int32.TryParse(tb02.Text, out int aux_precio) && dtp01.Value < dtp02.Value )
+                        if ( dtp01.Value < dtp02.Value )
                         {
                             camp = new clsCampaña();
                             camp.Nombre = tb01.Text;
-                            camp.Precio = aux_precio;
+                            camp.Precio = (float)nudPrecio.Value;
                             camp.Descripcion = tb03.Text;
                             camp.Fecha_inicio = dtp01.Value;
                             camp.Fecha_fin = dtp02.Value;
@@ -152,7 +241,7 @@ namespace WindowsFormsApplication1
                             SeGuardo(conectar.insertar_campaña(camp));
                         }
                         else
-                            msjError("Falta completar campos");
+                            msjError("La fecha de finalización de una campaña debe no puede ser anterior ni la misma que la fecha de inicio.");
                         break;
                 }
             }
@@ -160,103 +249,9 @@ namespace WindowsFormsApplication1
                 msjError("Falta completar campos");
         }
 
-        public void setForm()
+        private void tb02_KeyPress(object sender, KeyPressEventArgs e)
         {
-            switch (tipo)
-            {
-                case "Empleado":
-                    label1.Text = "Nombre";
-                    label2.Text = "Apellido";
-                    label3.Text = "DNI";
-                    label4.Text = "Teléfono";
-                    label5.Text = "Mail";
-                    label6.Text = "Domicilio";
-                    label7.Text = "Nacimiento";
-                    label8.Text = "Contraseña";
-                    label9.Visible = false;
-                    dtp02.Visible = false;
-                    cb01.Visible = false;
 
-                    dTable = conectar.obtenerCampañas(); //ACTIVAS
-                    cb02.DataSource = dTable;
-                    cb02.DisplayMember = "nombre";
-                    cb02.ValueMember = "id_campaña";
-                    break;
-
-                case "Cliente":
-                    label1.Text = "Nombre";
-                    label2.Text = "CUIL";
-                    label3.Text = "Domicilio";
-                    label4.Text = "Nombre contacto";
-                    label5.Text = "Mail contacto";
-                    label6.Text = "Telefono contacto";
-                    label4.ForeColor = Color.Maroon;
-                    label5.ForeColor = Color.Maroon;
-                    label6.ForeColor = Color.Maroon;
-                    label7.Visible = false;
-                    label8.Visible = false;
-                    label9.Visible = false;
-                    check01.Visible = false;
-                    check02.Visible = false;
-                    tb07.Visible = false;
-                    dtp01.Visible = false;
-                    dtp02.Visible = false;
-                    cb01.Visible = false;
-                    cb02.Visible = false;
-                    break;
-
-                case "Campaña":
-                    label1.Text = "Campaña";
-                    label2.Text = "Precio";
-                    label3.Text = "Descripción";
-                    label7.Text = "Fecha de inicio";
-                    label8.Text = "Fecha de fin";
-                    label9.Text = "Cliente";
-                    check02.Text = "Lider de campaña";
-                    tb03.Size = new Size(261, 139);
-                    label4.Visible = false;
-                    label5.Visible = false;
-                    label6.Visible = false;
-                    tb04.Visible = false;
-                    tb05.Visible = false;
-                    tb06.Visible = false;
-                    tb07.Visible = false;
-                    cb02.Visible = false;
-                    check01.Visible = false;
-
-                    dTable = conectar.listarClientes(); //ACTIVAS
-                    cb01.DataSource = dTable;
-                    cb01.DisplayMember = "Cliente";
-                    cb01.ValueMember = "id_cliente";
-                    break;
-            }
         }
-        
-        public void limpiarControles()
-        {
-            MessageBox.Show("Se guardó correctamente el registro.", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            // PERMITIMOS DESDE ACA?
-            /*if (cbTipoRegistro.SelectedItem.ToString() == "Campaña")
-            {
-                if(DialogResult.Yes == MessageBox.Show("¿Desea asignar empleados a esta campaña?", "Completar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
-                {  }
-            }
-            else*/
-            this.Close();
-        }
-
-        public void msjError(string msj)
-        {
-            MessageBox.Show(msj, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        public void SeGuardo(bool se_guardo)
-        {
-            if (se_guardo)
-                limpiarControles();
-            else
-                MessageBox.Show("Se produjo un error al guardar los registros en la base de datos. Intente nuevamente.", "No se guardo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
     }
 }
